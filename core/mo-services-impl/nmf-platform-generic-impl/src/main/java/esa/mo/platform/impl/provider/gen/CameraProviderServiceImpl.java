@@ -23,7 +23,6 @@ package esa.mo.platform.impl.provider.gen;
 import esa.mo.com.impl.util.COMServicesProvider;
 import esa.mo.helpertools.connections.ConfigurationProviderSingleton;
 import esa.mo.helpertools.connections.ConnectionProvider;
-import esa.mo.helpertools.helpers.HelperTime;
 import esa.mo.helpertools.misc.TaskScheduler;
 import java.io.IOException;
 import java.util.Map;
@@ -37,20 +36,18 @@ import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALHelper;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.MALStandardError;
-import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Duration;
-import org.ccsds.moims.mo.mal.structures.EntityKey;
-import org.ccsds.moims.mo.mal.structures.EntityKeyList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.QoSLevel;
 import org.ccsds.moims.mo.mal.structures.SessionType;
 import org.ccsds.moims.mo.mal.structures.UInteger;
+import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
-import org.ccsds.moims.mo.mal.structures.UpdateType;
 import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.platform.PlatformHelper;
@@ -171,9 +168,7 @@ public class CameraProviderServiceImpl extends CameraInheritanceSkeleton
 
       synchronized (lock) {
         if (!isRegistered) {
-          final EntityKeyList lst = new EntityKeyList();
-          lst.add(ConnectionConsumer.entityKeyWildcard());
-          publisher.register(lst, new PublishInteractionListener());
+          publisher.register(new PublishInteractionListener());
           isRegistered = true;
         }
 
@@ -187,14 +182,21 @@ public class CameraProviderServiceImpl extends CameraInheritanceSkeleton
 
       LOGGER.log(Level.FINER, "Generating streaming Picture update with objId: {0}", objId);
 
+      /*
       final EntityKey ekey = ConnectionConsumer.subscriptionKeys(
               firstEntityKey, objId,
           settings.getResolution().getWidth().getValue(),
           settings.getResolution().getHeight().getValue());
+      */
+      AttributeList keys = new AttributeList(); 
+      keys.add(firstEntityKey);
+      keys.add(objId);
+      keys.add(settings.getResolution().getWidth().getValue());
+      keys.add(settings.getResolution().getHeight().getValue());
 
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
-      hdrlst.add(new UpdateHeader(HelperTime.getTimestampMillis(),
-          connection.getConnectionDetails().getProviderURI(), UpdateType.UPDATE, ekey));
+      URI source = connection.getConnectionDetails().getProviderURI();
+      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), keys));
 
       PictureList picList = new PictureList();
       picList.add(picture);

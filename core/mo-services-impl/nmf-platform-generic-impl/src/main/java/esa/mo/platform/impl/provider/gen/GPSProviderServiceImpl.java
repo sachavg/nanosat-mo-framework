@@ -52,11 +52,10 @@ import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.BooleanList;
 import org.ccsds.moims.mo.mal.structures.Duration;
 import org.ccsds.moims.mo.mal.structures.Element;
-import org.ccsds.moims.mo.mal.structures.EntityKey;
-import org.ccsds.moims.mo.mal.structures.EntityKeyList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
@@ -68,7 +67,6 @@ import org.ccsds.moims.mo.mal.structures.UIntegerList;
 import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
-import org.ccsds.moims.mo.mal.structures.UpdateType;
 import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.platform.PlatformHelper;
@@ -202,9 +200,7 @@ public class GPSProviderServiceImpl extends GPSInheritanceSkeleton
     try {
       synchronized (lock) {
         if (!isRegistered) {
-          final EntityKeyList lst = new EntityKeyList();
-          lst.add(ConnectionConsumer.entityKeyWildcard());
-          publisher.register(lst, new PublishInteractionListener());
+          publisher.register(new PublishInteractionListener());
           isRegistered = true;
         }
       }
@@ -216,12 +212,16 @@ public class GPSProviderServiceImpl extends GPSInheritanceSkeleton
       final URI uri = connection.getConnectionDetails().getProviderURI();
       final Long pValObjId = manager.storeAndGenerateNearbyPositionAlertId(isInside, objId, uri);
 
-      final EntityKey ekey = ConnectionConsumer.subscriptionKeys(new Identifier(manager.get(objId).getName().toString()),
-          objId, pValObjId, null);
+      AttributeList keys = new AttributeList(); 
+      keys.add(new Identifier(manager.get(objId).getName().toString()));
+      keys.add(objId);
+      keys.add(pValObjId);
+      
       final Time timestamp = HelperTime.getTimestampMillis();
 
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
-      hdrlst.add(new UpdateHeader(timestamp, uri, UpdateType.UPDATE, ekey));
+      URI source = connection.getConnectionDetails().getProviderURI();
+      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), keys));
 
       BooleanList bools = new BooleanList();
       bools.add(isInside);

@@ -13,7 +13,6 @@ import org.ccsds.moims.mo.com.activitytracking.structures.OperationActivity;
 import org.ccsds.moims.mo.com.structures.ObjectType;
 import org.ccsds.moims.mo.mal.helpertools.helpers.HelperAttributes;
 import org.ccsds.moims.mo.mal.structures.Attribute;
-import org.ccsds.moims.mo.mal.structures.EntityKey;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.NamedValue;
 import org.ccsds.moims.mo.mal.structures.NamedValueList;
@@ -392,32 +391,6 @@ public class MCServicesHelper {
                 includeObjectNumber ? objectType.getNumber().getValue() : 0);
     }
 
-    /**
-     * Create an entity key for an event for the instanceNumber of objectType,
-     * with source set ti sourceObjectType
-     *
-     * @param objectType
-     * @param instanceNumber
-     * @param sourceObjectType
-     * @return
-     */
-    static public EntityKey generateEntityKey(ObjectType objectType, long instanceNumber,
-            ObjectType sourceObjectType) {
-        /*
-        return new EntityKey(
-                new Identifier(String.valueOf(objectType.getNumber())),
-                MCServicesHelper.generateSubKey(objectType, false),
-                instanceNumber,
-                MCServicesHelper.generateSubKey(sourceObjectType, true));
-        */
-        NamedValueList subkeys = new NamedValueList();
-        subkeys.add(new NamedValue(new Identifier("key1"), new Identifier(String.valueOf(objectType.getNumber()))));
-        subkeys.add(new NamedValue(new Identifier("key2"), new Union(MCServicesHelper.generateSubKey(objectType, false))));
-        subkeys.add(new NamedValue(new Identifier("key3"), new Union((Long) instanceNumber)));
-        subkeys.add(new NamedValue(new Identifier("key4"), new Union(MCServicesHelper.generateSubKey(sourceObjectType, true))));
-        return new EntityKey(subkeys);
-    }
-
     public static class KeyParts {
 
         public ObjectType objectType = new ObjectType();
@@ -425,31 +398,6 @@ public class MCServicesHelper {
         public ObjectType sourceObjectType = new ObjectType();
     }
 
-    static public void getValuesFromEntityKey(EntityKey key, KeyParts keyParts) {
-        // Get the area/service/version from the second sub key
-        NamedValueList subkeys = key.getSubkeys();
-        //generateObjectTypeFromSubKey(keyParts.objectType, key.getSecondSubKey());
-        generateObjectTypeFromSubKey(keyParts.objectType, 
-                (Long) HelperAttributes.attribute2JavaType(subkeys.get(1).getValue()));
-        // Add object number from first subkey
-        String key1 = ((Identifier) subkeys.get(0).getValue()).getValue();
-        keyParts.objectType.setNumber(new UShort(Integer.parseInt(key1)));
-
-        // Instance number is 3rd
-        keyParts.objectInstance = (Long) HelperAttributes.attribute2JavaType(subkeys.get(2).getValue());
-
-        // Source object is all from the 4th
-        generateObjectTypeFromSubKey(keyParts.sourceObjectType, 
-                (Long) HelperAttributes.attribute2JavaType(subkeys.get(3).getValue()));
-    }
-
-//  static public Long generateSubKey(Element object, int objectNumber)
-//  {
-//    return generateSubKey(object.getAreaNumber().getValue(),
-//      object.getServiceNumber().getValue(),
-//      object.getAreaVersion().getValue(),
-//      objectNumber);
-//  }
     public static void generateObjectTypeFromSubKey(ObjectType objectType, Long secondSubKey) {
         long subkey = secondSubKey;
 

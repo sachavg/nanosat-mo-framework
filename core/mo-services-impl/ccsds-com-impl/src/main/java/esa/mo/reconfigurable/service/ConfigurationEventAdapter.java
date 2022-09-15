@@ -22,7 +22,6 @@ package esa.mo.reconfigurable.service;
 
 import esa.mo.com.impl.util.COMServicesProvider;
 import esa.mo.com.impl.util.HelperArchive;
-import esa.mo.helpertools.helpers.HelperAttributes;
 import esa.mo.helpertools.helpers.HelperTime;
 import java.io.IOException;
 import java.io.Serializable;
@@ -42,12 +41,12 @@ import org.ccsds.moims.mo.common.configuration.structures.ConfigurationObjectDet
 import org.ccsds.moims.mo.common.configuration.structures.ConfigurationObjectDetailsList;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALInteractionException;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.BooleanList;
 import org.ccsds.moims.mo.mal.structures.ElementList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
-import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
@@ -79,8 +78,8 @@ public class ConfigurationEventAdapter extends EventAdapter implements Serializa
             ElementList objects, Map qosProperties) {
         // Notification received from the Configuration serviceImpl...
         for (int i = 0; i < objectDetailsList.size(); i++) {
-            NamedValueList subkeys = updateHeaderList.get(i).getKey().getSubkeys();
-            Identifier eventObjNumber = (Identifier) subkeys.get(0).getValue();
+            AttributeList subkeys = updateHeaderList.get(i).getKeyValues();
+            Identifier eventObjNumber = (Identifier) subkeys.get(0);
 
             // Check if it is a "Configuration switch Request" or a "Current Configuration Store"
             if (!eventObjNumber.toString().equals(ConfigurationHelper.CONFIGURATIONSWITCH_OBJECT_NUMBER.toString())
@@ -127,7 +126,8 @@ public class ConfigurationEventAdapter extends EventAdapter implements Serializa
                 }
             }
 
-            Long entityKey3 = (Long) HelperAttributes.attribute2JavaType(subkeys.get(2).getValue());
+            // Long entityKey3 = (Long) HelperAttributes.attribute2JavaType(subkeys.get(2).getValue());
+            Long entityKey3 = (Long) subkeys.get(2);
             
             // -----------------------------------------------------------
             // Check if it is a "Current Configuration Store"

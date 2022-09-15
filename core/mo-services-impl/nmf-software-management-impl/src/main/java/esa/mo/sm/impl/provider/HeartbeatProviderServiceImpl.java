@@ -22,7 +22,6 @@ package esa.mo.sm.impl.provider;
 
 import esa.mo.helpertools.connections.ConfigurationProviderSingleton;
 import esa.mo.helpertools.connections.ConnectionProvider;
-import esa.mo.helpertools.helpers.HelperTime;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -32,23 +31,18 @@ import org.ccsds.moims.mo.mal.MALContextFactory;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALHelper;
 import org.ccsds.moims.mo.mal.MALInteractionException;
-import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Duration;
-import org.ccsds.moims.mo.mal.structures.EntityKey;
-import org.ccsds.moims.mo.mal.structures.EntityKeyList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
-import org.ccsds.moims.mo.mal.structures.NamedValue;
-import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.QoSLevel;
 import org.ccsds.moims.mo.mal.structures.SessionType;
 import org.ccsds.moims.mo.mal.structures.UInteger;
-import org.ccsds.moims.mo.mal.structures.Union;
+import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
-import org.ccsds.moims.mo.mal.structures.UpdateType;
 import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.softwaremanagement.SoftwareManagementHelper;
@@ -155,25 +149,14 @@ public class HeartbeatProviderServiceImpl extends HeartbeatInheritanceSkeleton
     try {
       synchronized (lock) {
         if (!isRegistered) {
-          final EntityKeyList lst = new EntityKeyList();
-          lst.add(ConnectionConsumer.entityKeyWildcard());
-          publisher.register(lst, new PublishInteractionListener());
+          publisher.register(new PublishInteractionListener());
           isRegistered = true;
         }
       }
 
-      NamedValueList subkeys = new NamedValueList();
-      final EntityKey ekey = new EntityKey(subkeys);
-      
       final UpdateHeaderList hdrlst = new UpdateHeaderList(1);
-      hdrlst.add(
-          new UpdateHeader(
-              HelperTime.getTimestampMillis(),
-              connection.getConnectionDetails().getProviderURI(),
-              UpdateType.UPDATE,
-              ekey
-          )
-      );
+      URI source = connection.getConnectionDetails().getProviderURI();
+      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), new AttributeList()));
 
       publisher.publish(hdrlst);
     } catch (IllegalArgumentException | MALException | MALInteractionException ex) {

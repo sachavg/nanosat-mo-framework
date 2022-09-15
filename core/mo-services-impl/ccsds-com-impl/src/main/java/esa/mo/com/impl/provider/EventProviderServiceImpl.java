@@ -48,10 +48,9 @@ import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Element;
 import org.ccsds.moims.mo.mal.structures.ElementList;
-import org.ccsds.moims.mo.mal.structures.EntityKey;
-import org.ccsds.moims.mo.mal.structures.EntityKeyList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
@@ -66,7 +65,6 @@ import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.Union;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
-import org.ccsds.moims.mo.mal.structures.UpdateType;
 import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 
@@ -266,14 +264,7 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
         try {
             synchronized (lock) {
                 if (!isRegistered) {
-                    NamedValueList subkeys = new NamedValueList();
-                    subkeys.add(new NamedValue(new Identifier("key1"), new Identifier("*")));
-                    subkeys.add(new NamedValue(new Identifier("key2"), new Union(0L)));
-                    subkeys.add(new NamedValue(new Identifier("key3"), new Union(0L)));
-                    subkeys.add(new NamedValue(new Identifier("key4"), new Union(0L)));
-                    final EntityKeyList lst = new EntityKeyList();
-                    lst.add(new EntityKey(subkeys));
-                    publisher.register(lst, new PublishInteractionListener());
+                    publisher.register(new PublishInteractionListener());
                     isRegistered = true;
                 }
             }
@@ -294,19 +285,24 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
                     objId,
                     subKey);
             */
+            /*
             NamedValueList subkeys = new NamedValueList();
             subkeys.add(new NamedValue(new Identifier("key1"), new Identifier(objType.getNumber().toString())));
             subkeys.add(new NamedValue(new Identifier("key2"), new Union(secondEntityKey)));
             subkeys.add(new NamedValue(new Identifier("key3"), new Union(objId)));
             subkeys.add(new NamedValue(new Identifier("key4"), new Union(subKey)));
-            final EntityKey ekey = new EntityKey(subkeys);
+            */
 
-            final Time timestamp = HelperTime.getTimestampMillis(); //  requirement: 3.3.4.2.7
-
+            final AttributeList keyValues = new AttributeList();
+            keyValues.add(new Identifier(objType.getNumber().toString()));
+            keyValues.add(new Union(secondEntityKey));
+            keyValues.add(new Union(objId));
+            keyValues.add(new Union(subKey));
+            
             final UpdateHeaderList hdrlst = new UpdateHeaderList();
             final ObjectDetailsList objectDetailsList = new ObjectDetailsList();
 
-            hdrlst.add(new UpdateHeader(timestamp, sourceURI, UpdateType.DELETION, ekey));
+            hdrlst.add(new UpdateHeader(new Identifier(sourceURI.getValue()), keyValues));
             objectDetailsList.add(new ObjectDetails(related, source)); // requirement: 3.3.4.2.5
 
             if (eventBodies != null) {
@@ -355,9 +351,7 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
         try {
             synchronized (lock) {
                 if (!isRegistered) {
-                    final EntityKeyList lst = new EntityKeyList();
-                    lst.add(ConnectionConsumer.entityKeyWildcard());
-                    publisher.register(lst, new PublishInteractionListener());
+                    publisher.register(new PublishInteractionListener());
                     isRegistered = true;
                 }
             }
@@ -376,16 +370,15 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
 
                 final Long subKey = (sources.get(i) != null) ? HelperCOM.generateSubKey(sources.get(i).getType()) : null;
                 // requirements: 3.3.4.2.1 , 3.3.4.2.2 , 3.3.4.2.3 , 3.3.4.2.4
-                final EntityKey ekey = ConnectionConsumer.subscriptionKeys(
-                        new Identifier(objType.getNumber().toString()),
-                        secondEntityKey,
-                        objIds.get(i),
-                        subKey);
+                AttributeList keys = new AttributeList(); 
+                keys.add(new Identifier(objType.getNumber().toString()));
+                keys.add(secondEntityKey);
+                keys.add(objIds.get(i));
+                keys.add(subKey);
 
-                final Time timestamp = HelperTime.getTimestampMillis(); //  requirement: 3.3.4.2.7
                 final Long related = (relateds == null) ? null : relateds.get(i);
 
-                hdrlst.add(new UpdateHeader(timestamp, sourceURI, UpdateType.DELETION, ekey));
+                hdrlst.add(new UpdateHeader(new Identifier(sourceURI.getValue()), keys));
                 objectDetailsList.add(new ObjectDetails(related, sources.get(i))); // requirement: 3.3.4.2.5
             }
 

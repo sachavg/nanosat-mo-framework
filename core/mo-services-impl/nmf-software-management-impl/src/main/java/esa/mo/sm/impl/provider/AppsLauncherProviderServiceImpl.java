@@ -28,7 +28,6 @@ import esa.mo.common.impl.provider.DirectoryProviderServiceImpl;
 import esa.mo.helpertools.connections.ConfigurationProviderSingleton;
 import esa.mo.helpertools.connections.ConnectionProvider;
 import esa.mo.helpertools.connections.SingleConnectionDetails;
-import esa.mo.helpertools.helpers.HelperTime;
 import esa.mo.helpertools.misc.Const;
 import esa.mo.reconfigurable.service.ConfigurationChangeListener;
 import esa.mo.reconfigurable.service.ReconfigurableService;
@@ -55,23 +54,18 @@ import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALHelper;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.MALStandardError;
-import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.BooleanList;
 import org.ccsds.moims.mo.mal.structures.Element;
-import org.ccsds.moims.mo.mal.structures.EntityKey;
-import org.ccsds.moims.mo.mal.structures.EntityKeyList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
-import org.ccsds.moims.mo.mal.structures.NamedValue;
-import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.QoSLevel;
 import org.ccsds.moims.mo.mal.structures.SessionType;
 import org.ccsds.moims.mo.mal.structures.StringList;
-import org.ccsds.moims.mo.mal.structures.Time;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.mal.structures.UIntegerList;
 import org.ccsds.moims.mo.mal.structures.URI;
@@ -79,7 +73,6 @@ import org.ccsds.moims.mo.mal.structures.UShort;
 import org.ccsds.moims.mo.mal.structures.Union;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
-import org.ccsds.moims.mo.mal.structures.UpdateType;
 import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.softwaremanagement.SoftwareManagementHelper;
@@ -194,9 +187,7 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
     try {
       synchronized (lock) {
         if (!isRegistered) {
-          final EntityKeyList lst = new EntityKeyList();
-          lst.add(ConnectionConsumer.entityKeyWildcard());
-          publisher.register(lst, new PublishInteractionListener());
+          publisher.register(new PublishInteractionListener());
           isRegistered = true;
         }
       }
@@ -211,20 +202,20 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
 
       final StringList outputList = new StringList();
 
+      /*
       // Should not be store in the Archive... it's too much stuff
       NamedValueList subkeys = new NamedValueList();
       subkeys.add(new NamedValue(new Identifier("key1"), new Identifier(appName)));
       subkeys.add(new NamedValue(new Identifier("key2"), new Union(appObjId)));
       final EntityKey ekey = new EntityKey(subkeys);
-      /*
-      final EntityKey ekey = new EntityKey(
-          new Identifier(manager.get(appObjId).getName().toString()), appObjId, null, null);
       */
-      final Time timestamp = HelperTime.getTimestampMillis();
-
+      AttributeList keyValues = new AttributeList();
+      keyValues.add(new Identifier(appName));
+      keyValues.add(new Union(appObjId));
+      
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
-      hdrlst.add(new UpdateHeader(timestamp, connection.getConnectionDetails().getProviderURI(),
-          UpdateType.UPDATE, ekey));
+      URI sourceURI = connection.getConnectionDetails().getProviderURI();
+      hdrlst.add(new UpdateHeader(new Identifier(sourceURI.getValue()), keyValues));
       EventProviderServiceImpl eventService = this.comServices.getEventService();
 
       int length = outputText.length();

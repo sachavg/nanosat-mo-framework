@@ -49,6 +49,7 @@ import org.ccsds.moims.mo.common.directory.structures.ProviderSummary;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.structures.Attribute;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Blob;
 import org.ccsds.moims.mo.mal.structures.Duration;
 import org.ccsds.moims.mo.mal.structures.Identifier;
@@ -217,9 +218,8 @@ public class GroundMOAdapterImpl extends NMFConsumer implements SimpleCommanding
 
         if (lParameterValueList.size() == lUpdateHeaderList.size()) {
           for (int i = 0; i < lUpdateHeaderList.size(); i++) {
-            NamedValueList subkeys = lUpdateHeaderList.get(i).getKey().getSubkeys();
-            // String parameterName = lUpdateHeaderList.get(i).getKey().getFirstSubKey().toString();
-            String parameterName = HelperAttributes.attribute2string(subkeys.get(0).getValue());
+            AttributeList keyValues = lUpdateHeaderList.get(i).getKeyValues();
+            String parameterName = HelperAttributes.attribute2string(keyValues.get(0));
             Attribute parameterValue = lParameterValueList.get(i).getRawValue();
             Serializable object;
 
@@ -247,7 +247,8 @@ public class GroundMOAdapterImpl extends NMFConsumer implements SimpleCommanding
             // Complete interface
             if (listener instanceof CompleteDataReceivedListener) {
               ObjectId source = lObjectIdList.get(i);
-              Time timestamp = lUpdateHeaderList.get(i).getTimestamp();
+              // Time timestamp = lUpdateHeaderList.get(i).getTimestamp();
+              Time timestamp = null;
 
               ParameterInstance parameterInstance = new ParameterInstance(new Identifier(
                   parameterName),
@@ -294,10 +295,11 @@ public class GroundMOAdapterImpl extends NMFConsumer implements SimpleCommanding
 
             if (listener instanceof CompleteAggregationReceivedListener) {
               ObjectId source = lObjectIdList.get(i);
-              Time timestamp = lUpdateHeaderList.get(i).getTimestamp();
-              NamedValueList subkeys = lUpdateHeaderList.get(i).getKey().getSubkeys();
+              //Time timestamp = lUpdateHeaderList.get(i).getTimestamp();
+              Time timestamp = null;
+              AttributeList subkeys = lUpdateHeaderList.get(i).getKeyValues();
               // String aggregationName = lUpdateHeaderList.get(i).getKey().getFirstSubKey().toString();
-              String aggregationName = HelperAttributes.attribute2string(subkeys.get(0).getValue());
+              String aggregationName = HelperAttributes.attribute2string(subkeys.get(0));
               AggregationValue aggregationValue = lAggregationValueList.get(i);
 
               AggregationInstance aggregationInstance = new AggregationInstance(

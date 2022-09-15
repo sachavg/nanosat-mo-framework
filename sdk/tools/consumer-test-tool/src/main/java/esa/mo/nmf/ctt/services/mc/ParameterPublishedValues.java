@@ -30,8 +30,8 @@ import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.helpertools.helpers.HelperAttributes;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
-import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.mal.structures.UOctet;
@@ -105,9 +105,9 @@ public class ParameterPublishedValues extends javax.swing.JPanel {
             for (int i = 0; i < lObjectIdList.size(); i++) {
                 final UpdateHeader updateHeader = lUpdateHeaderList.get(i);
                 final ParameterValue parameterValue = lParameterValueList.get(i);
-                final NamedValueList subkeys = updateHeader.getKey().getSubkeys();
-                final String name = HelperAttributes.attribute2string(subkeys.get(0).getValue());
-                final Long second = (Long) HelperAttributes.attribute2JavaType(subkeys.get(1).getValue());
+                final AttributeList keyValues = updateHeader.getKeyValues();
+                final String name = HelperAttributes.attribute2string(keyValues.get(0));
+                final Long second = (Long) HelperAttributes.attribute2JavaType(keyValues.get(1));
                 //final String name = updateHeader.getKey().getFirstSubKey().getValue();
 
                 try {

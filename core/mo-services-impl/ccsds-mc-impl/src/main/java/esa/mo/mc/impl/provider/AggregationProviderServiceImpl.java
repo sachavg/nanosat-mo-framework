@@ -51,28 +51,24 @@ import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALHelper;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.MALStandardError;
-import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.BooleanList;
 import org.ccsds.moims.mo.mal.structures.Duration;
-import org.ccsds.moims.mo.mal.structures.EntityKey;
-import org.ccsds.moims.mo.mal.structures.EntityKeyList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
-import org.ccsds.moims.mo.mal.structures.NamedValue;
-import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.QoSLevel;
 import org.ccsds.moims.mo.mal.structures.SessionType;
 import org.ccsds.moims.mo.mal.structures.Time;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.mal.structures.UIntegerList;
+import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.Union;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
-import org.ccsds.moims.mo.mal.structures.UpdateType;
 import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.mc.MCHelper;
@@ -215,9 +211,7 @@ public class AggregationProviderServiceImpl extends AggregationInheritanceSkelet
         try {
             synchronized (lock) {
                 if (!isRegistered) {
-                    final EntityKeyList lst = new EntityKeyList();
-                    lst.add(ConnectionConsumer.entityKeyWildcard());
-                    publisher.register(lst, new PublishInteractionListener());
+                    publisher.register(new PublishInteractionListener());
                     isRegistered = true;
                 }
             }
@@ -240,18 +234,18 @@ public class AggregationProviderServiceImpl extends AggregationInheritanceSkelet
                 HelperTime.timeToFineTime(time));
 
             // requirements: 3.7.7.2.a , 3.7.7.2.b , 3.7.7.2.c , 3.7.7.2.d
-            NamedValueList subkeys = new NamedValueList();
-            subkeys.add(new NamedValue(new Identifier("key1"), new Identifier(manager.getName(identityId).toString())));
-            subkeys.add(new NamedValue(new Identifier("key2"), new Union(identityId)));
-            subkeys.add(new NamedValue(new Identifier("key3"), new Union(definitionId)));
-            subkeys.add(new NamedValue(new Identifier("key4"), new Union(aValObjId)));
-            final EntityKey ekey = new EntityKey(subkeys);
-
+            AttributeList keys = new AttributeList();
+            keys.add(new Identifier(manager.getName(identityId).toString()));
+            keys.add(new Union(identityId));
+            keys.add(new Union(definitionId));
+            keys.add(new Union(aValObjId));
+            
             final UpdateHeaderList hdrlst = new UpdateHeaderList(1);
             final ObjectIdList objectIdlst = new ObjectIdList(1);
             final AggregationValueList aValLst = new AggregationValueList(1);
 
-            hdrlst.add(new UpdateHeader(time, connection.getConnectionDetails().getProviderURI(), UpdateType.UPDATE, ekey));
+            URI providerURI = connection.getConnectionDetails().getProviderURI();
+            hdrlst.add(new UpdateHeader(new Identifier(providerURI.getValue()), keys));
             objectIdlst.add(source); // requirement: 3.7.7.2.f,g 
             aValLst.add(aVal); //requirement 3.7.7.2.h
 

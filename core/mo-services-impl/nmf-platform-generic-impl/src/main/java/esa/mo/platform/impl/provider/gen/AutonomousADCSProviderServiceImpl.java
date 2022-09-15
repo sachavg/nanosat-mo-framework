@@ -24,7 +24,6 @@ import esa.mo.com.impl.util.COMServicesProvider;
 import esa.mo.helpertools.connections.ConfigurationProviderSingleton;
 import esa.mo.helpertools.connections.ConnectionProvider;
 import esa.mo.helpertools.helpers.HelperMisc;
-import esa.mo.helpertools.helpers.HelperTime;
 import esa.mo.helpertools.misc.TaskScheduler;
 import java.io.IOException;
 import java.util.Map;
@@ -37,22 +36,20 @@ import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALHelper;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.MALStandardError;
-import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Duration;
 import org.ccsds.moims.mo.mal.structures.DurationList;
-import org.ccsds.moims.mo.mal.structures.EntityKey;
-import org.ccsds.moims.mo.mal.structures.EntityKeyList;
+import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.QoSLevel;
 import org.ccsds.moims.mo.mal.structures.SessionType;
-import org.ccsds.moims.mo.mal.structures.Time;
 import org.ccsds.moims.mo.mal.structures.UInteger;
+import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
-import org.ccsds.moims.mo.mal.structures.UpdateType;
 import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.platform.PlatformHelper;
@@ -174,10 +171,8 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
 
     synchronized (lock) {
       if (!isRegistered) {
-        final EntityKeyList lst = new EntityKeyList();
-        lst.add(ConnectionConsumer.entityKeyWildcard());
         try {
-          publisher.register(lst, new PublishInteractionListener());
+          publisher.register(new PublishInteractionListener());
         } catch (IllegalArgumentException | MALException | MALInteractionException ex) {
           LOGGER.log(Level.WARNING, "Error when registering the publisher!", ex);
           return;
@@ -212,11 +207,11 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
       final DurationList durationList = new DurationList();
       durationList.add(getAttitudeControlRemainingDuration());
 
-      final EntityKey ekey = new EntityKey(new NamedValueList());
-      final Time timestamp = HelperTime.getTimestampMillis();
+      AttributeList keys = new AttributeList(); 
+      keys.add(new NamedValueList());
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
-      hdrlst.add(new UpdateHeader(timestamp, connection.getConnectionDetails().getProviderURI(),
-          UpdateType.UPDATE, ekey));
+      URI source = connection.getConnectionDetails().getProviderURI();
+      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), keys));
 
       publisher.publish(hdrlst, attitudeTelemetryList, actuatorsTelemetryList, durationList,
           attitudeModeList);

@@ -145,21 +145,6 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test014() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test014");
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts0 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        org.ccsds.moims.mo.com.structures.ObjectType objectType1 = keyParts0.objectType;
-        org.ccsds.moims.mo.com.structures.ObjectType objectType3 = null;
-        try {
-            org.ccsds.moims.mo.mal.structures.EntityKey entityKey4 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType1, 281475010265070L, objectType3);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        }
-        org.junit.Assert.assertNotNull(objectType1);
-    }
-
-    @Test
     public void test015() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test015");
@@ -329,21 +314,6 @@ public class RegressionTest0 {
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType5, (java.lang.Long) 281474993487886L);
         org.junit.Assert.assertNotNull(objectType1);
         org.junit.Assert.assertNotNull(objectType5);
-    }
-
-    @Test
-    public void test031() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test031");
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts0 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        org.ccsds.moims.mo.com.structures.ObjectType objectType1 = keyParts0.objectType;
-        org.ccsds.moims.mo.com.structures.ObjectType objectType3 = null;
-        try {
-            org.ccsds.moims.mo.mal.structures.EntityKey entityKey4 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType1, 0L, objectType3);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        }
-        org.junit.Assert.assertNotNull(objectType1);
     }
 
     @Test
@@ -524,22 +494,6 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test044() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test044");
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey0 = null;
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts1 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        keyParts1.objectInstance = (-75682021376L);
-        java.lang.Long long4 = keyParts1.objectInstance;
-        try {
-            esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey0, keyParts1);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        }
-        org.junit.Assert.assertTrue("'" + long4 + "' != '" + (-75682021376L) + "'", long4.equals((-75682021376L)));
-    }
-
-    @Test
     public void test045() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test045");
@@ -637,7 +591,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType64 = keyParts63.objectType;
         keyParts62.objectType = objectType64;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType64, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey68 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType57, (long) '#', objectType64);
         keyParts50.sourceObjectType = objectType64;
         int int70 = shortList5.indexOf((java.lang.Object) objectType64);
         try {
@@ -676,7 +629,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long54 + "' != '" + 281474993487876L + "'", long54.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType57);
         org.junit.Assert.assertNotNull(objectType64);
-        org.junit.Assert.assertNotNull(entityKey68);
         org.junit.Assert.assertTrue("'" + int70 + "' != '" + (-1) + "'", int70 == (-1));
     }
 
@@ -1257,41 +1209,6 @@ public class RegressionTest0 {
     }
 
     @Test
-    public void test082() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test082");
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts0 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts1 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        org.ccsds.moims.mo.com.structures.ObjectType objectType2 = keyParts1.objectType;
-        keyParts0.objectType = objectType2;
-        esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType2, (java.lang.Long) 281474993487889L);
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts7 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts8 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
-        keyParts7.objectType = objectType9;
-        esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts16 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        keyParts16.objectInstance = (-75682021376L);
-        org.ccsds.moims.mo.com.structures.ObjectType objectType19 = keyParts16.objectType;
-        keyParts14.sourceObjectType = objectType19;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts22 = null;
-        try {
-            esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts22);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        }
-        org.junit.Assert.assertNotNull(objectType2);
-        org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
-        org.junit.Assert.assertNotNull(objectType15);
-        org.junit.Assert.assertNotNull(objectType19);
-    }
-
-    @Test
     public void test083() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test083");
@@ -1317,36 +1234,7 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(objectType3);
         org.junit.Assert.assertNotNull(objectType8);
     }
-
-    @Test
-    public void test085() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test085");
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts0 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        org.ccsds.moims.mo.com.structures.ObjectType objectType1 = keyParts0.objectType;
-        keyParts0.objectInstance = 281474993487876L;
-        java.lang.Long long4 = keyParts0.objectInstance;
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts5 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts6 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        org.ccsds.moims.mo.com.structures.ObjectType objectType7 = keyParts6.objectType;
-        keyParts5.objectType = objectType7;
-        esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType7, (java.lang.Long) 281474993487889L);
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts12 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts13 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        org.ccsds.moims.mo.com.structures.ObjectType objectType14 = keyParts13.objectType;
-        keyParts12.objectType = objectType14;
-        esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType14, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey18 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType7, (long) '#', objectType14);
-        keyParts0.sourceObjectType = objectType14;
-        esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType14, (java.lang.Long) 281474993487872L);
-        esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType14, (java.lang.Long) 281614093385737L);
-        org.junit.Assert.assertNotNull(objectType1);
-        org.junit.Assert.assertTrue("'" + long4 + "' != '" + 281474993487876L + "'", long4.equals(281474993487876L));
-        org.junit.Assert.assertNotNull(objectType7);
-        org.junit.Assert.assertNotNull(objectType14);
-        org.junit.Assert.assertNotNull(entityKey18);
-    }
-
+    
     @Test
     public void test086() throws Throwable {
         if (debug)
@@ -1415,7 +1303,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType64 = keyParts63.objectType;
         keyParts62.objectType = objectType64;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType64, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey68 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType57, (long) '#', objectType64);
         keyParts50.sourceObjectType = objectType64;
         int int70 = shortList5.indexOf((java.lang.Object) objectType64);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts72 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
@@ -1432,9 +1319,7 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType86 = keyParts85.objectType;
         keyParts84.objectType = objectType86;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType86, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey90 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType79, (long) '#', objectType86);
         keyParts72.sourceObjectType = objectType86;
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey92 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType64, (long) 5, objectType86);
         org.junit.Assert.assertNotNull(shortArray4);
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
         org.junit.Assert.assertNotNull(objArray9);
@@ -1466,14 +1351,11 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long54 + "' != '" + 281474993487876L + "'", long54.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType57);
         org.junit.Assert.assertNotNull(objectType64);
-        org.junit.Assert.assertNotNull(entityKey68);
         org.junit.Assert.assertTrue("'" + int70 + "' != '" + (-1) + "'", int70 == (-1));
         org.junit.Assert.assertNotNull(objectType73);
         org.junit.Assert.assertTrue("'" + long76 + "' != '" + 281474993487876L + "'", long76.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType79);
         org.junit.Assert.assertNotNull(objectType86);
-        org.junit.Assert.assertNotNull(entityKey90);
-        org.junit.Assert.assertNotNull(entityKey92);
     }
 
     @Test
@@ -1958,7 +1840,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType14 = keyParts13.objectType;
         keyParts12.objectType = objectType14;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType14, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey18 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType7, (long) '#', objectType14);
         keyParts0.sourceObjectType = objectType14;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts20 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts20.objectInstance = (-75682021376L);
@@ -1981,14 +1862,12 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType43 = keyParts42.objectType;
         keyParts41.objectType = objectType43;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType43, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey47 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType36, (long) '#', objectType43);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts48 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType49 = keyParts48.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts50 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts50.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType53 = keyParts50.objectType;
         keyParts48.sourceObjectType = objectType53;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey47, keyParts48);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts56 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts56.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType59 = keyParts56.objectType;
@@ -2013,12 +1892,10 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long4 + "' != '" + 281474993487876L + "'", long4.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType7);
         org.junit.Assert.assertNotNull(objectType14);
-        org.junit.Assert.assertNotNull(entityKey18);
         org.junit.Assert.assertNotNull(objectType23);
         org.junit.Assert.assertNotNull(objectType28);
         org.junit.Assert.assertNotNull(objectType36);
         org.junit.Assert.assertNotNull(objectType43);
-        org.junit.Assert.assertNotNull(entityKey47);
         org.junit.Assert.assertNotNull(objectType49);
         org.junit.Assert.assertNotNull(objectType53);
         org.junit.Assert.assertNotNull(objectType59);
@@ -2043,14 +1920,12 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts16 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts16.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType19 = keyParts16.objectType;
         keyParts14.sourceObjectType = objectType19;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts22 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts22.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType25 = keyParts22.objectType;
@@ -2091,7 +1966,6 @@ public class RegressionTest0 {
         keyParts14.objectType = objectType60;
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType15);
         org.junit.Assert.assertNotNull(objectType19);
         org.junit.Assert.assertNotNull(objectType25);
@@ -2388,14 +2262,12 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType14 = keyParts13.objectType;
         keyParts12.objectType = objectType14;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType14, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey18 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType7, (long) '#', objectType14);
         keyParts0.sourceObjectType = objectType14;
         java.lang.Long long21 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType14, true);
         org.junit.Assert.assertNotNull(objectType1);
         org.junit.Assert.assertTrue("'" + long4 + "' != '" + 281474993487876L + "'", long4.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType7);
         org.junit.Assert.assertNotNull(objectType14);
-        org.junit.Assert.assertNotNull(entityKey18);
         org.junit.Assert.assertTrue("'" + long21 + "' != '" + 281474993487889L + "'", long21.equals(281474993487889L));
     }
 
@@ -2599,10 +2471,8 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType21 = keyParts20.objectType;
         keyParts19.objectType = objectType21;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType21, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey25 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType14, (long) '#', objectType21);
         keyParts7.sourceObjectType = objectType21;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType21, (java.lang.Long) (-83886074L));
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey29 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType1, (long) (-15), objectType21);
         java.lang.Long long31 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType1, true);
         org.junit.Assert.assertNotNull(objectType1);
         org.junit.Assert.assertTrue("'" + long5 + "' != '" + 281474993487884L + "'", long5.equals(281474993487884L));
@@ -2610,8 +2480,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long11 + "' != '" + 281474993487876L + "'", long11.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType14);
         org.junit.Assert.assertNotNull(objectType21);
-        org.junit.Assert.assertNotNull(entityKey25);
-        org.junit.Assert.assertNotNull(entityKey29);
         org.junit.Assert.assertTrue("'" + long31 + "' != '" + 281474993487884L + "'", long31.equals(281474993487884L));
     }
 
@@ -2706,7 +2574,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType70 = keyParts69.objectType;
         keyParts68.objectType = objectType70;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType70, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey74 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType63, (long) '#', objectType70);
         keyParts56.sourceObjectType = objectType70;
         int int76 = shortList11.indexOf((java.lang.Object) objectType70);
         keyParts0.sourceObjectType = objectType70;
@@ -2742,7 +2609,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long60 + "' != '" + 281474993487876L + "'", long60.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType63);
         org.junit.Assert.assertNotNull(objectType70);
-        org.junit.Assert.assertNotNull(entityKey74);
         org.junit.Assert.assertTrue("'" + int76 + "' != '" + (-1) + "'", int76 == (-1));
     }
 
@@ -3236,7 +3102,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType81 = keyParts80.objectType;
         keyParts79.objectType = objectType81;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType81, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey85 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType74, (long) '#', objectType81);
         keyParts67.sourceObjectType = objectType81;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType81, (java.lang.Long) (-83886074L));
         keyParts53.sourceObjectType = objectType81;
@@ -3276,7 +3141,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long71 + "' != '" + 281474993487876L + "'", long71.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType74);
         org.junit.Assert.assertNotNull(objectType81);
-        org.junit.Assert.assertNotNull(entityKey85);
         org.junit.Assert.assertTrue("'" + int90 + "' != '" + (-1) + "'", int90 == (-1));
     }
 
@@ -3360,7 +3224,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType64 = keyParts63.objectType;
         keyParts62.objectType = objectType64;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType64, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey68 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType57, (long) '#', objectType64);
         keyParts50.sourceObjectType = objectType64;
         int int70 = shortList5.indexOf((java.lang.Object) objectType64);
         try {
@@ -3399,7 +3262,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long54 + "' != '" + 281474993487876L + "'", long54.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType57);
         org.junit.Assert.assertNotNull(objectType64);
-        org.junit.Assert.assertNotNull(entityKey68);
         org.junit.Assert.assertTrue("'" + int70 + "' != '" + (-1) + "'", int70 == (-1));
     }
 
@@ -3805,10 +3667,8 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType21 = keyParts20.objectType;
         keyParts19.objectType = objectType21;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType21, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey25 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType14, (long) '#', objectType21);
         keyParts7.sourceObjectType = objectType21;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType21, (java.lang.Long) (-83886074L));
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey29 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType1, (long) (-15), objectType21);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts30 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType31 = keyParts30.objectType;
         keyParts30.objectInstance = 281474993487876L;
@@ -3817,15 +3677,12 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType36 = keyParts30.sourceObjectType;
         java.lang.Long long37 = keyParts30.objectInstance;
         keyParts30.objectInstance = 281475010265077L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey29, keyParts30);
         org.junit.Assert.assertNotNull(objectType1);
         org.junit.Assert.assertTrue("'" + long5 + "' != '" + 281474993487884L + "'", long5.equals(281474993487884L));
         org.junit.Assert.assertNotNull(objectType8);
         org.junit.Assert.assertTrue("'" + long11 + "' != '" + 281474993487876L + "'", long11.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType14);
         org.junit.Assert.assertNotNull(objectType21);
-        org.junit.Assert.assertNotNull(entityKey25);
-        org.junit.Assert.assertNotNull(entityKey29);
         org.junit.Assert.assertNotNull(objectType31);
         org.junit.Assert.assertTrue("'" + long34 + "' != '" + 281474993487876L + "'", long34.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType35);
@@ -4049,12 +3906,10 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts14.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType17 = keyParts14.objectType;
         keyParts14.objectInstance = (-281431993483167L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         org.ccsds.moims.mo.mal.structures.Duration duration22 = new org.ccsds.moims.mo.mal.structures.Duration((double) ' ');
         org.ccsds.moims.mo.mal.structures.Element element23 = duration22.createElement();
         double double24 = duration22.getValue();
@@ -4078,7 +3933,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType43 = keyParts33.objectType;
         boolean boolean44 = uShort32.equals((java.lang.Object) keyParts33);
         boolean boolean45 = duration22.equals((java.lang.Object) keyParts33);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts33);
         org.ccsds.moims.mo.mal.structures.ShortList shortList48 = new org.ccsds.moims.mo.mal.structures.ShortList((int) (byte) 10);
         java.lang.Integer int49 = shortList48.getTypeShortForm();
         org.ccsds.moims.mo.mal.structures.UShort uShort50 = shortList48.getAreaNumber();
@@ -4101,14 +3955,11 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType70 = keyParts69.objectType;
         keyParts68.objectType = objectType70;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType70, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey74 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType63, (long) '#', objectType70);
         keyParts56.sourceObjectType = objectType70;
         boolean boolean76 = shortList48.equals((java.lang.Object) keyParts56);
         java.lang.Long long77 = keyParts56.objectInstance;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts56);
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType17);
         org.junit.Assert.assertNotNull(element23);
         org.junit.Assert.assertTrue("'" + double24 + "' != '" + 32.0d + "'", double24 == 32.0d);
@@ -4133,7 +3984,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long60 + "' != '" + 281474993487876L + "'", long60.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType63);
         org.junit.Assert.assertNotNull(objectType70);
-        org.junit.Assert.assertNotNull(entityKey74);
         org.junit.Assert.assertTrue("'" + boolean76 + "' != '" + false + "'", boolean76 == false);
         org.junit.Assert.assertTrue("'" + long77 + "' != '" + 281474993487876L + "'", long77.equals(281474993487876L));
     }
@@ -4270,25 +4120,20 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts16 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts16.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType19 = keyParts16.objectType;
         keyParts14.sourceObjectType = objectType19;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts22 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts22.objectInstance = (-75682021376L);
         java.lang.Long long25 = keyParts22.objectInstance;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts22);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts27 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts27.objectInstance = (-75682021376L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts27);
         keyParts27.objectInstance = 281475010265077L;
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType15);
         org.junit.Assert.assertNotNull(objectType19);
         org.junit.Assert.assertTrue("'" + long25 + "' != '" + (-75682021376L) + "'", long25.equals((-75682021376L)));
@@ -4332,11 +4177,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType45 = keyParts40.objectType;
         keyParts13.sourceObjectType = objectType45;
         org.ccsds.moims.mo.com.structures.ObjectType objectType48 = null;
-        try {
-            org.ccsds.moims.mo.mal.structures.EntityKey entityKey49 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType45, 281475010265078L, objectType48);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        }
         org.junit.Assert.assertNotNull(doubleArray4);
         org.junit.Assert.assertTrue("'" + boolean6 + "' != '" + true + "'", boolean6 == true);
         org.junit.Assert.assertNotNull(doubleSpliterator12);
@@ -4371,7 +4211,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         java.lang.Float[] floatArray19 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList20 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList20, floatArray19);
@@ -4386,12 +4225,10 @@ public class RegressionTest0 {
         java.lang.Long long31 = keyParts30.objectInstance;
         int int32 = floatList20.indexOf((java.lang.Object) keyParts30);
         keyParts30.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts30);
         org.ccsds.moims.mo.com.structures.ObjectType objectType36 = keyParts30.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType36, (java.lang.Long) (-3659131714011136L));
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(floatArray19);
         org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
         org.junit.Assert.assertTrue("'" + int22 + "' != '" + 5 + "'", int22 == 5);
@@ -4416,7 +4253,6 @@ public class RegressionTest0 {
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts7 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType8 = keyParts7.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType8, (java.lang.Long) 1125912808521736L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey11 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType1, (long) 8, objectType8);
         java.lang.Float[] floatArray17 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList18 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean19 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList18, floatArray17);
@@ -4446,12 +4282,8 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType48 = keyParts47.objectType;
         keyParts46.objectType = objectType48;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType48, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey52 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType41, (long) '#', objectType48);
         keyParts28.objectType = objectType41;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey11, keyParts28);
         org.junit.Assert.assertNotNull(objectType1);
-        org.junit.Assert.assertNotNull(objectType8);
-        org.junit.Assert.assertNotNull(entityKey11);
         org.junit.Assert.assertNotNull(floatArray17);
         org.junit.Assert.assertTrue("'" + boolean19 + "' != '" + true + "'", boolean19 == true);
         org.junit.Assert.assertTrue("'" + int20 + "' != '" + 5 + "'", int20 == 5);
@@ -4466,7 +4298,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(objectType35);
         org.junit.Assert.assertNotNull(objectType41);
         org.junit.Assert.assertNotNull(objectType48);
-        org.junit.Assert.assertNotNull(entityKey52);
     }
 
     @Test
@@ -4750,7 +4581,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType42 = keyParts41.objectType;
         keyParts40.objectType = objectType42;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType42, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey46 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType35, (long) '#', objectType42);
         keyParts28.sourceObjectType = objectType42;
         boolean boolean48 = shortList20.equals((java.lang.Object) keyParts28);
         boolean boolean49 = uShortList1.equals((java.lang.Object) shortList20);
@@ -4773,7 +4603,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long32 + "' != '" + 281474993487876L + "'", long32.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType35);
         org.junit.Assert.assertNotNull(objectType42);
-        org.junit.Assert.assertNotNull(entityKey46);
         org.junit.Assert.assertTrue("'" + boolean48 + "' != '" + false + "'", boolean48 == false);
         org.junit.Assert.assertTrue("'" + boolean49 + "' != '" + true + "'", boolean49 == true);
     }
@@ -4919,7 +4748,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType14 = keyParts13.objectType;
         keyParts12.objectType = objectType14;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType14, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey18 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType7, (long) '#', objectType14);
         keyParts0.sourceObjectType = objectType14;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType14, (java.lang.Long) (-83886074L));
         java.lang.Long long23 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType14, true);
@@ -4927,7 +4755,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long4 + "' != '" + 281474993487876L + "'", long4.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType7);
         org.junit.Assert.assertNotNull(objectType14);
-        org.junit.Assert.assertNotNull(entityKey18);
         org.junit.Assert.assertTrue("'" + long23 + "' != '" + (-83886074L) + "'", long23.equals((-83886074L)));
     }
 
@@ -5364,7 +5191,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487884L);
         java.lang.Long long13 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType9, true);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey14 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType4, (-16777213L), objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts15 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType16 = keyParts15.objectType;
         keyParts15.objectInstance = 281474993487876L;
@@ -5379,7 +5205,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType29 = keyParts28.objectType;
         keyParts27.objectType = objectType29;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType29, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey33 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType22, (long) '#', objectType29);
         keyParts15.sourceObjectType = objectType29;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts35 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts35.objectInstance = (-75682021376L);
@@ -5392,28 +5217,19 @@ public class RegressionTest0 {
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType43, (java.lang.Long) 281474993487876L);
         keyParts35.sourceObjectType = objectType43;
         keyParts15.objectType = objectType43;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey14, keyParts15);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts50 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType51 = keyParts50.objectType;
         keyParts50.objectInstance = 281475010265081L;
         keyParts50.objectInstance = 1125912808521735L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey14, keyParts50);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts57 = null;
-        try {
-            esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey14, keyParts57);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        }
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + (-1L) + "'", long1.equals((-1L)));
         org.junit.Assert.assertNotNull(objectType4);
         org.junit.Assert.assertNotNull(objectType9);
         org.junit.Assert.assertTrue("'" + long13 + "' != '" + 281474993487884L + "'", long13.equals(281474993487884L));
-        org.junit.Assert.assertNotNull(entityKey14);
         org.junit.Assert.assertNotNull(objectType16);
         org.junit.Assert.assertTrue("'" + long19 + "' != '" + 281474993487876L + "'", long19.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType22);
         org.junit.Assert.assertNotNull(objectType29);
-        org.junit.Assert.assertNotNull(entityKey33);
         org.junit.Assert.assertNotNull(objectType38);
         org.junit.Assert.assertNotNull(objectType43);
         org.junit.Assert.assertNotNull(objectType51);
@@ -5974,7 +5790,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487884L);
         java.lang.Long long13 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType9, true);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey14 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType4, (-16777213L), objectType9);
         java.lang.Float[] floatArray20 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList21 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean22 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList21, floatArray20);
@@ -5988,12 +5803,10 @@ public class RegressionTest0 {
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts31 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         java.lang.Long long32 = keyParts31.objectInstance;
         int int33 = floatList21.indexOf((java.lang.Object) keyParts31);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey14, keyParts31);
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + (-1L) + "'", long1.equals((-1L)));
         org.junit.Assert.assertNotNull(objectType4);
         org.junit.Assert.assertNotNull(objectType9);
         org.junit.Assert.assertTrue("'" + long13 + "' != '" + 281474993487884L + "'", long13.equals(281474993487884L));
-        org.junit.Assert.assertNotNull(entityKey14);
         org.junit.Assert.assertNotNull(floatArray20);
         org.junit.Assert.assertTrue("'" + boolean22 + "' != '" + true + "'", boolean22 == true);
         org.junit.Assert.assertTrue("'" + int23 + "' != '" + 5 + "'", int23 == 5);
@@ -6070,7 +5883,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         java.lang.Float[] floatArray19 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList20 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList20, floatArray19);
@@ -6085,7 +5897,6 @@ public class RegressionTest0 {
         java.lang.Long long31 = keyParts30.objectInstance;
         int int32 = floatList20.indexOf((java.lang.Object) keyParts30);
         keyParts30.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts30);
         java.lang.Float[] floatArray41 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList42 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean43 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList42, floatArray41);
@@ -6105,7 +5916,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType59 = keyParts58.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType59, (java.lang.Long) 281474993487884L);
         keyParts52.objectType = objectType59;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts52);
         java.lang.Float[] floatArray69 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList70 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean71 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList70, floatArray69);
@@ -6122,10 +5932,8 @@ public class RegressionTest0 {
         keyParts80.objectInstance = 281474993487884L;
         keyParts80.objectInstance = 2L;
         java.lang.Long long87 = keyParts80.objectInstance;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts80);
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(floatArray19);
         org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
         org.junit.Assert.assertTrue("'" + int22 + "' != '" + 5 + "'", int22 == 5);
@@ -6189,7 +5997,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487884L);
         java.lang.Long long13 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType9, true);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey14 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType4, (-16777213L), objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts15 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType16 = keyParts15.objectType;
         keyParts15.objectInstance = 281474993487876L;
@@ -6204,7 +6011,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType29 = keyParts28.objectType;
         keyParts27.objectType = objectType29;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType29, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey33 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType22, (long) '#', objectType29);
         keyParts15.sourceObjectType = objectType29;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts35 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts35.objectInstance = (-75682021376L);
@@ -6217,7 +6023,6 @@ public class RegressionTest0 {
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType43, (java.lang.Long) 281474993487876L);
         keyParts35.sourceObjectType = objectType43;
         keyParts15.objectType = objectType43;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey14, keyParts15);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts50 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts51 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType52 = keyParts51.objectType;
@@ -6228,7 +6033,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType59 = keyParts58.objectType;
         keyParts57.objectType = objectType59;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType59, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey63 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType52, (long) '#', objectType59);
         java.lang.Float[] floatArray69 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList70 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean71 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList70, floatArray69);
@@ -6243,23 +6047,18 @@ public class RegressionTest0 {
         java.lang.Long long81 = keyParts80.objectInstance;
         int int82 = floatList70.indexOf((java.lang.Object) keyParts80);
         keyParts80.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey63, keyParts80);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey14, keyParts80);
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + (-1L) + "'", long1.equals((-1L)));
         org.junit.Assert.assertNotNull(objectType4);
         org.junit.Assert.assertNotNull(objectType9);
         org.junit.Assert.assertTrue("'" + long13 + "' != '" + 281474993487884L + "'", long13.equals(281474993487884L));
-        org.junit.Assert.assertNotNull(entityKey14);
         org.junit.Assert.assertNotNull(objectType16);
         org.junit.Assert.assertTrue("'" + long19 + "' != '" + 281474993487876L + "'", long19.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType22);
         org.junit.Assert.assertNotNull(objectType29);
-        org.junit.Assert.assertNotNull(entityKey33);
         org.junit.Assert.assertNotNull(objectType38);
         org.junit.Assert.assertNotNull(objectType43);
         org.junit.Assert.assertNotNull(objectType52);
         org.junit.Assert.assertNotNull(objectType59);
-        org.junit.Assert.assertNotNull(entityKey63);
         org.junit.Assert.assertNotNull(floatArray69);
         org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + true + "'", boolean71 == true);
         org.junit.Assert.assertTrue("'" + int72 + "' != '" + 5 + "'", int72 == 5);
@@ -6613,12 +6412,10 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType57 = keyParts56.objectType;
         keyParts55.objectType = objectType57;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType57, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey61 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType50, (long) '#', objectType57);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts62 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts62.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType65 = keyParts62.objectType;
         keyParts62.objectInstance = (-281431993483167L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey61, keyParts62);
         int int69 = longList42.indexOf((java.lang.Object) keyParts62);
         org.ccsds.moims.mo.com.structures.ObjectType objectType70 = keyParts62.objectType;
         org.junit.Assert.assertNotNull(doubleArray4);
@@ -6648,7 +6445,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(uShort47);
         org.junit.Assert.assertNotNull(objectType50);
         org.junit.Assert.assertNotNull(objectType57);
-        org.junit.Assert.assertNotNull(entityKey61);
         org.junit.Assert.assertNotNull(objectType65);
         org.junit.Assert.assertTrue("'" + int69 + "' != '" + (-1) + "'", int69 == (-1));
         org.junit.Assert.assertNotNull(objectType70);
@@ -7149,7 +6945,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         java.lang.Float[] floatArray19 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList20 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList20, floatArray19);
@@ -7164,12 +6959,10 @@ public class RegressionTest0 {
         java.lang.Long long31 = keyParts30.objectInstance;
         int int32 = floatList20.indexOf((java.lang.Object) keyParts30);
         keyParts30.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts30);
         org.ccsds.moims.mo.com.structures.ObjectType objectType36 = keyParts30.objectType;
         keyParts30.objectInstance = (-54156853238L);
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(floatArray19);
         org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
         org.junit.Assert.assertTrue("'" + int22 + "' != '" + 5 + "'", int22 == 5);
@@ -7241,7 +7034,6 @@ public class RegressionTest0 {
     public void test252() throws Throwable {
         if (debug)
             System.out.format("%n%s%n", "RegressionTest0.test252");
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey0 = null;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts1 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts2 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType3 = keyParts2.objectType;
@@ -7252,14 +7044,12 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType10 = keyParts9.objectType;
         keyParts8.objectType = objectType10;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType10, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey14 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType3, (long) '#', objectType10);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts15 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType16 = keyParts15.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts17 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts17.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType20 = keyParts17.objectType;
         keyParts15.sourceObjectType = objectType20;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey14, keyParts15);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts23 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType24 = keyParts23.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType24, (java.lang.Long) 281474993487884L);
@@ -7267,21 +7057,13 @@ public class RegressionTest0 {
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts30 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType31 = keyParts30.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType31, (java.lang.Long) 1125912808521736L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey34 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType24, (long) 8, objectType31);
         keyParts15.objectType = objectType24;
-        try {
-            esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey0, keyParts15);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        }
         org.junit.Assert.assertNotNull(objectType3);
         org.junit.Assert.assertNotNull(objectType10);
-        org.junit.Assert.assertNotNull(entityKey14);
         org.junit.Assert.assertNotNull(objectType16);
         org.junit.Assert.assertNotNull(objectType20);
         org.junit.Assert.assertNotNull(objectType24);
         org.junit.Assert.assertNotNull(objectType31);
-        org.junit.Assert.assertNotNull(entityKey34);
     }
 
     @Test
@@ -7298,21 +7080,17 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts16 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts16.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType19 = keyParts16.objectType;
         keyParts14.sourceObjectType = objectType19;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts22 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts22.objectInstance = (-75682021376L);
         java.lang.Long long25 = keyParts22.objectInstance;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts22);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts27 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts27.objectInstance = (-75682021376L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts27);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts31 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType32 = keyParts31.objectType;
         keyParts31.objectInstance = 281474993487876L;
@@ -7320,10 +7098,8 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType36 = keyParts31.sourceObjectType;
         org.ccsds.moims.mo.com.structures.ObjectType objectType37 = keyParts31.sourceObjectType;
         java.lang.Long long38 = keyParts31.objectInstance;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts31);
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType15);
         org.junit.Assert.assertNotNull(objectType19);
         org.junit.Assert.assertTrue("'" + long25 + "' != '" + (-75682021376L) + "'", long25.equals((-75682021376L)));
@@ -7471,7 +7247,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         java.lang.Float[] floatArray19 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList20 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList20, floatArray19);
@@ -7486,7 +7261,6 @@ public class RegressionTest0 {
         java.lang.Long long31 = keyParts30.objectInstance;
         int int32 = floatList20.indexOf((java.lang.Object) keyParts30);
         keyParts30.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts30);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts36 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts37 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType38 = keyParts37.objectType;
@@ -7497,7 +7271,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType45 = keyParts44.objectType;
         keyParts43.objectType = objectType45;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType45, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey49 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType38, (long) '#', objectType45);
         java.lang.Float[] floatArray55 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList56 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean57 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList56, floatArray55);
@@ -7512,15 +7285,12 @@ public class RegressionTest0 {
         java.lang.Long long67 = keyParts66.objectInstance;
         int int68 = floatList56.indexOf((java.lang.Object) keyParts66);
         keyParts66.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey49, keyParts66);
         org.ccsds.moims.mo.com.structures.ObjectType objectType72 = keyParts66.objectType;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts66);
         keyParts66.objectInstance = 7L;
         keyParts66.objectInstance = (-1970264707432442L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType78 = keyParts66.sourceObjectType;
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(floatArray19);
         org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
         org.junit.Assert.assertTrue("'" + int22 + "' != '" + 5 + "'", int22 == 5);
@@ -7533,7 +7303,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + int32 + "' != '" + (-1) + "'", int32 == (-1));
         org.junit.Assert.assertNotNull(objectType38);
         org.junit.Assert.assertNotNull(objectType45);
-        org.junit.Assert.assertNotNull(entityKey49);
         org.junit.Assert.assertNotNull(floatArray55);
         org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + true + "'", boolean57 == true);
         org.junit.Assert.assertTrue("'" + int58 + "' != '" + 5 + "'", int58 == 5);
@@ -7789,7 +7558,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
         keyParts13.objectType = objectType15;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType15, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey19 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType8, (long) '#', objectType15);
         keyParts0.sourceObjectType = objectType15;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts21 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType22 = keyParts21.objectType;
@@ -7809,10 +7577,8 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType42 = keyParts41.objectType;
         keyParts40.objectType = objectType42;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType42, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey46 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType35, (long) '#', objectType42);
         keyParts28.sourceObjectType = objectType42;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType42, (java.lang.Long) (-83886074L));
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey50 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType22, (long) (-15), objectType42);
         keyParts0.objectType = objectType42;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts52 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts53 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
@@ -7824,14 +7590,12 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType61 = keyParts60.objectType;
         keyParts59.objectType = objectType61;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType61, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey65 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType54, (long) '#', objectType61);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts66 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType67 = keyParts66.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts68 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts68.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType71 = keyParts68.objectType;
         keyParts66.sourceObjectType = objectType71;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey65, keyParts66);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts74 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts74.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType77 = keyParts74.objectType;
@@ -7855,18 +7619,14 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(objectType3);
         org.junit.Assert.assertNotNull(objectType8);
         org.junit.Assert.assertNotNull(objectType15);
-        org.junit.Assert.assertNotNull(entityKey19);
         org.junit.Assert.assertNotNull(objectType22);
         org.junit.Assert.assertTrue("'" + long26 + "' != '" + 281474993487884L + "'", long26.equals(281474993487884L));
         org.junit.Assert.assertNotNull(objectType29);
         org.junit.Assert.assertTrue("'" + long32 + "' != '" + 281474993487876L + "'", long32.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType35);
         org.junit.Assert.assertNotNull(objectType42);
-        org.junit.Assert.assertNotNull(entityKey46);
-        org.junit.Assert.assertNotNull(entityKey50);
         org.junit.Assert.assertNotNull(objectType54);
         org.junit.Assert.assertNotNull(objectType61);
-        org.junit.Assert.assertNotNull(entityKey65);
         org.junit.Assert.assertNotNull(objectType67);
         org.junit.Assert.assertNotNull(objectType71);
         org.junit.Assert.assertNotNull(objectType77);
@@ -8015,14 +7775,12 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts16 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts16.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType19 = keyParts16.objectType;
         keyParts14.sourceObjectType = objectType19;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts22 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts22.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType25 = keyParts22.objectType;
@@ -8045,7 +7803,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType44 = keyParts14.objectType;
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType15);
         org.junit.Assert.assertNotNull(objectType19);
         org.junit.Assert.assertNotNull(objectType25);
@@ -8070,7 +7827,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487884L);
         java.lang.Long long13 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType9, true);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey14 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType4, (-16777213L), objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts15 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType16 = keyParts15.objectType;
         keyParts15.objectInstance = 281474993487876L;
@@ -8085,7 +7841,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType29 = keyParts28.objectType;
         keyParts27.objectType = objectType29;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType29, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey33 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType22, (long) '#', objectType29);
         keyParts15.sourceObjectType = objectType29;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts35 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts35.objectInstance = (-75682021376L);
@@ -8098,7 +7853,6 @@ public class RegressionTest0 {
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType43, (java.lang.Long) 281474993487876L);
         keyParts35.sourceObjectType = objectType43;
         keyParts15.objectType = objectType43;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey14, keyParts15);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts50 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType51 = keyParts50.objectType;
         keyParts50.objectInstance = 281474993487876L;
@@ -8107,7 +7861,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType56 = keyParts50.sourceObjectType;
         java.lang.Long long57 = keyParts50.objectInstance;
         keyParts50.objectInstance = 281475010265077L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey14, keyParts50);
         java.lang.Float[] floatArray66 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList67 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean68 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList67, floatArray66);
@@ -8123,17 +7876,14 @@ public class RegressionTest0 {
         int int79 = floatList67.indexOf((java.lang.Object) keyParts77);
         keyParts77.objectInstance = 281474993487884L;
         org.ccsds.moims.mo.com.structures.ObjectType objectType82 = keyParts77.objectType;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey14, keyParts77);
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + (-1L) + "'", long1.equals((-1L)));
         org.junit.Assert.assertNotNull(objectType4);
         org.junit.Assert.assertNotNull(objectType9);
         org.junit.Assert.assertTrue("'" + long13 + "' != '" + 281474993487884L + "'", long13.equals(281474993487884L));
-        org.junit.Assert.assertNotNull(entityKey14);
         org.junit.Assert.assertNotNull(objectType16);
         org.junit.Assert.assertTrue("'" + long19 + "' != '" + 281474993487876L + "'", long19.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType22);
         org.junit.Assert.assertNotNull(objectType29);
-        org.junit.Assert.assertNotNull(entityKey33);
         org.junit.Assert.assertNotNull(objectType38);
         org.junit.Assert.assertNotNull(objectType43);
         org.junit.Assert.assertNotNull(objectType51);
@@ -8503,12 +8253,10 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType11 = keyParts10.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType11, (java.lang.Long) 281474993487884L);
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType11, (java.lang.Long) 17L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey16 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType5, 281497323962372L, objectType11);
         java.lang.Long long18 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType11, true);
         org.junit.Assert.assertNotNull(objectType1);
         org.junit.Assert.assertNotNull(objectType5);
         org.junit.Assert.assertNotNull(objectType11);
-        org.junit.Assert.assertNotNull(entityKey16);
         org.junit.Assert.assertTrue("'" + long18 + "' != '" + 17L + "'", long18.equals(17L));
     }
 
@@ -8743,7 +8491,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         java.lang.Float[] floatArray19 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList20 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList20, floatArray19);
@@ -8758,7 +8505,6 @@ public class RegressionTest0 {
         java.lang.Long long31 = keyParts30.objectInstance;
         int int32 = floatList20.indexOf((java.lang.Object) keyParts30);
         keyParts30.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts30);
         java.lang.Float[] floatArray41 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList42 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean43 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList42, floatArray41);
@@ -8778,7 +8524,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType59 = keyParts58.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType59, (java.lang.Long) 281474993487884L);
         keyParts52.objectType = objectType59;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts52);
         java.lang.String[] strArray65 = new java.lang.String[] { "hi!" };
         java.util.ArrayList<java.lang.String> strList66 = new java.util.ArrayList<java.lang.String>();
         boolean boolean67 = java.util.Collections.addAll((java.util.Collection<java.lang.String>) strList66, strArray65);
@@ -8796,10 +8541,8 @@ public class RegressionTest0 {
         keyParts83.objectInstance = 281474993487876L;
         java.lang.Long long87 = keyParts83.objectInstance;
         int int88 = strList66.lastIndexOf((java.lang.Object) keyParts83);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts83);
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(floatArray19);
         org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
         org.junit.Assert.assertTrue("'" + int22 + "' != '" + 5 + "'", int22 == 5);
@@ -9068,7 +8811,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
         keyParts13.objectType = objectType15;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType15, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey19 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType8, (long) '#', objectType15);
         keyParts1.sourceObjectType = objectType15;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType15, (java.lang.Long) 281474993487872L);
         boolean boolean23 = uOctet0.equals((java.lang.Object) 281474993487872L);
@@ -9077,7 +8819,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long5 + "' != '" + 281474993487876L + "'", long5.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType8);
         org.junit.Assert.assertNotNull(objectType15);
-        org.junit.Assert.assertNotNull(entityKey19);
         org.junit.Assert.assertTrue("'" + boolean23 + "' != '" + false + "'", boolean23 == false);
     }
 
@@ -9404,7 +9145,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType64 = keyParts63.objectType;
         keyParts62.objectType = objectType64;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType64, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey68 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType57, (long) '#', objectType64);
         keyParts50.sourceObjectType = objectType64;
         int int70 = shortList5.indexOf((java.lang.Object) objectType64);
         boolean boolean71 = shortList5.isEmpty();
@@ -9439,7 +9179,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long54 + "' != '" + 281474993487876L + "'", long54.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType57);
         org.junit.Assert.assertNotNull(objectType64);
-        org.junit.Assert.assertNotNull(entityKey68);
         org.junit.Assert.assertTrue("'" + int70 + "' != '" + (-1) + "'", int70 == (-1));
         org.junit.Assert.assertTrue("'" + boolean71 + "' != '" + true + "'", boolean71 == true);
     }
@@ -9463,7 +9202,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
         keyParts13.objectType = objectType15;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType15, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey19 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType8, (long) '#', objectType15);
         java.lang.Float[] floatArray25 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList26 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean27 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList26, floatArray25);
@@ -9478,7 +9216,6 @@ public class RegressionTest0 {
         java.lang.Long long37 = keyParts36.objectInstance;
         int int38 = floatList26.indexOf((java.lang.Object) keyParts36);
         keyParts36.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey19, keyParts36);
         org.ccsds.moims.mo.com.structures.ObjectType objectType42 = keyParts36.objectType;
         org.ccsds.moims.mo.com.structures.ObjectType objectType43 = keyParts36.objectType;
         boolean boolean44 = blob5.equals((java.lang.Object) keyParts36);
@@ -9487,7 +9224,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(byteArray4);
         org.junit.Assert.assertNotNull(objectType8);
         org.junit.Assert.assertNotNull(objectType15);
-        org.junit.Assert.assertNotNull(entityKey19);
         org.junit.Assert.assertNotNull(floatArray25);
         org.junit.Assert.assertTrue("'" + boolean27 + "' != '" + true + "'", boolean27 == true);
         org.junit.Assert.assertTrue("'" + int28 + "' != '" + 5 + "'", int28 == 5);
@@ -9770,10 +9506,8 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType25 = keyParts24.objectType;
         keyParts23.objectType = objectType25;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType25, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey29 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType18, (long) '#', objectType25);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts30 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts30.objectInstance = (-75682021376L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey29, keyParts30);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts34 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType35 = keyParts34.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts36 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
@@ -9797,7 +9531,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(byteStream15);
         org.junit.Assert.assertNotNull(objectType18);
         org.junit.Assert.assertNotNull(objectType25);
-        org.junit.Assert.assertNotNull(entityKey29);
         org.junit.Assert.assertNotNull(objectType35);
         org.junit.Assert.assertNotNull(objectType37);
         org.junit.Assert.assertNotNull(objectType41);
@@ -9827,12 +9560,10 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts14.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType17 = keyParts14.objectType;
         keyParts14.objectInstance = (-281431993483167L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts21 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts21.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType24 = keyParts21.objectType;
@@ -9851,10 +9582,8 @@ public class RegressionTest0 {
         keyParts27.sourceObjectType = objectType37;
         keyParts21.sourceObjectType = objectType37;
         org.ccsds.moims.mo.com.structures.ObjectType objectType41 = keyParts21.objectType;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts21);
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType17);
         org.junit.Assert.assertNotNull(objectType24);
         org.junit.Assert.assertNotNull(objectType29);
@@ -9909,7 +9638,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         java.lang.Float[] floatArray19 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList20 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList20, floatArray19);
@@ -9924,13 +9652,11 @@ public class RegressionTest0 {
         java.lang.Long long31 = keyParts30.objectInstance;
         int int32 = floatList20.indexOf((java.lang.Object) keyParts30);
         keyParts30.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts30);
         org.ccsds.moims.mo.com.structures.ObjectType objectType36 = keyParts30.objectType;
         org.ccsds.moims.mo.com.structures.ObjectType objectType37 = keyParts30.sourceObjectType;
         java.lang.Long long38 = keyParts30.objectInstance;
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(floatArray19);
         org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
         org.junit.Assert.assertTrue("'" + int22 + "' != '" + 5 + "'", int22 == 5);
@@ -10017,7 +9743,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType41 = keyParts40.objectType;
         keyParts39.objectType = objectType41;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType41, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey45 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType34, (long) '#', objectType41);
         keyParts27.sourceObjectType = objectType41;
         org.ccsds.moims.mo.com.structures.ObjectType objectType47 = keyParts27.sourceObjectType;
         keyParts0.sourceObjectType = objectType47;
@@ -10036,7 +9761,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long31 + "' != '" + 281474993487876L + "'", long31.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType34);
         org.junit.Assert.assertNotNull(objectType41);
-        org.junit.Assert.assertNotNull(entityKey45);
         org.junit.Assert.assertNotNull(objectType47);
     }
 
@@ -10395,7 +10119,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         java.lang.Float[] floatArray19 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList20 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList20, floatArray19);
@@ -10410,7 +10133,6 @@ public class RegressionTest0 {
         java.lang.Long long31 = keyParts30.objectInstance;
         int int32 = floatList20.indexOf((java.lang.Object) keyParts30);
         keyParts30.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts30);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts36 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType37 = keyParts36.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts38 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
@@ -10419,10 +10141,8 @@ public class RegressionTest0 {
         keyParts36.sourceObjectType = objectType41;
         keyParts36.objectInstance = (-10L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType45 = keyParts36.objectType;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts36);
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(floatArray19);
         org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
         org.junit.Assert.assertTrue("'" + int22 + "' != '" + 5 + "'", int22 == 5);
@@ -10484,7 +10204,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487884L);
         java.lang.Long long13 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType9, true);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey14 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType4, (-16777213L), objectType9);
         org.ccsds.moims.mo.mal.structures.UShortList uShortList16 = new org.ccsds.moims.mo.mal.structures.UShortList(3);
         boolean boolean17 = uShortList16.isEmpty();
         org.ccsds.moims.mo.mal.structures.Duration duration19 = new org.ccsds.moims.mo.mal.structures.Duration((double) ' ');
@@ -10517,12 +10236,10 @@ public class RegressionTest0 {
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType45, (java.lang.Long) 281474993487876L);
         keyParts30.sourceObjectType = objectType45;
         boolean boolean50 = uShortList16.remove((java.lang.Object) keyParts30);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey14, keyParts30);
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + (-1L) + "'", long1.equals((-1L)));
         org.junit.Assert.assertNotNull(objectType4);
         org.junit.Assert.assertNotNull(objectType9);
         org.junit.Assert.assertTrue("'" + long13 + "' != '" + 281474993487884L + "'", long13.equals(281474993487884L));
-        org.junit.Assert.assertNotNull(entityKey14);
         org.junit.Assert.assertTrue("'" + boolean17 + "' != '" + true + "'", boolean17 == true);
         org.junit.Assert.assertNotNull(element20);
         org.junit.Assert.assertTrue("'" + double21 + "' != '" + 32.0d + "'", double21 == 32.0d);
@@ -10555,7 +10272,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         java.lang.Float[] floatArray19 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList20 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList20, floatArray19);
@@ -10570,7 +10286,6 @@ public class RegressionTest0 {
         java.lang.Long long31 = keyParts30.objectInstance;
         int int32 = floatList20.indexOf((java.lang.Object) keyParts30);
         keyParts30.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts30);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts36 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType37 = keyParts36.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType37, (java.lang.Long) 281474993487884L);
@@ -10590,7 +10305,6 @@ public class RegressionTest0 {
         keyParts30.sourceObjectType = objectType53;
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(floatArray19);
         org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
         org.junit.Assert.assertTrue("'" + int22 + "' != '" + 5 + "'", int22 == 5);
@@ -10668,7 +10382,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         java.lang.Float[] floatArray19 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList20 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList20, floatArray19);
@@ -10683,7 +10396,6 @@ public class RegressionTest0 {
         java.lang.Long long31 = keyParts30.objectInstance;
         int int32 = floatList20.indexOf((java.lang.Object) keyParts30);
         keyParts30.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts30);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts36 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts37 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType38 = keyParts37.objectType;
@@ -10694,7 +10406,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType45 = keyParts44.objectType;
         keyParts43.objectType = objectType45;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType45, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey49 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType38, (long) '#', objectType45);
         java.lang.Float[] floatArray55 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList56 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean57 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList56, floatArray55);
@@ -10709,14 +10420,11 @@ public class RegressionTest0 {
         java.lang.Long long67 = keyParts66.objectInstance;
         int int68 = floatList56.indexOf((java.lang.Object) keyParts66);
         keyParts66.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey49, keyParts66);
         org.ccsds.moims.mo.com.structures.ObjectType objectType72 = keyParts66.objectType;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts66);
         keyParts66.objectInstance = 7L;
         org.ccsds.moims.mo.com.structures.ObjectType objectType76 = keyParts66.objectType;
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(floatArray19);
         org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
         org.junit.Assert.assertTrue("'" + int22 + "' != '" + 5 + "'", int22 == 5);
@@ -10729,7 +10437,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + int32 + "' != '" + (-1) + "'", int32 == (-1));
         org.junit.Assert.assertNotNull(objectType38);
         org.junit.Assert.assertNotNull(objectType45);
-        org.junit.Assert.assertNotNull(entityKey49);
         org.junit.Assert.assertNotNull(floatArray55);
         org.junit.Assert.assertTrue("'" + boolean57 + "' != '" + true + "'", boolean57 == true);
         org.junit.Assert.assertTrue("'" + int58 + "' != '" + 5 + "'", int58 == 5);
@@ -10958,7 +10665,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487884L);
         java.lang.Long long13 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType9, true);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey14 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType4, (-16777213L), objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts16 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType17 = keyParts16.objectType;
         keyParts16.objectInstance = 281474993487876L;
@@ -10973,7 +10679,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType30 = keyParts29.objectType;
         keyParts28.objectType = objectType30;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType30, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey34 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType23, (long) '#', objectType30);
         keyParts16.sourceObjectType = objectType30;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts36 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts36.objectInstance = (-75682021376L);
@@ -10987,7 +10692,6 @@ public class RegressionTest0 {
         keyParts36.sourceObjectType = objectType44;
         keyParts16.objectType = objectType44;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType44, (java.lang.Long) (-3659131714011136L));
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey52 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType4, (long) (short) 0, objectType44);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts53 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts54 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType55 = keyParts54.objectType;
@@ -10998,7 +10702,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType62 = keyParts61.objectType;
         keyParts60.objectType = objectType62;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType62, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey66 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType55, (long) '#', objectType62);
         java.lang.Float[] floatArray72 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList73 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean74 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList73, floatArray72);
@@ -11013,25 +10716,19 @@ public class RegressionTest0 {
         java.lang.Long long84 = keyParts83.objectInstance;
         int int85 = floatList73.indexOf((java.lang.Object) keyParts83);
         keyParts83.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey66, keyParts83);
         keyParts83.objectInstance = (-83886074L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey52, keyParts83);
         org.junit.Assert.assertTrue("'" + long1 + "' != '" + (-1L) + "'", long1.equals((-1L)));
         org.junit.Assert.assertNotNull(objectType4);
         org.junit.Assert.assertNotNull(objectType9);
         org.junit.Assert.assertTrue("'" + long13 + "' != '" + 281474993487884L + "'", long13.equals(281474993487884L));
-        org.junit.Assert.assertNotNull(entityKey14);
         org.junit.Assert.assertNotNull(objectType17);
         org.junit.Assert.assertTrue("'" + long20 + "' != '" + 281474993487876L + "'", long20.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType23);
         org.junit.Assert.assertNotNull(objectType30);
-        org.junit.Assert.assertNotNull(entityKey34);
         org.junit.Assert.assertNotNull(objectType39);
         org.junit.Assert.assertNotNull(objectType44);
-        org.junit.Assert.assertNotNull(entityKey52);
         org.junit.Assert.assertNotNull(objectType55);
         org.junit.Assert.assertNotNull(objectType62);
-        org.junit.Assert.assertNotNull(entityKey66);
         org.junit.Assert.assertNotNull(floatArray72);
         org.junit.Assert.assertTrue("'" + boolean74 + "' != '" + true + "'", boolean74 == true);
         org.junit.Assert.assertTrue("'" + int75 + "' != '" + 5 + "'", int75 == 5);
@@ -11058,19 +10755,16 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts16 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts16.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType19 = keyParts16.objectType;
         keyParts14.sourceObjectType = objectType19;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         org.ccsds.moims.mo.com.structures.ObjectType objectType22 = keyParts14.objectType;
         java.lang.Long long24 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType22, false);
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType15);
         org.junit.Assert.assertNotNull(objectType19);
         org.junit.Assert.assertNotNull(objectType22);
@@ -11095,7 +10789,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType14 = keyParts13.objectType;
         keyParts12.objectType = objectType14;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType14, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey18 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType7, (long) '#', objectType14);
         keyParts0.sourceObjectType = objectType14;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType14, (java.lang.Long) 281474993487872L);
         java.lang.Long long23 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType14, false);
@@ -11104,7 +10797,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long4 + "' != '" + 281474993487876L + "'", long4.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType7);
         org.junit.Assert.assertNotNull(objectType14);
-        org.junit.Assert.assertNotNull(entityKey18);
         org.junit.Assert.assertTrue("'" + long23 + "' != '" + 281474993487872L + "'", long23.equals(281474993487872L));
     }
 
@@ -11145,7 +10837,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         java.lang.Float[] floatArray19 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList20 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList20, floatArray19);
@@ -11160,13 +10851,11 @@ public class RegressionTest0 {
         java.lang.Long long31 = keyParts30.objectInstance;
         int int32 = floatList20.indexOf((java.lang.Object) keyParts30);
         keyParts30.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts30);
         org.ccsds.moims.mo.com.structures.ObjectType objectType36 = keyParts30.objectType;
         org.ccsds.moims.mo.com.structures.ObjectType objectType37 = keyParts30.sourceObjectType;
         org.ccsds.moims.mo.com.structures.ObjectType objectType38 = keyParts30.sourceObjectType;
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(floatArray19);
         org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
         org.junit.Assert.assertTrue("'" + int22 + "' != '" + 5 + "'", int22 == 5);
@@ -11327,7 +11016,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         java.lang.Float[] floatArray19 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList20 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList20, floatArray19);
@@ -11342,7 +11030,6 @@ public class RegressionTest0 {
         java.lang.Long long31 = keyParts30.objectInstance;
         int int32 = floatList20.indexOf((java.lang.Object) keyParts30);
         keyParts30.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts30);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts36 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts37 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType38 = keyParts37.objectType;
@@ -11353,12 +11040,10 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType45 = keyParts44.objectType;
         keyParts43.objectType = objectType45;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType45, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey49 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType38, (long) '#', objectType45);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts50 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts50.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType53 = keyParts50.objectType;
         keyParts50.objectInstance = (-281431993483167L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey49, keyParts50);
         org.ccsds.moims.mo.mal.structures.Duration duration58 = new org.ccsds.moims.mo.mal.structures.Duration((double) ' ');
         org.ccsds.moims.mo.mal.structures.Element element59 = duration58.createElement();
         double double60 = duration58.getValue();
@@ -11382,8 +11067,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType79 = keyParts69.objectType;
         boolean boolean80 = uShort68.equals((java.lang.Object) keyParts69);
         boolean boolean81 = duration58.equals((java.lang.Object) keyParts69);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey49, keyParts69);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts69);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts84 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType85 = keyParts84.objectType;
         keyParts84.objectInstance = 281474993487876L;
@@ -11391,10 +11074,8 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType89 = keyParts84.sourceObjectType;
         java.lang.Long long90 = keyParts84.objectInstance;
         java.lang.Long long91 = keyParts84.objectInstance;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts84);
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(floatArray19);
         org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
         org.junit.Assert.assertTrue("'" + int22 + "' != '" + 5 + "'", int22 == 5);
@@ -11407,7 +11088,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + int32 + "' != '" + (-1) + "'", int32 == (-1));
         org.junit.Assert.assertNotNull(objectType38);
         org.junit.Assert.assertNotNull(objectType45);
-        org.junit.Assert.assertNotNull(entityKey49);
         org.junit.Assert.assertNotNull(objectType53);
         org.junit.Assert.assertNotNull(element59);
         org.junit.Assert.assertTrue("'" + double60 + "' != '" + 32.0d + "'", double60 == 32.0d);
@@ -11515,12 +11195,10 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts14.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType17 = keyParts14.objectType;
         keyParts14.objectInstance = (-281431993483167L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         org.ccsds.moims.mo.mal.structures.Duration duration22 = new org.ccsds.moims.mo.mal.structures.Duration((double) ' ');
         org.ccsds.moims.mo.mal.structures.Element element23 = duration22.createElement();
         double double24 = duration22.getValue();
@@ -11544,16 +11222,9 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType43 = keyParts33.objectType;
         boolean boolean44 = uShort32.equals((java.lang.Object) keyParts33);
         boolean boolean45 = duration22.equals((java.lang.Object) keyParts33);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts33);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts47 = null;
-        try {
-            esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts47);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        }
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType17);
         org.junit.Assert.assertNotNull(element23);
         org.junit.Assert.assertTrue("'" + double24 + "' != '" + 32.0d + "'", double24 == 32.0d);
@@ -11760,12 +11431,10 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts14.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType17 = keyParts14.objectType;
         keyParts14.objectInstance = (-281431993483167L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts21 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType22 = keyParts21.objectType;
         keyParts21.objectInstance = 281474993487876L;
@@ -11780,7 +11449,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType35 = keyParts34.objectType;
         keyParts33.objectType = objectType35;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType35, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey39 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType28, (long) '#', objectType35);
         keyParts21.sourceObjectType = objectType35;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts41 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts41.objectInstance = (-75682021376L);
@@ -11794,7 +11462,6 @@ public class RegressionTest0 {
         keyParts41.sourceObjectType = objectType49;
         keyParts21.objectType = objectType49;
         java.lang.Long long55 = keyParts21.objectInstance;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts21);
         keyParts21.objectInstance = (-55666802679L);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts59 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType60 = keyParts59.objectType;
@@ -11803,13 +11470,11 @@ public class RegressionTest0 {
         keyParts21.objectType = objectType60;
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType17);
         org.junit.Assert.assertNotNull(objectType22);
         org.junit.Assert.assertTrue("'" + long25 + "' != '" + 281474993487876L + "'", long25.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType28);
         org.junit.Assert.assertNotNull(objectType35);
-        org.junit.Assert.assertNotNull(entityKey39);
         org.junit.Assert.assertNotNull(objectType44);
         org.junit.Assert.assertNotNull(objectType49);
         org.junit.Assert.assertTrue("'" + long55 + "' != '" + 281474993487876L + "'", long55.equals(281474993487876L));
@@ -11938,7 +11603,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts16 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
@@ -11966,10 +11630,8 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType41 = keyParts37.sourceObjectType;
         keyParts16.sourceObjectType = objectType41;
         keyParts14.sourceObjectType = objectType41;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType15);
         org.junit.Assert.assertNotNull(objectType18);
         org.junit.Assert.assertTrue("'" + long20 + "' != '" + (-1L) + "'", long20.equals((-1L)));
@@ -12055,7 +11717,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType22 = keyParts21.objectType;
         keyParts20.objectType = objectType22;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType22, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey26 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType15, (long) '#', objectType22);
         keyParts7.sourceObjectType = objectType22;
         keyParts0.sourceObjectType = objectType22;
         java.lang.Long long29 = keyParts0.objectInstance;
@@ -12064,7 +11725,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(objectType10);
         org.junit.Assert.assertNotNull(objectType15);
         org.junit.Assert.assertNotNull(objectType22);
-        org.junit.Assert.assertNotNull(entityKey26);
         org.junit.Assert.assertTrue("'" + long29 + "' != '" + 281474993487876L + "'", long29.equals(281474993487876L));
     }
 
@@ -12229,7 +11889,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType65 = keyParts64.objectType;
         keyParts63.objectType = objectType65;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType65, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey69 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType58, (long) '#', objectType65);
         int int70 = doubleList5.indexOf((java.lang.Object) objectType65);
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType65, (java.lang.Long) 281474993487874L);
         org.junit.Assert.assertNotNull(doubleArray4);
@@ -12264,7 +11923,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + double55 + "' != '" + 10.0d + "'", double55.equals(10.0d));
         org.junit.Assert.assertNotNull(objectType58);
         org.junit.Assert.assertNotNull(objectType65);
-        org.junit.Assert.assertNotNull(entityKey69);
         org.junit.Assert.assertTrue("'" + int70 + "' != '" + (-1) + "'", int70 == (-1));
     }
 
@@ -12294,7 +11952,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType23 = keyParts22.objectType;
         keyParts21.objectType = objectType23;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType23, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey27 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType16, (long) '#', objectType23);
         keyParts9.sourceObjectType = objectType23;
         boolean boolean29 = shortList1.equals((java.lang.Object) keyParts9);
         org.ccsds.moims.mo.com.structures.ObjectType objectType30 = keyParts9.sourceObjectType;
@@ -12309,7 +11966,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long13 + "' != '" + 281474993487876L + "'", long13.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType16);
         org.junit.Assert.assertNotNull(objectType23);
-        org.junit.Assert.assertNotNull(entityKey27);
         org.junit.Assert.assertTrue("'" + boolean29 + "' != '" + false + "'", boolean29 == false);
         org.junit.Assert.assertNotNull(objectType30);
         org.junit.Assert.assertTrue("'" + long31 + "' != '" + 281474993487876L + "'", long31.equals(281474993487876L));
@@ -12374,12 +12030,10 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts14.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType17 = keyParts14.objectType;
         keyParts14.objectInstance = (-281431993483167L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts21 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType22 = keyParts21.objectType;
         keyParts21.objectInstance = 281474993487876L;
@@ -12394,7 +12048,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType35 = keyParts34.objectType;
         keyParts33.objectType = objectType35;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType35, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey39 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType28, (long) '#', objectType35);
         keyParts21.sourceObjectType = objectType35;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts41 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts41.objectInstance = (-75682021376L);
@@ -12408,22 +12061,18 @@ public class RegressionTest0 {
         keyParts41.sourceObjectType = objectType49;
         keyParts21.objectType = objectType49;
         java.lang.Long long55 = keyParts21.objectInstance;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts21);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts57 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts57.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType60 = keyParts57.objectType;
         keyParts57.objectInstance = 281474993487874L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts57);
         java.lang.Long long64 = keyParts57.objectInstance;
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType17);
         org.junit.Assert.assertNotNull(objectType22);
         org.junit.Assert.assertTrue("'" + long25 + "' != '" + 281474993487876L + "'", long25.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType28);
         org.junit.Assert.assertNotNull(objectType35);
-        org.junit.Assert.assertNotNull(entityKey39);
         org.junit.Assert.assertNotNull(objectType44);
         org.junit.Assert.assertNotNull(objectType49);
         org.junit.Assert.assertTrue("'" + long55 + "' != '" + 281474993487876L + "'", long55.equals(281474993487876L));
@@ -12553,21 +12202,17 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts16 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts16.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType19 = keyParts16.objectType;
         keyParts14.sourceObjectType = objectType19;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts22 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts22.objectInstance = (-75682021376L);
         java.lang.Long long25 = keyParts22.objectInstance;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts22);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts27 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts27.objectInstance = (-75682021376L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts27);
         org.ccsds.moims.mo.mal.structures.ShortList shortList32 = new org.ccsds.moims.mo.mal.structures.ShortList((int) (byte) 10);
         java.lang.Integer int33 = shortList32.getTypeShortForm();
         org.ccsds.moims.mo.mal.structures.UShort uShort34 = shortList32.getAreaNumber();
@@ -12590,14 +12235,11 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType54 = keyParts53.objectType;
         keyParts52.objectType = objectType54;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType54, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey58 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType47, (long) '#', objectType54);
         keyParts40.sourceObjectType = objectType54;
         boolean boolean60 = shortList32.equals((java.lang.Object) keyParts40);
         org.ccsds.moims.mo.com.structures.ObjectType objectType61 = keyParts40.sourceObjectType;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts40);
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType15);
         org.junit.Assert.assertNotNull(objectType19);
         org.junit.Assert.assertTrue("'" + long25 + "' != '" + (-75682021376L) + "'", long25.equals((-75682021376L)));
@@ -12611,7 +12253,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long44 + "' != '" + 281474993487876L + "'", long44.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType47);
         org.junit.Assert.assertNotNull(objectType54);
-        org.junit.Assert.assertNotNull(entityKey58);
         org.junit.Assert.assertTrue("'" + boolean60 + "' != '" + false + "'", boolean60 == false);
         org.junit.Assert.assertNotNull(objectType61);
     }
@@ -13152,18 +12793,15 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType36 = keyParts35.objectType;
         keyParts34.objectType = objectType36;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType36, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey40 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType29, (long) '#', objectType36);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts41 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType42 = keyParts41.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts43 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts43.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType46 = keyParts43.objectType;
         keyParts41.sourceObjectType = objectType46;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey40, keyParts41);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts49 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts49.objectInstance = (-75682021376L);
         java.lang.Long long52 = keyParts49.objectInstance;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey40, keyParts49);
         boolean boolean54 = octetList7.remove((java.lang.Object) keyParts49);
         org.junit.Assert.assertNotNull(floatArray2);
         org.junit.Assert.assertTrue("'" + boolean4 + "' != '" + true + "'", boolean4 == true);
@@ -13182,7 +12820,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(byteSpliterator26);
         org.junit.Assert.assertNotNull(objectType29);
         org.junit.Assert.assertNotNull(objectType36);
-        org.junit.Assert.assertNotNull(entityKey40);
         org.junit.Assert.assertNotNull(objectType42);
         org.junit.Assert.assertNotNull(objectType46);
         org.junit.Assert.assertTrue("'" + long52 + "' != '" + (-75682021376L) + "'", long52.equals((-75682021376L)));
@@ -13362,12 +12999,10 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType11 = keyParts10.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType11, (java.lang.Long) 281474993487884L);
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType11, (java.lang.Long) 17L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey16 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType5, 281497323962372L, objectType11);
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType5, (java.lang.Long) (-21374173171L));
         org.junit.Assert.assertNotNull(objectType1);
         org.junit.Assert.assertNotNull(objectType5);
         org.junit.Assert.assertNotNull(objectType11);
-        org.junit.Assert.assertNotNull(entityKey16);
     }
 
     @Test
@@ -13519,11 +13154,6 @@ public class RegressionTest0 {
         java.lang.Long long4 = keyParts0.objectInstance;
         org.ccsds.moims.mo.com.structures.ObjectType objectType5 = keyParts0.sourceObjectType;
         org.ccsds.moims.mo.com.structures.ObjectType objectType7 = null;
-        try {
-            org.ccsds.moims.mo.mal.structures.EntityKey entityKey8 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType5, (-16777213L), objectType7);
-            org.junit.Assert.fail("Expected exception of type java.lang.NullPointerException; message: null");
-        } catch (java.lang.NullPointerException e) {
-        }
         org.junit.Assert.assertNotNull(objectType1);
         org.junit.Assert.assertTrue("'" + long4 + "' != '" + 281474993487876L + "'", long4.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType5);
@@ -14000,14 +13630,12 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType61 = keyParts60.objectType;
         keyParts59.objectType = objectType61;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType61, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey65 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType54, (long) '#', objectType61);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts66 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType67 = keyParts66.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts68 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts68.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType71 = keyParts68.objectType;
         keyParts66.sourceObjectType = objectType71;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey65, keyParts66);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts74 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType75 = keyParts74.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType75, (java.lang.Long) 281474993487884L);
@@ -14015,7 +13643,6 @@ public class RegressionTest0 {
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts81 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType82 = keyParts81.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType82, (java.lang.Long) 1125912808521736L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey85 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType75, (long) 8, objectType82);
         keyParts66.objectType = objectType75;
         int int87 = longList18.indexOf((java.lang.Object) objectType75);
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType75, (java.lang.Long) (-251658140L));
@@ -14042,12 +13669,10 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long51 + "' != '" + 281475010265086L + "'", long51.equals(281475010265086L));
         org.junit.Assert.assertNotNull(objectType54);
         org.junit.Assert.assertNotNull(objectType61);
-        org.junit.Assert.assertNotNull(entityKey65);
         org.junit.Assert.assertNotNull(objectType67);
         org.junit.Assert.assertNotNull(objectType71);
         org.junit.Assert.assertNotNull(objectType75);
         org.junit.Assert.assertNotNull(objectType82);
-        org.junit.Assert.assertNotNull(entityKey85);
         org.junit.Assert.assertTrue("'" + int87 + "' != '" + (-1) + "'", int87 == (-1));
     }
 
@@ -14274,7 +13899,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType14 = keyParts13.objectType;
         keyParts12.objectType = objectType14;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType14, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey18 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType7, (long) '#', objectType14);
         keyParts0.sourceObjectType = objectType14;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts20 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts20.objectInstance = (-75682021376L);
@@ -14293,7 +13917,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long4 + "' != '" + 281474993487876L + "'", long4.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType7);
         org.junit.Assert.assertNotNull(objectType14);
-        org.junit.Assert.assertNotNull(entityKey18);
         org.junit.Assert.assertNotNull(objectType23);
         org.junit.Assert.assertNotNull(objectType28);
     }
@@ -14383,10 +14006,8 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType65 = keyParts64.objectType;
         keyParts63.objectType = objectType65;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType65, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey69 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType58, (long) '#', objectType65);
         keyParts51.sourceObjectType = objectType65;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType65, (java.lang.Long) (-83886074L));
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey73 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType45, (long) (-15), objectType65);
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType45, (java.lang.Long) 281474993487890L);
         int int76 = longList24.lastIndexOf((java.lang.Object) objectType45);
         keyParts0.objectType = objectType45;
@@ -14410,8 +14031,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long55 + "' != '" + 281474993487876L + "'", long55.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType58);
         org.junit.Assert.assertNotNull(objectType65);
-        org.junit.Assert.assertNotNull(entityKey69);
-        org.junit.Assert.assertNotNull(entityKey73);
         org.junit.Assert.assertTrue("'" + int76 + "' != '" + (-1) + "'", int76 == (-1));
     }
 
@@ -14630,7 +14249,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType40 = keyParts39.objectType;
         keyParts38.objectType = objectType40;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType40, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey44 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType33, (long) '#', objectType40);
         keyParts26.sourceObjectType = objectType40;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType40, (java.lang.Long) (-83886074L));
         keyParts12.sourceObjectType = objectType40;
@@ -14653,7 +14271,6 @@ public class RegressionTest0 {
         keyParts70.objectType = objectType72;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType72, (java.lang.Long) 281474993487875L);
         int int76 = doubleList60.indexOf((java.lang.Object) objectType72);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey77 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType40, 1125912808521828L, objectType72);
         org.junit.Assert.assertNotNull(element2);
         org.junit.Assert.assertTrue("'" + double3 + "' != '" + 32.0d + "'", double3 == 32.0d);
         org.junit.Assert.assertTrue("'" + long4 + "' != '" + 281474993487875L + "'", long4.equals(281474993487875L));
@@ -14672,7 +14289,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long30 + "' != '" + 281474993487876L + "'", long30.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType33);
         org.junit.Assert.assertNotNull(objectType40);
-        org.junit.Assert.assertNotNull(entityKey44);
         org.junit.Assert.assertNotNull(strArray51);
         org.junit.Assert.assertTrue("'" + boolean53 + "' != '" + true + "'", boolean53 == true);
         org.junit.Assert.assertNotNull(strStream54);
@@ -14683,7 +14299,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + boolean68 + "' != '" + false + "'", boolean68 == false);
         org.junit.Assert.assertNotNull(objectType72);
         org.junit.Assert.assertTrue("'" + int76 + "' != '" + (-1) + "'", int76 == (-1));
-        org.junit.Assert.assertNotNull(entityKey77);
     }
 
     @Test
@@ -14907,14 +14522,12 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType63 = keyParts62.objectType;
         keyParts61.objectType = objectType63;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType63, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey67 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType56, (long) '#', objectType63);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts68 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType69 = keyParts68.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts70 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts70.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType73 = keyParts70.objectType;
         keyParts68.sourceObjectType = objectType73;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey67, keyParts68);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts76 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType77 = keyParts76.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType77, (java.lang.Long) 281474993487884L);
@@ -14922,7 +14535,6 @@ public class RegressionTest0 {
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts83 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType84 = keyParts83.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType84, (java.lang.Long) 1125912808521736L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey87 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType77, (long) 8, objectType84);
         keyParts68.objectType = objectType77;
         int int89 = longList20.indexOf((java.lang.Object) objectType77);
         keyParts0.sourceObjectType = objectType77;
@@ -14950,12 +14562,10 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long53 + "' != '" + 281475010265086L + "'", long53.equals(281475010265086L));
         org.junit.Assert.assertNotNull(objectType56);
         org.junit.Assert.assertNotNull(objectType63);
-        org.junit.Assert.assertNotNull(entityKey67);
         org.junit.Assert.assertNotNull(objectType69);
         org.junit.Assert.assertNotNull(objectType73);
         org.junit.Assert.assertNotNull(objectType77);
         org.junit.Assert.assertNotNull(objectType84);
-        org.junit.Assert.assertNotNull(entityKey87);
         org.junit.Assert.assertTrue("'" + int89 + "' != '" + (-1) + "'", int89 == (-1));
     }
 
@@ -15014,22 +14624,18 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts16 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts16.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType19 = keyParts16.objectType;
         keyParts14.sourceObjectType = objectType19;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts22 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts22.objectInstance = (-75682021376L);
         java.lang.Long long25 = keyParts22.objectInstance;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts22);
         java.lang.Long long27 = keyParts22.objectInstance;
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType15);
         org.junit.Assert.assertNotNull(objectType19);
         org.junit.Assert.assertTrue("'" + long25 + "' != '" + (-75682021376L) + "'", long25.equals((-75682021376L)));
@@ -15077,7 +14683,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType44 = keyParts43.objectType;
         keyParts42.objectType = objectType44;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType44, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey48 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType37, (long) '#', objectType44);
         keyParts30.sourceObjectType = objectType44;
         boolean boolean50 = shortList22.equals((java.lang.Object) keyParts30);
         java.lang.Long long51 = keyParts30.objectInstance;
@@ -15103,7 +14708,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long34 + "' != '" + 281474993487876L + "'", long34.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType37);
         org.junit.Assert.assertNotNull(objectType44);
-        org.junit.Assert.assertNotNull(entityKey48);
         org.junit.Assert.assertTrue("'" + boolean50 + "' != '" + false + "'", boolean50 == false);
         org.junit.Assert.assertTrue("'" + long51 + "' != '" + 281474993487876L + "'", long51.equals(281474993487876L));
         org.junit.Assert.assertTrue("'" + boolean52 + "' != '" + false + "'", boolean52 == false);
@@ -15159,7 +14763,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         java.lang.Float[] floatArray19 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList20 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean21 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList20, floatArray19);
@@ -15174,13 +14777,11 @@ public class RegressionTest0 {
         java.lang.Long long31 = keyParts30.objectInstance;
         int int32 = floatList20.indexOf((java.lang.Object) keyParts30);
         keyParts30.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts30);
         org.ccsds.moims.mo.com.structures.ObjectType objectType36 = keyParts30.objectType;
         org.ccsds.moims.mo.com.structures.ObjectType objectType37 = keyParts30.objectType;
         java.lang.Long long39 = esa.mo.mc.impl.util.MCServicesHelper.generateSubKey(objectType37, true);
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(floatArray19);
         org.junit.Assert.assertTrue("'" + boolean21 + "' != '" + true + "'", boolean21 == true);
         org.junit.Assert.assertTrue("'" + int22 + "' != '" + 5 + "'", int22 == 5);
@@ -15383,14 +14984,12 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
         keyParts7.objectType = objectType9;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType15 = keyParts14.objectType;
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts16 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         keyParts16.objectInstance = (-75682021376L);
         org.ccsds.moims.mo.com.structures.ObjectType objectType19 = keyParts16.objectType;
         keyParts14.sourceObjectType = objectType19;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
         org.ccsds.moims.mo.com.structures.ObjectType objectType22 = keyParts14.objectType;
         java.lang.Short[] shortArray27 = new java.lang.Short[] { (short) 100, (short) 10, (short) 10, (short) -1 };
         java.util.ArrayList<java.lang.Short> shortList28 = new java.util.ArrayList<java.lang.Short>();
@@ -15442,13 +15041,11 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType87 = keyParts86.objectType;
         keyParts85.objectType = objectType87;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType87, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey91 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType80, (long) '#', objectType87);
         keyParts73.sourceObjectType = objectType87;
         int int93 = shortList28.indexOf((java.lang.Object) objectType87);
         keyParts14.sourceObjectType = objectType87;
         org.junit.Assert.assertNotNull(objectType2);
         org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
         org.junit.Assert.assertNotNull(objectType15);
         org.junit.Assert.assertNotNull(objectType19);
         org.junit.Assert.assertNotNull(objectType22);
@@ -15483,7 +15080,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + long77 + "' != '" + 281474993487876L + "'", long77.equals(281474993487876L));
         org.junit.Assert.assertNotNull(objectType80);
         org.junit.Assert.assertNotNull(objectType87);
-        org.junit.Assert.assertNotNull(entityKey91);
         org.junit.Assert.assertTrue("'" + int93 + "' != '" + (-1) + "'", int93 == (-1));
     }
 
@@ -15615,7 +15211,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType22 = keyParts21.objectType;
         keyParts20.objectType = objectType22;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType22, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey26 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType15, (long) '#', objectType22);
         java.lang.Float[] floatArray32 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList33 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean34 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList33, floatArray32);
@@ -15630,7 +15225,6 @@ public class RegressionTest0 {
         java.lang.Long long44 = keyParts43.objectInstance;
         int int45 = floatList33.indexOf((java.lang.Object) keyParts43);
         keyParts43.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey26, keyParts43);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts49 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts50 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType51 = keyParts50.objectType;
@@ -15641,7 +15235,6 @@ public class RegressionTest0 {
         org.ccsds.moims.mo.com.structures.ObjectType objectType58 = keyParts57.objectType;
         keyParts56.objectType = objectType58;
         esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType58, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey62 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType51, (long) '#', objectType58);
         java.lang.Float[] floatArray68 = new java.lang.Float[] { (-1.0f), 0.0f, 100.0f, (-1.0f), 0.0f };
         java.util.ArrayList<java.lang.Float> floatList69 = new java.util.ArrayList<java.lang.Float>();
         boolean boolean70 = java.util.Collections.addAll((java.util.Collection<java.lang.Float>) floatList69, floatArray68);
@@ -15656,9 +15249,7 @@ public class RegressionTest0 {
         java.lang.Long long80 = keyParts79.objectInstance;
         int int81 = floatList69.indexOf((java.lang.Object) keyParts79);
         keyParts79.objectInstance = 281474993487884L;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey62, keyParts79);
         org.ccsds.moims.mo.com.structures.ObjectType objectType85 = keyParts79.objectType;
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey26, keyParts79);
         boolean boolean87 = floatList3.contains((java.lang.Object) keyParts79);
         esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts88 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
         org.ccsds.moims.mo.com.structures.ObjectType objectType89 = keyParts88.objectType;
@@ -15674,7 +15265,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertNotNull(floatSpliterator9);
         org.junit.Assert.assertNotNull(objectType15);
         org.junit.Assert.assertNotNull(objectType22);
-        org.junit.Assert.assertNotNull(entityKey26);
         org.junit.Assert.assertNotNull(floatArray32);
         org.junit.Assert.assertTrue("'" + boolean34 + "' != '" + true + "'", boolean34 == true);
         org.junit.Assert.assertTrue("'" + int35 + "' != '" + 5 + "'", int35 == 5);
@@ -15687,7 +15277,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertTrue("'" + int45 + "' != '" + (-1) + "'", int45 == (-1));
         org.junit.Assert.assertNotNull(objectType51);
         org.junit.Assert.assertNotNull(objectType58);
-        org.junit.Assert.assertNotNull(entityKey62);
         org.junit.Assert.assertNotNull(floatArray68);
         org.junit.Assert.assertTrue("'" + boolean70 + "' != '" + true + "'", boolean70 == true);
         org.junit.Assert.assertTrue("'" + int71 + "' != '" + 5 + "'", int71 == 5);
@@ -15941,46 +15530,6 @@ public class RegressionTest0 {
         org.junit.Assert.assertNull(actionConsumerServiceImpl7);
         org.junit.Assert.assertNull(actionConsumerServiceImpl8);
         org.junit.Assert.assertNull(checkConsumerServiceImpl9);
-    }
-
-    @Test
-    public void test482() throws Throwable {
-        if (debug)
-            System.out.format("%n%s%n", "RegressionTest0.test482");
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts0 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts1 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        org.ccsds.moims.mo.com.structures.ObjectType objectType2 = keyParts1.objectType;
-        keyParts0.objectType = objectType2;
-        esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType2, (java.lang.Long) 281474993487889L);
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts7 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts8 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        org.ccsds.moims.mo.com.structures.ObjectType objectType9 = keyParts8.objectType;
-        keyParts7.objectType = objectType9;
-        esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType9, (java.lang.Long) 281474993487889L);
-        org.ccsds.moims.mo.mal.structures.EntityKey entityKey13 = esa.mo.mc.impl.util.MCServicesHelper.generateEntityKey(objectType2, (long) '#', objectType9);
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts14 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        keyParts14.objectInstance = (-75682021376L);
-        esa.mo.mc.impl.util.MCServicesHelper.getValuesFromEntityKey(entityKey13, keyParts14);
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts18 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        org.ccsds.moims.mo.com.structures.ObjectType objectType19 = keyParts18.objectType;
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts20 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        org.ccsds.moims.mo.com.structures.ObjectType objectType21 = keyParts20.objectType;
-        esa.mo.mc.impl.util.MCServicesHelper.KeyParts keyParts22 = new esa.mo.mc.impl.util.MCServicesHelper.KeyParts();
-        keyParts22.objectInstance = (-75682021376L);
-        org.ccsds.moims.mo.com.structures.ObjectType objectType25 = keyParts22.objectType;
-        keyParts20.sourceObjectType = objectType25;
-        keyParts18.objectType = objectType25;
-        org.ccsds.moims.mo.com.structures.ObjectType objectType28 = keyParts18.objectType;
-        esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType28, (java.lang.Long) 17L);
-        keyParts14.objectType = objectType28;
-        esa.mo.mc.impl.util.MCServicesHelper.generateObjectTypeFromSubKey(objectType28, (java.lang.Long) 7L);
-        org.junit.Assert.assertNotNull(objectType2);
-        org.junit.Assert.assertNotNull(objectType9);
-        org.junit.Assert.assertNotNull(entityKey13);
-        org.junit.Assert.assertNotNull(objectType19);
-        org.junit.Assert.assertNotNull(objectType21);
-        org.junit.Assert.assertNotNull(objectType25);
-        org.junit.Assert.assertNotNull(objectType28);
     }
 
     @Test

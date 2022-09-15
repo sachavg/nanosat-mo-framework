@@ -41,11 +41,11 @@ import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALHelper;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.consumer.MALConsumer;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Element;
 import org.ccsds.moims.mo.mal.structures.ElementList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
-import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
 import org.ccsds.moims.mo.mal.structures.SubscriptionList;
 import org.ccsds.moims.mo.mal.structures.UShort;
@@ -145,12 +145,16 @@ public class EventConsumerServiceImpl extends ConsumerServiceImpl {
                         Long entityKey4 = lUpdateHeaderList.get(i).getKey().getFourthSubKey(); // ObjType of the source
                         */
 
-                        NamedValueList subkeys = lUpdateHeaderList.get(i).getKey().getSubkeys();
-                        Identifier entityKey1 = (Identifier) subkeys.get(0).getValue();
+                        AttributeList subkeys = lUpdateHeaderList.get(i).getKeyValues();
+                        Identifier entityKey1 = (Identifier) subkeys.get(0);
+                        Long entityKey2 = (Long) subkeys.get(1);
+                        Long entityKey3 = (Long) subkeys.get(2);
+                        Long entityKey4 = (Long) subkeys.get(3); // ObjType of the source
+                        /*
                         Long entityKey2 = (Long) HelperAttributes.attribute2JavaType(subkeys.get(1).getValue());
                         Long entityKey3 = (Long) HelperAttributes.attribute2JavaType(subkeys.get(2).getValue());
                         Long entityKey4 = (Long) HelperAttributes.attribute2JavaType(subkeys.get(3).getValue()); // ObjType of the source
-
+                        */
                         // (UShort area, UShort service, UOctet version, UShort number)
                         // (UShort area, UShort service, UOctet version, 0)
                         ObjectType objType = HelperCOM.objectTypeId2objectType(entityKey2);
@@ -170,8 +174,8 @@ public class EventConsumerServiceImpl extends ConsumerServiceImpl {
                         newEvent.setRelated(objectDetailsList.get(i).getRelated());
                         newEvent.setBody(body);
 
-                        newEvent.setTimestamp(lUpdateHeaderList.get(i).getTimestamp());
-                        newEvent.setSourceURI(lUpdateHeaderList.get(i).getSourceURI());
+                        newEvent.setTimestamp(null);
+                        newEvent.setSourceURI(null);
                         newEvent.setNetworkZone(msgHeader.getNetworkZone());
                         // ----
 

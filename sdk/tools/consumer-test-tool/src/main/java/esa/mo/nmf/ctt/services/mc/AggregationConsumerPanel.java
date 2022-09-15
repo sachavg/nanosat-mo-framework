@@ -36,11 +36,11 @@ import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.MALStandardError;
 import org.ccsds.moims.mo.mal.helpertools.helpers.HelperAttributes;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Duration;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
-import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
 import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
@@ -691,9 +691,9 @@ public class AggregationConsumerPanel extends javax.swing.JPanel {
             final long iDiff = System.currentTimeMillis() - msgHeader.getTimestamp().getValue();
 
             final UpdateHeader updateHeader = lUpdateHeaderList.get(0);
-            final NamedValueList subkeys = updateHeader.getKey().getSubkeys();
-            final String Aggname = HelperAttributes.attribute2string(subkeys.get(0).getValue());
-            final int objId = (int) HelperAttributes.attribute2JavaType(subkeys.get(1).getValue());
+            final AttributeList keyValues = updateHeader.getKeyValues();
+            final String Aggname = HelperAttributes.attribute2string(keyValues.get(0));
+            final int objId = (int) HelperAttributes.attribute2JavaType(keyValues.get(1));
             /*
             final String Aggname = updateHeader.getKey().getFirstSubKey().getValue();
             final int objId = updateHeader.getKey().getSecondSubKey().intValue();

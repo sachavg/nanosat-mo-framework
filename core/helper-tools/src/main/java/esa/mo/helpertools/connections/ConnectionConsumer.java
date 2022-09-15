@@ -30,11 +30,8 @@ import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALService;
 import org.ccsds.moims.mo.mal.consumer.MALConsumer;
 import org.ccsds.moims.mo.mal.consumer.MALConsumerManager;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Blob;
-import org.ccsds.moims.mo.mal.structures.EntityKey;
-import org.ccsds.moims.mo.mal.structures.EntityKeyList;
-import org.ccsds.moims.mo.mal.structures.EntityRequest;
-import org.ccsds.moims.mo.mal.structures.EntityRequestList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.NamedValue;
@@ -42,6 +39,8 @@ import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.QoSLevel;
 import org.ccsds.moims.mo.mal.structures.QoSLevelList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
+import org.ccsds.moims.mo.mal.structures.SubscriptionFilter;
+import org.ccsds.moims.mo.mal.structures.SubscriptionFilterList;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.Union;
@@ -274,11 +273,11 @@ public class ConnectionConsumer {
     public static Subscription subscriptionKeys(final Identifier key1,
             final Long key2, final Long key3, final Long key4) {
         final Identifier subscriptionId = new Identifier("SUB");
-        NamedValueList subkeys = new NamedValueList();
-        subkeys.add(new NamedValue(new Identifier("key1"), key1));
-        subkeys.add(new NamedValue(new Identifier("key2"), new Union(key2)));
-        subkeys.add(new NamedValue(new Identifier("key3"), new Union(key3)));
-        subkeys.add(new NamedValue(new Identifier("key4"), new Union(key4)));
+        SubscriptionFilterList subkeys = new SubscriptionFilterList();
+        subkeys.add(new SubscriptionFilter(new Identifier("key1"), new AttributeList(key1)));
+        subkeys.add(new SubscriptionFilter(new Identifier("key2"), new AttributeList(new Union(key2))));
+        subkeys.add(new SubscriptionFilter(new Identifier("key3"), new AttributeList(new Union(key3))));
+        subkeys.add(new SubscriptionFilter(new Identifier("key4"), new AttributeList(new Union(key4))));
         return ConnectionConsumer.subscriptionKeys(subscriptionId, subkeys);
     }
 
@@ -290,16 +289,7 @@ public class ConnectionConsumer {
      * @return The subscription object
      */
     public static Subscription subscriptionWildcard(final Identifier subscriptionId) {
-        final EntityKeyList entityKeys = new EntityKeyList();
-        final EntityKey entitykey = new EntityKey(new NamedValueList());
-        entityKeys.add(entitykey);
-
-        final EntityRequest entity = new EntityRequest(
-                null, false, false, false, false, entityKeys);
-        final EntityRequestList entities = new EntityRequestList();
-        entities.add(entity);
-
-        return new Subscription(subscriptionId, entities);
+        return new Subscription(subscriptionId, null, null);
     }
 
     /**
@@ -314,17 +304,8 @@ public class ConnectionConsumer {
      * @return The subscription object
      */
     public static Subscription subscriptionKeys(final Identifier subscriptionId,
-            NamedValueList subkeys) {
-        final EntityKeyList entityKeys = new EntityKeyList();
-        final EntityKey entitykey = new EntityKey(subkeys);
-        entityKeys.add(entitykey);
-
-        final EntityRequest entity = new EntityRequest(
-                null, false, false, false, false, entityKeys);
-        final EntityRequestList entities = new EntityRequestList();
-        entities.add(entity);
-
-        return new Subscription(subscriptionId, entities);
+            SubscriptionFilterList filters) {
+        return new Subscription(subscriptionId, null, filters);
     }
 
 }

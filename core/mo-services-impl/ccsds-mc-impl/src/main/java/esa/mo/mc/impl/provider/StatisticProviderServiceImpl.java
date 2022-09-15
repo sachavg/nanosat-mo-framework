@@ -46,29 +46,25 @@ import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALHelper;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.MALStandardError;
-import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
 import org.ccsds.moims.mo.mal.structures.Attribute;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.BooleanList;
 import org.ccsds.moims.mo.mal.structures.Duration;
-import org.ccsds.moims.mo.mal.structures.EntityKey;
-import org.ccsds.moims.mo.mal.structures.EntityKeyList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.LongList;
-import org.ccsds.moims.mo.mal.structures.NamedValue;
-import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.QoSLevel;
 import org.ccsds.moims.mo.mal.structures.SessionType;
 import org.ccsds.moims.mo.mal.structures.Time;
 import org.ccsds.moims.mo.mal.structures.TimeList;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.mal.structures.UIntegerList;
+import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.Union;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
-import org.ccsds.moims.mo.mal.structures.UpdateType;
 import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.mc.MCHelper;
@@ -218,9 +214,7 @@ public class StatisticProviderServiceImpl extends StatisticInheritanceSkeleton {
         try {
             synchronized (lock) {
                 if (!isRegistered) {
-                    final EntityKeyList lst = new EntityKeyList();
-                    lst.add(ConnectionConsumer.entityKeyWildcard());
-                    publisher.register(lst, new PublishInteractionListener());
+                    publisher.register(new PublishInteractionListener());
                     isRegistered = true;
                 }
             }
@@ -238,14 +232,21 @@ public class StatisticProviderServiceImpl extends StatisticInheritanceSkeleton {
             final Identifier funcName = manager.getStatisticFunction(statLink.getStatFuncInstId()).getName();
 
             // requirements: 3.6.9.2.a , 3.6.9.2.b , 3.6.9.2.c , 3.6.9.2.d
-            final EntityKey ekey = ConnectionConsumer.subscriptionKeys(funcName, objIdLink, statLink.getParameterId().getInstId(), sValObjId);
+            //final EntityKey ekey = ConnectionConsumer.subscriptionKeys(funcName, objIdLink, statLink.getParameterId().getInstId(), sValObjId);
+            AttributeList keys = new AttributeList();
+            keys.add(funcName);
+            keys.add(new Union(objIdLink));
+            keys.add(new Union(statLink.getParameterId().getInstId()));
+            keys.add(new Union(sValObjId));
+            
             final Time timestamp = HelperTime.getTimestampMillis(); //  requirement: 3.6.9.2.e
 
             final UpdateHeaderList hdrlst = new UpdateHeaderList();
             LongList relatedId = new LongList();
             final ObjectIdList sourceId = new ObjectIdList();
 
-            hdrlst.add(new UpdateHeader(timestamp, connection.getConnectionDetails().getProviderURI(), UpdateType.UPDATE, ekey));
+            URI uri = connection.getConnectionDetails().getProviderURI();
+            hdrlst.add(new UpdateHeader(new Identifier(uri.getValue()), keys));
             sourceId.add(source); // requirement: 3.6.9.2.f and 3.6.9.2.g
 
             StatisticValueList statisticValues = new StatisticValueList();

@@ -287,8 +287,7 @@ public class ConfigurationProviderServiceImpl extends ConfigurationInheritanceSk
             // Create a static method in the Helper Tools to cconvert rom a Java file to a MAL File and vice versa
             org.ccsds.moims.mo.mal.structures.File xmlFile = new org.ccsds.moims.mo.mal.structures.File();
 //            xmlFile.setContent((Blob) HelperAttributes.javaType2Attribute(Files.readAllBytes(file.toPath())));
-            xmlFile.setName(new Identifier("bbgbgbdg"));
-
+            xmlFile.setName("MyFilename.file");
             return xmlFile;
 
         } catch (FileNotFoundException ex) {

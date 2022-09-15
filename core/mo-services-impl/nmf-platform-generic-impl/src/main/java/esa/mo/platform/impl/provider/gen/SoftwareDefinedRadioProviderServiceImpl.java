@@ -39,16 +39,15 @@ import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
+import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Duration;
-import org.ccsds.moims.mo.mal.structures.EntityKey;
-import org.ccsds.moims.mo.mal.structures.EntityKeyList;
-import org.ccsds.moims.mo.mal.structures.NamedValueList;
+import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.QoSLevel;
 import org.ccsds.moims.mo.mal.structures.SessionType;
 import org.ccsds.moims.mo.mal.structures.UInteger;
+import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
-import org.ccsds.moims.mo.mal.structures.UpdateType;
 import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.platform.PlatformHelper;
@@ -156,9 +155,7 @@ public class SoftwareDefinedRadioProviderServiceImpl extends SoftwareDefinedRadi
 
       synchronized (lock) {
         if (!isRegistered) {
-          final EntityKeyList lst = new EntityKeyList();
-          lst.add(ConnectionConsumer.entityKeyWildcard());
-          publisher.register(lst, new PublishInteractionListener());
+          publisher.register(new PublishInteractionListener());
           isRegistered = true;
         }
         final IQComponents iqComponents = adapter.getIQComponents();
@@ -172,10 +169,10 @@ public class SoftwareDefinedRadioProviderServiceImpl extends SoftwareDefinedRadi
       Logger.getLogger(SoftwareDefinedRadioProviderServiceImpl.class.getName()).log(
               Level.FINER, "Generating streaming Radio update with objId: " + objId);
 
-      final EntityKey ekey = new EntityKey(new NamedValueList());
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
-      hdrlst.add(new UpdateHeader(HelperTime.getTimestampMillis(),
-          connection.getConnectionDetails().getProviderURI(), UpdateType.UPDATE, ekey));
+      AttributeList keys = new AttributeList(); 
+      URI source = connection.getConnectionDetails().getProviderURI();
+      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), keys));
 
       publisher.publish(hdrlst, iqComponentsList);
 
