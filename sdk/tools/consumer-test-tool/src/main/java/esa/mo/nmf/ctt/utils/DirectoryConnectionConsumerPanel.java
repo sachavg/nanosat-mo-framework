@@ -132,8 +132,8 @@ public class DirectoryConnectionConsumerPanel extends javax.swing.JPanel
 
           String serviceName;
           try {
-            serviceName = HelperMisc.serviceKey2name(service.getServiceKey().getArea(),
-                service.getServiceKey().getVersion(), service.getServiceKey().getService());
+            serviceName = HelperMisc.serviceKey2name(service.getServiceKey().getKeyArea(),
+                service.getServiceKey().getKeyAreaVersion(), service.getServiceKey().getKeyService());
           } catch (MALException ex) {
             serviceName = "<Unknown service>";
           }
@@ -148,8 +148,8 @@ public class DirectoryConnectionConsumerPanel extends javax.swing.JPanel
                 ? "null" : service.getServiceAddresses().get(0).getBrokerURI().toString();
           }
 
-          String supportedCapabilities = (service.getSupportedCapabilities() == null)
-              ? "All Supported" : service.getSupportedCapabilities().toString();
+          String supportedCapabilities = (service.getSupportedCapabilitySets() == null)
+              ? "All Supported" : service.getSupportedCapabilitySets().toString();
 
           tableData.addRow(new Object[]{
             serviceName,
@@ -352,7 +352,7 @@ public class DirectoryConnectionConsumerPanel extends javax.swing.JPanel
           // -- Close Button --
           final javax.swing.JPanel pnlTab = new javax.swing.JPanel();
           pnlTab.setOpaque(false);
-          JLabel label = new JLabel(summary.getProviderName().toString());
+          JLabel label = new JLabel(summary.getProviderId().toString());
           JLabel closeLabel = new JLabel("x");
           closeLabel.addMouseListener(new CloseMouseHandler(pnlTab, providerPanel));
           closeLabel.setFont(closeLabel.getFont().deriveFont(
@@ -405,7 +405,7 @@ public class DirectoryConnectionConsumerPanel extends javax.swing.JPanel
 
         for (ProviderSummary summary : summaryList) {
           listOfProviders.addElement(summary.getProviderKey().getInstId().toString()
-              + ". " + summary.getProviderName().toString());
+              + ". " + summary.getProviderId().toString());
         }
 
         providersList.setModel(listOfProviders);

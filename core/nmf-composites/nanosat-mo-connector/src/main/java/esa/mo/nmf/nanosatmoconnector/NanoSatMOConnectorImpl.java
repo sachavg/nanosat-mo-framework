@@ -65,10 +65,10 @@ import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
-import org.ccsds.moims.mo.mal.structures.UIntegerList;
 import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.UShort;
+import org.ccsds.moims.mo.mal.structures.UShortList;
 import org.ccsds.moims.mo.platform.PlatformHelper;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherHelper;
 
@@ -154,7 +154,7 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
                 final ServiceFilter sf = new ServiceFilter(
                         new Identifier(Const.NANOSAT_MO_SUPERVISOR_NAME),
                         domain, new Identifier("*"), null, new Identifier("*"),
-                        serviceKey, new UIntegerList());
+                        serviceKey, new UShortList());
                 final ProviderSummaryList supervisorEventServiceConnectionDetails = centralDirectory.getDirectoryStub().lookupProvider(sf);
 
                 LOGGER.log(Level.INFO,
@@ -195,7 +195,7 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
                 final ServiceKey sk = new ServiceKey(PlatformHelper.PLATFORM_AREA_NUMBER,
                         new UShort(0), new UOctet((short) 0));
                 final ServiceFilter sf2 = new ServiceFilter(new Identifier(Const.NANOSAT_MO_SUPERVISOR_NAME),
-                        domain, new Identifier("*"), null, new Identifier("*"), sk, new UIntegerList());
+                        domain, new Identifier("*"), null, new Identifier("*"), sk, new UShortList());
                 final ProviderSummaryList supervisorConnections = centralDirectory.getDirectoryStub().lookupProvider(sf2);
 
                 if (supervisorConnections.size() == 1) { // Platform services found!
@@ -215,7 +215,7 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
                     platformServices.init(supervisorCCPlat, comServicesConsumer);
                     LOGGER.log(Level.INFO,
                             "Successfully connected to Platform services on: {0}",
-                            supervisorConnections.get(0).getProviderName());
+                            supervisorConnections.get(0).getProviderId());
                 } else {
                     LOGGER.log(Level.SEVERE,
                             "The NanoSat MO Connector was expecting a single NMF Platform services provider!"
@@ -323,7 +323,7 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
     private static ProviderSummary selectBestIPCTransport(final ProviderSummary provider) {
         final ProviderSummary newSummary = new ProviderSummary();
         newSummary.setProviderKey(provider.getProviderKey());
-        newSummary.setProviderName(provider.getProviderName());
+        newSummary.setProviderId(provider.getProviderId());
 
         final ProviderDetails details = new ProviderDetails();
         newSummary.setProviderDetails(details);
@@ -337,7 +337,7 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
             ServiceCapability cap = new ServiceCapability();
             cap.setServiceKey(oldCapabilities.get(i).getServiceKey());
             cap.setServiceProperties(oldCapabilities.get(i).getServiceProperties());
-            cap.setSupportedCapabilities(oldCapabilities.get(i).getSupportedCapabilities());
+            cap.setSupportedCapabilitySets(oldCapabilities.get(i).getSupportedCapabilitySets());
 
             try {
                 final int bestIndex = HelperCommon.getBestIPCServiceAddressIndex(addresses);

@@ -231,8 +231,8 @@ public class CameraAcquisitorGround
       GroundMOAdapterImpl gmaTMP = null;
       boolean providerFound = false;
       for (ProviderSummary provider : providers) {
-        System.out.println("name : " + provider.getProviderName().getValue());
-        if (provider.getProviderName().getValue().equals("App: camera-acquisitor-system")) {
+        System.out.println("name : " + provider.getProviderId().getValue());
+        if (provider.getProviderId().getValue().equals("App: camera-acquisitor-system")) {
           gmaTMP = new GroundMOAdapterImpl(provider);
           providerFound = true;
           break;

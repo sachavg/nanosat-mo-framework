@@ -50,6 +50,7 @@ import org.ccsds.moims.mo.mal.structures.UIntegerList;
 import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.UShort;
+import org.ccsds.moims.mo.mal.structures.UShortList;
 import org.ccsds.moims.mo.mc.MCHelper;
 import org.ccsds.moims.mo.platform.PlatformHelper;
 import org.ccsds.moims.mo.softwaremanagement.SoftwareManagementHelper;
@@ -252,8 +253,8 @@ public class NMFConsumer {
         }
 
         filter.setServiceKey(new ServiceKey(new UShort((short) 0), new UShort((short) 0), new UOctet((short) 0)));
-        filter.setRequiredCapabilities(new UIntegerList());
-        filter.setServiceProviderName(new Identifier("*"));
+        filter.setRequiredCapabilitySets(new UShortList());
+        filter.setServiceProviderId(new Identifier("*"));
 
         // Do the lookup
         final ProviderSummaryList summaryList = directoryService.getDirectoryStub().lookupProvider(filter);
