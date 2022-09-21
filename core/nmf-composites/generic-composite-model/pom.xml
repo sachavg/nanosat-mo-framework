@@ -73,19 +73,19 @@
     </dependency>
     <dependency>
       <groupId>int.esa.ccsds.mo</groupId>
-      <artifactId>ENCODING_STRING</artifactId>
+      <artifactId>encoding-string</artifactId>
     </dependency>
     <dependency>
       <groupId>int.esa.ccsds.mo</groupId>
-      <artifactId>ENCODING_BINARY</artifactId>
+      <artifactId>encoding-binary</artifactId>
     </dependency>
     <dependency>
       <groupId>int.esa.ccsds.mo</groupId>
-      <artifactId>TRANSPORT_RMI</artifactId>
+      <artifactId>transport-rmi</artifactId>
     </dependency>
     <dependency>
       <groupId>int.esa.ccsds.mo</groupId>
-      <artifactId>TRANSPORT_TCPIP</artifactId>
+      <artifactId>transport-tcpip</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
