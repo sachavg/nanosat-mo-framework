@@ -174,8 +174,8 @@ public class EventConsumerServiceImpl extends ConsumerServiceImpl {
                         newEvent.setRelated(objectDetailsList.get(i).getRelated());
                         newEvent.setBody(body);
 
-                        newEvent.setTimestamp(null);
-                        newEvent.setSourceURI(null);
+                        newEvent.setTimestamp(msgHeader.getTimestamp());
+                        newEvent.setSourceURI(msgHeader.getURIFrom());
                         newEvent.setNetworkZone(msgHeader.getNetworkZone());
                         // ----
 
