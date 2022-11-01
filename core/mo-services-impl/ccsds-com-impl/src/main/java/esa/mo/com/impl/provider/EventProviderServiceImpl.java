@@ -264,7 +264,7 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
         try {
             synchronized (lock) {
                 if (!isRegistered) {
-                    publisher.register(new PublishInteractionListener());
+                    publisher.register(new IdentifierList(), new PublishInteractionListener());
                     isRegistered = true;
                 }
             }
@@ -351,7 +351,7 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
         try {
             synchronized (lock) {
                 if (!isRegistered) {
-                    publisher.register(new PublishInteractionListener());
+                    publisher.register(new IdentifierList(), new PublishInteractionListener());
                     isRegistered = true;
                 }
             }

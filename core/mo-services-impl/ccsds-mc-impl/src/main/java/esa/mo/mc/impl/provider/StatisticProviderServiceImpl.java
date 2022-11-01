@@ -54,6 +54,7 @@ import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.BooleanList;
 import org.ccsds.moims.mo.mal.structures.Duration;
 import org.ccsds.moims.mo.mal.structures.Identifier;
+import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.QoSLevel;
 import org.ccsds.moims.mo.mal.structures.SessionType;
@@ -214,7 +215,12 @@ public class StatisticProviderServiceImpl extends StatisticInheritanceSkeleton {
         try {
             synchronized (lock) {
                 if (!isRegistered) {
-                    publisher.register(new PublishInteractionListener());
+                    IdentifierList keys = new IdentifierList();
+                    keys.add(new Identifier("funcName"));
+                    keys.add(new Identifier("objIdLink"));
+                    keys.add(new Identifier("instId"));
+                    keys.add(new Identifier("sValObjId"));
+                    publisher.register(keys, new PublishInteractionListener());
                     isRegistered = true;
                 }
             }

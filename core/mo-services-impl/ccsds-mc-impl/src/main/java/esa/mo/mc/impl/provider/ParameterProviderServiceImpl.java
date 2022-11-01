@@ -955,7 +955,12 @@ public class ParameterProviderServiceImpl extends ParameterInheritanceSkeleton i
         try {
             synchronized (lock) {
                 if (!isRegistered) {
-                    publisher.register(new PublishInteractionListener());
+                    IdentifierList keys = new IdentifierList();
+                    keys.add(new Identifier("objIdentityInstanceName"));
+                    keys.add(new Identifier("objIdentityInstanceId"));
+                    keys.add(new Identifier("objDefInstanceId"));
+                    keys.add(new Identifier("pValObjIds"));
+                    publisher.register(keys, new PublishInteractionListener());
                     isRegistered = true;
                 }
             }

@@ -43,6 +43,7 @@ import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Duration;
 import org.ccsds.moims.mo.mal.structures.DurationList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
+import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.QoSLevel;
 import org.ccsds.moims.mo.mal.structures.SessionType;
@@ -172,7 +173,8 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
     synchronized (lock) {
       if (!isRegistered) {
         try {
-          publisher.register(new PublishInteractionListener());
+          IdentifierList keys = new IdentifierList();
+          publisher.register(keys, new PublishInteractionListener());
         } catch (IllegalArgumentException | MALException | MALInteractionException ex) {
           LOGGER.log(Level.WARNING, "Error when registering the publisher!", ex);
           return;

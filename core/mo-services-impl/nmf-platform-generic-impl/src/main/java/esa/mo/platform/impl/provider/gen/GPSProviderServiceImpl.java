@@ -200,7 +200,11 @@ public class GPSProviderServiceImpl extends GPSInheritanceSkeleton
     try {
       synchronized (lock) {
         if (!isRegistered) {
-          publisher.register(new PublishInteractionListener());
+          IdentifierList keys = new IdentifierList();
+          keys.add(new Identifier("name"));
+          keys.add(new Identifier("objId"));
+          keys.add(new Identifier("pValObjId"));
+          publisher.register(keys, new PublishInteractionListener());
           isRegistered = true;
         }
       }
