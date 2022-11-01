@@ -83,6 +83,8 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
     private Long appDirectoryServiceId;
     private EventConsumerServiceImpl serviceCOMEvent;
     private Subscription subscription;
+    
+    private boolean fast = false;
 
     /**
      * Initializes the NanoSat MO Connector. The MonitorAndControlAdapter
@@ -111,6 +113,24 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
         }
 
         this.providerName = AppsLauncherProviderServiceImpl.PROVIDER_PREFIX_NAME + appName;
+        
+        if(fast) {
+            Thread t1 = new Thread(new Runnable() {
+                @Override 
+                public void run(){
+                    try {
+                        startMCServices(mcAdapter);
+                    } catch (MALException ex) {
+                        LOGGER.log(Level.SEVERE,
+                                "The services could not be initialized. "
+                                + "Perhaps there's something wrong with the Transport Layer.", ex);
+                        return;
+                    }
+                }
+            });
+            t1.start();
+        }
+        
 
         try {
             comServices.init();
@@ -233,7 +253,9 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
 
         // Initialize the rest of the services
         try {
-            this.startMCServices(mcAdapter);
+            if(!fast) {
+                startMCServices(mcAdapter);
+            }
             directoryService.init(comServices);
             heartbeatService.init();
         } catch (MALException ex) {
