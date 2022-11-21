@@ -174,7 +174,8 @@ public class SoftwareDefinedRadioProviderServiceImpl extends SoftwareDefinedRadi
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
       AttributeList keys = new AttributeList(); 
       URI source = connection.getConnectionDetails().getProviderURI();
-      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), keys));
+      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), 
+              connection.getConnectionDetails().getDomain(), keys));
 
       publisher.publish(hdrlst, iqComponentsList);
 

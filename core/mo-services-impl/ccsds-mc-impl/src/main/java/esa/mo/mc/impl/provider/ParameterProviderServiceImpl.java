@@ -1072,7 +1072,8 @@ public class ParameterProviderServiceImpl extends ParameterInheritanceSkeleton i
 
                 //requirement: 3.3.7.2.e : timestamp must be the same as for the creation of the ParameterValue
                 URI source = connection.getConnectionDetails().getProviderURI();
-                hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), keys));
+                hdrlst.add(new UpdateHeader(new Identifier(source.getValue()),
+                        connection.getConnectionDetails().getDomain(), keys));
                 objectIdlst.add(parameterInstances.get(i).getSource()); // requirement: 3.3.7.2.g (3.3.5.2.f not necessary) 
                 pVallst.add(parameterInstances.get(i).getParameterValue()); // requirement: 3.3.7.2.h 
             }

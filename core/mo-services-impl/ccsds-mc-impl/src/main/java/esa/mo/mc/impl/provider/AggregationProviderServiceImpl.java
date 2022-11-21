@@ -250,7 +250,8 @@ public class AggregationProviderServiceImpl extends AggregationInheritanceSkelet
             final AggregationValueList aValLst = new AggregationValueList(1);
 
             URI providerURI = connection.getConnectionDetails().getProviderURI();
-            hdrlst.add(new UpdateHeader(new Identifier(providerURI.getValue()), keys));
+            hdrlst.add(new UpdateHeader(new Identifier(providerURI.getValue()), 
+                    connection.getConnectionDetails().getDomain(), keys));
             objectIdlst.add(source); // requirement: 3.7.7.2.f,g 
             aValLst.add(aVal); //requirement 3.7.7.2.h
 

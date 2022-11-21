@@ -202,7 +202,8 @@ public class CameraProviderServiceImpl extends CameraInheritanceSkeleton
 
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
       URI source = connection.getConnectionDetails().getProviderURI();
-      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), keys));
+      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), 
+              connection.getConnectionDetails().getDomain(), keys));
 
       PictureList picList = new PictureList();
       picList.add(picture);

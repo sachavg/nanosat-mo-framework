@@ -219,7 +219,8 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
       
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
       URI sourceURI = connection.getConnectionDetails().getProviderURI();
-      hdrlst.add(new UpdateHeader(new Identifier(sourceURI.getValue()), keyValues));
+      hdrlst.add(new UpdateHeader(new Identifier(sourceURI.getValue()), 
+              connection.getConnectionDetails().getDomain(), keyValues));
       EventProviderServiceImpl eventService = this.comServices.getEventService();
 
       int length = outputText.length();

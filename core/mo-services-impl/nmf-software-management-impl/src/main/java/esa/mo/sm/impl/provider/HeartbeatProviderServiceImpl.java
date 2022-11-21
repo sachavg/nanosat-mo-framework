@@ -157,7 +157,8 @@ public class HeartbeatProviderServiceImpl extends HeartbeatInheritanceSkeleton
 
       final UpdateHeaderList hdrlst = new UpdateHeaderList(1);
       URI source = connection.getConnectionDetails().getProviderURI();
-      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), new AttributeList()));
+      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), 
+              connection.getConnectionDetails().getDomain(), new AttributeList()));
 
       publisher.publish(hdrlst);
     } catch (IllegalArgumentException | MALException | MALInteractionException ex) {

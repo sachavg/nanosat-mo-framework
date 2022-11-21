@@ -252,7 +252,8 @@ public class StatisticProviderServiceImpl extends StatisticInheritanceSkeleton {
             final ObjectIdList sourceId = new ObjectIdList();
 
             URI uri = connection.getConnectionDetails().getProviderURI();
-            hdrlst.add(new UpdateHeader(new Identifier(uri.getValue()), keys));
+            hdrlst.add(new UpdateHeader(new Identifier(uri.getValue()),
+                    connection.getConnectionDetails().getDomain(), keys));
             sourceId.add(source); // requirement: 3.6.9.2.f and 3.6.9.2.g
 
             StatisticValueList statisticValues = new StatisticValueList();

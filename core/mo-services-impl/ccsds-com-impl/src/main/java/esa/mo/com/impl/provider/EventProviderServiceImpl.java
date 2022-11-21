@@ -264,7 +264,12 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
         try {
             synchronized (lock) {
                 if (!isRegistered) {
-                    publisher.register(new IdentifierList(), new PublishInteractionListener());
+                    IdentifierList keyNames = new IdentifierList();
+                    keyNames.add(new Identifier("K1"));
+                    keyNames.add(new Identifier("K2"));
+                    keyNames.add(new Identifier("K3"));
+                    keyNames.add(new Identifier("K4"));
+                    publisher.register(keyNames, new PublishInteractionListener());
                     isRegistered = true;
                 }
             }
@@ -302,7 +307,8 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
             final UpdateHeaderList hdrlst = new UpdateHeaderList();
             final ObjectDetailsList objectDetailsList = new ObjectDetailsList();
 
-            hdrlst.add(new UpdateHeader(new Identifier(sourceURI.getValue()), keyValues));
+            hdrlst.add(new UpdateHeader(new Identifier(sourceURI.getValue()),
+                    connection.getConnectionDetails().getDomain(), keyValues));
             objectDetailsList.add(new ObjectDetails(related, source)); // requirement: 3.3.4.2.5
 
             if (eventBodies != null) {
@@ -351,7 +357,12 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
         try {
             synchronized (lock) {
                 if (!isRegistered) {
-                    publisher.register(new IdentifierList(), new PublishInteractionListener());
+                    IdentifierList keyNames = new IdentifierList();
+                    keyNames.add(new Identifier("K1"));
+                    keyNames.add(new Identifier("K2"));
+                    keyNames.add(new Identifier("K3"));
+                    keyNames.add(new Identifier("K4"));
+                    publisher.register(keyNames, new PublishInteractionListener());
                     isRegistered = true;
                 }
             }
@@ -378,7 +389,8 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
 
                 final Long related = (relateds == null) ? null : relateds.get(i);
 
-                hdrlst.add(new UpdateHeader(new Identifier(sourceURI.getValue()), keys));
+                hdrlst.add(new UpdateHeader(new Identifier(sourceURI.getValue()),
+                        connection.getConnectionDetails().getDomain(), keys));
                 objectDetailsList.add(new ObjectDetails(related, sources.get(i))); // requirement: 3.3.4.2.5
             }
 

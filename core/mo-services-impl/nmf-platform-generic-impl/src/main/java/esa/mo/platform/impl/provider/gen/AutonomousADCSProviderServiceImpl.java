@@ -213,7 +213,8 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
       keys.add(new NamedValueList());
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
       URI source = connection.getConnectionDetails().getProviderURI();
-      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), keys));
+      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), 
+              connection.getConnectionDetails().getDomain(), keys));
 
       publisher.publish(hdrlst, attitudeTelemetryList, actuatorsTelemetryList, durationList,
           attitudeModeList);
