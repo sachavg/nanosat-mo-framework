@@ -633,7 +633,7 @@ public class AggregationConsumerPanel extends javax.swing.JPanel {
             org.ccsds.moims.mo.mc.aggregation.structures.AggregationValueList lAggregationValueList,
             java.util.Map qosProperties) {
 
-            final long iDiff = System.currentTimeMillis() - msgHeader.getTimestamp().getValue();
+            final long iDiff = (System.nanoTime()/1000000) - msgHeader.getTimestamp().getValue();
 
             final UpdateHeader updateHeader = lUpdateHeaderList.get(0);
             final String Aggname = updateHeader.getKey().getFirstSubKey().getValue();

@@ -59,7 +59,7 @@ public class SimpleDemoPackageCreation {
         // If No:s
         // Select the binary files to be installed
         // Additional libraries?
-        final Time time = new Time(System.currentTimeMillis());
+        final Time time = new Time(System.nanoTime()/1000000);
         final String timestamp = HelperTime.time2readableString(time);
 
         Logger.getLogger(NMFPackageCreator.class.getName()).log(Level.INFO,

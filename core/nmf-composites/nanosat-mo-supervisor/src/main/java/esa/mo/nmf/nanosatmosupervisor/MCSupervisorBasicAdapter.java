@@ -232,7 +232,7 @@ public class MCSupervisorBasicAdapter extends MonitorAndControlNMFAdapter {
             description = "Sets the clock using a diff between the on-board time and the desired time.")
     public UInteger setTimeUsingDeltaMilliseconds(Long actionInstanceObjId, boolean reportProgress,
         MALInteraction interaction, @ActionParameter(name = "delta", rawUnit = "milliseconds") Long delta) {
-        String str = (new SimpleDateFormat(DATE_PATTERN)).format(new Date(System.currentTimeMillis() + delta));
+        String str = (new SimpleDateFormat(DATE_PATTERN)).format(new Date(System.currentTimeMillis() + delta)); //@TODO ??
 
         ShellCommander shell = new ShellCommander();
         shell.runCommand("date -s \"" + str + " UTC\" | hwclock --systohc");

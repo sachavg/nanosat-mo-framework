@@ -116,7 +116,7 @@ public class HelperTime {
      */
     public static FineTime getTimestamp() {
         // Convert from milliseconds (10^-3) to nanoseconds (10^-9)
-        return new FineTime(System.currentTimeMillis() * ONE_MILLION);
+        return new FineTime(System.nanoTime());
     }
 
     /**
@@ -125,7 +125,7 @@ public class HelperTime {
      * @return The current time
      */
     public static Time getTimestampMillis() {
-        return new Time(System.currentTimeMillis());
+        return new Time(System.nanoTime()/1000000);
     }
 
     public static long fromMilliToNano(long milli) {

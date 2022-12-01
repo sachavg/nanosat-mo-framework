@@ -145,7 +145,7 @@ public abstract class TaskNode implements Runnable {
     }
 
     private void manageTime() {
-        long sysTime = System.currentTimeMillis();
+        long sysTime = System.nanoTime()/1000000;
         long diff = sysTime - lastTimeElapsed;
         lastTimeElapsed = sysTime;
         this.timeElapsed = diff;

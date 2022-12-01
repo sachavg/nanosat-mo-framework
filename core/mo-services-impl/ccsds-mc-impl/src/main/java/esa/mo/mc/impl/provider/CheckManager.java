@@ -512,7 +512,7 @@ public final class CheckManager extends CheckLinksManager {
     private void saveCheckResultObject(Long checkLinkId, CheckResult checkResult) {
         //save the new lastCheckResult as the current one
         final CheckLinkEvaluation checkLinkEvaluation = checkLinkEvalManager.get(checkLinkId);
-        checkLinkEvaluation.setLastCheckResultTime(new Time(System.currentTimeMillis()));
+        checkLinkEvaluation.setLastCheckResultTime(new Time(System.nanoTime()/1000000));
         //get the current parameter-definition-id if available and set the object
         final ObjectId sourceParam = super.getCheckLinkLinks(checkLinkId).getSource();
         checkResult.setParamDefInstId(sourceParam == null ? null : parameterManager.getDefinitionId(sourceParam.getKey()

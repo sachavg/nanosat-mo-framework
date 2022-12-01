@@ -47,7 +47,7 @@ public abstract class GPSNMEAonlyAdapter implements GPSAdapterInterface {
 
     @Override
     public synchronized Position getCurrentPosition() {
-        if (System.currentTimeMillis() - lastPositionTime < resultCacheValidityMs)
+        if ((System.nanoTime()/1000000) - lastPositionTime < resultCacheValidityMs)
             return lastPosition;
         String nmeaLog = "";
         try {
@@ -64,13 +64,13 @@ public abstract class GPSNMEAonlyAdapter implements GPSAdapterInterface {
                 "The current position could not be retrieved! The receiver is likely offline or not returning proper position.",
                 ex);
         }
-        lastPositionTime = System.currentTimeMillis();
+        lastPositionTime = System.nanoTime()/1000000;
         return lastPosition;
     }
 
     @Override
     public SatelliteInfoList getSatelliteInfoList() {
-        if (System.currentTimeMillis() - lastSatInfoTime < resultCacheValidityMs)
+        if ((System.nanoTime()/1000000) - lastSatInfoTime < resultCacheValidityMs)
             return lastSatInfo;
         try {
             lastSatInfo = null;
@@ -83,7 +83,7 @@ public abstract class GPSNMEAonlyAdapter implements GPSAdapterInterface {
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
         }
-        lastSatInfoTime = System.currentTimeMillis();
+        lastSatInfoTime = System.nanoTime()/1000000;
         return lastSatInfo;
     }
 

@@ -84,7 +84,7 @@ public class CameraProviderServiceImpl extends CameraInheritanceSkeleton {
     private boolean isRegistered = false;
     private final ConnectionProvider connection = new ConnectionProvider();
     private TaskScheduler publishTimer = new TaskScheduler(1);
-    private final AtomicLong uniqueObjId = new AtomicLong(System.currentTimeMillis());
+    private final AtomicLong uniqueObjId = new AtomicLong(System.nanoTime()/1000000);
     private CameraAdapterInterface adapter;
     private PictureFormatList availableFormats;
 

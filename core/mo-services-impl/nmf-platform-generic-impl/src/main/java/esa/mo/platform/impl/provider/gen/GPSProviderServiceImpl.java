@@ -293,7 +293,7 @@ public class GPSProviderServiceImpl extends GPSInheritanceSkeleton implements Re
         }
 
         response.setBodyElement0(pos);
-        double elapsedTime = (System.currentTimeMillis() - startTime) / 1000.0; // convert from milli to
+        double elapsedTime = ((System.nanoTime()/1000000) - startTime) / 1000.0; // convert from milli to
         // sec
         response.setBodyElement1(new Duration(elapsedTime));
         return response;
@@ -353,7 +353,7 @@ public class GPSProviderServiceImpl extends GPSInheritanceSkeleton implements Re
 
         synchronized (MUTEX) { // Store the latest Position
             currentPosition = position;
-            timeOfCurrentPosition = System.currentTimeMillis();
+            timeOfCurrentPosition = System.nanoTime()/1000000;
         }
         return position;
     }
@@ -508,7 +508,7 @@ public class GPSProviderServiceImpl extends GPSInheritanceSkeleton implements Re
             throw new MALInteractionException(new MALStandardError(MALHelper.UNKNOWN_ERROR_NUMBER, null));
         }
 
-        double elapsedTime = (System.currentTimeMillis() - startTime) / 1000.0; // convert from milli to sec
+        double elapsedTime = ((System.nanoTime()/1000000) - startTime) / 1000.0; // convert from milli to sec
 
         return new GetLastKnownPositionAndVelocityResponse(position, positionDeviation, velocity, velocityDeviation,
             new Duration(elapsedTime));
@@ -591,7 +591,7 @@ public class GPSProviderServiceImpl extends GPSInheritanceSkeleton implements Re
                 currentCartesianPositionDeviation = positionDeviation;
                 currentCartesianVelocity = velocity;
                 currentCartesianVelocityDeviation = velocityDeviation;
-                timeOfCurrentPositionAndVelocity = System.currentTimeMillis();
+                timeOfCurrentPositionAndVelocity = System.nanoTime()/1000000;
             }
         } catch (IOException | NumberFormatException e) {
             e.printStackTrace();

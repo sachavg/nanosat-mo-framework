@@ -109,7 +109,7 @@ public class ParameterProviderServiceImpl extends ParameterInheritanceSkeleton i
     private MonitorValuePublisher publisher;
     private boolean isRegistered = false;
     private final Object lock = new Object();
-    private final AtomicLong pValUniqueObjId = new AtomicLong(System.currentTimeMillis());
+    private final AtomicLong pValUniqueObjId = new AtomicLong(System.nanoTime()/1000000);
     protected ParameterManager manager;
     private PeriodicReportingManager periodicReportingManager;
     private final ConnectionProvider connection = new ConnectionProvider();
@@ -1110,7 +1110,7 @@ public class ParameterProviderServiceImpl extends ParameterInheritanceSkeleton i
             /*
             Logger.getLogger(ParameterProviderServiceImpl.class.getName()).log(Level.INFO,
                     "start publishing periodic parameter update with identityId: {0} at {1}",
-                    new Object[]{identityId, System.currentTimeMillis()});
+                    new Object[]{identityId, System.nanoTime()/1000000});
              */
             final ParameterValue parameterValue = manager.getParameterValue(identityId);
             final Identifier name = manager.getName(identityId);

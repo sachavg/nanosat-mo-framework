@@ -72,7 +72,7 @@ public class SoftwareDefinedRadioProviderServiceImpl extends SoftwareDefinedRadi
     private boolean isRegistered = false;
     private final ConnectionProvider connection = new ConnectionProvider();
     private Timer publishTimer = new Timer();
-    private final AtomicLong uniqueObjId = new AtomicLong(System.currentTimeMillis());
+    private final AtomicLong uniqueObjId = new AtomicLong(System.nanoTime()/1000000);
     private SoftwareDefinedRadioAdapterInterface adapter;
 
     /**

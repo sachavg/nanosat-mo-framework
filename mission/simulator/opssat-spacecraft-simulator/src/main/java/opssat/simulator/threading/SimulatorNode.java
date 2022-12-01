@@ -484,7 +484,7 @@ public class SimulatorNode extends TaskNode {
     public SimulatorNode(ConcurrentLinkedQueue<Object> queueIn, ConcurrentLinkedQueue<Object> queueOut, String name,
         int delay, Level logLevel, Level consoleLogLevel) {
         super(queueIn, queueOut, name, delay, logLevel, consoleLogLevel);
-        benchmarkStartupTime = System.currentTimeMillis();
+        benchmarkStartupTime = System.nanoTime()/1000000;
         this.logger = super.getLogObject();
         super.getTimers().put(TIMER_SIMULATOR_DATA, new SimulatorTimer(TIMER_SIMULATOR_DATA,
             TIMER_SIMULATOR_DATA_INTERVAL));

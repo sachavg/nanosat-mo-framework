@@ -439,7 +439,7 @@ public class StatisticProviderServiceImpl extends StatisticInheritanceSkeleton {
             return null;
         }
         // slice the times and values in order to only use those values gathered during the last collection period
-        double oldestTime = System.currentTimeMillis() - link.getLinkDetails().getCollectionInterval().getValue() *
+        double oldestTime = (System.nanoTime()/1000000) - link.getLinkDetails().getCollectionInterval().getValue() *
             1000.0;
         Integer oldestIndex = manager.getDataSets().getOldestIndex(statLinkId, oldestTime);
         // Retrieve the corresponding data set

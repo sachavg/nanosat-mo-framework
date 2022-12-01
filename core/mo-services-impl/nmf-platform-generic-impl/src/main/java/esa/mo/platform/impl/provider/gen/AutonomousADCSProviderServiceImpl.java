@@ -264,7 +264,7 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
     }
 
     private AttitudeTelemetry getAttitudeTelemetry() throws IOException {
-        if (System.currentTimeMillis() - lastAttitudeTmTime < resultCacheValidityMs) {
+        if ((System.nanoTime()/1000000) - lastAttitudeTmTime < resultCacheValidityMs) {
             if (lastAttitudeTm != null)
                 return lastAttitudeTm;
             else
@@ -276,15 +276,15 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
             // Cache the exception
             lastAttitudeTm = null;
             lastAttitudeTmException = e;
-            lastAttitudeTmTime = System.currentTimeMillis();
+            lastAttitudeTmTime = System.nanoTime()/1000000;
             throw e;
         }
-        lastAttitudeTmTime = System.currentTimeMillis();
+        lastAttitudeTmTime = System.nanoTime()/1000000;
         return lastAttitudeTm;
     }
 
     private ActuatorsTelemetry getActuatorsTelemetry() throws IOException {
-        if (System.currentTimeMillis() - lastActuatorsTmTime < resultCacheValidityMs) {
+        if ((System.nanoTime()/1000000) - lastActuatorsTmTime < resultCacheValidityMs) {
             if (lastActuatorsTm != null)
                 return lastActuatorsTm;
             else
@@ -296,10 +296,10 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
             // Cache the exception
             lastActuatorsTm = null;
             lastActuatorsTmException = e;
-            lastActuatorsTmTime = System.currentTimeMillis();
+            lastActuatorsTmTime = System.nanoTime()/1000000;
             throw e;
         }
-        lastActuatorsTmTime = System.currentTimeMillis();
+        lastActuatorsTmTime = System.nanoTime()/1000000;
         return lastActuatorsTm;
     }
 
@@ -390,7 +390,7 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
         }
 
         final long remainingMillis = (long) (duration.getValue() * 1000);
-        attitudeControlEndTime = System.currentTimeMillis() + remainingMillis;
+        attitudeControlEndTime = (System.nanoTime()/1000000) + remainingMillis;
         // Start auto-timer to unset
         autoUnsetThread = new Thread(() -> {
             try {
@@ -410,7 +410,7 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
         if (attitudeControlEndTime == 0) {
             return null; // Return null if the time left is unknown...
         } else {
-            return new Duration((attitudeControlEndTime - System.currentTimeMillis()) / 1000.f);
+            return new Duration((attitudeControlEndTime - (System.nanoTime()/1000000)) / 1000.f);
         }
     }
 

@@ -101,7 +101,7 @@ public class CheckLinkEvaluationManager {
         boolean triggered, CheckDefinitionDetails checkDefDetails, CheckLinkDetails details,
         ObjectDetails checkLinkLink, boolean checkServiceGloballyEnabled) {
         EvaluationResult evaluationResult = new EvaluationResult();
-        evaluationResult.setEvaluationTime(new Time(System.currentTimeMillis()));
+        evaluationResult.setEvaluationTime(new Time(System.nanoTime()/1000000));
         //requirement: 3.5.3.o
         //        CheckLinkDetails details = super.getCheckLinkDetails(checkLinkId);
         //        ObjectDetails checkLinkLink = super.getCheckLinkLinks(checkLinkId);
@@ -278,7 +278,7 @@ public class CheckLinkEvaluationManager {
     private boolean calculateCheckResult(Long checkLinkId, CheckDefinitionDetails actCheckDef) {
         final CheckLinkEvaluation checkLinkEval = checkLinkEvaluations.get(checkLinkId);
         //        final CheckDefinitionDetails actCheckDef = getActualCheckDefinitionFromCheckLinks(checkLinkId);
-        final long now = System.currentTimeMillis();
+        final long now = System.nanoTime()/1000000;
         final long nominalTime = Math.round(actCheckDef.getNominalTime().getValue() * 1000);
         final long violationTime = Math.round(actCheckDef.getViolationTime().getValue() * 1000);
         int nominalCounter = 0;

@@ -332,7 +332,7 @@ public class ParameterMonitoringManager {
     public synchronized void setParameterValue(Long paramIdentityId, ParameterValue newParamValue, ObjectId source) {
         final List<ParameterValueEntry> paramValues = parameterValues.get(paramIdentityId);
         ParameterValue oldParamValue = paramValues.get(paramValues.size() - 1).getValue();
-        paramValues.add(new ParameterValueEntry(newParamValue, new Time(System.currentTimeMillis())));
+        paramValues.add(new ParameterValueEntry(newParamValue, new Time(System.nanoTime()/1000000)));
         //check the onChange-CheckLinks 
         if (!oldParamValue.equals(newParamValue)) {
             final List<Long> checkLinkIdsToNotify = onChangeNotifierList.get(paramIdentityId);
@@ -352,7 +352,7 @@ public class ParameterMonitoringManager {
                         .getCheckReference();
                 List<ParameterValueEntry> values = parameterValues.get(paramIdentityId);
                 //task: make it more effective and delete the expired ones
-                long now = System.currentTimeMillis();
+                long now = System.nanoTime()/1000000;
                 int counter = 0;
                 for (ParameterValueEntry value : values) {
                     if (now - value.getCreationTime().getValue() < Math.round(refValue.getDeltaTime().getValue() *

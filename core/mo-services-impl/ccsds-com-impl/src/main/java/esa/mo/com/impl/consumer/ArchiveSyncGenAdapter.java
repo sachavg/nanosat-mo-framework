@@ -63,7 +63,7 @@ public class ArchiveSyncGenAdapter extends org.ccsds.moims.mo.com.archivesync.co
         Logger.getLogger(ArchiveSyncAdapter.class.getName()).log(Level.INFO,
                 "Received Acknowledgement!");
         this.interactionTicket = interactionTicket;
-        lastTimeReceived = System.currentTimeMillis();
+        lastTimeReceived = System.nanoTime()/1000000;
         */
     }
 
@@ -76,7 +76,7 @@ public class ArchiveSyncGenAdapter extends org.ccsds.moims.mo.com.archivesync.co
                 "Received! Chunk index: " + index);
          */
 
-        lastTimeReceived = System.currentTimeMillis();
+        lastTimeReceived = System.nanoTime()/1000000;
         lastknowIndex = index;
         try {
             receivedChunks.put(index, chunk.getValue());
@@ -116,7 +116,7 @@ public class ArchiveSyncGenAdapter extends org.ccsds.moims.mo.com.archivesync.co
         Logger.getLogger(ArchiveSyncGenAdapter.class.getName()).log(Level.FINE, "Received on rerequest! Chunk index: " +
             index);
 
-        lastTimeReceived = System.currentTimeMillis();
+        lastTimeReceived = System.nanoTime()/1000000;
         try {
             receivedChunks.put(index, chunk.getValue());
         } catch (MALException ex) {
@@ -146,7 +146,7 @@ public class ArchiveSyncGenAdapter extends org.ccsds.moims.mo.com.archivesync.co
     }
 
     public long noUpdatesReceivedForThisDuration() {
-        return System.currentTimeMillis() - lastTimeReceived;
+        return (System.nanoTime()/1000000) - lastTimeReceived;
     }
 
     public boolean transactionCompleted() {

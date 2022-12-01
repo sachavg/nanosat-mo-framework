@@ -1222,14 +1222,14 @@ public class OrekitCore {
             return ((TLEPropagator) this.runningPropagator).getTLE();
         } else {
             // in case we are using the keplerian propagator, the TLE can not be reconstructed completle!
-            if (System.currentTimeMillis() - lastTLEPropagatorWarningTime > 60000) { //Reduce the logging frequency
+            if ((System.nanoTime()/1000000) - lastTLEPropagatorWarningTime > 60000) { //Reduce the logging frequency
                 this.logger.log(Level.WARNING,
                     "Using getTLE() with any other than the TLEPropagator results in incomplete and inaccurate TLE Messages!" +
                         "\n" +
                         "Catalog Number, launch year, launch number, ephemeris type, mean motion d1 and d2, number of revolutions and BStart will be set to 0" +
                         "\n" + "launch Piece will be set to \"N\", classification will be set to 'U'" + "\n" +
                         "Element number will start at 0 and count up on every call of getTLE()");
-                lastTLEPropagatorWarningTime = System.currentTimeMillis();
+                lastTLEPropagatorWarningTime = System.nanoTime()/1000000;
             }
             KeplerianOrbit orbit = (KeplerianOrbit) OrbitType.KEPLERIAN.convertType(this.getOrbit());
 

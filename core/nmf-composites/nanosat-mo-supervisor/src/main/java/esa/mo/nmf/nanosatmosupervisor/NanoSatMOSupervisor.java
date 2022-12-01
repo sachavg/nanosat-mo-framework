@@ -82,7 +82,7 @@ public abstract class NanoSatMOSupervisor extends NMFProvider {
      */
     public void init(MonitorAndControlNMFAdapter mcAdapter, PlatformServicesConsumer platformServices,
         PMBackend packageManagementBackend) {
-        super.startTime = System.currentTimeMillis();
+        super.startTime = System.nanoTime()/1000000;
         HelperMisc.loadPropertiesFile(); // Loads: provider.properties; settings.properties; transport.properties
         ConnectionProvider.resetURILinks();
 
@@ -148,7 +148,7 @@ public abstract class NanoSatMOSupervisor extends NMFProvider {
         final SingleConnectionDetails det = this.directoryService.getConnection().getSecondaryConnectionDetails();
         final String secondaryURI = (det != null) ? det.getProviderURI().toString() : null;
         this.writeCentralDirectoryServiceURI(primaryURI, secondaryURI);
-        LOGGER.log(Level.INFO, "NanoSat MO Supervisor initialized in " + (((float) (System.currentTimeMillis() -
+        LOGGER.log(Level.INFO, "NanoSat MO Supervisor initialized in " + (((float) ((System.nanoTime()/1000000) -
             super.startTime)) / 1000) + " seconds!");
         LOGGER.log(Level.INFO, "URI: {0}\n", primaryURI);
 
@@ -199,7 +199,7 @@ public abstract class NanoSatMOSupervisor extends NMFProvider {
     public final void closeGracefully(final ObjectId source) {
         try {
             AppShutdownGuard.start();
-            long timestamp = System.currentTimeMillis();
+            long timestamp = System.nanoTime()/1000000;
 
             // Acknowledge the reception of the request to close (Closing...)
             Long eventId = this.getCOMServices().getEventService().generateAndStoreEvent(
@@ -241,7 +241,7 @@ public abstract class NanoSatMOSupervisor extends NMFProvider {
 
             // Exit the Java application
             LOGGER.log(Level.INFO, "Success! The currently running Java Virtual Machine will now terminate. " +
-                "(NanoSat MO Supervisor closed in: " + (System.currentTimeMillis() - timestamp) + " ms)\n");
+                "(NanoSat MO Supervisor closed in: " + ((System.nanoTime()/1000000) - timestamp) + " ms)\n");
 
         } catch (NMFException ex) {
             LOGGER.log(Level.SEVERE, null, ex);

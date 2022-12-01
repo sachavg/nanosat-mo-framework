@@ -124,8 +124,8 @@ public class GenerateNMFPackageMojo extends AbstractMojo {
                 "Please use the <nmfVersion> tag inside the <configuration> tag!\n");
         }
 
-        final Time time = new Time(System.currentTimeMillis());
-        final String timestamp = HelperTime.time2readableString(time);
+        final Time time = new Time(System.nanoTime()/1000000);
+        final String timestamp = HelperTime.time2readableString(time); //@TODO check ?
 
         // Package 1
         NMFPackageDetails details = new NMFPackageDetails(name, version, timestamp, mainClass, maxHeap);

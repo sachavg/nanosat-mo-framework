@@ -408,7 +408,7 @@ public class StatisticConsumerPanel extends javax.swing.JPanel {
             UpdateHeaderList lUpdateHeaderList, LongList _LongList2, ObjectIdList _ObjectIdList3,
             StatisticValueList _StatisticValueList3, Map qosProperties) {
 
-            final long iDiff = System.currentTimeMillis() - msgHeader.getTimestamp().getValue();
+            final long iDiff = (System.nanoTime()/1000000) - msgHeader.getTimestamp().getValue();
 
             final UpdateHeader updateHeader = lUpdateHeaderList.get(0);
             final String statFunctionName = updateHeader.getKey().getFirstSubKey().getValue();
