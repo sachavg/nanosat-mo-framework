@@ -23,7 +23,6 @@ package esa.mo.com.impl.provider;
 import esa.mo.com.impl.util.HelperCOM;
 import esa.mo.helpertools.connections.ConfigurationProviderSingleton;
 import esa.mo.helpertools.connections.ConnectionProvider;
-import esa.mo.helpertools.helpers.HelperMisc;
 import esa.mo.helpertools.helpers.HelperTime;
 import java.io.IOException;
 import java.util.Map;
@@ -41,10 +40,11 @@ import org.ccsds.moims.mo.com.structures.ObjectId;
 import org.ccsds.moims.mo.com.structures.ObjectIdList;
 import org.ccsds.moims.mo.com.structures.ObjectType;
 import org.ccsds.moims.mo.mal.MALContextFactory;
+import org.ccsds.moims.mo.mal.MALElementsRegistry;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALHelper;
 import org.ccsds.moims.mo.mal.MALInteractionException;
-import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
+import org.ccsds.moims.mo.mal.NotFoundException;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
@@ -54,11 +54,8 @@ import org.ccsds.moims.mo.mal.structures.ElementList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
-import org.ccsds.moims.mo.mal.structures.NamedValue;
-import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.QoSLevel;
 import org.ccsds.moims.mo.mal.structures.SessionType;
-import org.ccsds.moims.mo.mal.structures.Time;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.mal.structures.UIntegerList;
 import org.ccsds.moims.mo.mal.structures.URI;
@@ -91,15 +88,15 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
     public synchronized void init(ArchiveProviderServiceImpl archiveService) throws MALException {
         if (!initialiased) {
             if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-                MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+                MALHelper.init(MALContextFactory.getElementsRegistry());
             }
 
             if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-                COMHelper.init(MALContextFactory.getElementFactoryRegistry());
+                COMHelper.init(MALContextFactory.getElementsRegistry());
             }
 
             try {
-                EventHelper.init(MALContextFactory.getElementFactoryRegistry());
+                EventHelper.init(MALContextFactory.getElementsRegistry());
             } catch (MALException ex) {
                 // nothing to be done..
             }
@@ -196,12 +193,12 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
                 if (eventObjBody instanceof java.util.ArrayList) {
                     events = (ElementList) eventObjBody;    // Then just cast it to ElementList
                 } else {
-                    events = HelperMisc.element2elementList(eventObjBody);  // Else, convert it to ElementList
+                    // Else, convert it to ElementList
+                    events = MALElementsRegistry.elementToElementList(eventObjBody);
                     events.add(eventObjBody);
                 }
             }
-
-        } catch (Exception ex) {
+        } catch (NotFoundException ex) {
             Logger.getLogger(EventProviderServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -289,21 +286,20 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
                     secondEntityKey,
                     objId,
                     subKey);
-            */
-            /*
+
             NamedValueList subkeys = new NamedValueList();
             subkeys.add(new NamedValue(new Identifier("key1"), new Identifier(objType.getNumber().toString())));
             subkeys.add(new NamedValue(new Identifier("key2"), new Union(secondEntityKey)));
             subkeys.add(new NamedValue(new Identifier("key3"), new Union(objId)));
             subkeys.add(new NamedValue(new Identifier("key4"), new Union(subKey)));
-            */
+             */
 
             final AttributeList keyValues = new AttributeList();
             keyValues.add(new Identifier(objType.getNumber().toString()));
             keyValues.add(new Union(secondEntityKey));
             keyValues.add(new Union(objId));
             keyValues.add(new Union(subKey));
-            
+
             final UpdateHeaderList hdrlst = new UpdateHeaderList();
             final ObjectDetailsList objectDetailsList = new ObjectDetailsList();
 
@@ -381,7 +377,7 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
 
                 final Long subKey = (sources.get(i) != null) ? HelperCOM.generateSubKey(sources.get(i).getType()) : null;
                 // requirements: 3.3.4.2.1 , 3.3.4.2.2 , 3.3.4.2.3 , 3.3.4.2.4
-                AttributeList keys = new AttributeList(); 
+                AttributeList keys = new AttributeList();
                 keys.add(new Identifier(objType.getNumber().toString()));
                 keys.add(secondEntityKey);
                 keys.add(objIds.get(i));

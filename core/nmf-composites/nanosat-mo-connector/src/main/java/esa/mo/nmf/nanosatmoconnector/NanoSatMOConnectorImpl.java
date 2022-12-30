@@ -221,7 +221,7 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
                 if (supervisorConnections.size() == 1) { // Platform services found!
                     // Load all the Platform services' APIs
                     if (MALContextFactory.lookupArea(PlatformHelper.PLATFORM_AREA_NAME, PlatformHelper.PLATFORM_AREA_VERSION) == null) {
-                        PlatformHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
+                        PlatformHelper.deepInit(MALContextFactory.getElementsRegistry());
                     }
 
                     // Select the best transport for IPC and convert to a ConnectionConsumer object

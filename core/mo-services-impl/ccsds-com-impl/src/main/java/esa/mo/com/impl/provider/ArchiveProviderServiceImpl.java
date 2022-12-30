@@ -43,12 +43,15 @@ import org.ccsds.moims.mo.com.archive.structures.QueryFilter;
 import org.ccsds.moims.mo.com.archive.structures.QueryFilterList;
 import org.ccsds.moims.mo.com.structures.ObjectType;
 import org.ccsds.moims.mo.mal.MALContextFactory;
+import org.ccsds.moims.mo.mal.MALElementsRegistry;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALHelper;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.MALStandardError;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
+import org.ccsds.moims.mo.mal.structures.Attribute;
+import org.ccsds.moims.mo.mal.structures.Element;
 import org.ccsds.moims.mo.mal.structures.ElementList;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
@@ -76,15 +79,15 @@ public class ArchiveProviderServiceImpl extends ArchiveInheritanceSkeleton {
     public synchronized void init(EventProviderServiceImpl eventService) throws MALException {
         if (!initialiased) {
             if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-                MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+                MALHelper.init(MALContextFactory.getElementsRegistry());
             }
 
             if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-                COMHelper.init(MALContextFactory.getElementFactoryRegistry());
+                COMHelper.init(MALContextFactory.getElementsRegistry());
             }
 
             try {
-                ArchiveHelper.init(MALContextFactory.getElementFactoryRegistry());
+                ArchiveHelper.init(MALContextFactory.getElementsRegistry());
             } catch (MALException ex) {
             }
         }
@@ -202,7 +205,7 @@ public class ArchiveProviderServiceImpl extends ArchiveInheritanceSkeleton {
 
             if (outMatchedObjects == null) {  // Initialize the elementList object
                 try {
-                    outMatchedObjects = HelperMisc.element2elementList(perObj.getObject());
+                    outMatchedObjects = MALElementsRegistry.elementToElementList((Element) perObj.getObject());
 
                     if (outMatchedObjects != null) { // Was it created?
                         for (int j = 0; j < index; j++) { // Insert the missing elements in the list
@@ -357,7 +360,7 @@ public class ArchiveProviderServiceImpl extends ArchiveInheritanceSkeleton {
                     if (returnObjBody == true) {
                         // requirement: 3.4.4.2.1
                         try {  // Let's try to generate the list...
-                            outObjectList = HelperMisc.element2elementList(perObjs.get(j).getObject());
+                            outObjectList = MALElementsRegistry.elementToElementList((Element) perObjs.get(j).getObject());
                         } catch (Exception ex) { // The list could not be generated
                             Logger.getLogger(ArchiveProviderServiceImpl.class.getName()).log(Level.SEVERE, "The outObjectList could not be generated!", ex);
                             continue;
@@ -391,7 +394,7 @@ public class ArchiveProviderServiceImpl extends ArchiveInheritanceSkeleton {
 
                 if (returnObjBody == true && !perObjs.isEmpty()) { // requirement: 3.4.4.2.24
                     try {
-                        outObjectList = HelperMisc.element2elementList(perObjs.get(0).getObject());
+                        outObjectList = MALElementsRegistry.elementToElementList((Element) perObjs.get(0).getObject());
                     } catch (Exception ex) {
                         Logger.getLogger(ArchiveProviderServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
                     }

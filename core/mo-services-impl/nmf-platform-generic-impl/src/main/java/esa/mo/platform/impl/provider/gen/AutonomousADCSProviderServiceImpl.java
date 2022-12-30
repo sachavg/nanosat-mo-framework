@@ -23,7 +23,6 @@ package esa.mo.platform.impl.provider.gen;
 import esa.mo.com.impl.util.COMServicesProvider;
 import esa.mo.helpertools.connections.ConfigurationProviderSingleton;
 import esa.mo.helpertools.connections.ConnectionProvider;
-import esa.mo.helpertools.helpers.HelperMisc;
 import esa.mo.helpertools.misc.TaskScheduler;
 import java.io.IOException;
 import java.util.Map;
@@ -32,10 +31,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.com.COMHelper;
 import org.ccsds.moims.mo.mal.MALContextFactory;
+import org.ccsds.moims.mo.mal.MALElementsRegistry;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALHelper;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.MALStandardError;
+import org.ccsds.moims.mo.mal.NotFoundException;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
@@ -104,20 +105,20 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
     if (!initialiased) {
 
       if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-        MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+        MALHelper.init(MALContextFactory.getElementsRegistry());
       }
 
       if (MALContextFactory.lookupArea(PlatformHelper.PLATFORM_AREA_NAME,
           PlatformHelper.PLATFORM_AREA_VERSION) == null) {
-        PlatformHelper.init(MALContextFactory.getElementFactoryRegistry());
+        PlatformHelper.init(MALContextFactory.getElementsRegistry());
       }
 
       if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-        COMHelper.init(MALContextFactory.getElementFactoryRegistry());
+        COMHelper.init(MALContextFactory.getElementsRegistry());
       }
 
       try {
-        AutonomousADCSHelper.init(MALContextFactory.getElementFactoryRegistry());
+        AutonomousADCSHelper.init(MALContextFactory.getElementsRegistry());
       } catch (MALException ex) { // nothing to be done..
       }
     }
@@ -162,7 +163,7 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
     }
   }
 
-  private void publishCurrentAttitude()
+  private void publishCurrentAttitude() throws NotFoundException
   {
     if (!adapter.isUnitAvailable()) {
       // Abort publishing
@@ -186,12 +187,12 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
     try {
       final AttitudeTelemetry attitudeTelemetry = adapter.getAttitudeTelemetry();
       final AttitudeTelemetryList attitudeTelemetryList =
-          (AttitudeTelemetryList) HelperMisc.element2elementList(attitudeTelemetry);
+          (AttitudeTelemetryList) MALElementsRegistry.elementToElementList(attitudeTelemetry);
       attitudeTelemetryList.add(attitudeTelemetry);
 
       final ActuatorsTelemetry actuatorsTelemetry = adapter.getActuatorsTelemetry();
       final ActuatorsTelemetryList actuatorsTelemetryList =
-          (ActuatorsTelemetryList) HelperMisc.element2elementList(actuatorsTelemetry);
+          (ActuatorsTelemetryList) MALElementsRegistry.elementToElementList(actuatorsTelemetry);
       actuatorsTelemetryList.add(actuatorsTelemetry);
 
       final AttitudeMode activeAttitudeMode = adapter.getActiveAttitudeMode();
@@ -201,7 +202,7 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
         // Pick a dummy concrete type type just to fill it with a null value
         attitudeModeList = new AttitudeModeBDotList();
       } else {
-        attitudeModeList = (AttitudeModeList) HelperMisc.element2elementList(
+        attitudeModeList = (AttitudeModeList) MALElementsRegistry.elementToElementList(
             activeAttitudeMode);
       }
       attitudeModeList.add(activeAttitudeMode);
@@ -336,7 +337,12 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
       public void run()
       {
         if (generationEnabled) {
-          publishCurrentAttitude();
+            try {
+                publishCurrentAttitude();
+            } catch (NotFoundException ex) {
+                Logger.getLogger(AutonomousADCSProviderServiceImpl.class.getName()).log(
+                        Level.SEVERE, "The current attitude could not be published.", ex);
+            }
         }
       }
     }, monitoringPeriod, monitoringPeriod, TimeUnit.MILLISECONDS, true);

@@ -152,20 +152,20 @@ public class DirectoryProviderServiceImpl extends DirectoryInheritanceSkeleton
   {
     if (!initialiased) {
       if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-        MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+        MALHelper.init(MALContextFactory.getElementsRegistry());
       }
 
       if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-        COMHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
+        COMHelper.deepInit(MALContextFactory.getElementsRegistry());
       }
 
       if (MALContextFactory.lookupArea(CommonHelper.COMMON_AREA_NAME,
           CommonHelper.COMMON_AREA_VERSION) == null) {
-        CommonHelper.init(MALContextFactory.getElementFactoryRegistry());
+        CommonHelper.init(MALContextFactory.getElementsRegistry());
       }
 
       try {
-        DirectoryHelper.init(MALContextFactory.getElementFactoryRegistry());
+        DirectoryHelper.init(MALContextFactory.getElementsRegistry());
       } catch (MALException ex) { // nothing to be done..
       }
     }

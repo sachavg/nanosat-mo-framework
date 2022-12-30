@@ -89,7 +89,7 @@ public class ParameterAddModify extends javax.swing.JFrame {
         this.setVisible(false);
 
         try {
-            ConversionHelper.init(MALContextFactory.getElementFactoryRegistry());
+            ConversionHelper.init(MALContextFactory.getElementsRegistry());
         } catch (MALException ex) {
             // nothing to be done..
         }

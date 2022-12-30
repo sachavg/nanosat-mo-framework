@@ -95,7 +95,7 @@ public class ArchiveManager {
         this.eventService = eventService;
 
         try {
-            ArchiveHelper.init(MALContextFactory.getElementFactoryRegistry());
+            ArchiveHelper.init(MALContextFactory.getElementsRegistry());
         } catch (MALException ex) {
         }
 

@@ -77,7 +77,7 @@ public class ParameterManager extends MCManager
     super(comServices);
 
     try {
-      ParameterHelper.init(MALContextFactory.getElementFactoryRegistry());
+      ParameterHelper.init(MALContextFactory.getElementsRegistry());
     } catch (MALException ex) { // nothing to be done..
     }
 

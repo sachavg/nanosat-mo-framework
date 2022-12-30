@@ -31,7 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.*;
 import org.ccsds.moims.mo.mal.MALContextFactory;
-import org.ccsds.moims.mo.mal.MALElementFactory;
+import org.ccsds.moims.mo.mal.MALElementsRegistry;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.structures.Element;
 import org.ccsds.moims.mo.mal.structures.FineTime;
@@ -221,8 +221,9 @@ public class COMObjectEntity implements Serializable {
         if (this.obj != null) {
             try {
                 final BinaryDecoder binDec = new BinaryDecoder(this.obj);
-                final MALElementFactory eleFact = MALContextFactory.getElementFactoryRegistry().lookupElementFactory(binDec.decodeLong());
-                elem = binDec.decodeNullableElement((Element) eleFact.createElement());
+                final Long sfp = binDec.decodeLong();
+                final MALElementsRegistry eleFact = MALContextFactory.getElementsRegistry();
+                elem = binDec.decodeNullableElement((Element) eleFact.createElement(sfp));
             } catch (MALException ex) {
                 Logger.getLogger(COMObjectEntity.class.getName()).log(Level.SEVERE,
                         "The object body could not be decoded! Usually happens when there's "

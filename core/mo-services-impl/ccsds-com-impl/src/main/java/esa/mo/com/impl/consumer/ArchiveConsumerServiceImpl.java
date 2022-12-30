@@ -58,15 +58,15 @@ public class ArchiveConsumerServiceImpl extends ConsumerServiceImpl {
     public ArchiveConsumerServiceImpl(SingleConnectionDetails connectionDetails) throws MALException, MalformedURLException {
 
         if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-            MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+            MALHelper.init(MALContextFactory.getElementsRegistry());
         }
 
         if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-            COMHelper.init(MALContextFactory.getElementFactoryRegistry());
+            COMHelper.init(MALContextFactory.getElementsRegistry());
         }
 
         try {
-            ArchiveHelper.init(MALContextFactory.getElementFactoryRegistry());
+            ArchiveHelper.init(MALContextFactory.getElementsRegistry());
         } catch (MALException ex) {
         }
 

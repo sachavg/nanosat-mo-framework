@@ -58,6 +58,7 @@ import org.ccsds.moims.mo.com.archive.structures.ExpressionOperator;
 import org.ccsds.moims.mo.com.archive.structures.PaginationFilter;
 import org.ccsds.moims.mo.com.archive.structures.PaginationFilterList;
 import org.ccsds.moims.mo.com.structures.ObjectType;
+import org.ccsds.moims.mo.mal.MALElementsRegistry;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.MALStandardError;
@@ -800,7 +801,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
         ElementList finalObject;
 
         try {
-            finalObject = HelperMisc.element2elementList((Element) objBodyWindow.getObject());
+            finalObject = MALElementsRegistry.elementToElementList((Element) objBodyWindow.getObject());
             finalObject.add(objBodyWindow.getObject());
 
             try {

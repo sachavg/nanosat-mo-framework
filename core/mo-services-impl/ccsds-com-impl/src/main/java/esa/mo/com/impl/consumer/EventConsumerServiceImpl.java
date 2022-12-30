@@ -77,15 +77,15 @@ public class EventConsumerServiceImpl extends ConsumerServiceImpl {
 
     public EventConsumerServiceImpl(SingleConnectionDetails connectionDetails) throws MALException, MALInteractionException, MalformedURLException {
         if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-            MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+            MALHelper.init(MALContextFactory.getElementsRegistry());
         }
 
         if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-            COMHelper.init(MALContextFactory.getElementFactoryRegistry());
+            COMHelper.init(MALContextFactory.getElementsRegistry());
         }
 
         try {
-            EventHelper.init(MALContextFactory.getElementFactoryRegistry());
+            EventHelper.init(MALContextFactory.getElementsRegistry());
         } catch (MALException ex) {
             // nothing to be done..
         }

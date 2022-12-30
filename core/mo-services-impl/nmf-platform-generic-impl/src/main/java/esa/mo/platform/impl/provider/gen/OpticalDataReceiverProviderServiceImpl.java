@@ -63,20 +63,20 @@ public class OpticalDataReceiverProviderServiceImpl extends OpticalDataReceiverI
     if (!initialiased) {
 
       if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-        MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+        MALHelper.init(MALContextFactory.getElementsRegistry());
       }
 
       if (MALContextFactory.lookupArea(PlatformHelper.PLATFORM_AREA_NAME,
           PlatformHelper.PLATFORM_AREA_VERSION) == null) {
-        PlatformHelper.init(MALContextFactory.getElementFactoryRegistry());
+        PlatformHelper.init(MALContextFactory.getElementsRegistry());
       }
 
       if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-        COMHelper.init(MALContextFactory.getElementFactoryRegistry());
+        COMHelper.init(MALContextFactory.getElementsRegistry());
       }
 
       try {
-        OpticalDataReceiverHelper.init(MALContextFactory.getElementFactoryRegistry());
+        OpticalDataReceiverHelper.init(MALContextFactory.getElementsRegistry());
       } catch (MALException ex) { // nothing to be done..
       }
     }

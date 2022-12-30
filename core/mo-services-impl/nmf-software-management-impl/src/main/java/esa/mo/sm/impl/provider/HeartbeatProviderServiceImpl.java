@@ -78,16 +78,16 @@ public class HeartbeatProviderServiceImpl extends HeartbeatInheritanceSkeleton
   {
     if (!initialiased) {
       if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-        MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+        MALHelper.init(MALContextFactory.getElementsRegistry());
       }
 
       if (MALContextFactory.lookupArea(SoftwareManagementHelper.SOFTWAREMANAGEMENT_AREA_NAME,
           SoftwareManagementHelper.SOFTWAREMANAGEMENT_AREA_VERSION) == null) {
-        SoftwareManagementHelper.init(MALContextFactory.getElementFactoryRegistry());
+        SoftwareManagementHelper.init(MALContextFactory.getElementsRegistry());
       }
 
       try {
-        HeartbeatHelper.init(MALContextFactory.getElementFactoryRegistry());
+        HeartbeatHelper.init(MALContextFactory.getElementsRegistry());
       } catch (MALException ex) { // nothing to be done..
       }
     }

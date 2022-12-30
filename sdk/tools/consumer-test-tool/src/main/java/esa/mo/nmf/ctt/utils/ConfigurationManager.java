@@ -122,9 +122,9 @@ public class ConfigurationManager extends javax.swing.JFrame
     }
 
     try {
-      MALHelper.init(MALContextFactory.getElementFactoryRegistry());
-      COMHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
-      MCHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
+      MALHelper.init(MALContextFactory.getElementsRegistry());
+      COMHelper.deepInit(MALContextFactory.getElementsRegistry());
+      MCHelper.deepInit(MALContextFactory.getElementsRegistry());
     } catch (MALException ex) {
       Logger.getLogger(ConfigurationManager.class.getName()).log(Level.SEVERE, null, ex);
     }

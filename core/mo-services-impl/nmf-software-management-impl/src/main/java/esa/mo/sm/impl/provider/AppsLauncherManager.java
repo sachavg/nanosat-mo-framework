@@ -109,7 +109,7 @@ public class AppsLauncherManager extends DefinitionsManager
     }
 
     try {
-      AppsLauncherHelper.init(MALContextFactory.getElementFactoryRegistry());
+      AppsLauncherHelper.init(MALContextFactory.getElementsRegistry());
     } catch (MALException ex) {
       // Apps Launcher service helpers were likely initialized by a different class
     }

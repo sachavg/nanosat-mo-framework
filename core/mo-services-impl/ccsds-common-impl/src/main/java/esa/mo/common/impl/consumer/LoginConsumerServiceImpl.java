@@ -65,21 +65,20 @@ public class LoginConsumerServiceImpl extends ConsumerServiceImpl {
 
     public LoginConsumerServiceImpl(SingleConnectionDetails connectionDetails, COMServicesConsumer comServices)
             throws MALException, MalformedURLException, MALInteractionException {
-
         if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-            MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+            MALHelper.init(MALContextFactory.getElementsRegistry());
         }
 
         if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-            COMHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
+            COMHelper.deepInit(MALContextFactory.getElementsRegistry());
         }
 
         if (MALContextFactory.lookupArea(CommonHelper.COMMON_AREA_NAME, CommonHelper.COMMON_AREA_VERSION) == null) {
-            CommonHelper.init(MALContextFactory.getElementFactoryRegistry());
+            CommonHelper.init(MALContextFactory.getElementsRegistry());
         }
 
         try {
-            LoginHelper.init(MALContextFactory.getElementFactoryRegistry());
+            LoginHelper.init(MALContextFactory.getElementsRegistry());
         } catch (MALException ex) {
             // nothing to be done..
         }

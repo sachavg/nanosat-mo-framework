@@ -68,15 +68,15 @@ public class ArchiveSyncConsumerServiceImpl extends ConsumerServiceImpl {
 
     public ArchiveSyncConsumerServiceImpl(SingleConnectionDetails connectionDetails) throws MALException, MalformedURLException {
         if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-            MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+            MALHelper.init(MALContextFactory.getElementsRegistry());
         }
 
         if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-            COMHelper.init(MALContextFactory.getElementFactoryRegistry());
+            COMHelper.init(MALContextFactory.getElementsRegistry());
         }
 
         try {
-            ArchiveSyncHelper.init(MALContextFactory.getElementFactoryRegistry());
+            ArchiveSyncHelper.init(MALContextFactory.getElementsRegistry());
         } catch (MALException ex) {
         }
 

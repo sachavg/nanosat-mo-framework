@@ -220,7 +220,7 @@ public class NMFConsumer {
         // Starting the directory service consumer from static method.
         // The whole Common area should be registered to avoid errors during the initHelpers
         if (MALContextFactory.lookupArea(CommonHelper.COMMON_AREA_NAME, CommonHelper.COMMON_AREA_VERSION) == null) {
-            CommonHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
+            CommonHelper.deepInit(MALContextFactory.getElementsRegistry());
         }
 
         try {
@@ -269,27 +269,27 @@ public class NMFConsumer {
     public static void initHelpers() {
         // Load the MAL factories for the supported services
         try {
-            MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+            MALHelper.init(MALContextFactory.getElementsRegistry());
 
             if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-                COMHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
+                COMHelper.deepInit(MALContextFactory.getElementsRegistry());
             }
 
             if (MALContextFactory.lookupArea(MCHelper.MC_AREA_NAME, MCHelper.MC_AREA_VERSION) == null) {
-                MCHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
+                MCHelper.deepInit(MALContextFactory.getElementsRegistry());
             }
 
             if (MALContextFactory.lookupArea(CommonHelper.COMMON_AREA_NAME, CommonHelper.COMMON_AREA_VERSION) == null) {
-                CommonHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
+                CommonHelper.deepInit(MALContextFactory.getElementsRegistry());
             }
 
             if (MALContextFactory.lookupArea(SoftwareManagementHelper.SOFTWAREMANAGEMENT_AREA_NAME,
                     SoftwareManagementHelper.SOFTWAREMANAGEMENT_AREA_VERSION) == null) {
-                SoftwareManagementHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
+                SoftwareManagementHelper.deepInit(MALContextFactory.getElementsRegistry());
             }
 
             if (MALContextFactory.lookupArea(PlatformHelper.PLATFORM_AREA_NAME, PlatformHelper.PLATFORM_AREA_VERSION) == null) {
-                PlatformHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
+                PlatformHelper.deepInit(MALContextFactory.getElementsRegistry());
             }
         } catch (MALException ex) {
             Logger.getLogger(NMFConsumer.class.getName()).log(Level.SEVERE, null, ex);

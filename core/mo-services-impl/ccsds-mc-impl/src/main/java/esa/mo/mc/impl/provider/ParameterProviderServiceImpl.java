@@ -123,19 +123,19 @@ public class ParameterProviderServiceImpl extends ParameterInheritanceSkeleton i
     public synchronized void init(ParameterManager parameterManager) throws MALException {
         if (!initialiased) {
             if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-                MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+                MALHelper.init(MALContextFactory.getElementsRegistry());
             }
 
             if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-                COMHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
+                COMHelper.deepInit(MALContextFactory.getElementsRegistry());
             }
 
             if (MALContextFactory.lookupArea(MCHelper.MC_AREA_NAME, MCHelper.MC_AREA_VERSION) == null) {
-                MCHelper.init(MALContextFactory.getElementFactoryRegistry());
+                MCHelper.init(MALContextFactory.getElementsRegistry());
             }
 
             try {
-                ParameterHelper.init(MALContextFactory.getElementFactoryRegistry());
+                ParameterHelper.init(MALContextFactory.getElementsRegistry());
             } catch (MALException ex) {
                 // nothing to be done..
             }

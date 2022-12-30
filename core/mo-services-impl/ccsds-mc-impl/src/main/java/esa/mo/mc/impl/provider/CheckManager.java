@@ -40,6 +40,7 @@ import org.ccsds.moims.mo.com.structures.ObjectDetails;
 import org.ccsds.moims.mo.com.structures.ObjectId;
 import org.ccsds.moims.mo.com.structures.ObjectKey;
 import org.ccsds.moims.mo.com.structures.ObjectType;
+import org.ccsds.moims.mo.mal.MALElementsRegistry;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
@@ -259,7 +260,7 @@ public final class CheckManager extends CheckLinksManager {
                 }
                 //requirement: 3.5.4.c
                 // Store the actual Definition
-                CheckDefinitionDetailsList defs = (CheckDefinitionDetailsList) HelperMisc.element2elementList(checkDef);
+                CheckDefinitionDetailsList defs = (CheckDefinitionDetailsList) MALElementsRegistry.elementToElementList(checkDef);
                 defs.add(checkDef);
                 ObjectType objType = CheckManager.generateCheckObjectType(checkDef); //requirement 3.5.4.c
                 LongList actDefIds = super.getArchiveService().store( //requirement: 3.5.7.b
@@ -300,7 +301,7 @@ public final class CheckManager extends CheckLinksManager {
         } else {  // store new objects in the COM Archive
             try {
                 // Store the actual Definition
-                CheckDefinitionDetailsList defs = (CheckDefinitionDetailsList) HelperMisc.element2elementList(checkDef);
+                CheckDefinitionDetailsList defs = (CheckDefinitionDetailsList) MALElementsRegistry.elementToElementList(checkDef);
                 defs.add(checkDef);
                 ObjectType objType = CheckManager.generateCheckObjectType(checkDef); //requirement 3.5.4.c
                 LongList actDefIds = super.getArchiveService().store(

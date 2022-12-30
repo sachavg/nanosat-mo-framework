@@ -56,13 +56,13 @@ public class PersistLatestServiceConfigurationAdapter implements ConfigurationCh
             final Long serviceConfigObjId, final ArchiveInheritanceSkeleton archiveService,
             final ExecutorService executor) {
         try {
-            ConfigurationHelper.init(MALContextFactory.getElementFactoryRegistry());
+            ConfigurationHelper.init(MALContextFactory.getElementsRegistry());
         } catch (MALException ex) {
             // if it was already initialized, then.. cool bro!
         }
 
         try {
-            DirectoryHelper.init(MALContextFactory.getElementFactoryRegistry());
+            DirectoryHelper.init(MALContextFactory.getElementsRegistry());
         } catch (MALException ex) {
             // if it was already initialized, then.. cool bro!
         }

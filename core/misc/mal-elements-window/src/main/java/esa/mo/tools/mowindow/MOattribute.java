@@ -21,6 +21,8 @@
 package esa.mo.tools.mowindow;
 
 import esa.mo.helpertools.helpers.HelperAttributes;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.ccsds.moims.mo.mal.MALContextFactory;
 import org.ccsds.moims.mo.mal.structures.Attribute;
@@ -36,48 +38,53 @@ public class MOattribute extends MOelement {
 
     public MOattribute(String fieldName, Object obj, boolean editable, boolean objIsNull) {
         super(fieldName, obj, editable, objIsNull);
-        
+
         fieldValue = new javax.swing.JTextField();
         super.middlePanel.add(fieldValue);
 
-        if (objIsNull){
+        if (objIsNull) {
             super.makeFieldNull();
-        }else{
+        } else {
             fieldValue.setText(HelperAttributes.attribute2string(obj));
         }
 
-        if (!editable){
+        if (!editable) {
             this.fieldValue.setEnabled(false);
         }
     }
-    
-    @Override
-    public Object getObject(){
 
-        if (super.object == null && super.fieldSelectableAttribute.isEnabled()){  // Unknown attribute
+    @Override
+    public Object getObject() {
+        if (super.object == null && super.fieldSelectableAttribute.isEnabled()) {  // Unknown attribute
             long index = (long) super.fieldSelectableAttribute.getSelectedIndex();
-            if (index == 0){
+            if (index == 0) {
                 index = Attribute.STRING_TYPE_SHORT_FORM;  // If nothing was selected, then just consider it as a String
             }
-            
+
             Long shortForm = Attribute.ABSOLUTE_AREA_SERVICE_NUMBER + index;
-            super.object = (Element) MALContextFactory.getElementFactoryRegistry().lookupElementFactory(shortForm).createElement();
+            try {
+                super.object = (Element) MALContextFactory.getElementsRegistry().createElement(shortForm);
+            } catch (Exception ex) {
+                Logger.getLogger(MOattribute.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
+
         try {
             Object out = HelperAttributes.string2attribute(super.object, fieldValue.getText());
-            
-            if (nullCB.isSelected()){
+
+            if (nullCB.isSelected()) {
                 out = null;
             }
-            
-            return out;
 
+            return out;
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null,"The field value: '" + fieldValue.getText() + "' could not be converted into " + super.object.getClass().getSimpleName() , "NumberFormatException",JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "The field value: '"
+                    + fieldValue.getText() + "' could not be converted into "
+                    + super.object.getClass().getSimpleName(),
+                    "NumberFormatException", JOptionPane.ERROR_MESSAGE);
         }
-        
+
         return null;
     }
-    
+
 }

@@ -71,19 +71,19 @@ public class HeartbeatConsumerServiceImpl extends ConsumerServiceImpl {
     public HeartbeatConsumerServiceImpl(SingleConnectionDetails connectionDetails, COMServicesConsumer comServices) throws MALException, MalformedURLException, MALInteractionException {
 
         if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-            MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+            MALHelper.init(MALContextFactory.getElementsRegistry());
         }
 
         if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-            COMHelper.init(MALContextFactory.getElementFactoryRegistry());
+            COMHelper.init(MALContextFactory.getElementsRegistry());
         }
 
         if (MALContextFactory.lookupArea(SoftwareManagementHelper.SOFTWAREMANAGEMENT_AREA_NAME, SoftwareManagementHelper.SOFTWAREMANAGEMENT_AREA_VERSION) == null) {
-            SoftwareManagementHelper.init(MALContextFactory.getElementFactoryRegistry());
+            SoftwareManagementHelper.init(MALContextFactory.getElementsRegistry());
         }
 
         try {
-            HeartbeatHelper.init(MALContextFactory.getElementFactoryRegistry());
+            HeartbeatHelper.init(MALContextFactory.getElementsRegistry());
         } catch (MALException ex) {
             // nothing to be done..
         }

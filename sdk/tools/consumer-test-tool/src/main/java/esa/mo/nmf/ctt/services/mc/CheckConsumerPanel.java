@@ -22,7 +22,6 @@ package esa.mo.nmf.ctt.services.mc;
 
 import esa.mo.com.impl.provider.ArchivePersistenceObject;
 import esa.mo.com.impl.util.HelperArchive;
-import esa.mo.helpertools.helpers.HelperMisc;
 import esa.mo.mc.impl.consumer.CheckConsumerServiceImpl;
 import esa.mo.tools.mowindow.MOWindow;
 import java.io.InterruptedIOException;
@@ -36,9 +35,11 @@ import org.ccsds.moims.mo.com.structures.ObjectDetailsList;
 import org.ccsds.moims.mo.com.structures.ObjectId;
 import org.ccsds.moims.mo.com.structures.ObjectKey;
 import org.ccsds.moims.mo.com.structures.ObjectType;
+import org.ccsds.moims.mo.mal.MALElementsRegistry;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.structures.Duration;
+import org.ccsds.moims.mo.mal.structures.Element;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
@@ -386,7 +387,7 @@ public class CheckConsumerPanel extends javax.swing.JPanel {
         CheckDefinitionDetailsList checkDefinitionList;
 
         try {
-            checkDefinitionList = (CheckDefinitionDetailsList) HelperMisc.element2elementList(checkDefinition);
+            checkDefinitionList = (CheckDefinitionDetailsList) MALElementsRegistry.elementToElementList(checkDefinition);
             checkDefinitionList.add((CheckDefinitionDetails) checkDefinitionWindow.getObject());
             StringList checkNames = new StringList();
             checkNames.add("AcheckDefinition");
@@ -438,7 +439,7 @@ public class CheckConsumerPanel extends javax.swing.JPanel {
         CheckDefinitionDetailsList checkDefinitionList;
 
         try {
-            checkDefinitionList = (CheckDefinitionDetailsList) HelperMisc.element2elementList(moObject.getObject());
+            checkDefinitionList = (CheckDefinitionDetailsList) MALElementsRegistry.elementToElementList((Element) moObject.getObject());
             checkDefinitionList.add((CheckDefinitionDetails) moObject.getObject());
             this.serviceMCCheck.getCheckStub().updateDefinition(objIds, checkDefinitionList);
             this.listDefinitionAllButtonActionPerformed(null);

@@ -88,25 +88,25 @@ public class ActionProviderServiceImpl extends ActionInheritanceSkeleton impleme
         if (!initialiased) {
 
             if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-                MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+                MALHelper.init(MALContextFactory.getElementsRegistry());
             }
 
             if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-                COMHelper.init(MALContextFactory.getElementFactoryRegistry());
+                COMHelper.init(MALContextFactory.getElementsRegistry());
             }
 
             if (MALContextFactory.lookupArea(MCHelper.MC_AREA_NAME, MCHelper.MC_AREA_VERSION) == null) {
-                MCHelper.init(MALContextFactory.getElementFactoryRegistry());
+                MCHelper.init(MALContextFactory.getElementsRegistry());
             }
 
             try {
-                ConfigurationHelper.init(MALContextFactory.getElementFactoryRegistry());
+                ConfigurationHelper.init(MALContextFactory.getElementsRegistry());
             } catch (MALException ex) {
                 // nothing to be done..
             }
 
             try {
-                ActionHelper.init(MALContextFactory.getElementFactoryRegistry());
+                ActionHelper.init(MALContextFactory.getElementsRegistry());
             } catch (MALException ex) {
                 // nothing to be done..
             }

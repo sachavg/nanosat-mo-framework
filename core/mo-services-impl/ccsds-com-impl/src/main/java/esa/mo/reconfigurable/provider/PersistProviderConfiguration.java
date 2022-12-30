@@ -65,7 +65,7 @@ public class PersistProviderConfiguration {
     public PersistProviderConfiguration(final ReconfigurableProvider provider,
             final ObjectId confId, final ArchiveInheritanceSkeleton archiveService) {
         try {
-            ConfigurationHelper.init(MALContextFactory.getElementFactoryRegistry());
+            ConfigurationHelper.init(MALContextFactory.getElementsRegistry());
         } catch (MALException ex) {
             // if it was already initialized, then.. cool bro!
         }

@@ -79,13 +79,13 @@ public class ConfigurationProviderServiceImpl extends ConfigurationInheritanceSk
     private MALProvider configurationServiceProvider;
     private boolean initialiased = false;
     private boolean running = false;
-    private final HashMap<ObjectId, Element> configs = new HashMap<ObjectId, Element>();
+    private final HashMap<ObjectId, Element> configs = new HashMap<>();
     private final ConnectionProvider connection = new ConnectionProvider();
     private final Random random = new Random();
     private COMServicesProvider comServices;
-    private final HashMap<ObjectId, ConfigurationObjectDetails> serviceConfigurations = new HashMap<ObjectId, ConfigurationObjectDetails>();
-    private final HashMap<ObjectId, ConfigurationObjectDetails> providerConfigurations = new HashMap<ObjectId, ConfigurationObjectDetails>();
-    private final HashMap<ObjectId, ConfigurationObjectDetails> compositeConfigurations = new HashMap<ObjectId, ConfigurationObjectDetails>();
+    private final HashMap<ObjectId, ConfigurationObjectDetails> serviceConfigurations = new HashMap<>();
+    private final HashMap<ObjectId, ConfigurationObjectDetails> providerConfigurations = new HashMap<>();
+    private final HashMap<ObjectId, ConfigurationObjectDetails> compositeConfigurations = new HashMap<>();
 
     /**
      * creates the MAL objects, the publisher used to create updates and starts
@@ -97,19 +97,19 @@ public class ConfigurationProviderServiceImpl extends ConfigurationInheritanceSk
     public synchronized void init(COMServicesProvider comServices) throws MALException {
         if (!initialiased) {
             if (MALContextFactory.lookupArea(MALHelper.MAL_AREA_NAME, MALHelper.MAL_AREA_VERSION) == null) {
-                MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+                MALHelper.init(MALContextFactory.getElementsRegistry());
             }
 
             if (MALContextFactory.lookupArea(COMHelper.COM_AREA_NAME, COMHelper.COM_AREA_VERSION) == null) {
-                COMHelper.deepInit(MALContextFactory.getElementFactoryRegistry());
+                COMHelper.deepInit(MALContextFactory.getElementsRegistry());
             }
 
             if (MALContextFactory.lookupArea(CommonHelper.COMMON_AREA_NAME, CommonHelper.COMMON_AREA_VERSION) == null) {
-                CommonHelper.init(MALContextFactory.getElementFactoryRegistry());
+                CommonHelper.init(MALContextFactory.getElementsRegistry());
             }
 
             try {
-                ConfigurationHelper.init(MALContextFactory.getElementFactoryRegistry());
+                ConfigurationHelper.init(MALContextFactory.getElementsRegistry());
             } catch (MALException ex) {
                 // nothing to be done..
             }

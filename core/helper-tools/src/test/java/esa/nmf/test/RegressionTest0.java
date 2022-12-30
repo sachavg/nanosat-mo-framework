@@ -22,7 +22,7 @@ public class RegressionTest0 {
     public void setup() {
       System.getProperties().clear();
       try {
-        MALHelper.init(MALContextFactory.getElementFactoryRegistry());
+        MALHelper.init(MALContextFactory.getElementsRegistry());
       } catch (MALException ex) {
         Logger.getLogger(TestHelperMisc.class.getName()).log(Level.SEVERE, null, ex);
       }

@@ -39,6 +39,7 @@ import org.ccsds.moims.mo.com.structures.ObjectKey;
 import org.ccsds.moims.mo.com.structures.ObjectType;
 import org.ccsds.moims.mo.mal.MALContextFactory;
 import org.ccsds.moims.mo.mal.MALElementFactory;
+import org.ccsds.moims.mo.mal.MALElementsRegistry;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.structures.Blob;
 import org.ccsds.moims.mo.mal.structures.Element;
@@ -157,8 +158,9 @@ public class EncodeDecode {
                 if (blob != null) {
                     try {
                         final BinaryDecoder binDec = new BinaryDecoder(blob.getValue());
-                        final MALElementFactory eleFact = MALContextFactory.getElementFactoryRegistry().lookupElementFactory(binDec.decodeLong());
-                        elem = binDec.decodeNullableElement((Element) eleFact.createElement());
+                        final Long sfp = binDec.decodeLong();
+                        Element newEle = MALContextFactory.getElementsRegistry().createElement(sfp);
+                        elem = binDec.decodeNullableElement((Element) newEle);
                     } catch (MALException ex) {
                         Logger.getLogger(COMObjectEntity.class.getName()).log(Level.SEVERE,
                                 "The object body could not be decoded! Usually happens when there's "
