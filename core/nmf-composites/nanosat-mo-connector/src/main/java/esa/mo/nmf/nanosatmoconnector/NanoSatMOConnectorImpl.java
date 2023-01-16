@@ -48,7 +48,7 @@ import org.ccsds.moims.mo.com.COMService;
 import org.ccsds.moims.mo.com.event.EventHelper;
 import org.ccsds.moims.mo.com.structures.ObjectId;
 import org.ccsds.moims.mo.com.structures.ObjectKey;
-import org.ccsds.moims.mo.common.configuration.ConfigurationHelper;
+import org.ccsds.moims.mo.common.configuration.ConfigurationServiceInfo;
 import org.ccsds.moims.mo.common.directory.body.PublishProviderResponse;
 import org.ccsds.moims.mo.common.directory.structures.AddressDetailsList;
 import org.ccsds.moims.mo.common.directory.structures.ProviderDetails;
@@ -70,7 +70,7 @@ import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.UShort;
 import org.ccsds.moims.mo.mal.structures.UShortList;
 import org.ccsds.moims.mo.platform.PlatformHelper;
-import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherHelper;
+import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherServiceInfo;
 
 /**
  * The implementation of the NanoSat MO Connector.
@@ -169,8 +169,8 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
                 IdentifierList domain = new IdentifierList();
                 domain.add(new Identifier("*"));
                 COMService eventCOM = EventHelper.EVENT_SERVICE; // Filter for the Event service of the Supervisor
-                final ServiceKey serviceKey = new ServiceKey(eventCOM.getArea().getNumber(),
-                        eventCOM.getNumber(), eventCOM.getArea().getVersion());
+                final ServiceKey serviceKey = new ServiceKey(eventCOM.getAreaNumber(),
+                        eventCOM.getServiceNumber(), eventCOM.getServiceVersion());
                 final ServiceFilter sf = new ServiceFilter(
                         new Identifier(Const.NANOSAT_MO_SUPERVISOR_NAME),
                         domain, new Identifier("*"), null, new Identifier("*"),
@@ -195,7 +195,7 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
                     // Select all object numbers from the Apps Launcher service Events
                     subscription = HelperCOM.generateSubscriptionCOMEvent(
                             "CloseAppEventListener",
-                            AppsLauncherHelper.APP_OBJECT_TYPE);
+                            AppsLauncherServiceInfo.APP_OBJECT_TYPE);
 
                     /* Previous code */
                     /*
@@ -299,7 +299,7 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
                     "Loading previous configurations...");
 
             // Activate the previous configuration
-            final ObjectId confId = new ObjectId(ConfigurationHelper.PROVIDERCONFIGURATION_OBJECT_TYPE,
+            final ObjectId confId = new ObjectId(ConfigurationServiceInfo.PROVIDERCONFIGURATION_OBJECT_TYPE,
                     new ObjectKey(ConfigurationProviderSingleton.getDomain(), DEFAULT_PROVIDER_CONFIGURATION_OBJID));
 
             super.providerConfiguration = new PersistProviderConfiguration(this, confId, comServices.getArchiveService());
@@ -396,7 +396,7 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
 
             // Acknowledge the reception of the request to close (Closing...)
             Long eventId = this.getCOMServices().getEventService().generateAndStoreEvent(
-                    AppsLauncherHelper.STOPPING_OBJECT_TYPE,
+                    AppsLauncherServiceInfo.STOPPING_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(),
                     null,
                     null,
@@ -410,7 +410,7 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
 
             try {
                 this.getCOMServices().getEventService().publishEvent(uri, eventId,
-                        AppsLauncherHelper.STOPPING_OBJECT_TYPE, null, source, null);
+                        AppsLauncherServiceInfo.STOPPING_OBJECT_TYPE, null, source, null);
             } catch (IOException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
             }
@@ -444,7 +444,7 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
             }
 
             Long eventId2 = this.getCOMServices().getEventService().generateAndStoreEvent(
-                    AppsLauncherHelper.STOPPED_OBJECT_TYPE,
+                    AppsLauncherServiceInfo.STOPPED_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(),
                     null,
                     null,
@@ -453,7 +453,7 @@ public class NanoSatMOConnectorImpl extends NMFProvider {
 
             try {
                 this.getCOMServices().getEventService().publishEvent(uri, eventId2,
-                        AppsLauncherHelper.STOPPED_OBJECT_TYPE, null, source, null);
+                        AppsLauncherServiceInfo.STOPPED_OBJECT_TYPE, null, source, null);
             } catch (IOException ex) {
                 LOGGER.log(Level.SEVERE, null, ex);
             }

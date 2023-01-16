@@ -53,6 +53,7 @@ import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.platform.PlatformHelper;
 import org.ccsds.moims.mo.platform.camera.CameraHelper;
+import org.ccsds.moims.mo.platform.camera.CameraServiceInfo;
 import org.ccsds.moims.mo.platform.camera.body.GetPropertiesResponse;
 import org.ccsds.moims.mo.platform.camera.provider.CameraInheritanceSkeleton;
 import org.ccsds.moims.mo.platform.camera.provider.PicturesStreamPublisher;
@@ -133,7 +134,7 @@ public class CameraProviderServiceImpl extends CameraInheritanceSkeleton
 
     this.adapter = adapter;
     minimumPeriod = this.adapter.getMinimumPeriod();
-    cameraServiceProvider = connection.startService(CameraHelper.CAMERA_SERVICE_NAME.toString(),
+    cameraServiceProvider = connection.startService(CameraServiceInfo.CAMERA_SERVICE_NAME.toString(),
         CameraHelper.CAMERA_SERVICE, this);
 
     availableFormats = adapter.getAvailableFormats();

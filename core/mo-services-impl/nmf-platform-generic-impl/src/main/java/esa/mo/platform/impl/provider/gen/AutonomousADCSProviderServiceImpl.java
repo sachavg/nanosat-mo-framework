@@ -56,6 +56,7 @@ import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.platform.PlatformHelper;
 import org.ccsds.moims.mo.platform.autonomousadcs.AutonomousADCSHelper;
+import org.ccsds.moims.mo.platform.autonomousadcs.AutonomousADCSServiceInfo;
 import org.ccsds.moims.mo.platform.autonomousadcs.body.GetStatusResponse;
 import org.ccsds.moims.mo.platform.autonomousadcs.provider.AutonomousADCSInheritanceSkeleton;
 import org.ccsds.moims.mo.platform.autonomousadcs.provider.MonitorAttitudePublisher;
@@ -138,7 +139,7 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
 
     this.adapter = adapter;
     autonomousADCSServiceProvider = connection.startService(
-        AutonomousADCSHelper.AUTONOMOUSADCS_SERVICE_NAME.toString(),
+        AutonomousADCSServiceInfo.AUTONOMOUSADCS_SERVICE_NAME.toString(),
         AutonomousADCSHelper.AUTONOMOUSADCS_SERVICE, true, this);
 
     initialiased = true;

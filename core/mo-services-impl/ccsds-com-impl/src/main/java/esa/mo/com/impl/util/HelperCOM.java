@@ -308,9 +308,9 @@ public class HelperCOM {
             return null;
         }
 
-        return new ObjectType(service.getArea().getNumber(),
-                service.getNumber(),
-                service.getArea().getVersion(),
+        return new ObjectType(service.getAreaNumber(),
+                service.getServiceNumber(),
+                service.getServiceVersion(),
                 objNumber);
     }
 

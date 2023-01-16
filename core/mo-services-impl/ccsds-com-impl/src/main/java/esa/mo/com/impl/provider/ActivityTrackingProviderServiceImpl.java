@@ -31,6 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.com.COMHelper;
 import org.ccsds.moims.mo.com.activitytracking.ActivityTrackingHelper;
+import org.ccsds.moims.mo.com.activitytracking.ActivityTrackingServiceInfo;
 import org.ccsds.moims.mo.com.activitytracking.structures.ActivityAcceptance;
 import org.ccsds.moims.mo.com.activitytracking.structures.ActivityAcceptanceList;
 import org.ccsds.moims.mo.com.activitytracking.structures.ActivityExecution;
@@ -123,19 +124,19 @@ public class ActivityTrackingProviderServiceImpl {
 
     public void publishReleaseEvent(MALInteraction interaction, boolean success, Duration nextDuration,
             URI nextDestination, ObjectId source) throws MALInteractionException, MALException {
-        this.publishTransferEventOperation(interaction, ActivityTrackingHelper.RELEASE_OBJECT_TYPE,
+        this.publishTransferEventOperation(interaction, ActivityTrackingServiceInfo.RELEASE_OBJECT_TYPE,
                 success, nextDuration, nextDestination, source);
     }
 
     public void publishReceptionEvent(MALInteraction interaction, boolean success, Duration nextDuration,
             URI nextDestination, ObjectId source) throws MALInteractionException, MALException {
-        this.publishTransferEventOperation(interaction, ActivityTrackingHelper.RECEPTION_OBJECT_TYPE,
+        this.publishTransferEventOperation(interaction, ActivityTrackingServiceInfo.RECEPTION_OBJECT_TYPE,
                 success, nextDuration, nextDestination, source);
     }
 
     public void publishForwardEvent(MALInteraction interaction, boolean success, Duration nextDuration,
             URI nextDestination, ObjectId source) throws MALInteractionException, MALException {
-        this.publishTransferEventOperation(interaction, ActivityTrackingHelper.FORWARD_OBJECT_TYPE,
+        this.publishTransferEventOperation(interaction, ActivityTrackingServiceInfo.FORWARD_OBJECT_TYPE,
                 success, nextDuration, nextDestination, source);
     }
 //------------------------------------------------------------------------------
@@ -165,17 +166,17 @@ public class ActivityTrackingProviderServiceImpl {
 
     public void publishReleaseEvent(final URI uri, final Identifier network, boolean success, Duration nextDuration,
             URI nextDestination, ObjectId source) throws MALInteractionException, MALException {
-        this.publishTransferEventOperation(uri, network, ActivityTrackingHelper.RELEASE_OBJECT_TYPE, success, nextDuration, nextDestination, source);
+        this.publishTransferEventOperation(uri, network, ActivityTrackingServiceInfo.RELEASE_OBJECT_TYPE, success, nextDuration, nextDestination, source);
     }
 
     public void publishReceptionEvent(final URI uri, final Identifier network, boolean success, Duration nextDuration,
             URI nextDestination, ObjectId source) throws MALInteractionException, MALException {
-        this.publishTransferEventOperation(uri, network, ActivityTrackingHelper.RECEPTION_OBJECT_TYPE, success, nextDuration, nextDestination, source);
+        this.publishTransferEventOperation(uri, network, ActivityTrackingServiceInfo.RECEPTION_OBJECT_TYPE, success, nextDuration, nextDestination, source);
     }
 
     public void publishForwardEvent(final URI uri, final Identifier network, boolean success, Duration nextDuration,
             URI nextDestination, ObjectId source) throws MALInteractionException, MALException {
-        this.publishTransferEventOperation(uri, network, ActivityTrackingHelper.FORWARD_OBJECT_TYPE, success, nextDuration, nextDestination, source);
+        this.publishTransferEventOperation(uri, network, ActivityTrackingServiceInfo.FORWARD_OBJECT_TYPE, success, nextDuration, nextDestination, source);
     }
 
 //------------------------------------------------------------------------------
@@ -206,23 +207,23 @@ public class ActivityTrackingProviderServiceImpl {
         URI sourceURI = uri;
 
         if (interaction != null) {
-            objId = eventService.generateAndStoreEvent(ActivityTrackingHelper.EXECUTION_OBJECT_TYPE,
+            objId = eventService.generateAndStoreEvent(ActivityTrackingServiceInfo.EXECUTION_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(), ael, related, source, interaction);
             sourceURI = (interaction.getMessageHeader() != null) ? interaction.getMessageHeader().getURITo() : new URI("");
         } else {
-            objId = eventService.generateAndStoreEvent(ActivityTrackingHelper.EXECUTION_OBJECT_TYPE,
+            objId = eventService.generateAndStoreEvent(ActivityTrackingServiceInfo.EXECUTION_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(), ael, related, source, uri, network);
         }
 
         final ObjectKey key = new ObjectKey(ConfigurationProviderSingleton.getDomain(), objId);
 
         try {
-            eventService.publishEvent(sourceURI, objId, ActivityTrackingHelper.EXECUTION_OBJECT_TYPE, related, source, ael);
+            eventService.publishEvent(sourceURI, objId, ActivityTrackingServiceInfo.EXECUTION_OBJECT_TYPE, related, source, ael);
         } catch (IOException ex) {
             Logger.getLogger(ActivityTrackingProviderServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        return new ObjectId(ActivityTrackingHelper.EXECUTION_OBJECT_TYPE, key);
+        return new ObjectId(ActivityTrackingServiceInfo.EXECUTION_OBJECT_TYPE, key);
     }
 
     public Long publishTransferEventOperation(MALInteraction interaction,
@@ -285,16 +286,16 @@ public class ActivityTrackingProviderServiceImpl {
         URI sourceURI = uri;
 
         if (interaction != null) {
-            objId = eventService.generateAndStoreEvent(ActivityTrackingHelper.ACCEPTANCE_OBJECT_TYPE,
+            objId = eventService.generateAndStoreEvent(ActivityTrackingServiceInfo.ACCEPTANCE_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(), aal, related, source, interaction);
             sourceURI = (interaction.getMessageHeader() != null) ? interaction.getMessageHeader().getURITo() : new URI("");
         } else {
-            objId = eventService.generateAndStoreEvent(ActivityTrackingHelper.ACCEPTANCE_OBJECT_TYPE,
+            objId = eventService.generateAndStoreEvent(ActivityTrackingServiceInfo.ACCEPTANCE_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(), aal, related, source, uri, network);
         }
 
         try {
-            eventService.publishEvent(sourceURI, objId, ActivityTrackingHelper.ACCEPTANCE_OBJECT_TYPE, null, source, aal);
+            eventService.publishEvent(sourceURI, objId, ActivityTrackingServiceInfo.ACCEPTANCE_OBJECT_TYPE, null, source, aal);
         } catch (IOException ex) {
             Logger.getLogger(ActivityTrackingProviderServiceImpl.class.getName()).log(Level.SEVERE, null, "Could not publish the Event!");
         }
@@ -332,7 +333,7 @@ public class ActivityTrackingProviderServiceImpl {
                 try {
                     archiveService.store(
                             false,
-                            ActivityTrackingHelper.OPERATIONACTIVITY_OBJECT_TYPE,
+                            ActivityTrackingServiceInfo.OPERATIONACTIVITY_OBJECT_TYPE,
                             interaction.getMessageHeader().getDomain(),
                             archiveDetails,
                             opActivityList,
@@ -351,7 +352,7 @@ public class ActivityTrackingProviderServiceImpl {
         });
 
         final ObjectKey key = new ObjectKey(interaction.getMessageHeader().getDomain(), objId);
-        return new ObjectId(ActivityTrackingHelper.OPERATIONACTIVITY_OBJECT_TYPE, key);
+        return new ObjectId(ActivityTrackingServiceInfo.OPERATIONACTIVITY_OBJECT_TYPE, key);
     }
 
     /**

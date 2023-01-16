@@ -45,7 +45,7 @@ import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.Union;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
-import org.ccsds.moims.mo.mc.parameter.ParameterHelper;
+import org.ccsds.moims.mo.mc.parameter.ParameterServiceInfo;
 import org.ccsds.moims.mo.mc.parameter.consumer.ParameterAdapter;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterCreationRequest;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterCreationRequestList;
@@ -277,7 +277,7 @@ public class ParameterConsumerPanel extends javax.swing.JPanel {
             // Get the stored Parameter Definition from the Archive
             ArchivePersistenceObject comObject = HelperArchive.getArchiveCOMObject(
                     this.serviceMCParameter.getCOMServices().getArchiveService().getArchiveStub(),
-                    ParameterHelper.PARAMETERDEFINITION_OBJECT_TYPE, 
+                    ParameterServiceInfo.PARAMETERDEFINITION_OBJECT_TYPE, 
                     serviceMCParameter.getConnectionDetails().getDomain(), 
                     objIds.get(0).getObjDefInstanceId());
 
@@ -289,7 +289,7 @@ public class ParameterConsumerPanel extends javax.swing.JPanel {
                 // Get the stored Parameter Definition from the Archive
                 comObject = HelperArchive.getArchiveCOMObject(
                         this.serviceMCParameter.getCOMServices().getArchiveService().getArchiveStub(),
-                    ParameterHelper.PARAMETERDEFINITION_OBJECT_TYPE, 
+                    ParameterServiceInfo.PARAMETERDEFINITION_OBJECT_TYPE, 
                     serviceMCParameter.getConnectionDetails().getDomain(), 
                     objIds.get(0).getObjDefInstanceId());
             }
@@ -380,7 +380,7 @@ public class ParameterConsumerPanel extends javax.swing.JPanel {
             this.serviceMCParameter.getParameterStub().asyncListDefinition(idList, new ParameterAdapter() {
                 @Override
                 public void listDefinitionResponseReceived(MALMessageHeader msgHeader, ObjectInstancePairList objInstIds, Map qosProperties) {
-                    parameterTable.refreshTableWithIds(objInstIds, serviceMCParameter.getConnectionDetails().getDomain(), ParameterHelper.PARAMETERDEFINITION_OBJECT_TYPE);
+                    parameterTable.refreshTableWithIds(objInstIds, serviceMCParameter.getConnectionDetails().getDomain(), ParameterServiceInfo.PARAMETERDEFINITION_OBJECT_TYPE);
                     Logger.getLogger(ParameterConsumerPanel.class.getName()).log(Level.INFO, "listDefinition(\"*\") returned {0} object instance identifiers", objInstIds.size());
                 }
 

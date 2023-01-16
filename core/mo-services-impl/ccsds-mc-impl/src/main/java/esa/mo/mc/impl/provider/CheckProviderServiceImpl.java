@@ -60,6 +60,7 @@ import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.mal.structures.UIntegerList;
 import org.ccsds.moims.mo.mc.MCHelper;
 import org.ccsds.moims.mo.mc.check.CheckHelper;
+import org.ccsds.moims.mo.mc.check.CheckServiceInfo;
 import org.ccsds.moims.mo.mc.check.provider.CheckInheritanceSkeleton;
 import org.ccsds.moims.mo.mc.check.provider.GetCurrentTransitionListInteraction;
 import org.ccsds.moims.mo.mc.check.provider.GetSummaryReportInteraction;
@@ -75,7 +76,7 @@ import org.ccsds.moims.mo.mc.check.structures.CheckResultSummaryList;
 import org.ccsds.moims.mo.mc.check.structures.CheckTypedInstance;
 import org.ccsds.moims.mo.mc.check.structures.CheckTypedInstanceList;
 import org.ccsds.moims.mo.mc.check.structures.CompoundCheckDefinition;
-import org.ccsds.moims.mo.mc.parameter.ParameterHelper;
+import org.ccsds.moims.mo.mc.parameter.ParameterServiceInfo;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterValue;
 import org.ccsds.moims.mo.mc.structures.ObjectInstancePair;
 import org.ccsds.moims.mo.mc.structures.ObjectInstancePairList;
@@ -136,7 +137,7 @@ public class CheckProviderServiceImpl extends CheckInheritanceSkeleton {
             connection.close();
         }
 
-        checkServiceProvider = connection.startService(CheckHelper.CHECK_SERVICE_NAME.toString(), CheckHelper.CHECK_SERVICE, this);
+        checkServiceProvider = connection.startService(CheckServiceInfo.CHECK_SERVICE_NAME.toString(), CheckHelper.CHECK_SERVICE, this);
 
         running = true;
         this.parameterManager = parameterManager;
@@ -234,7 +235,7 @@ public class CheckProviderServiceImpl extends CheckInheritanceSkeleton {
                 //get the group instances
                 // requirement: 3.5.8.2.j, k, l
                 groupRetrievalInformation = manager.getGroupInstancesForServiceOperation(filter.getCheckFilter(),
-                        groupRetrievalInformation, CheckHelper.CHECKIDENTITY_OBJECT_TYPE,
+                        groupRetrievalInformation, CheckServiceInfo.CHECKIDENTITY_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(), manager.listAllIdentities());
 
                 //fill the existing lists with the generated lists
@@ -262,7 +263,7 @@ public class CheckProviderServiceImpl extends CheckInheritanceSkeleton {
                 //get the group instances
                 // requirement: 3.5.8.2.j, k, m
                 groupRetrievalInformation = manager.getGroupInstancesForServiceOperation(filter.getParameterFilter(),
-                        groupRetrievalInformation, ParameterHelper.PARAMETERIDENTITY_OBJECT_TYPE,
+                        groupRetrievalInformation, ParameterServiceInfo.PARAMETERIDENTITY_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(), parameterManager.listAllIdentities());
 
                 //fill the existing lists with the generated lists
@@ -430,7 +431,7 @@ public class CheckProviderServiceImpl extends CheckInheritanceSkeleton {
                         invIndexList, objIdToBeEnabled, valueToBeEnabled);
                 //get the group instances
                 groupRetrievalInformation = manager.getGroupInstancesForServiceOperation(enableInstances,
-                        groupRetrievalInformation, CheckHelper.CHECKLINK_OBJECT_TYPE,
+                        groupRetrievalInformation, CheckServiceInfo.CHECKLINK_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(), manager.listAllCheckLinkIds());
 
                 //fill the existing lists with the generated lists

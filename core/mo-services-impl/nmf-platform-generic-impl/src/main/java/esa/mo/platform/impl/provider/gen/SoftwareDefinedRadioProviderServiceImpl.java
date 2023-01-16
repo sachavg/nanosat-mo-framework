@@ -21,7 +21,6 @@
 package esa.mo.platform.impl.provider.gen;
 
 import esa.mo.helpertools.connections.ConfigurationProviderSingleton;
-import esa.mo.helpertools.helpers.HelperTime;
 import esa.mo.helpertools.connections.ConnectionProvider;
 import java.util.Map;
 import java.util.Timer;
@@ -35,7 +34,6 @@ import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALHelper;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.MALStandardError;
-import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
@@ -53,6 +51,7 @@ import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.platform.PlatformHelper;
 import org.ccsds.moims.mo.platform.softwaredefinedradio.SoftwareDefinedRadioHelper;
+import org.ccsds.moims.mo.platform.softwaredefinedradio.SoftwareDefinedRadioServiceInfo;
 import org.ccsds.moims.mo.platform.softwaredefinedradio.provider.SoftwareDefinedRadioInheritanceSkeleton;
 import org.ccsds.moims.mo.platform.softwaredefinedradio.provider.StreamRadioPublisher;
 import org.ccsds.moims.mo.platform.softwaredefinedradio.structures.IQComponents;
@@ -121,7 +120,7 @@ public class SoftwareDefinedRadioProviderServiceImpl extends SoftwareDefinedRadi
 
     this.adapter = adapter;
     softwareDefinedRadioServiceProvider = connection.startService(
-        SoftwareDefinedRadioHelper.SOFTWAREDEFINEDRADIO_SERVICE_NAME.toString(),
+        SoftwareDefinedRadioServiceInfo.SOFTWAREDEFINEDRADIO_SERVICE_NAME.toString(),
         SoftwareDefinedRadioHelper.SOFTWAREDEFINEDRADIO_SERVICE, this);
 
     running = true;

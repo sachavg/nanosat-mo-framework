@@ -45,7 +45,7 @@ import org.ccsds.moims.mo.mal.structures.Subscription;
 import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
-import org.ccsds.moims.mo.mc.aggregation.AggregationHelper;
+import org.ccsds.moims.mo.mc.aggregation.AggregationServiceInfo;
 import org.ccsds.moims.mo.mc.aggregation.consumer.AggregationAdapter;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationCreationRequest;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationCreationRequestList;
@@ -367,7 +367,7 @@ public class AggregationConsumerPanel extends javax.swing.JPanel {
             // Get the stored Parameter Definition from the Archive
             ArchivePersistenceObject comObject = HelperArchive.getArchiveCOMObject(
                     this.serviceMCAggregation.getCOMServices().getArchiveService().getArchiveStub(),
-                    AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE,
+                    AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE,
                     serviceMCAggregation.getConnectionDetails().getDomain(),
                     objIds.get(0).getObjDefInstanceId());
 
@@ -453,7 +453,7 @@ public class AggregationConsumerPanel extends javax.swing.JPanel {
             this.serviceMCAggregation.getAggregationStub().asyncListDefinition(idList, new AggregationAdapter() {
                 @Override
                 public void listDefinitionResponseReceived(MALMessageHeader msgHeader, ObjectInstancePairList objInstIds, Map qosProperties) {
-                    aggregationTable.refreshTableWithIds(objInstIds, serviceMCAggregation.getConnectionDetails().getDomain(), AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE);
+                    aggregationTable.refreshTableWithIds(objInstIds, serviceMCAggregation.getConnectionDetails().getDomain(), AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE);
                     Logger.getLogger(AggregationConsumerPanel.class.getName()).log(Level.INFO, "listDefinition(\"*\") returned {0} object instance identifiers", objInstIds.size());
                 }
 

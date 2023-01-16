@@ -40,7 +40,7 @@ import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mal.structures.UShort;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
-import org.ccsds.moims.mo.mc.action.ActionHelper;
+import org.ccsds.moims.mo.mc.action.ActionServiceInfo;
 import org.ccsds.moims.mo.mc.action.consumer.ActionAdapter;
 import org.ccsds.moims.mo.mc.action.structures.ActionCreationRequest;
 import org.ccsds.moims.mo.mc.action.structures.ActionCreationRequestList;
@@ -371,7 +371,7 @@ public class ActionConsumerPanel extends javax.swing.JPanel {
             Thread.sleep(500);
             // Get the stored Action Definition from the Archive
             ArchivePersistenceObject comObject = HelperArchive.getArchiveCOMObject(this.serviceMCAction.getCOMServices().getArchiveService().getArchiveStub(),
-                    ActionHelper.ACTIONDEFINITION_OBJECT_TYPE, serviceMCAction.getConnectionDetails().getDomain(), objIds.get(0).getObjDefInstanceId());
+                    ActionServiceInfo.ACTIONDEFINITION_OBJECT_TYPE, serviceMCAction.getConnectionDetails().getDomain(), objIds.get(0).getObjDefInstanceId());
 
             // Add the Action Definition to the table
             actionTable.addEntry(requestList.get(0).getName(), comObject);
@@ -459,7 +459,7 @@ public class ActionConsumerPanel extends javax.swing.JPanel {
             this.serviceMCAction.getActionStub().asyncListDefinition(idList, new ActionAdapter() {
                 @Override
                 public void listDefinitionResponseReceived(MALMessageHeader msgHeader, ObjectInstancePairList actionInstIds, Map qosProperties) {
-                    actionTable.refreshTableWithIds(actionInstIds, serviceMCAction.getConnectionDetails().getDomain(), ActionHelper.ACTIONDEFINITION_OBJECT_TYPE);
+                    actionTable.refreshTableWithIds(actionInstIds, serviceMCAction.getConnectionDetails().getDomain(), ActionServiceInfo.ACTIONDEFINITION_OBJECT_TYPE);
                     Logger.getLogger(ActionConsumerPanel.class.getName()).log(Level.INFO, "listDefinition(\"*\") returned {0} object instance identifiers", actionInstIds.size());
                 }
 

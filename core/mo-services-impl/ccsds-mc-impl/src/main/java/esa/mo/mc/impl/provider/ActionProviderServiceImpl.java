@@ -61,6 +61,7 @@ import org.ccsds.moims.mo.mc.structures.ObjectInstancePair;
 import org.ccsds.moims.mo.mc.structures.ObjectInstancePairList;
 import esa.mo.reconfigurable.service.ReconfigurableService;
 import esa.mo.reconfigurable.service.ConfigurationChangeListener;
+import org.ccsds.moims.mo.mc.action.ActionServiceInfo;
 
 /**
  * Action service Provider.
@@ -118,7 +119,7 @@ public class ActionProviderServiceImpl extends ActionInheritanceSkeleton impleme
             connection.closeAll();
         }
 
-        actionServiceProvider = connection.startService(ActionHelper.ACTION_SERVICE_NAME.toString(), ActionHelper.ACTION_SERVICE, false, this);
+        actionServiceProvider = connection.startService(ActionServiceInfo.ACTION_SERVICE_NAME.toString(), ActionHelper.ACTION_SERVICE, false, this);
 
         running = true;
         manager = new ActionManager(comServices, actions);
@@ -194,7 +195,7 @@ public class ActionProviderServiceImpl extends ActionInheritanceSkeleton impleme
         // Publish the second Acceptance event
         try {
             // source for ActionInstance ACCEPTANCE event is the ActionInstance object id
-            ObjectId source = new ObjectId(ActionHelper.ACTIONINSTANCE_OBJECT_TYPE,
+            ObjectId source = new ObjectId(ActionServiceInfo.ACTIONINSTANCE_OBJECT_TYPE,
                     new ObjectKey(ConfigurationProviderSingleton.getDomain(), actionInstId)); // requirement: 3.2.8.f  
             //body of AcceptanceEvent is value of "accepted"? -> issue #187
             manager.getActivityTrackingService().publishAcceptanceEventOperation(interaction, accepted, null, source); // requirement: 3.2.8.e, f, g  
@@ -500,13 +501,13 @@ public class ActionProviderServiceImpl extends ActionInheritanceSkeleton impleme
         ConfigurationObjectSet confSet1 = configurationObjectDetails.getConfigObjects().get(1);
 
         // Confirm the objTypes
-        if (!confSet0.getObjType().equals(ActionHelper.ACTIONDEFINITION_OBJECT_TYPE)
-                && !confSet1.getObjType().equals(ActionHelper.ACTIONDEFINITION_OBJECT_TYPE)) {
+        if (!confSet0.getObjType().equals(ActionServiceInfo.ACTIONDEFINITION_OBJECT_TYPE)
+                && !confSet1.getObjType().equals(ActionServiceInfo.ACTIONDEFINITION_OBJECT_TYPE)) {
             return false;
         }
 
-        if (!confSet0.getObjType().equals(ActionHelper.ACTIONIDENTITY_OBJECT_TYPE)
-                && !confSet1.getObjType().equals(ActionHelper.ACTIONIDENTITY_OBJECT_TYPE)) {
+        if (!confSet0.getObjType().equals(ActionServiceInfo.ACTIONIDENTITY_OBJECT_TYPE)
+                && !confSet1.getObjType().equals(ActionServiceInfo.ACTIONIDENTITY_OBJECT_TYPE)) {
             return false;
         }
 
@@ -526,19 +527,19 @@ public class ActionProviderServiceImpl extends ActionInheritanceSkeleton impleme
 
         // ok, we're good to go...
         // Load the Parameter Definitions from this configuration...
-        ConfigurationObjectSet confSetDefs = (confSet0.getObjType().equals(ActionHelper.ACTIONDEFINITION_OBJECT_TYPE)) ? confSet0 : confSet1;
+        ConfigurationObjectSet confSetDefs = (confSet0.getObjType().equals(ActionServiceInfo.ACTIONDEFINITION_OBJECT_TYPE)) ? confSet0 : confSet1;
 
         ActionDefinitionDetailsList pDefs = (ActionDefinitionDetailsList) HelperArchive.getObjectBodyListFromArchive(
                 manager.getArchiveService(),
-                ActionHelper.ACTIONDEFINITION_OBJECT_TYPE,
+                ActionServiceInfo.ACTIONDEFINITION_OBJECT_TYPE,
                 ConfigurationProviderSingleton.getDomain(),
                 confSetDefs.getObjInstIds());
 
-        ConfigurationObjectSet confSetIdents = (confSet0.getObjType().equals(ActionHelper.ACTIONIDENTITY_OBJECT_TYPE)) ? confSet0 : confSet1;
+        ConfigurationObjectSet confSetIdents = (confSet0.getObjType().equals(ActionServiceInfo.ACTIONIDENTITY_OBJECT_TYPE)) ? confSet0 : confSet1;
 
         IdentifierList idents = (IdentifierList) HelperArchive.getObjectBodyListFromArchive(
                 manager.getArchiveService(),
-                ActionHelper.ACTIONIDENTITY_OBJECT_TYPE,
+                ActionServiceInfo.ACTIONIDENTITY_OBJECT_TYPE,
                 ConfigurationProviderSingleton.getDomain(),
                 confSetIdents.getObjInstIds());
 
@@ -566,8 +567,8 @@ public class ActionProviderServiceImpl extends ActionInheritanceSkeleton impleme
         list.add(objsSet);
          */
         ConfigurationObjectSetList list = manager.getCurrentConfiguration();
-        list.get(0).setObjType(ActionHelper.ACTIONIDENTITY_OBJECT_TYPE);
-        list.get(1).setObjType(ActionHelper.ACTIONDEFINITION_OBJECT_TYPE);
+        list.get(0).setObjType(ActionServiceInfo.ACTIONIDENTITY_OBJECT_TYPE);
+        list.get(1).setObjType(ActionServiceInfo.ACTIONDEFINITION_OBJECT_TYPE);
 
         // Needs the Common API here!
         ConfigurationObjectDetails set = new ConfigurationObjectDetails();

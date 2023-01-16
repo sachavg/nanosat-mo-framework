@@ -29,6 +29,7 @@ import java.util.logging.Logger;
 import org.ccsds.moims.mo.com.archive.provider.ArchiveInheritanceSkeleton;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveDetailsList;
 import org.ccsds.moims.mo.common.configuration.ConfigurationHelper;
+import org.ccsds.moims.mo.common.configuration.ConfigurationServiceInfo;
 import org.ccsds.moims.mo.common.configuration.structures.ConfigurationObjectDetailsList;
 import org.ccsds.moims.mo.common.directory.DirectoryHelper;
 import org.ccsds.moims.mo.common.structures.ServiceKey;
@@ -85,7 +86,7 @@ public class PersistLatestServiceConfigurationAdapter implements ConfigurationCh
                 if (configObjectsObjId == null) {
                     // Retrieve the COM object of the service
                     ArchivePersistenceObject comObject = HelperArchive.getArchiveCOMObject(archiveService,
-                            ConfigurationHelper.SERVICECONFIGURATION_OBJECT_TYPE,
+                            ConfigurationServiceInfo.SERVICECONFIGURATION_OBJECT_TYPE,
                             ConfigurationProviderSingleton.getDomain(), serviceConfigObjId);
 
                     if (comObject == null) {
@@ -109,7 +110,7 @@ public class PersistLatestServiceConfigurationAdapter implements ConfigurationCh
 
                 try {
                     archiveService.update(
-                            ConfigurationHelper.CONFIGURATIONOBJECTS_OBJECT_TYPE,
+                            ConfigurationServiceInfo.CONFIGURATIONOBJECTS_OBJECT_TYPE,
                             ConfigurationProviderSingleton.getDomain(),
                             details,
                             confObjsList,
@@ -133,7 +134,7 @@ public class PersistLatestServiceConfigurationAdapter implements ConfigurationCh
 
             LongList objIds1 = archiveService.store(
                     true,
-                    ConfigurationHelper.CONFIGURATIONOBJECTS_OBJECT_TYPE,
+                    ConfigurationServiceInfo.CONFIGURATIONOBJECTS_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(),
                     HelperArchive.generateArchiveDetailsList(null, null,
                             ConfigurationProviderSingleton.getNetwork(), new URI("")),
@@ -142,12 +143,12 @@ public class PersistLatestServiceConfigurationAdapter implements ConfigurationCh
 
             // Store the Service Configuration
             ServiceKeyList serviceKeyList = new ServiceKeyList();
-            serviceKeyList.add(new ServiceKey(service.getCOMService().getArea().getNumber(),
-                    service.getCOMService().getNumber(), service.getCOMService().getArea().getVersion()));
+            serviceKeyList.add(new ServiceKey(service.getCOMService().getAreaNumber(),
+                    service.getCOMService().getServiceNumber(), service.getCOMService().getServiceVersion()));
 
             archiveService.store(
                     false,
-                    ConfigurationHelper.SERVICECONFIGURATION_OBJECT_TYPE,
+                    ConfigurationServiceInfo.SERVICECONFIGURATION_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(),
                     HelperArchive.generateArchiveDetailsList(objIds1.get(0), null,
                             ConfigurationProviderSingleton.getNetwork(), new URI(""), defaultObjId),

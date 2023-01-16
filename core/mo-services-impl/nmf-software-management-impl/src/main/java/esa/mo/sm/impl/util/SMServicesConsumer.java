@@ -33,9 +33,13 @@ import java.util.logging.Logger;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherHelper;
+import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherServiceInfo;
 import org.ccsds.moims.mo.softwaremanagement.commandexecutor.CommandExecutorHelper;
+import org.ccsds.moims.mo.softwaremanagement.commandexecutor.CommandExecutorServiceInfo;
 import org.ccsds.moims.mo.softwaremanagement.heartbeat.HeartbeatHelper;
+import org.ccsds.moims.mo.softwaremanagement.heartbeat.HeartbeatServiceInfo;
 import org.ccsds.moims.mo.softwaremanagement.packagemanagement.PackageManagementHelper;
+import org.ccsds.moims.mo.softwaremanagement.packagemanagement.PackageManagementServiceInfo;
 
 /**
  * Class holding all the COM services consumers. The services can all be initialized automatically
@@ -63,27 +67,27 @@ public class SMServicesConsumer
     try {
       // Initialize the Apps Launcher service
       details = connectionConsumer.getServicesDetails().get(
-          AppsLauncherHelper.APPSLAUNCHER_SERVICE_NAME);
+          AppsLauncherServiceInfo.APPSLAUNCHER_SERVICE_NAME);
       if (details != null) {
         appsLauncherService = new AppsLauncherConsumerServiceImpl(details, comServices);
       }
 
       // Initialize the Command Executor Service service
       details = connectionConsumer.getServicesDetails().get(
-          CommandExecutorHelper.COMMANDEXECUTOR_SERVICE_NAME);
+          CommandExecutorServiceInfo.COMMANDEXECUTOR_SERVICE_NAME);
       if (details != null) {
         commandExecutorService = new CommandExecutorConsumerServiceImpl(details, comServices);
       }
 
       // Initialize the Package Management service
       details = connectionConsumer.getServicesDetails().get(
-          PackageManagementHelper.PACKAGEMANAGEMENT_SERVICE_NAME);
+          PackageManagementServiceInfo.PACKAGEMANAGEMENT_SERVICE_NAME);
       if (details != null) {
         packageManagementService = new PackageManagementConsumerServiceImpl(details, comServices);
       }
 
       // Initialize the Heartbeat service
-      details = connectionConsumer.getServicesDetails().get(HeartbeatHelper.HEARTBEAT_SERVICE_NAME);
+      details = connectionConsumer.getServicesDetails().get(HeartbeatServiceInfo.HEARTBEAT_SERVICE_NAME);
       if (details != null) {
         heartbeatService = new HeartbeatConsumerServiceImpl(details, comServices);
       }

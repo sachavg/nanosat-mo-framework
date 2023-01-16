@@ -11,22 +11,19 @@ import org.ccsds.moims.mo.com.activitytracking.structures.ActivityExecution;
 import org.ccsds.moims.mo.com.activitytracking.structures.ActivityTransfer;
 import org.ccsds.moims.mo.com.activitytracking.structures.OperationActivity;
 import org.ccsds.moims.mo.com.structures.ObjectType;
-import org.ccsds.moims.mo.mal.helpertools.helpers.HelperAttributes;
 import org.ccsds.moims.mo.mal.structures.Attribute;
 import org.ccsds.moims.mo.mal.structures.Identifier;
-import org.ccsds.moims.mo.mal.structures.NamedValue;
-import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.mal.structures.ULong;
 import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mal.structures.UShort;
 import org.ccsds.moims.mo.mal.structures.Union;
 import org.ccsds.moims.mo.mc.MCHelper;
-import org.ccsds.moims.mo.mc.action.ActionHelper;
+import org.ccsds.moims.mo.mc.action.ActionServiceInfo;
 import org.ccsds.moims.mo.mc.action.structures.ActionDefinitionDetails;
 import org.ccsds.moims.mo.mc.action.structures.ActionInstanceDetails;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationDefinitionDetails;
-import org.ccsds.moims.mo.mc.alert.AlertHelper;
+import org.ccsds.moims.mo.mc.alert.AlertServiceInfo;
 import org.ccsds.moims.mo.mc.alert.structures.AlertDefinitionDetails;
 import org.ccsds.moims.mo.mc.alert.structures.AlertEventDetails;
 import org.ccsds.moims.mo.mc.check.structures.CheckLinkDetails;
@@ -46,8 +43,6 @@ import org.ccsds.moims.mo.mc.parameter.structures.ParameterValue;
 import org.ccsds.moims.mo.mc.statistic.structures.StatisticFunctionDetails;
 import org.ccsds.moims.mo.mc.statistic.structures.StatisticLinkDetails;
 import org.ccsds.moims.mo.mc.statistic.structures.StatisticValue;
-//import org.ccsds.moims.mo.mcprototype.MCPrototypeHelper;
-//import org.ccsds.moims.mo.mcprototype.alerttest.AlertTestHelper;
 
 /**
  *
@@ -148,7 +143,7 @@ public class MCServicesHelper {
 
     private static final ObjectType actionFailureObjType
             = new ObjectType(MCHelper.MC_AREA_NUMBER,
-                    ActionHelper.ACTION_SERVICE_NUMBER,
+                    ActionServiceInfo.ACTION_SERVICE_NUMBER,
                     MCHelper.MC_AREA_VERSION,
                     new UShort(ACTION_FAILURE_OBJECT_NUMBER));
 
@@ -341,7 +336,7 @@ public class MCServicesHelper {
 
         iKey = (long) objectNumber;
         iKey = iKey | (long) MCHelper._MC_AREA_NUMBER << 48;
-        iKey = iKey | (long) AlertHelper._ALERT_SERVICE_NUMBER << 32;
+        iKey = iKey | (long) AlertServiceInfo._ALERT_SERVICE_NUMBER << 32;
         iKey = iKey | (long) MCHelper._MC_AREA_VERSION << 24;
         return iKey;
     }
@@ -411,6 +406,7 @@ public class MCServicesHelper {
         objectType.setArea(new UShort((int) ((subkey >> 48) & 0xFFFF)));
     }
 
+    @Deprecated
     public static Attribute getAttribute(String value, int type) {
 //        LoggingBase.logMessage("Getting Attribute of type " + type + " with value " + value);
 

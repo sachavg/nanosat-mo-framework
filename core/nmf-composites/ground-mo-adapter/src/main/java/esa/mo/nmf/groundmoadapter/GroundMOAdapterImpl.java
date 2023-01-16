@@ -37,7 +37,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.com.COMHelper;
-import org.ccsds.moims.mo.com.activitytracking.ActivityTrackingHelper;
+import org.ccsds.moims.mo.com.activitytracking.ActivityTrackingServiceInfo;
 import org.ccsds.moims.mo.com.activitytracking.structures.OperationActivity;
 import org.ccsds.moims.mo.com.activitytracking.structures.OperationActivityList;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveDetailsList;
@@ -55,14 +55,13 @@ import org.ccsds.moims.mo.mal.structures.Duration;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
-import org.ccsds.moims.mo.mal.structures.NamedValueList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
 import org.ccsds.moims.mo.mal.structures.Time;
 import org.ccsds.moims.mo.mal.structures.UShort;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
 import org.ccsds.moims.mo.mal.transport.MALMessage;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
-import org.ccsds.moims.mo.mc.action.ActionHelper;
+import org.ccsds.moims.mo.mc.action.ActionServiceInfo;
 import org.ccsds.moims.mo.mc.action.consumer.ActionAdapter;
 import org.ccsds.moims.mo.mc.action.consumer.ActionStub;
 import org.ccsds.moims.mo.mc.action.structures.ActionCreationRequest;
@@ -590,7 +589,7 @@ public class GroundMOAdapterImpl extends NMFConsumer implements SimpleCommanding
       LongList objIdActionInstances =
           super.getCOMServices().getArchiveService().getArchiveStub().store(
               returnObjInstIds,
-              ActionHelper.ACTIONINSTANCE_OBJECT_TYPE,
+              ActionServiceInfo.ACTIONINSTANCE_OBJECT_TYPE,
               actionConnection.getDomain(),
               archiveDetailsListActionInstance,
               instanceDetailsList);
@@ -635,7 +634,7 @@ public class GroundMOAdapterImpl extends NMFConsumer implements SimpleCommanding
         returnObjInstIds = false;
         super.getCOMServices().getArchiveService().getArchiveStub().store(
             returnObjInstIds,
-            ActivityTrackingHelper.OPERATIONACTIVITY_OBJECT_TYPE,
+            ActivityTrackingServiceInfo.OPERATIONACTIVITY_OBJECT_TYPE,
             actionConnection.getDomain(),
             archiveDetailsListOp,
             opActivityList);
@@ -651,13 +650,13 @@ public class GroundMOAdapterImpl extends NMFConsumer implements SimpleCommanding
         throw new NMFException("The storing of the Operation Activity failed. (2)", ex);
       }
 
-      ObjectId source2 = new ObjectId(ActivityTrackingHelper.OPERATIONACTIVITY_OBJECT_TYPE,
+      ObjectId source2 = new ObjectId(ActivityTrackingServiceInfo.OPERATIONACTIVITY_OBJECT_TYPE,
           new ObjectKey(actionConnection.getDomain(), transId));
       ObjectDetails details = new ObjectDetails(defInstId, source2);
       archiveDetailsListActionInstance.get(0).setDetails(details);
 
       super.getCOMServices().getArchiveService().getArchiveStub().update(
-          ActionHelper.ACTIONINSTANCE_OBJECT_TYPE,
+          ActionServiceInfo.ACTIONINSTANCE_OBJECT_TYPE,
           actionConnection.getDomain(),
           archiveDetailsListActionInstance,
           instanceDetailsList);

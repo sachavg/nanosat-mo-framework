@@ -30,6 +30,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.com.COMHelper;
 import org.ccsds.moims.mo.com.archive.ArchiveHelper;
+import org.ccsds.moims.mo.com.archive.ArchiveServiceInfo;
 import org.ccsds.moims.mo.com.archive.provider.ArchiveInheritanceSkeleton;
 import org.ccsds.moims.mo.com.archive.provider.CountInteraction;
 import org.ccsds.moims.mo.com.archive.provider.QueryInteraction;
@@ -100,7 +101,7 @@ public class ArchiveProviderServiceImpl extends ArchiveInheritanceSkeleton {
             connection.closeAll();
         }
 
-        archiveServiceProvider = connection.startService(ArchiveHelper.ARCHIVE_SERVICE_NAME.toString(), ArchiveHelper.ARCHIVE_SERVICE, false, this);
+        archiveServiceProvider = connection.startService(ArchiveServiceInfo.ARCHIVE_SERVICE_NAME.toString(), ArchiveHelper.ARCHIVE_SERVICE, false, this);
         running = true;
         initialiased = true;
         Logger.getLogger(ArchiveProviderServiceImpl.class.getName()).info("Archive service READY");

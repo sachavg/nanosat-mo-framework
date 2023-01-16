@@ -28,7 +28,6 @@ import org.ccsds.moims.mo.com.COMHelper;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveDetails;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveDetailsList;
 import org.ccsds.moims.mo.com.archive.structures.ExpressionOperator;
-import org.ccsds.moims.mo.com.structures.ObjectId;
 import org.ccsds.moims.mo.com.structures.ObjectType;
 import org.ccsds.moims.mo.mal.MALContextFactory;
 import org.ccsds.moims.mo.mal.MALException;
@@ -44,6 +43,7 @@ import org.ccsds.moims.mo.mal.structures.PairList;
 import org.ccsds.moims.mo.mal.structures.Union;
 import org.ccsds.moims.mo.mc.MCHelper;
 import org.ccsds.moims.mo.mc.conversion.ConversionHelper;
+import org.ccsds.moims.mo.mc.conversion.ConversionServiceInfo;
 import org.ccsds.moims.mo.mc.conversion.provider.ConversionInheritanceSkeleton;
 import org.ccsds.moims.mo.mc.conversion.structures.DiscreteConversionDetails;
 import org.ccsds.moims.mo.mc.conversion.structures.LineConversionDetails;
@@ -204,26 +204,26 @@ public class ConversionServiceImpl extends ConversionInheritanceSkeleton {
     private Element getConversionDefinition(final IdentifierList domain, final Long identityId) {
         Element conversionDetails;
         //Search in PolyConversions:
-        ObjectType convType = ConversionHelper.POLYCONVERSION_OBJECT_TYPE;
+        ObjectType convType = ConversionServiceInfo.POLYCONVERSION_OBJECT_TYPE;
         conversionDetails = getDefinitionDetailsFromIdentityIdFromArchive(convType, domain, identityId);
 
         if (conversionDetails == null) {
             //Search in DiscreteConversions
-            convType = ConversionHelper.DISCRETECONVERSION_OBJECT_TYPE;
+            convType = ConversionServiceInfo.DISCRETECONVERSION_OBJECT_TYPE;
             conversionDetails = getDefinitionDetailsFromIdentityIdFromArchive(convType, domain, identityId);
         } else {
             return conversionDetails;
         }
         if (conversionDetails == null) {
             //Search in LineConversions
-            convType = ConversionHelper.LINECONVERSION_OBJECT_TYPE;
+            convType = ConversionServiceInfo.LINECONVERSION_OBJECT_TYPE;
             conversionDetails = getDefinitionDetailsFromIdentityIdFromArchive(convType, domain, identityId);
         } else {
             return conversionDetails;
         }
         if (conversionDetails == null) {
             //Search in RangeConversions
-            convType = ConversionHelper.RANGECONVERSION_OBJECT_TYPE;
+            convType = ConversionServiceInfo.RANGECONVERSION_OBJECT_TYPE;
             conversionDetails = getDefinitionDetailsFromIdentityIdFromArchive(convType, domain, identityId);
         }
         return conversionDetails;

@@ -32,7 +32,7 @@ import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.structures.Duration;
 import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.UOctet;
-import org.ccsds.moims.mo.mc.aggregation.AggregationHelper;
+import org.ccsds.moims.mo.mc.aggregation.AggregationServiceInfo;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationDefinitionDetails;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationDefinitionDetailsList;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationParameterSet;
@@ -119,7 +119,7 @@ public class StoreAggregations {
                     yyy.add(defs.get(i));
 
                     connector.getCOMServices().getArchiveService().store(true,
-                            AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE,
+                            AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE,
                             connector.getMCServices().getActionService().getConnectionProvider().getConnectionDetails().getDomain(),
                             xxx,
                             yyy,

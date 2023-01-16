@@ -71,9 +71,11 @@ import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.mc.MCHelper;
 import org.ccsds.moims.mo.mc.group.structures.GroupDetails;
 import org.ccsds.moims.mo.mc.parameter.ParameterHelper;
+import org.ccsds.moims.mo.mc.parameter.ParameterServiceInfo;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterDefinitionDetails;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterValue;
 import org.ccsds.moims.mo.mc.statistic.StatisticHelper;
+import org.ccsds.moims.mo.mc.statistic.StatisticServiceInfo;
 import org.ccsds.moims.mo.mc.statistic.provider.MonitorStatisticsPublisher;
 import org.ccsds.moims.mo.mc.statistic.provider.StatisticInheritanceSkeleton;
 import org.ccsds.moims.mo.mc.statistic.structures.StatisticCreationRequest;
@@ -174,7 +176,7 @@ public class StatisticProviderServiceImpl extends StatisticInheritanceSkeleton {
             connection.close();
         }
 
-        statisticServiceProvider = connection.startService(StatisticHelper.STATISTIC_SERVICE_NAME.toString(), StatisticHelper.STATISTIC_SERVICE, this);
+        statisticServiceProvider = connection.startService(StatisticServiceInfo.STATISTIC_SERVICE_NAME.toString(), StatisticHelper.STATISTIC_SERVICE, this);
 
         running = true;
         manager = new StatisticManager(comServices, parameterManager, statisticFunctions);
@@ -351,7 +353,7 @@ public class StatisticProviderServiceImpl extends StatisticInheritanceSkeleton {
 
                             //checks if the given identityId is found in the internal Parameter-list, if not its not a parameter and invalid
                             for (GroupServiceImpl.IdObjectType idObjectType : idObjectTypes) {
-                                if (idObjectType.getObjectType().equals(ParameterHelper.PARAMETERIDENTITY_OBJECT_TYPE)) {
+                                if (idObjectType.getObjectType().equals(ParameterServiceInfo.PARAMETERIDENTITY_OBJECT_TYPE)) {
                                     final Long identityId = idObjectType.getId();
                                     //checks if the parameterId referenced in the group is known
                                     if (!manager.existsParameterIdentity(identityId)) {// requirement 3.6.7.2.h
@@ -533,7 +535,7 @@ public class StatisticProviderServiceImpl extends StatisticInheritanceSkeleton {
 
                         //checks if the given identityId is found in the internal StatisticLink-list, if not its not a StatisticLink and invalid
                         for (GroupServiceImpl.IdObjectType idObjectTypePair : idObjectTypes) {
-                            if (idObjectTypePair.getObjectType().equals(StatisticHelper.STATISTICLINK_OBJECT_TYPE)) {  //requirement: 3.6.8.2.b
+                            if (idObjectTypePair.getObjectType().equals(StatisticServiceInfo.STATISTICLINK_OBJECT_TYPE)) {  //requirement: 3.6.8.2.b
                                 final Long statLinkId = idObjectTypePair.getId();
                                 //checks if the parameterId referenced in the group is known
                                 if (manager.getStatisticLink(statLinkId) == null) {// requirement: 3.6.8.2.d
@@ -676,7 +678,7 @@ public class StatisticProviderServiceImpl extends StatisticInheritanceSkeleton {
 
                         //checks if the given identityId is found in the internal StatisticLink-list, if not its not a StatisticLink and invalid
                         for (GroupServiceImpl.IdObjectType idObjectTypePair : idObjectTypes) {
-                            if (idObjectTypePair.getObjectType().equals(StatisticHelper.STATISTICLINK_OBJECT_TYPE)) {  //requirement: 3.6.12.2.b
+                            if (idObjectTypePair.getObjectType().equals(StatisticServiceInfo.STATISTICLINK_OBJECT_TYPE)) {  //requirement: 3.6.12.2.b
                                 final Long statLinkId = idObjectTypePair.getId();
                                 //checks if the parameterId referenced in the group is known
                                 if (manager.getStatisticLink(statLinkId) == null) {// requirement: 3.6.12.2.g

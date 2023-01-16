@@ -43,10 +43,10 @@ import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.Time;
 import org.ccsds.moims.mo.mal.structures.TimeList;
 import org.ccsds.moims.mo.mal.structures.UInteger;
-import org.ccsds.moims.mo.mc.parameter.ParameterHelper;
+import org.ccsds.moims.mo.mc.parameter.ParameterServiceInfo;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterDefinitionDetails;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterValue;
-import org.ccsds.moims.mo.mc.statistic.StatisticHelper;
+import org.ccsds.moims.mo.mc.statistic.StatisticServiceInfo;
 import org.ccsds.moims.mo.mc.statistic.structures.StatisticCreationRequest;
 import org.ccsds.moims.mo.mc.statistic.structures.StatisticCreationRequestList;
 import org.ccsds.moims.mo.mc.statistic.structures.StatisticEvaluationReport;
@@ -183,7 +183,7 @@ public final class StatisticManager {
             try {
                 LongList objIds = comServices.getArchiveService().store( //requirement: 3.6.6.c
                         true,
-                        StatisticHelper.STATISTICVALUEINSTANCE_OBJECT_TYPE, //requirement: 3.6.4.i
+                        StatisticServiceInfo.STATISTICVALUEINSTANCE_OBJECT_TYPE, //requirement: 3.6.4.i
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(related, source, connectionDetails), //requirement: 3.6.4. , n, o 
                         sValList,
@@ -272,11 +272,11 @@ public final class StatisticManager {
         } else {
             try {
                 // store the StatisticLink object
-                ObjectId source = new ObjectId(ParameterHelper.PARAMETERIDENTITY_OBJECT_TYPE,
+                ObjectId source = new ObjectId(ParameterServiceInfo.PARAMETERIDENTITY_OBJECT_TYPE,
                         statLink.getParameterId());
                 LongList linkIds = comServices.getArchiveService().store( //requirement: 3.6.6.b, 3.6.13.2.i
                         true,
-                        StatisticHelper.STATISTICLINK_OBJECT_TYPE, //requirement: 3.6.4.g, h
+                        StatisticServiceInfo.STATISTICLINK_OBJECT_TYPE, //requirement: 3.6.4.g, h
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(statLink.getStatFuncInstId(), source, connectionDetails), //requirement: 3.6.4.j, k
                         null,
@@ -290,7 +290,7 @@ public final class StatisticManager {
 
                 LongList linkDefIds = comServices.getArchiveService().store( //requirement: 3.6.6.b, 3.6.13.2.i
                         true,
-                        StatisticHelper.STATISTICLINKDEFINITION_OBJECT_TYPE, //requirement: 3.6.4.g, h
+                        StatisticServiceInfo.STATISTICLINKDEFINITION_OBJECT_TYPE, //requirement: 3.6.4.g, h
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(newLinkId, null, connectionDetails), //requirement: 3.6.4.j, k
                         linkDetails,
@@ -324,7 +324,7 @@ public final class StatisticManager {
 
                 LongList linkDefIds = comServices.getArchiveService().store( //requirement: 3.6.15.2.i
                         true,
-                        StatisticHelper.STATISTICLINKDEFINITION_OBJECT_TYPE,
+                        StatisticServiceInfo.STATISTICLINKDEFINITION_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(statLinkId, null, connectionDetails),
                         links,

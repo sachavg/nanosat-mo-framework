@@ -42,7 +42,7 @@ import org.ccsds.moims.mo.mal.structures.Time;
 import org.ccsds.moims.mo.mal.structures.TimeList;
 import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mal.structures.URI;
-import org.ccsds.moims.mo.mc.aggregation.AggregationHelper;
+import org.ccsds.moims.mo.mc.aggregation.AggregationServiceInfo;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationDefinitionDetails;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationDefinitionDetailsList;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationParameterSet;
@@ -203,7 +203,7 @@ public final class AggregationManager extends MCManager {
                 //requirement: 3.7.4.d, 3.7.6.b
                 LongList objIds = super.getArchiveService().store(
                         true,
-                        AggregationHelper.AGGREGATIONVALUEINSTANCE_OBJECT_TYPE,
+                        AggregationServiceInfo.AGGREGATIONVALUEINSTANCE_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(
                             related,
@@ -785,7 +785,7 @@ public final class AggregationManager extends MCManager {
                 //requirement: 3.7.10.2.f: if a AggregationName ever existed before, use the old AggregationIdentity-Object by retrieving it from the archive
                 //check if the name existed before and retrieve id if found
                 Long identityId = retrieveIdentityIdByNameFromArchive(ConfigurationProviderSingleton.getDomain(),
-                        name, AggregationHelper.AGGREGATIONIDENTITY_OBJECT_TYPE);
+                        name, AggregationServiceInfo.AGGREGATIONIDENTITY_OBJECT_TYPE);
 
                 //in case the AggregationName never existed before, create a new identity
                 if (identityId == null) {
@@ -793,7 +793,7 @@ public final class AggregationManager extends MCManager {
                     names.add(name);
                     //add to the archive
                     LongList identityIds = super.getArchiveService().store(true,
-                            AggregationHelper.AGGREGATIONIDENTITY_OBJECT_TYPE,
+                            AggregationServiceInfo.AGGREGATIONIDENTITY_OBJECT_TYPE,
                             ConfigurationProviderSingleton.getDomain(),
                             HelperArchive.generateArchiveDetailsList(null, source, connectionDetails),
                             names,
@@ -805,7 +805,7 @@ public final class AggregationManager extends MCManager {
                 AggregationDefinitionDetailsList defs = new AggregationDefinitionDetailsList();
                 defs.add(definition);
                 LongList defIds = super.getArchiveService().store(true,
-                        AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE,
+                        AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(identityId, source, connectionDetails),
                         defs,
@@ -859,7 +859,7 @@ public final class AggregationManager extends MCManager {
 
                 //requirement 3.7.6.a
                 LongList defIds = super.getArchiveService().store(true,
-                        AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE,
+                        AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(identityId, source, connectionDetails), //requirement: 3.7.4.d, h
                         defs,

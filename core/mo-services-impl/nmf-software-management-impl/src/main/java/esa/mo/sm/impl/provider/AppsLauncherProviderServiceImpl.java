@@ -78,6 +78,7 @@ import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.softwaremanagement.SoftwareManagementHelper;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherHelper;
+import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherServiceInfo;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.body.ListAppResponse;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.provider.AppsLauncherInheritanceSkeleton;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.provider.MonitorExecutionPublisher;
@@ -85,6 +86,7 @@ import org.ccsds.moims.mo.softwaremanagement.appslauncher.provider.StopAppIntera
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.structures.AppDetails;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.structures.AppDetailsList;
 import org.ccsds.moims.mo.softwaremanagement.commandexecutor.CommandExecutorHelper;
+import org.ccsds.moims.mo.softwaremanagement.commandexecutor.CommandExecutorServiceInfo;
 
 /**
  * Apps Launcher service Provider.
@@ -160,7 +162,7 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
     this.directoryService = directoryService;
     manager = new AppsLauncherManager(comServices);
     appsLauncherServiceProvider = connection.startService(
-        AppsLauncherHelper.APPSLAUNCHER_SERVICE_NAME.toString(),
+        AppsLauncherServiceInfo.APPSLAUNCHER_SERVICE_NAME.toString(),
         AppsLauncherHelper.APPSLAUNCHER_SERVICE, this);
     running = true;
     initialiased = true;
@@ -239,7 +241,7 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
           if (currentStd + segment.length() <= stdLimit) {
             Element eventBody = new Union(segment);
             stdPerApp.increase(appObjId, segment.length());
-            ObjectId source = new ObjectId(AppsLauncherHelper.APP_OBJECT_TYPE, 
+            ObjectId source = new ObjectId(AppsLauncherServiceInfo.APP_OBJECT_TYPE, 
                     new ObjectKey(domain, appObjId));
             eventService.generateAndStoreEvent(
                 objType,
@@ -249,7 +251,7 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
                 = "Your logging is too verbose and reached the limit.\nPlease reduce verbosity.";
             Element eventBody = new Union(errorString);
             outputList.add(errorString);
-            ObjectId source = new ObjectId(AppsLauncherHelper.APP_OBJECT_TYPE, 
+            ObjectId source = new ObjectId(AppsLauncherServiceInfo.APP_OBJECT_TYPE, 
                     new ObjectKey(domain, appObjId));
             eventService.generateAndStoreEvent(
                 objType,
@@ -439,8 +441,8 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
       final IdentifierList domain = new IdentifierList();
       domain.add(new Identifier("*"));
       final COMService eventCOM = EventHelper.EVENT_SERVICE;
-      ServiceKey serviceKey = new ServiceKey(eventCOM.getArea().getNumber(),
-          eventCOM.getNumber(), eventCOM.getArea().getVersion());
+      ServiceKey serviceKey = new ServiceKey(eventCOM.getAreaNumber(),
+          eventCOM.getServiceNumber(), eventCOM.getServiceVersion());
       ServiceFilter sf = new ServiceFilter(serviceProviderName, domain, new Identifier("*"),
           null, new Identifier("*"), serviceKey, new UShortList());
       if (app.getCategory().getValue().equals("NMF_App")) {
@@ -566,7 +568,7 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
     ConfigurationObjectSet confSet = configurationObjectDetails.getConfigObjects().get(0);
 
     // Confirm the objType
-    if (!confSet.getObjType().equals(AppsLauncherHelper.APP_OBJECT_TYPE)) {
+    if (!confSet.getObjType().equals(AppsLauncherServiceInfo.APP_OBJECT_TYPE)) {
       return false;
     }
 
@@ -585,7 +587,7 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
     // Load the App Details from this configuration...
     AppDetailsList pDefs = (AppDetailsList) HelperArchive.getObjectBodyListFromArchive(
         manager.getArchiveService(),
-        AppsLauncherHelper.APP_OBJECT_TYPE,
+        AppsLauncherServiceInfo.APP_OBJECT_TYPE,
         ConfigurationProviderSingleton.getDomain(),
         confSet.getObjInstIds());
 
@@ -611,7 +613,7 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
     LongList currentObjIds = new LongList();
     currentObjIds.addAll(defObjs.keySet());
     objsSet.setObjInstIds(currentObjIds);
-    objsSet.setObjType(AppsLauncherHelper.APP_OBJECT_TYPE);
+    objsSet.setObjType(AppsLauncherServiceInfo.APP_OBJECT_TYPE);
 
     final ConfigurationObjectSetList list = new ConfigurationObjectSetList();
     list.add(objsSet);
@@ -664,12 +666,12 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
 
     @Override
     public void flushStdout(Long objId, String data) {
-      publishExecutionMonitoring(objId, data, CommandExecutorHelper.STANDARDOUTPUT_OBJECT_TYPE);
+      publishExecutionMonitoring(objId, data, CommandExecutorServiceInfo.STANDARDOUTPUT_OBJECT_TYPE);
     }
 
     @Override
     public void flushStderr(Long objId, String data) {
-      publishExecutionMonitoring(objId, data, CommandExecutorHelper.STANDARDERROR_OBJECT_TYPE);
+      publishExecutionMonitoring(objId, data, CommandExecutorServiceInfo.STANDARDERROR_OBJECT_TYPE);
     }
 
     @Override

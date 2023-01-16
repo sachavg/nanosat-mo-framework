@@ -47,7 +47,7 @@ import org.ccsds.moims.mo.mal.structures.Subscription;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
-import org.ccsds.moims.mo.mc.statistic.StatisticHelper;
+import org.ccsds.moims.mo.mc.statistic.StatisticServiceInfo;
 import org.ccsds.moims.mo.mc.statistic.consumer.StatisticAdapter;
 import org.ccsds.moims.mo.mc.statistic.structures.StatisticCreationRequest;
 import org.ccsds.moims.mo.mc.statistic.structures.StatisticCreationRequestList;
@@ -304,7 +304,7 @@ public class StatisticConsumerPanel extends javax.swing.JPanel {
             // Get the stored Action Definition from the Archive
             ArchivePersistenceObject comObject = HelperArchive.getArchiveCOMObject(
                     this.serviceMCStatistic.getCOMServices().getArchiveService().getArchiveStub(),
-                    StatisticHelper.STATISTICLINK_OBJECT_TYPE,
+                    StatisticServiceInfo.STATISTICLINK_OBJECT_TYPE,
                     serviceMCStatistic.getConnectionDetails().getDomain(),
                     objIds.get(0).getObjDefInstanceId());
 

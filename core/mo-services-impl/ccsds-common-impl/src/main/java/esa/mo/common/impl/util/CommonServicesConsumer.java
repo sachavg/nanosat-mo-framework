@@ -29,9 +29,9 @@ import esa.mo.common.impl.consumer.LoginConsumerServiceImpl;
 import java.net.MalformedURLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.ccsds.moims.mo.common.configuration.ConfigurationHelper;
-import org.ccsds.moims.mo.common.directory.DirectoryHelper;
-import org.ccsds.moims.mo.common.login.LoginHelper;
+import org.ccsds.moims.mo.common.configuration.ConfigurationServiceInfo;
+import org.ccsds.moims.mo.common.directory.DirectoryServiceInfo;
+import org.ccsds.moims.mo.common.login.LoginServiceInfo;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 
@@ -51,19 +51,19 @@ public class CommonServicesConsumer {
 
         try {
             // Initialize the Directory service
-            details = connectionConsumer.getServicesDetails().get(DirectoryHelper.DIRECTORY_SERVICE_NAME);
+            details = connectionConsumer.getServicesDetails().get(DirectoryServiceInfo.DIRECTORY_SERVICE_NAME);
             if (details != null) {
                 directoryService = new DirectoryConsumerServiceImpl(details.getProviderURI());
             }
 
             // Initialize the Configuration service
-            details = connectionConsumer.getServicesDetails().get(ConfigurationHelper.CONFIGURATION_SERVICE_NAME);
+            details = connectionConsumer.getServicesDetails().get(ConfigurationServiceInfo.CONFIGURATION_SERVICE_NAME);
             if (details != null) {
                 configurationService = new ConfigurationConsumerServiceImpl(details, comServices);
             }
 
             // Initialize the Login service
-            details = connectionConsumer.getServicesDetails().get(LoginHelper.LOGIN_SERVICE_NAME);
+            details = connectionConsumer.getServicesDetails().get(LoginServiceInfo.LOGIN_SERVICE_NAME);
             if (details != null) {
                 loginService = new LoginConsumerServiceImpl(details, comServices);
             }

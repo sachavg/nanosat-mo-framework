@@ -51,6 +51,7 @@ import org.ccsds.moims.mo.com.archive.structures.ArchiveDetailsList;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveQuery;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveQueryList;
 import org.ccsds.moims.mo.com.archivesync.ArchiveSyncHelper;
+import org.ccsds.moims.mo.com.archivesync.ArchiveSyncServiceInfo;
 import org.ccsds.moims.mo.com.archivesync.body.GetTimeResponse;
 import org.ccsds.moims.mo.com.archivesync.provider.ArchiveSyncInheritanceSkeleton;
 import org.ccsds.moims.mo.com.archivesync.provider.RetrieveRangeAgainInteraction;
@@ -144,7 +145,7 @@ public class ArchiveSyncProviderServiceImpl extends ArchiveSyncInheritanceSkelet
     }
 
     archiveSyncServiceProvider = connection.startService(
-        ArchiveSyncHelper.ARCHIVESYNC_SERVICE_NAME.toString(), ArchiveSyncHelper.ARCHIVESYNC_SERVICE,
+        ArchiveSyncServiceInfo.ARCHIVESYNC_SERVICE_NAME.toString(), ArchiveSyncHelper.ARCHIVESYNC_SERVICE,
         false, this);
     running = true;
     initialiased = true;

@@ -28,7 +28,7 @@ import javax.swing.JOptionPane;
 import org.ccsds.moims.mo.com.structures.ObjectId;
 import org.ccsds.moims.mo.com.structures.ObjectIdList;
 import org.ccsds.moims.mo.com.structures.ObjectKey;
-import org.ccsds.moims.mo.common.configuration.ConfigurationHelper;
+import org.ccsds.moims.mo.common.configuration.ConfigurationServiceInfo;
 import org.ccsds.moims.mo.common.configuration.consumer.ConfigurationAdapter;
 import org.ccsds.moims.mo.common.configuration.structures.ConfigurationType;
 import org.ccsds.moims.mo.common.structures.ServiceKey;
@@ -40,7 +40,7 @@ import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mal.structures.UShort;
 import org.ccsds.moims.mo.mc.MCHelper;
-import org.ccsds.moims.mo.mc.parameter.ParameterHelper;
+import org.ccsds.moims.mo.mc.parameter.ParameterServiceInfo;
 
 /**
  *
@@ -327,7 +327,7 @@ public class ConfigurationConsumerPanel extends javax.swing.JPanel {
         objKey.setDomain(domain);
         objKey.setInstId((long) 0);
 
-        ObjectId objIdDef = new ObjectId(ConfigurationHelper.CONFIGURATIONOBJECTS_OBJECT_TYPE, objKey);
+        ObjectId objIdDef = new ObjectId(ConfigurationServiceInfo.CONFIGURATIONOBJECTS_OBJECT_TYPE, objKey);
         final ObjectIdList oil = new ObjectIdList();
         oil.add(objIdDef);
 
@@ -358,7 +358,7 @@ public class ConfigurationConsumerPanel extends javax.swing.JPanel {
 
         ServiceKey key = new ServiceKey(); // Wildcards
         key.setKeyArea(new UShort(MCHelper._MC_AREA_NUMBER));
-        key.setKeyService(new UShort(ParameterHelper._PARAMETER_SERVICE_NUMBER));
+        key.setKeyService(new UShort(ParameterServiceInfo._PARAMETER_SERVICE_NUMBER));
         key.setKeyAreaVersion(new UOctet(MCHelper._MC_AREA_VERSION));
 
         ObjectKey prov = new ObjectKey();
@@ -388,7 +388,7 @@ public class ConfigurationConsumerPanel extends javax.swing.JPanel {
     private void exportXMLButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportXMLButtonActionPerformed
         ObjectId confObjId = new ObjectId();
         confObjId.setKey(new ObjectKey(this.serviceMCConfiguration.getConnectionDetails().getDomain(), (long) 7));
-        confObjId.setType(ConfigurationHelper.CONFIGURATIONOBJECTS_OBJECT_TYPE);
+        confObjId.setType(ConfigurationServiceInfo.CONFIGURATIONOBJECTS_OBJECT_TYPE);
 
         try {
             file = this.serviceMCConfiguration.getConfigurationStub().exportXML(confObjId, Boolean.TRUE);

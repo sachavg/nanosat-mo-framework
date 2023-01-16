@@ -48,6 +48,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.ccsds.moims.mo.common.configuration.ConfigurationServiceInfo;
 
 /**
  * This class is responsible for storing the configuration of a provider in the
@@ -77,7 +78,7 @@ public class PersistProviderConfiguration {
 
         final ArchivePersistenceObject comObjectProvider = HelperArchive.getArchiveCOMObject(
                 archiveService,
-                ConfigurationHelper.PROVIDERCONFIGURATION_OBJECT_TYPE,
+                ConfigurationServiceInfo.PROVIDERCONFIGURATION_OBJECT_TYPE,
                 confId.getKey().getDomain(),
                 confId.getKey().getInstId());
 
@@ -85,7 +86,7 @@ public class PersistProviderConfiguration {
         if (comObjectProvider != null) {
             final ArchivePersistenceObject comObjectConfs = HelperArchive.getArchiveCOMObject(
                     archiveService,
-                    ConfigurationHelper.CONFIGURATIONOBJECTS_OBJECT_TYPE,
+                    ConfigurationServiceInfo.CONFIGURATIONOBJECTS_OBJECT_TYPE,
                     confId.getKey().getDomain(),
                     comObjectProvider.getArchiveDetails().getDetails().getRelated());
             objIds = ((ConfigurationObjectDetails) comObjectConfs.getObject()).getConfigObjects().get(0).getObjInstIds();
@@ -112,7 +113,7 @@ public class PersistProviderConfiguration {
             ConfigurationObjectSetList setList = new ConfigurationObjectSetList(1);
             ConfigurationObjectSet set = new ConfigurationObjectSet();
             set.setDomain(ConfigurationProviderSingleton.getDomain());
-            set.setObjType(ConfigurationHelper.SERVICECONFIGURATION_OBJECT_TYPE);
+            set.setObjType(ConfigurationServiceInfo.SERVICECONFIGURATION_OBJECT_TYPE);
             set.setObjInstIds(objIds);
 
             setList.add(set);
@@ -121,7 +122,7 @@ public class PersistProviderConfiguration {
 
             LongList objIds3 = this.archiveService.store(
                     true,
-                    ConfigurationHelper.CONFIGURATIONOBJECTS_OBJECT_TYPE,
+                    ConfigurationServiceInfo.CONFIGURATIONOBJECTS_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(),
                     HelperArchive.generateArchiveDetailsList(null, null, ConfigurationProviderSingleton.getNetwork(), new URI("")),
                     archObj,
@@ -137,7 +138,7 @@ public class PersistProviderConfiguration {
 
             this.archiveService.store(
                     false,
-                    ConfigurationHelper.PROVIDERCONFIGURATION_OBJECT_TYPE,
+                    ConfigurationServiceInfo.PROVIDERCONFIGURATION_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(),
                     details,
                     providerNameList,
@@ -173,7 +174,7 @@ public class PersistProviderConfiguration {
             final LongList objIds) throws IOException {
         // Retrieve the COM object of the service
         List<ArchivePersistenceObject> comObjects = HelperArchive.getArchiveCOMObjectList(archiveService,
-                ConfigurationHelper.SERVICECONFIGURATION_OBJECT_TYPE,
+                ConfigurationServiceInfo.SERVICECONFIGURATION_OBJECT_TYPE,
                 ConfigurationProviderSingleton.getDomain(), objIds);
 
         if (comObjects == null) { // Could not be found, return
@@ -191,7 +192,7 @@ public class PersistProviderConfiguration {
 
         // Retrieve it from the Archive
         List<ArchivePersistenceObject> confObjs = HelperArchive.getArchiveCOMObjectList(
-                archiveService, ConfigurationHelper.CONFIGURATIONOBJECTS_OBJECT_TYPE,
+                archiveService, ConfigurationServiceInfo.CONFIGURATIONOBJECTS_OBJECT_TYPE,
                 ConfigurationProviderSingleton.getDomain(), relateds);
 
         for (int i = 0; i < confObjs.size(); i++) {

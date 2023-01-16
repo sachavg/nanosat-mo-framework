@@ -40,7 +40,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import org.ccsds.moims.mo.common.directory.DirectoryHelper;
+import org.ccsds.moims.mo.common.directory.DirectoryServiceInfo;
 import org.ccsds.moims.mo.common.directory.structures.ProviderSummary;
 import org.ccsds.moims.mo.common.directory.structures.ProviderSummaryList;
 import org.ccsds.moims.mo.common.directory.structures.ServiceCapability;
@@ -462,7 +462,7 @@ public class DirectoryConnectionConsumerPanel extends javax.swing.JPanel
   {  // runs during the init of the app
     // Common services
     SingleConnectionDetails details = connectionConsumer.getServicesDetails().get(
-        DirectoryHelper.DIRECTORY_SERVICE_NAME);
+        DirectoryServiceInfo.DIRECTORY_SERVICE_NAME);
 
     if (details != null) {
       this.uriServiceDirectory.setText(details.getProviderURI().toString());

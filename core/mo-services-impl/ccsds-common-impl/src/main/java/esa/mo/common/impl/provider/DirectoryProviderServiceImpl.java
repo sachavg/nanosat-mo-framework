@@ -38,6 +38,7 @@ import org.ccsds.moims.mo.com.archive.structures.ArchiveDetailsList;
 import org.ccsds.moims.mo.com.structures.ObjectKey;
 import org.ccsds.moims.mo.common.CommonHelper;
 import org.ccsds.moims.mo.common.directory.DirectoryHelper;
+import org.ccsds.moims.mo.common.directory.DirectoryServiceInfo;
 import org.ccsds.moims.mo.common.directory.body.PublishProviderResponse;
 import org.ccsds.moims.mo.common.directory.provider.DirectoryInheritanceSkeleton;
 import org.ccsds.moims.mo.common.directory.structures.AddressDetails;
@@ -178,7 +179,7 @@ public class DirectoryProviderServiceImpl extends DirectoryInheritanceSkeleton
     }
 
     directoryServiceProvider = connection.startService(
-        DirectoryHelper.DIRECTORY_SERVICE_NAME.toString(),
+        DirectoryServiceInfo.DIRECTORY_SERVICE_NAME.toString(),
         DirectoryHelper.DIRECTORY_SERVICE, false, this);
 
     running = true;
@@ -421,7 +422,7 @@ public class DirectoryProviderServiceImpl extends DirectoryInheritanceSkeleton
       // Store in the Archive the ServiceProvider COM object and get an object instance identifier
       final LongList returnedServProvObjIds = comServices.getArchiveService().store(
           true,
-          DirectoryHelper.SERVICEPROVIDER_OBJECT_TYPE,
+          DirectoryServiceInfo.SERVICEPROVIDER_OBJECT_TYPE,
           ConfigurationProviderSingleton.getDomain(),
           archDetails,
           objBodies,
@@ -448,7 +449,7 @@ public class DirectoryProviderServiceImpl extends DirectoryInheritanceSkeleton
       // Store in the Archive the ProviderCapabilities COM object
       comServices.getArchiveService().store(
           false,
-          DirectoryHelper.PROVIDERCAPABILITIES_OBJECT_TYPE,
+          DirectoryServiceInfo.PROVIDERCAPABILITIES_OBJECT_TYPE,
           ConfigurationProviderSingleton.getDomain(),
           archDetails1,
           capabilities,

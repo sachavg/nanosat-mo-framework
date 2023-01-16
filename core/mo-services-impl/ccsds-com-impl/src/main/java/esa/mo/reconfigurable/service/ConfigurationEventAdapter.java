@@ -37,6 +37,7 @@ import org.ccsds.moims.mo.com.structures.ObjectId;
 import org.ccsds.moims.mo.com.structures.ObjectKey;
 import org.ccsds.moims.mo.com.structures.ObjectType;
 import org.ccsds.moims.mo.common.configuration.ConfigurationHelper;
+import org.ccsds.moims.mo.common.configuration.ConfigurationServiceInfo;
 import org.ccsds.moims.mo.common.configuration.structures.ConfigurationObjectDetails;
 import org.ccsds.moims.mo.common.configuration.structures.ConfigurationObjectDetailsList;
 import org.ccsds.moims.mo.mal.MALException;
@@ -82,13 +83,13 @@ public class ConfigurationEventAdapter extends EventAdapter implements Serializa
             Identifier eventObjNumber = (Identifier) subkeys.get(0);
 
             // Check if it is a "Configuration switch Request" or a "Current Configuration Store"
-            if (!eventObjNumber.toString().equals(ConfigurationHelper.CONFIGURATIONSWITCH_OBJECT_NUMBER.toString())
-                    && !eventObjNumber.toString().equals(ConfigurationHelper.CONFIGURATIONSTORE_OBJECT_NUMBER.toString())) {
+            if (!eventObjNumber.toString().equals(ConfigurationServiceInfo.CONFIGURATIONSWITCH_OBJECT_NUMBER.toString())
+                    && !eventObjNumber.toString().equals(ConfigurationServiceInfo.CONFIGURATIONSTORE_OBJECT_NUMBER.toString())) {
                 return;
             }
 
             // If so... check if it is a "Configuration switch Request"
-            if (eventObjNumber.toString().equals(ConfigurationHelper.CONFIGURATIONSWITCH_OBJECT_NUMBER.toString())) {
+            if (eventObjNumber.toString().equals(ConfigurationServiceInfo.CONFIGURATIONSWITCH_OBJECT_NUMBER.toString())) {
                 if (objects == null) {
                     return;
                 }
@@ -105,8 +106,8 @@ public class ConfigurationEventAdapter extends EventAdapter implements Serializa
                 }
 
                 // Check if it is a Configuration event for this particular service (based on the service type, domain ?)
-                if (obj.getType().getArea().equals(serviceImpl.getCOMService().getArea().getNumber())
-                        && obj.getType().getNumber().equals(serviceImpl.getCOMService().getNumber())
+                if (obj.getType().getArea().equals(serviceImpl.getCOMService().getAreaNumber())
+                        && obj.getType().getNumber().equals(serviceImpl.getCOMService().getServiceNumber())
                         && obj.getKey().getDomain().equals(providerDomain)) {
 
                     // Retrieve it from the Archive
@@ -131,13 +132,13 @@ public class ConfigurationEventAdapter extends EventAdapter implements Serializa
             
             // -----------------------------------------------------------
             // Check if it is a "Current Configuration Store"
-            if (eventObjNumber.toString().equals(ConfigurationHelper.CONFIGURATIONSTORE_OBJECT_NUMBER.toString())) {
+            if (eventObjNumber.toString().equals(ConfigurationServiceInfo.CONFIGURATIONSTORE_OBJECT_NUMBER.toString())) {
                 ConfigurationObjectDetails set = serviceImpl.getCurrentConfiguration();
                 ConfigurationObjectDetailsList bodies = new ConfigurationObjectDetailsList();
                 bodies.add(set);
 
                 // For the ConfigurationObjects:
-                ObjectType objType = ConfigurationHelper.CONFIGURATIONOBJECTS_OBJECT_TYPE;
+                ObjectType objType = ConfigurationServiceInfo.CONFIGURATIONOBJECTS_OBJECT_TYPE;
 
                 ArchiveDetails archiveDetails = new ArchiveDetails();
                 archiveDetails.setInstId(new Long(0));
@@ -176,7 +177,7 @@ public class ConfigurationEventAdapter extends EventAdapter implements Serializa
 
     private void publishConfigurationStoredFailure(Long related) {
         // Publish event: Failure with the objId of the Configuration stored
-        ObjectType objTypeEvent = ConfigurationHelper.CONFIGURATIONSTORED_OBJECT_TYPE;
+        ObjectType objTypeEvent = ConfigurationServiceInfo.CONFIGURATIONSTORED_OBJECT_TYPE;
         BooleanList bool = new BooleanList();
         bool.add(false);  // Failure
         ObjectId eventSource = null;  // It was not stored...
@@ -197,11 +198,11 @@ public class ConfigurationEventAdapter extends EventAdapter implements Serializa
 
     private void publishConfigurationStoredSuccess(Long objId, Long related) {
         // Publish event: Success with the objId of the Configuration stored
-        ObjectType objTypeEvent = ConfigurationHelper.CONFIGURATIONSTORED_OBJECT_TYPE;
+        ObjectType objTypeEvent = ConfigurationServiceInfo.CONFIGURATIONSTORED_OBJECT_TYPE;
         BooleanList bool = new BooleanList();
         bool.add(true);  // Success
         ObjectId eventSource = new ObjectId();
-        eventSource.setType(ConfigurationHelper.CONFIGURATIONOBJECTS_OBJECT_TYPE);
+        eventSource.setType(ConfigurationServiceInfo.CONFIGURATIONOBJECTS_OBJECT_TYPE);
         eventSource.setKey(new ObjectKey(providerDomain, objId));
 
         try {

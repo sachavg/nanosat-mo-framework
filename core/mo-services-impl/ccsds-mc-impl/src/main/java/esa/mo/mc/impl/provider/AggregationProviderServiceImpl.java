@@ -73,6 +73,7 @@ import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.mc.MCHelper;
 import org.ccsds.moims.mo.mc.aggregation.AggregationHelper;
+import org.ccsds.moims.mo.mc.aggregation.AggregationServiceInfo;
 import org.ccsds.moims.mo.mc.aggregation.provider.AggregationInheritanceSkeleton;
 import org.ccsds.moims.mo.mc.aggregation.provider.MonitorValuePublisher;
 import org.ccsds.moims.mo.mc.aggregation.structures.*;
@@ -145,7 +146,7 @@ public class AggregationProviderServiceImpl extends AggregationInheritanceSkelet
             connection.closeAll();
         }
 
-        aggregationServiceProvider = connection.startService(AggregationHelper.AGGREGATION_SERVICE_NAME.toString(), 
+        aggregationServiceProvider = connection.startService(AggregationServiceInfo.AGGREGATION_SERVICE_NAME.toString(), 
                 AggregationHelper.AGGREGATION_SERVICE, this);
 
         running = true;
@@ -384,7 +385,7 @@ public class AggregationProviderServiceImpl extends AggregationInheritanceSkelet
                 groupRetrievalInformation = new GroupRetrieval(unkIndexList, invIndexList, objIdToBeEnabled, valueToBeEnabled);
                 //get the group instances requirements: 3.7.9.2.g, h
                 groupRetrievalInformation = manager.getGroupInstancesForServiceOperation(enableInstances,
-                        groupRetrievalInformation, AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE,
+                        groupRetrievalInformation, AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(), manager.listAllIdentities());
 
                 //fill the existing lists with the modified lists
@@ -471,7 +472,7 @@ public class AggregationProviderServiceImpl extends AggregationInheritanceSkelet
 
                 //get the group instances requirements: 3.7.10.2.g, h
                 groupRetrievalInformation = manager.getGroupInstancesForServiceOperation(enableInstances,
-                        groupRetrievalInformation, AggregationHelper.AGGREGATIONIDENTITY_OBJECT_TYPE,
+                        groupRetrievalInformation, AggregationServiceInfo.AGGREGATIONIDENTITY_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(), manager.listAllIdentities());
 
                 //fill the existing lists with the modified lists
@@ -1268,13 +1269,13 @@ public class AggregationProviderServiceImpl extends AggregationInheritanceSkelet
         ConfigurationObjectSet confSet1 = configurationObjectDetails.getConfigObjects().get(1);
 
         // Confirm the objTypes
-        if (!confSet0.getObjType().equals(AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE)
-                && !confSet1.getObjType().equals(AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE)) {
+        if (!confSet0.getObjType().equals(AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE)
+                && !confSet1.getObjType().equals(AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE)) {
             return false;
         }
 
-        if (!confSet0.getObjType().equals(AggregationHelper.AGGREGATIONIDENTITY_OBJECT_TYPE)
-                && !confSet1.getObjType().equals(AggregationHelper.AGGREGATIONIDENTITY_OBJECT_TYPE)) {
+        if (!confSet0.getObjType().equals(AggregationServiceInfo.AGGREGATIONIDENTITY_OBJECT_TYPE)
+                && !confSet1.getObjType().equals(AggregationServiceInfo.AGGREGATIONIDENTITY_OBJECT_TYPE)) {
             return false;
         }
 
@@ -1294,19 +1295,19 @@ public class AggregationProviderServiceImpl extends AggregationInheritanceSkelet
 
         // ok, we're good to go...
         // Load the Parameter Definitions from this configuration...
-        ConfigurationObjectSet confSetDefs = (confSet0.getObjType().equals(AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE)) ? confSet0 : confSet1;
+        ConfigurationObjectSet confSetDefs = (confSet0.getObjType().equals(AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE)) ? confSet0 : confSet1;
 
         AggregationDefinitionDetailsList pDefs = (AggregationDefinitionDetailsList) HelperArchive.getObjectBodyListFromArchive(
                 manager.getArchiveService(),
-                AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE,
+                AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE,
                 ConfigurationProviderSingleton.getDomain(),
                 confSetDefs.getObjInstIds());
 
-        ConfigurationObjectSet confSetIdents = (confSet0.getObjType().equals(AggregationHelper.AGGREGATIONIDENTITY_OBJECT_TYPE)) ? confSet0 : confSet1;
+        ConfigurationObjectSet confSetIdents = (confSet0.getObjType().equals(AggregationServiceInfo.AGGREGATIONIDENTITY_OBJECT_TYPE)) ? confSet0 : confSet1;
 
         IdentifierList idents = (IdentifierList) HelperArchive.getObjectBodyListFromArchive(
                 manager.getArchiveService(),
-                AggregationHelper.AGGREGATIONIDENTITY_OBJECT_TYPE,
+                AggregationServiceInfo.AGGREGATIONIDENTITY_OBJECT_TYPE,
                 ConfigurationProviderSingleton.getDomain(),
                 confSetIdents.getObjInstIds());
 
@@ -1330,8 +1331,8 @@ public class AggregationProviderServiceImpl extends AggregationInheritanceSkelet
     public ConfigurationObjectDetails getCurrentConfiguration() {
         // Needs the Common API here!
         ConfigurationObjectSetList list = manager.getCurrentConfiguration();
-        list.get(0).setObjType(AggregationHelper.AGGREGATIONIDENTITY_OBJECT_TYPE);
-        list.get(1).setObjType(AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE);
+        list.get(0).setObjType(AggregationServiceInfo.AGGREGATIONIDENTITY_OBJECT_TYPE);
+        list.get(1).setObjType(AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE);
 
         // Needs the Common API here!
         ConfigurationObjectDetails set = new ConfigurationObjectDetails();

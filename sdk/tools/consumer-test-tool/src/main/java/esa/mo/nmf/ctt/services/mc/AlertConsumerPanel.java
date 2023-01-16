@@ -38,7 +38,7 @@ import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
-import org.ccsds.moims.mo.mc.alert.AlertHelper;
+import org.ccsds.moims.mo.mc.alert.AlertServiceInfo;
 import org.ccsds.moims.mo.mc.alert.consumer.AlertAdapter;
 import org.ccsds.moims.mo.mc.alert.structures.AlertCreationRequest;
 import org.ccsds.moims.mo.mc.alert.structures.AlertCreationRequestList;
@@ -294,7 +294,7 @@ public class AlertConsumerPanel extends javax.swing.JPanel {
             // Get the stored Action Definition from the Archive
             ArchivePersistenceObject comObject = HelperArchive.getArchiveCOMObject(
                     this.serviceMCAlert.getCOMServices().getArchiveService().getArchiveStub(),
-                    AlertHelper.ALERTDEFINITION_OBJECT_TYPE, 
+                    AlertServiceInfo.ALERTDEFINITION_OBJECT_TYPE, 
                     serviceMCAlert.getConnectionDetails().getDomain(), 
                     objIds.get(0).getObjDefInstanceId());
 
@@ -385,7 +385,7 @@ public class AlertConsumerPanel extends javax.swing.JPanel {
             this.serviceMCAlert.getAlertStub().asyncListDefinition(idList, new AlertAdapter() {
                 @Override
                 public void listDefinitionResponseReceived(MALMessageHeader msgHeader, ObjectInstancePairList alertObjInstIds, Map qosProperties) {
-                    alertTable.refreshTableWithIds(alertObjInstIds, serviceMCAlert.getConnectionDetails().getDomain(), AlertHelper.ALERTDEFINITION_OBJECT_TYPE);
+                    alertTable.refreshTableWithIds(alertObjInstIds, serviceMCAlert.getConnectionDetails().getDomain(), AlertServiceInfo.ALERTDEFINITION_OBJECT_TYPE);
                     Logger.getLogger(AlertConsumerPanel.class.getName()).log(Level.INFO, "listDefinition(\"*\") returned {0} object instance identifiers", alertObjInstIds.size());
                 }
 

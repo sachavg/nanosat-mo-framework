@@ -32,7 +32,7 @@ import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
-import org.ccsds.moims.mo.mc.alert.AlertHelper;
+import org.ccsds.moims.mo.mc.alert.AlertServiceInfo;
 import org.ccsds.moims.mo.mc.alert.structures.AlertDefinitionDetails;
 import org.ccsds.moims.mo.mc.alert.structures.AlertDefinitionDetailsList;
 import org.ccsds.moims.mo.mc.structures.ObjectInstancePair;
@@ -80,7 +80,7 @@ public final class AlertManager extends MCManager {
                 //requirement: 3.4.10.2.e: if an AlertName ever existed before, use the old AlertIdentity-Object by retrieving it from the archive
                 //check if the name existed before and retrieve id if found
                 Long identityId = retrieveIdentityIdByNameFromArchive(ConfigurationProviderSingleton.getDomain(),
-                        name, AlertHelper.ALERTIDENTITY_OBJECT_TYPE);
+                        name, AlertServiceInfo.ALERTIDENTITY_OBJECT_TYPE);
 
                 //in case the AlertName never existed before, create a new identity
                 if (identityId == null) {
@@ -88,7 +88,7 @@ public final class AlertManager extends MCManager {
                     names.add(name);
                     //add to the archive; requirement: 3.4.7.a
                     LongList identityIds = super.getArchiveService().store(true,
-                            AlertHelper.ALERTIDENTITY_OBJECT_TYPE, //requirement: 3.4.4.a
+                            AlertServiceInfo.ALERTIDENTITY_OBJECT_TYPE, //requirement: 3.4.4.a
                             ConfigurationProviderSingleton.getDomain(),
                             HelperArchive.generateArchiveDetailsList(null, source, connectionDetails), //requirement 3.4.4.g
                             names, //requirement: 3.4.4.b
@@ -101,7 +101,7 @@ public final class AlertManager extends MCManager {
                 defs.add(definition);
                 //add to the archive; requirement: 3.4.7.a
                 LongList defIds = super.getArchiveService().store(true,
-                        AlertHelper.ALERTDEFINITION_OBJECT_TYPE, //requirement: 3.4.4.c
+                        AlertServiceInfo.ALERTDEFINITION_OBJECT_TYPE, //requirement: 3.4.4.c
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(identityId, source, connectionDetails), //requirement: 3.4.4.e, 3.4.4.h
                         defs,
@@ -134,7 +134,7 @@ public final class AlertManager extends MCManager {
                 defs.add(definition);
                 //create a new AlertDefinition and add to the archive; requirement: 3.4.7.a
                 LongList defIds = super.getArchiveService().store(true,
-                        AlertHelper.ALERTDEFINITION_OBJECT_TYPE, //requirement: 3.4.4.c
+                        AlertServiceInfo.ALERTDEFINITION_OBJECT_TYPE, //requirement: 3.4.4.c
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(identityId, source, connectionDetails), //requirement: 3.4.4.d, 3.4.4.h
                         defs,

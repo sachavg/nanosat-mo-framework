@@ -48,7 +48,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import org.ccsds.moims.mo.com.activitytracking.ActivityTrackingHelper;
+import org.ccsds.moims.mo.com.activitytracking.ActivityTrackingServiceInfo;
 import org.ccsds.moims.mo.com.activitytracking.structures.ActivityAcceptance;
 import org.ccsds.moims.mo.com.activitytracking.structures.ActivityExecution;
 import org.ccsds.moims.mo.com.archive.consumer.ArchiveAdapter;
@@ -243,7 +243,7 @@ public class CameraAcquisitorGround
 
       Subscription subscription = HelperCOM.generateSubscriptionCOMEvent(
           "ActivityTrackingListener",
-          ActivityTrackingHelper.EXECUTION_OBJECT_TYPE);
+          ActivityTrackingServiceInfo.EXECUTION_OBJECT_TYPE);
       gma.getCOMServices().getEventService().addEventReceivedListener(subscription,
           new EventReceivedListenerAdapter());
 

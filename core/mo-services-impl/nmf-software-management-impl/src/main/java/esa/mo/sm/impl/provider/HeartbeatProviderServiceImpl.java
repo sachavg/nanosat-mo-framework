@@ -48,6 +48,7 @@ import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.softwaremanagement.SoftwareManagementHelper;
 import org.ccsds.moims.mo.softwaremanagement.heartbeat.HeartbeatHelper;
+import org.ccsds.moims.mo.softwaremanagement.heartbeat.HeartbeatServiceInfo;
 import org.ccsds.moims.mo.softwaremanagement.heartbeat.provider.BeatPublisher;
 import org.ccsds.moims.mo.softwaremanagement.heartbeat.provider.HeartbeatInheritanceSkeleton;
 
@@ -106,7 +107,7 @@ public class HeartbeatProviderServiceImpl extends HeartbeatInheritanceSkeleton
     }
 
     heartbeatServiceProvider = connection.startService(
-        HeartbeatHelper.HEARTBEAT_SERVICE_NAME.toString(),
+        HeartbeatServiceInfo.HEARTBEAT_SERVICE_NAME.toString(),
         HeartbeatHelper.HEARTBEAT_SERVICE, true, this);
 
     running = true;

@@ -36,10 +36,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.com.structures.ObjectId;
 import org.ccsds.moims.mo.com.structures.ObjectKey;
-import org.ccsds.moims.mo.common.configuration.ConfigurationHelper;
+import org.ccsds.moims.mo.common.configuration.ConfigurationServiceInfo;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.structures.URI;
-import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherHelper;
+import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherServiceInfo;
 
 /**
  * The implementation of the NanoSat MO Monolithic that can be extended by
@@ -103,7 +103,7 @@ public abstract class NanoSatMOMonolithic extends NMFProvider {
 
             // Activate the previous configuration
             final ObjectId confId = new ObjectId(
-                    ConfigurationHelper.PROVIDERCONFIGURATION_OBJECT_TYPE,
+                    ConfigurationServiceInfo.PROVIDERCONFIGURATION_OBJECT_TYPE,
                     new ObjectKey(
                             ConfigurationProviderSingleton.getDomain(),
                             DEFAULT_PROVIDER_CONFIGURATION_OBJID
@@ -150,7 +150,7 @@ public abstract class NanoSatMOMonolithic extends NMFProvider {
 
             // Acknowledge the reception of the request to close (Closing...)
             Long eventId = this.getCOMServices().getEventService().generateAndStoreEvent(
-                    AppsLauncherHelper.STOPPING_OBJECT_TYPE,
+                    AppsLauncherServiceInfo.STOPPING_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(),
                     null,
                     null,
@@ -161,7 +161,7 @@ public abstract class NanoSatMOMonolithic extends NMFProvider {
 
             try {
                 this.getCOMServices().getEventService().publishEvent(uri, eventId,
-                        AppsLauncherHelper.STOPPING_OBJECT_TYPE, null, source, null);
+                        AppsLauncherServiceInfo.STOPPING_OBJECT_TYPE, null, source, null);
             } catch (IOException ex) {
                 Logger.getLogger(NanoSatMOMonolithic.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -175,7 +175,7 @@ public abstract class NanoSatMOMonolithic extends NMFProvider {
             }
 
             Long eventId2 = this.getCOMServices().getEventService().generateAndStoreEvent(
-                    AppsLauncherHelper.STOPPED_OBJECT_TYPE,
+                    AppsLauncherServiceInfo.STOPPED_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(),
                     null,
                     null,
@@ -184,7 +184,7 @@ public abstract class NanoSatMOMonolithic extends NMFProvider {
 
             try {
                 this.getCOMServices().getEventService().publishEvent(uri, eventId2,
-                        AppsLauncherHelper.STOPPED_OBJECT_TYPE, null, source, null);
+                        AppsLauncherServiceInfo.STOPPED_OBJECT_TYPE, null, source, null);
             } catch (IOException ex) {
                 Logger.getLogger(NanoSatMOMonolithic.class.getName()).log(Level.SEVERE, null, ex);
             }

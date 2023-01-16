@@ -32,6 +32,7 @@ import org.ccsds.moims.mo.com.COMHelper;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveDetails;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveDetailsList;
 import org.ccsds.moims.mo.com.event.EventHelper;
+import org.ccsds.moims.mo.com.event.EventServiceInfo;
 import org.ccsds.moims.mo.com.event.provider.EventInheritanceSkeleton;
 import org.ccsds.moims.mo.com.event.provider.MonitorEventPublisher;
 import org.ccsds.moims.mo.com.structures.ObjectDetails;
@@ -117,7 +118,7 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
             connection.closeAll();
         }
 
-        eventServiceProvider = connection.startService(EventHelper.EVENT_SERVICE_NAME.toString(), EventHelper.EVENT_SERVICE, this);
+        eventServiceProvider = connection.startService(EventServiceInfo.EVENT_SERVICE_NAME.toString(), EventHelper.EVENT_SERVICE, this);
         running = true;
         initialiased = true;
         Logger.getLogger(EventProviderServiceImpl.class.getName()).log(Level.INFO, "Event service: READY");

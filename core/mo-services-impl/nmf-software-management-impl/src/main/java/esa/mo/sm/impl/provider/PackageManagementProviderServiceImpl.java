@@ -47,6 +47,7 @@ import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.StringList;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.mal.structures.UIntegerList;
+import org.ccsds.moims.mo.softwaremanagement.packagemanagement.PackageManagementServiceInfo;
 import org.ccsds.moims.mo.softwaremanagement.packagemanagement.body.FindPackageResponse;
 
 /**
@@ -105,7 +106,7 @@ public class PackageManagementProviderServiceImpl extends PackageManagementInher
             connection.closeAll();
         }
 
-        packageManagementServiceProvider = connection.startService(PackageManagementHelper.PACKAGEMANAGEMENT_SERVICE_NAME.toString(),
+        packageManagementServiceProvider = connection.startService(PackageManagementServiceInfo.PACKAGEMANAGEMENT_SERVICE_NAME.toString(),
                 PackageManagementHelper.PACKAGEMANAGEMENT_SERVICE, false, this);
         running = true;
         initialiased = true;

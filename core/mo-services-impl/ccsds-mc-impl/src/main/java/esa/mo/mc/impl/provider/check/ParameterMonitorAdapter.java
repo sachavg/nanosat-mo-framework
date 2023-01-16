@@ -32,7 +32,7 @@ import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
-import org.ccsds.moims.mo.mc.parameter.ParameterHelper;
+import org.ccsds.moims.mo.mc.parameter.ParameterServiceInfo;
 import org.ccsds.moims.mo.mc.parameter.consumer.ParameterAdapter;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterValue;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterValueList;
@@ -80,7 +80,7 @@ public class ParameterMonitorAdapter extends ParameterAdapter {
                 "monitorvalue-update for parameter with identity id: {0} received", new Object[]{paramIdentityId});
         final ParameterValue newParamValue = parameterValueList.get(0);
         final Long key4 = (Long) HelperAttributes.attribute2JavaType(keyValues.get(3));
-        final ObjectId paramValObjId = new ObjectId(ParameterHelper.PARAMETERVALUEINSTANCE_OBJECT_TYPE, 
+        final ObjectId paramValObjId = new ObjectId(ParameterServiceInfo.PARAMETERVALUEINSTANCE_OBJECT_TYPE, 
                 new ObjectKey(msgHeader.getDomain(), key4));
 
         //set as the current parameterValue

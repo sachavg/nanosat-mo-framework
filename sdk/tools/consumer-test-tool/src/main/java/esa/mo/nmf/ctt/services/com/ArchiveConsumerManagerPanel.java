@@ -24,7 +24,6 @@ import esa.mo.com.impl.consumer.ArchiveConsumerServiceImpl;
 import esa.mo.com.impl.provider.ArchivePersistenceObject;
 import esa.mo.com.impl.util.ArchiveCOMObjectsOutput;
 import esa.mo.com.impl.util.HelperArchive;
-import esa.mo.helpertools.helpers.HelperMisc;
 import esa.mo.nmf.groundmoadapter.GroundMOAdapterImpl;
 import esa.mo.tools.mowindow.MOWindow;
 import java.awt.Component;
@@ -75,12 +74,12 @@ import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mal.structures.UShort;
 import org.ccsds.moims.mo.mal.structures.Union;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
-import org.ccsds.moims.mo.mc.aggregation.AggregationHelper;
+import org.ccsds.moims.mo.mc.aggregation.AggregationServiceInfo;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationDefinitionDetails;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationDefinitionDetailsList;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationParameterSet;
 import org.ccsds.moims.mo.mc.aggregation.structures.AggregationParameterSetList;
-import org.ccsds.moims.mo.mc.conversion.ConversionHelper;
+import org.ccsds.moims.mo.mc.conversion.ConversionServiceInfo;
 import org.ccsds.moims.mo.mc.conversion.structures.DiscreteConversionDetails;
 import org.ccsds.moims.mo.mc.conversion.structures.DiscreteConversionDetailsList;
 import org.ccsds.moims.mo.mc.conversion.structures.LineConversionDetails;
@@ -644,7 +643,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
 
         try {
             LongList outObjId = serviceCOMArchive.getArchiveStub().store(Boolean.TRUE,
-                    AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE,
+                    AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE,
                     serviceCOMArchive.getConnectionDetails().getDomain(), archiveDetailsList, objList);
             Long received = outObjId.get(0);
             TBoxStore.setText(received.toString());
@@ -691,7 +690,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
         ArchiveConsumerAdapter adapter = new ArchiveConsumerAdapter("Query...");
 
         // Object Type
-        ObjectType objType = AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE;
+        ObjectType objType = AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE;
         MOWindow genObjType = new MOWindow(objType, true);
         try {
             objType = (ObjectType) genObjType.getObject();
@@ -756,7 +755,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
     private void jButtonRetrieveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRetrieveActionPerformed
 
         // Object Type
-        ObjectType objType = AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE;
+        ObjectType objType = AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE;
         MOWindow genObjType = new MOWindow(objType, true);
         try {
             objType = (ObjectType) genObjType.getObject();
@@ -821,7 +820,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
     private void jButtonCountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCountActionPerformed
 
         // Object Type
-        ObjectType objType = AggregationHelper.AGGREGATIONDEFINITION_OBJECT_TYPE;
+        ObjectType objType = AggregationServiceInfo.AGGREGATIONDEFINITION_OBJECT_TYPE;
         MOWindow genObjType = new MOWindow(objType, true);
         try {
             objType = (ObjectType) genObjType.getObject();
@@ -888,7 +887,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
 //        archiveDetailsList = new ArchiveDetailsList();
 //        archiveDetailsList.add(serviceCOMArchive.generateArchiveDetails(new Long(0)));
         ArchiveDetailsList archiveDetailsList = HelperArchive.generateArchiveDetailsList(null, null, serviceCOMArchive.getConnectionDetails());
-        objType = ConversionHelper.DISCRETECONVERSION_OBJECT_TYPE;
+        objType = ConversionServiceInfo.DISCRETECONVERSION_OBJECT_TYPE;
         DiscreteConversionDetailsList objList1 = new DiscreteConversionDetailsList();
         objList1.add(this.generateDiscreteConversionDetails());
 
@@ -903,7 +902,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
 //        archiveDetailsList = new ArchiveDetailsList();
 //        archiveDetailsList.add(serviceCOMArchive.generateArchiveDetails(new Long(0)));
         archiveDetailsList = HelperArchive.generateArchiveDetailsList(null, null, serviceCOMArchive.getConnectionDetails());
-        objType = ConversionHelper.LINECONVERSION_OBJECT_TYPE;
+        objType = ConversionServiceInfo.LINECONVERSION_OBJECT_TYPE;
         LineConversionDetailsList objList2 = new LineConversionDetailsList();
         objList2.add(this.generateLineConversionDetails());
 
@@ -918,7 +917,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
 //        archiveDetailsList = new ArchiveDetailsList();
 //        archiveDetailsList.add(serviceCOMArchive.generateArchiveDetails(new Long(0)));
         archiveDetailsList = HelperArchive.generateArchiveDetailsList(null, null, serviceCOMArchive.getConnectionDetails());
-        objType = ConversionHelper.POLYCONVERSION_OBJECT_TYPE;
+        objType = ConversionServiceInfo.POLYCONVERSION_OBJECT_TYPE;
         PolyConversionDetailsList objList3 = new PolyConversionDetailsList();
         objList3.add(this.generatePolyConversionDetails());
 
@@ -933,7 +932,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
 //        archiveDetailsList = new ArchiveDetailsList();
 //        archiveDetailsList.add(serviceCOMArchive.generateArchiveDetails(new Long(0)));
         archiveDetailsList = HelperArchive.generateArchiveDetailsList(null, null, serviceCOMArchive.getConnectionDetails());
-        objType = ConversionHelper.RANGECONVERSION_OBJECT_TYPE;
+        objType = ConversionServiceInfo.RANGECONVERSION_OBJECT_TYPE;
         RangeConversionDetailsList objList4 = new RangeConversionDetailsList();
         objList4.add(this.generateRangeConversionDetails());
 

@@ -34,6 +34,7 @@ import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mc.MCHelper;
 import org.ccsds.moims.mo.mc.conversion.provider.ConversionInheritanceSkeleton;
 import org.ccsds.moims.mo.mc.group.GroupHelper;
+import org.ccsds.moims.mo.mc.group.GroupServiceInfo;
 import org.ccsds.moims.mo.mc.group.structures.GroupDetails;
 
 /**
@@ -90,7 +91,7 @@ public class GroupServiceImpl extends ConversionInheritanceSkeleton {
         LongList groupDefIds = new LongList();
         groupDefIds.add(0L);
         final ArchiveDetailsList groupDetailsList = HelperArchive.getArchiveDetailsListFromArchive(archiveService, 
-                GroupHelper.GROUPDEFINITION_OBJECT_TYPE, domain, groupDefIds);
+                GroupServiceInfo.GROUPDEFINITION_OBJECT_TYPE, domain, groupDefIds);
         ArchiveDetailsList groupDefsReferencingGroupIdentity = new ArchiveDetailsList();
         //get ALL group-definitions, referencing the current group-identity
         for (ArchiveDetails groupDefDetails : groupDetailsList) {
@@ -140,7 +141,7 @@ public class GroupServiceImpl extends ConversionInheritanceSkeleton {
         //get the group-definitions-body
         //requirement: 3.9.4.g instances of a group will be referenced by the id of the GroupDefinition-object
         return (GroupDetails) HelperArchive.getObjectBodyFromArchive(archiveService, 
-                GroupHelper.GROUPDEFINITION_OBJECT_TYPE, domain, latestGroupDefId);
+                GroupServiceInfo.GROUPDEFINITION_OBJECT_TYPE, domain, latestGroupDefId);
     }
 
     /**
@@ -159,7 +160,7 @@ public class GroupServiceImpl extends ConversionInheritanceSkeleton {
         //get the group-definitions-body
         //requirement: 3.9.4.g instances of a group will be referenced by the id of the GroupDefinition-object
         return (GroupDetails) HelperArchive.getObjectBodyFromArchive(archiveService, 
-                GroupHelper.GROUPDEFINITION_OBJECT_TYPE, domain, groupDefId);
+                GroupServiceInfo.GROUPDEFINITION_OBJECT_TYPE, domain, groupDefId);
     }
 
     /**
@@ -187,7 +188,7 @@ public class GroupServiceImpl extends ConversionInheritanceSkeleton {
         }
         //easiest case: group contains non-group-instances
         //requirement: 3.9.4.h
-        if (!group.getObjectType().equals(GroupHelper.GROUPIDENTITY_OBJECT_TYPE)) {  // It is no group of groups?
+        if (!group.getObjectType().equals(GroupServiceInfo.GROUPIDENTITY_OBJECT_TYPE)) {  // It is no group of groups?
             return new IdObjectTypeList(group.getInstanceIds(), group.getObjectType());
         } else { //solve a case with less complexity: get the instances of the groups groups
             final LongList groupsGroupIdentityIds = group.getInstanceIds();

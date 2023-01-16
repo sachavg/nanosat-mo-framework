@@ -41,7 +41,7 @@ import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
-import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherHelper;
+import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherServiceInfo;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.consumer.AppsLauncherAdapter;
 
 /**
@@ -238,7 +238,7 @@ public class AppsLauncherConsumerPanel extends javax.swing.JPanel
           {
             appsTable.refreshTableWithIds(appInstIds,
                 serviceSMAppsLauncher.getConnectionDetails().getDomain(),
-                AppsLauncherHelper.APP_OBJECT_TYPE);
+                AppsLauncherServiceInfo.APP_OBJECT_TYPE);
 
             for (int i = 0; i < appInstIds.size(); i++) {
               Long objId = appInstIds.get(i);

@@ -38,6 +38,7 @@ import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.UIntegerList;
 import org.ccsds.moims.mo.platform.PlatformHelper;
 import org.ccsds.moims.mo.platform.powercontrol.PowerControlHelper;
+import org.ccsds.moims.mo.platform.powercontrol.PowerControlServiceInfo;
 import org.ccsds.moims.mo.platform.powercontrol.provider.PowerControlInheritanceSkeleton;
 import org.ccsds.moims.mo.platform.powercontrol.structures.Device;
 import org.ccsds.moims.mo.platform.powercontrol.structures.DeviceList;
@@ -93,7 +94,7 @@ public class PowerControlProviderServiceImpl extends PowerControlInheritanceSkel
 
     this.adapter = adapter;
     powerControlServiceProvider = connection.startService(
-        PowerControlHelper.POWERCONTROL_SERVICE_NAME.toString(),
+        PowerControlServiceInfo.POWERCONTROL_SERVICE_NAME.toString(),
         PowerControlHelper.POWERCONTROL_SERVICE, this);
 
     running = true;

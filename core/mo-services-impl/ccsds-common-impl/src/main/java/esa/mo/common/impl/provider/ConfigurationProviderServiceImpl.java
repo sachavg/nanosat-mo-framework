@@ -48,6 +48,7 @@ import org.ccsds.moims.mo.com.structures.ObjectKey;
 import org.ccsds.moims.mo.com.structures.ObjectType;
 import org.ccsds.moims.mo.common.CommonHelper;
 import org.ccsds.moims.mo.common.configuration.ConfigurationHelper;
+import org.ccsds.moims.mo.common.configuration.ConfigurationServiceInfo;
 import org.ccsds.moims.mo.common.configuration.provider.ActivateInteraction;
 import org.ccsds.moims.mo.common.configuration.provider.ConfigurationInheritanceSkeleton;
 import org.ccsds.moims.mo.common.configuration.provider.StoreCurrentInteraction;
@@ -122,7 +123,7 @@ public class ConfigurationProviderServiceImpl extends ConfigurationInheritanceSk
         }
 
         service = ConfigurationHelper.CONFIGURATION_SERVICE;
-        configurationServiceProvider = connection.startService(ConfigurationHelper.CONFIGURATION_SERVICE_NAME.toString(), 
+        configurationServiceProvider = connection.startService(ConfigurationServiceInfo.CONFIGURATION_SERVICE_NAME.toString(), 
                 ConfigurationHelper.CONFIGURATION_SERVICE, false, this);
         this.comServices = comServices;
 
@@ -158,7 +159,7 @@ public class ConfigurationProviderServiceImpl extends ConfigurationInheritanceSk
 
         // Store Event in the Archive
         Long objId = this.comServices.getEventService().generateAndStoreEvent(
-                ConfigurationHelper.CONFIGURATIONSWITCH_OBJECT_TYPE,
+                ConfigurationServiceInfo.CONFIGURATIONSWITCH_OBJECT_TYPE,
                 ConfigurationProviderSingleton.getDomain(),
                 objBodies,
                 related,
@@ -168,7 +169,7 @@ public class ConfigurationProviderServiceImpl extends ConfigurationInheritanceSk
         try {
             // Send Activation event
             this.comServices.getEventService().publishEvent(interaction.getInteraction(), objId,
-                    ConfigurationHelper.CONFIGURATIONSWITCH_OBJECT_TYPE, related, source, objBodies);
+                    ConfigurationServiceInfo.CONFIGURATIONSWITCH_OBJECT_TYPE, related, source, objBodies);
         } catch (IOException ex) {
             Logger.getLogger(ConfigurationProviderServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -199,7 +200,7 @@ public class ConfigurationProviderServiceImpl extends ConfigurationInheritanceSk
 
         // Store Event in the Archive
         Long objId = this.comServices.getEventService().generateAndStoreEvent(
-                ConfigurationHelper.CONFIGURATIONSTORE_OBJECT_TYPE,
+                ConfigurationServiceInfo.CONFIGURATIONSTORE_OBJECT_TYPE,
                 ConfigurationProviderSingleton.getDomain(),
                 null,
                 related,
@@ -212,7 +213,7 @@ public class ConfigurationProviderServiceImpl extends ConfigurationInheritanceSk
 
             // For the Configuration service: area=3 ; service=5; version=1
 //            ObjectType objType = HelperCOM.generateCOMObjectType(3, 5, 1, 0);  // Listen only to Configuration events
-            ObjectType objType = ConfigurationHelper.CONFIGURATIONOBJECTS_OBJECT_TYPE;  // Listen only to Configuration events
+            ObjectType objType = ConfigurationServiceInfo.CONFIGURATIONOBJECTS_OBJECT_TYPE;  // Listen only to Configuration events
             objType.setNumber(new UShort((short) 0));  // Select "any" object from the Configuration service
             Long key2 = HelperCOM.generateSubKey(objType);
             Subscription subscription = ConnectionConsumer.subscriptionKeys(new Identifier("*"), key2, 0L, 0L);
@@ -225,7 +226,7 @@ public class ConfigurationProviderServiceImpl extends ConfigurationInheritanceSk
             try {
                 // Send Store event
                 this.comServices.getEventService().publishEvent(interaction.getInteraction(), objId,
-                        ConfigurationHelper.CONFIGURATIONSTORE_OBJECT_TYPE, related, source, null);
+                        ConfigurationServiceInfo.CONFIGURATIONSTORE_OBJECT_TYPE, related, source, null);
             } catch (IOException ex) {
                 Logger.getLogger(ConfigurationProviderServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
             }

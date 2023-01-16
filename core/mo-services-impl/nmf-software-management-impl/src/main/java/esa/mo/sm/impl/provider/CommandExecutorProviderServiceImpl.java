@@ -61,6 +61,7 @@ import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.Union;
 import org.ccsds.moims.mo.softwaremanagement.SoftwareManagementHelper;
 import org.ccsds.moims.mo.softwaremanagement.commandexecutor.CommandExecutorHelper;
+import org.ccsds.moims.mo.softwaremanagement.commandexecutor.CommandExecutorServiceInfo;
 import org.ccsds.moims.mo.softwaremanagement.commandexecutor.provider.CommandExecutorInheritanceSkeleton;
 import org.ccsds.moims.mo.softwaremanagement.commandexecutor.structures.CommandDetails;
 import org.ccsds.moims.mo.softwaremanagement.commandexecutor.structures.CommandDetailsList;
@@ -123,7 +124,7 @@ public class CommandExecutorProviderServiceImpl extends CommandExecutorInheritan
     }
 
     commandExecutorServiceProvider = connection.startService(
-        CommandExecutorHelper.COMMANDEXECUTOR_SERVICE_NAME.toString(),
+        CommandExecutorServiceInfo.COMMANDEXECUTOR_SERVICE_NAME.toString(),
         CommandExecutorHelper.COMMANDEXECUTOR_SERVICE, this);
     initialiased = true;
 
@@ -183,7 +184,7 @@ public class CommandExecutorProviderServiceImpl extends CommandExecutorInheritan
     objBodies.add(command);
     LongList objIds = archiveService.store(
         true,
-        CommandExecutorHelper.COMMAND_OBJECT_TYPE,
+        CommandExecutorServiceInfo.COMMAND_OBJECT_TYPE,
         connection.getPrimaryConnectionDetails().getDomain(),
         archDetails,
         objBodies,
@@ -228,7 +229,7 @@ public class CommandExecutorProviderServiceImpl extends CommandExecutorInheritan
   {
     IdentifierList domain = connection.getPrimaryConnectionDetails().getDomain();
     URI sourceURI = connection.getPrimaryConnectionDetails().getProviderURI();
-    ObjectId source = new ObjectId(CommandExecutorHelper.COMMAND_OBJECT_TYPE, new ObjectKey(domain,
+    ObjectId source = new ObjectId(CommandExecutorServiceInfo.COMMAND_OBJECT_TYPE, new ObjectKey(domain,
         objId));
     Element eventBody = new Union(outputText);
     StringList eventBodyList = new StringList(1);
@@ -250,18 +251,18 @@ public class CommandExecutorProviderServiceImpl extends CommandExecutorInheritan
   {
     IdentifierList domain = connection.getPrimaryConnectionDetails().getDomain();
     URI sourceURI = connection.getPrimaryConnectionDetails().getProviderURI();
-    ObjectId source = new ObjectId(CommandExecutorHelper.COMMAND_OBJECT_TYPE, new ObjectKey(domain,
+    ObjectId source = new ObjectId(CommandExecutorServiceInfo.COMMAND_OBJECT_TYPE, new ObjectKey(domain,
         objId));
     Element eventBody = new Union((Integer) exitCode);
     IntegerList eventBodyList = new IntegerList(1);
     eventBodyList.add(exitCode);
     final Long eventObjId = eventService.generateAndStoreEvent(
-        CommandExecutorHelper.EXECUTIONFINISHED_OBJECT_TYPE, domain, eventBody, null,
+        CommandExecutorServiceInfo.EXECUTIONFINISHED_OBJECT_TYPE, domain, eventBody, null,
         source, connection.getPrimaryConnectionDetails().getProviderURI(), null);
     if (eventObjId != null) {
       try {
         eventService.publishEvent(sourceURI, eventObjId,
-            CommandExecutorHelper.EXECUTIONFINISHED_OBJECT_TYPE, null, source, eventBodyList);
+            CommandExecutorServiceInfo.EXECUTIONFINISHED_OBJECT_TYPE, null, source, eventBodyList);
       } catch (IOException ex) {
         LOGGER.log(Level.SEVERE, "Could not publish command exit event", ex);
       }
@@ -283,7 +284,7 @@ public class CommandExecutorProviderServiceImpl extends CommandExecutorInheritan
       return cachedCommandDetails.get(objId);
     } else {
       Element retrievedObject = HelperArchive.getObjectBodyFromArchive(archiveService,
-          CommandExecutorHelper.COMMAND_OBJECT_TYPE,
+          CommandExecutorServiceInfo.COMMAND_OBJECT_TYPE,
           connection.getPrimaryConnectionDetails().getDomain(), objId);
       if (retrievedObject == null) {
         throw new IOException("Could not retrieve Command object for objId: " + objId);
@@ -304,7 +305,7 @@ public class CommandExecutorProviderServiceImpl extends CommandExecutorInheritan
     objBodies.add(command);
     try {
       archiveService.update(
-          CommandExecutorHelper.COMMAND_OBJECT_TYPE,
+          CommandExecutorServiceInfo.COMMAND_OBJECT_TYPE,
           connection.getPrimaryConnectionDetails().getDomain(), archDetails, objBodies, null);
     } catch (MALException | MALInteractionException ex) {
       Logger.getLogger(CommandExecutorProviderServiceImpl.class.getName()).log(Level.SEVERE,
@@ -318,13 +319,13 @@ public class CommandExecutorProviderServiceImpl extends CommandExecutorInheritan
     @Override
     public void flushStdout(Long objId, String data)
     {
-      commandOutputEvent(objId, data, CommandExecutorHelper.STANDARDOUTPUT_OBJECT_TYPE);
+      commandOutputEvent(objId, data, CommandExecutorServiceInfo.STANDARDOUTPUT_OBJECT_TYPE);
     }
 
     @Override
     public void flushStderr(Long objId, String data)
     {
-      commandOutputEvent(objId, data, CommandExecutorHelper.STANDARDERROR_OBJECT_TYPE);
+      commandOutputEvent(objId, data, CommandExecutorServiceInfo.STANDARDERROR_OBJECT_TYPE);
     }
 
     @Override

@@ -47,6 +47,7 @@ import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mc.parameter.ParameterHelper;
+import org.ccsds.moims.mo.mc.parameter.ParameterServiceInfo;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterConversion;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterDefinitionDetails;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterDefinitionDetailsList;
@@ -183,7 +184,7 @@ public class ParameterManager extends MCManager
         // requirement: 3.3.4.d
         //save the published value in the COM-Archive
         LongList objIds = super.getArchiveService().store(true,
-            ParameterHelper.PARAMETERVALUEINSTANCE_OBJECT_TYPE,
+            ParameterServiceInfo.PARAMETERVALUEINSTANCE_OBJECT_TYPE,
             ConfigurationProviderSingleton.getDomain(),
             archiveDetailsList,
             pValList,
@@ -234,7 +235,7 @@ public class ParameterManager extends MCManager
       try {// requirement: 3.3.4.d 
         LongList objIds = super.getArchiveService().store(
             true,
-            ParameterHelper.PARAMETERVALUEINSTANCE_OBJECT_TYPE,
+            ParameterServiceInfo.PARAMETERVALUEINSTANCE_OBJECT_TYPE,
             ConfigurationProviderSingleton.getDomain(),
             archiveDetailsList,
             pVals,
@@ -515,7 +516,7 @@ public class ParameterManager extends MCManager
         //check if the name existed before and retrieve id if found
         Long identityId = retrieveIdentityIdByNameFromArchive(
             ConfigurationProviderSingleton.getDomain(),
-            name, ParameterHelper.PARAMETERIDENTITY_OBJECT_TYPE);
+            name, ParameterServiceInfo.PARAMETERIDENTITY_OBJECT_TYPE);
 
         //in case the ParameterName never existed before, create a new identity
         if (identityId == null) {
@@ -523,7 +524,7 @@ public class ParameterManager extends MCManager
           names.add(name);
           //add to the archive
           LongList identityIds = super.getArchiveService().store(true,
-              ParameterHelper.PARAMETERIDENTITY_OBJECT_TYPE,
+              ParameterServiceInfo.PARAMETERIDENTITY_OBJECT_TYPE,
               ConfigurationProviderSingleton.getDomain(),
               HelperArchive.generateArchiveDetailsList(null, source, connectionDetails),
               names,
@@ -535,7 +536,7 @@ public class ParameterManager extends MCManager
         ParameterDefinitionDetailsList defs = new ParameterDefinitionDetailsList();
         defs.add(definition);
         LongList defIds = super.getArchiveService().store(true,
-            ParameterHelper.PARAMETERDEFINITION_OBJECT_TYPE,
+            ParameterServiceInfo.PARAMETERDEFINITION_OBJECT_TYPE,
             ConfigurationProviderSingleton.getDomain(),
             HelperArchive.generateArchiveDetailsList(identityId, source, connectionDetails),
             defs,
@@ -585,7 +586,7 @@ public class ParameterManager extends MCManager
 
         //create a new ParameterDefinition 
         LongList defIds = super.getArchiveService().store(true,
-            ParameterHelper.PARAMETERDEFINITION_OBJECT_TYPE,
+            ParameterServiceInfo.PARAMETERDEFINITION_OBJECT_TYPE,
             ConfigurationProviderSingleton.getDomain(),
             HelperArchive.generateArchiveDetailsList(identityId, source, connectionDetails),
             defs,

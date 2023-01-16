@@ -35,7 +35,7 @@ import org.ccsds.moims.mo.mal.structures.ElementList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.URI;
-import org.ccsds.moims.mo.platform.gps.GPSHelper;
+import org.ccsds.moims.mo.platform.gps.GPSServiceInfo;
 import org.ccsds.moims.mo.platform.gps.structures.NearbyPositionDefinition;
 import org.ccsds.moims.mo.platform.gps.structures.NearbyPositionDefinitionList;
 
@@ -99,7 +99,7 @@ public final class GPSManager extends DefinitionsManager {
             try {
                 LongList objIds = super.getArchiveService().store(
                         true,
-                        GPSHelper.NEARBYPOSITION_OBJECT_TYPE,
+                        GPSServiceInfo.NEARBYPOSITION_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(null, source, uri),
                         defs,
@@ -133,7 +133,7 @@ public final class GPSManager extends DefinitionsManager {
             try {  // requirement: 3.3.4.2
                 LongList objIds = super.getArchiveService().store(
                         true,
-                        GPSHelper.NEARBYPOSITIONALERT_OBJECT_TYPE,
+                        GPSServiceInfo.NEARBYPOSITIONALERT_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(objId, null, uri),
                         isEnteringList,

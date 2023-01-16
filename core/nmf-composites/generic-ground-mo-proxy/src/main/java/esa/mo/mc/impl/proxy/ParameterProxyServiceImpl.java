@@ -41,6 +41,7 @@ import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mc.MCHelper;
 import org.ccsds.moims.mo.mc.parameter.ParameterHelper;
+import org.ccsds.moims.mo.mc.parameter.ParameterServiceInfo;
 import org.ccsds.moims.mo.mc.parameter.provider.ParameterInheritanceSkeleton;
 import org.ccsds.moims.mo.mc.parameter.structures.*;
 import org.ccsds.moims.mo.mc.structures.ObjectInstancePairList;
@@ -113,7 +114,7 @@ public class ParameterProxyServiceImpl extends ParameterInheritanceSkeleton {
             connection.close();
         }
 
-        parameterServiceProvider = connection.startService(ParameterHelper.PARAMETER_SERVICE_NAME.toString(), ParameterHelper.PARAMETER_SERVICE, this);
+        parameterServiceProvider = connection.startService(ParameterServiceInfo.PARAMETER_SERVICE_NAME.toString(), ParameterHelper.PARAMETER_SERVICE, this);
 
         running = true;
 

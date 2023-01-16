@@ -21,8 +21,6 @@
 package esa.mo.platform.impl.provider.gen;
 
 import esa.mo.helpertools.connections.ConnectionProvider;
-import java.util.Timer;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.com.COMHelper;
@@ -37,6 +35,7 @@ import org.ccsds.moims.mo.mal.structures.Duration;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.platform.PlatformHelper;
 import org.ccsds.moims.mo.platform.opticaldatareceiver.OpticalDataReceiverHelper;
+import org.ccsds.moims.mo.platform.opticaldatareceiver.OpticalDataReceiverServiceInfo;
 import org.ccsds.moims.mo.platform.opticaldatareceiver.provider.OpticalDataReceiverInheritanceSkeleton;
 import org.ccsds.moims.mo.platform.opticaldatareceiver.provider.RecordSamplesInteraction;
 
@@ -88,7 +87,7 @@ public class OpticalDataReceiverProviderServiceImpl extends OpticalDataReceiverI
 
     this.adapter = adapter;
     opticalDataReceiverServiceProvider = connection.startService(
-        OpticalDataReceiverHelper.OPTICALDATARECEIVER_SERVICE_NAME.toString(),
+        OpticalDataReceiverServiceInfo.OPTICALDATARECEIVER_SERVICE_NAME.toString(),
         OpticalDataReceiverHelper.OPTICALDATARECEIVER_SERVICE, this);
 
     initialiased = true;

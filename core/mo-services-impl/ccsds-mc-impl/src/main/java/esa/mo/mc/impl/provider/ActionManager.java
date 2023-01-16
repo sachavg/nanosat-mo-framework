@@ -47,6 +47,7 @@ import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.mal.structures.UIntegerList;
 import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mc.action.ActionHelper;
+import org.ccsds.moims.mo.mc.action.ActionServiceInfo;
 import org.ccsds.moims.mo.mc.action.structures.ActionCreationRequest;
 import org.ccsds.moims.mo.mc.action.structures.ActionDefinitionDetails;
 import org.ccsds.moims.mo.mc.action.structures.ActionDefinitionDetailsList;
@@ -115,7 +116,7 @@ public final class ActionManager extends MCManager {
             try {
                 LongList objIds = super.getArchiveService().store(
                         true,
-                        ActionHelper.ACTIONINSTANCE_OBJECT_TYPE,
+                        ActionServiceInfo.ACTIONINSTANCE_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(related, null, uri),
                         aValList,
@@ -153,7 +154,7 @@ public final class ActionManager extends MCManager {
                 //requirement: 3.2.12.2.e: if an ActionName ever existed before, use the old ActionIdentity-Object by retrieving it from the archive
                 //check if the name existed before and retrieve id if found
                 Long identityId = retrieveIdentityIdByNameFromArchive(ConfigurationProviderSingleton.getDomain(),
-                        name, ActionHelper.ACTIONIDENTITY_OBJECT_TYPE);
+                        name, ActionServiceInfo.ACTIONIDENTITY_OBJECT_TYPE);
 
                 //in case the ActionName never existed before, create a new identity
                 if (identityId == null) {
@@ -162,7 +163,7 @@ public final class ActionManager extends MCManager {
                     names.add(name);
                     //add identity to the archive 3.2.7.a
                     LongList identityIds = super.getArchiveService().store(true,
-                            ActionHelper.ACTIONIDENTITY_OBJECT_TYPE, //requirement: 3.2.4.a
+                            ActionServiceInfo.ACTIONIDENTITY_OBJECT_TYPE, //requirement: 3.2.4.a
                             ConfigurationProviderSingleton.getDomain(),
                             HelperArchive.generateArchiveDetailsList(null, source, uri), //requirement: 3.2.4.e
                             names,
@@ -175,7 +176,7 @@ public final class ActionManager extends MCManager {
                 defs.add(actionDefDetails);
                 //add definition to the archive requirement: 3.2.7.b
                 LongList defIds = super.getArchiveService().store(true,
-                        ActionHelper.ACTIONDEFINITION_OBJECT_TYPE, //requirement: 3.2.4.c
+                        ActionServiceInfo.ACTIONDEFINITION_OBJECT_TYPE, //requirement: 3.2.4.c
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(identityId, source, uri), //requirement: 3.2.4.d, f
                         defs,
@@ -209,7 +210,7 @@ public final class ActionManager extends MCManager {
 
                 //create a new ActionDefinition 
                 LongList defIds = super.getArchiveService().store(true,
-                        ActionHelper.ACTIONDEFINITION_OBJECT_TYPE,
+                        ActionServiceInfo.ACTIONDEFINITION_OBJECT_TYPE,
                         ConfigurationProviderSingleton.getDomain(),
                         HelperArchive.generateArchiveDetailsList(identityId, source, uri),
                         defs,
@@ -404,7 +405,7 @@ public final class ActionManager extends MCManager {
                     }
 
                     // Reception
-                    ObjectId sourceRec = new ObjectId(ActionHelper.ACTIONINSTANCE_OBJECT_TYPE, key);
+                    ObjectId sourceRec = new ObjectId(ActionServiceInfo.ACTIONINSTANCE_OBJECT_TYPE, key);
                     getActivityTrackingService().publishReceptionEvent(new URI(nodes[0]),
                             interaction.getMessageHeader().getNetworkZone(), true, null, uriNextDestination, sourceRec);
 
@@ -419,7 +420,7 @@ public final class ActionManager extends MCManager {
                     }
 
                     // Publish forward success
-                    ObjectId sourceFor = new ObjectId(ActionHelper.ACTIONINSTANCE_OBJECT_TYPE, key);
+                    ObjectId sourceFor = new ObjectId(ActionServiceInfo.ACTIONINSTANCE_OBJECT_TYPE, key);
                     getActivityTrackingService().publishForwardEvent(new URI(nodes[0]),
                             interaction.getMessageHeader().getNetworkZone(), (errorNumber == null),
                             null, uriNextDestination, sourceFor);
@@ -491,7 +492,7 @@ public final class ActionManager extends MCManager {
             final int executionStage, final int stageCount, final Long actionInstId,
             final MALInteraction interaction, final SingleConnectionDetails connectionDetails) {
         ObjectKey key = new ObjectKey(ConfigurationProviderSingleton.getDomain(), actionInstId);
-        ObjectId source = new ObjectId(ActionHelper.ACTIONINSTANCE_OBJECT_TYPE, key);
+        ObjectId source = new ObjectId(ActionServiceInfo.ACTIONINSTANCE_OBJECT_TYPE, key);
 
         try {
             if (this.getActivityTrackingService() != null) {
@@ -523,7 +524,7 @@ public final class ActionManager extends MCManager {
         // requirement: 3.2.5.c and 3.2.5.d and 3.2.5.e
         if (this.getEventService() != null) {
             Long objId = this.getEventService().generateAndStoreEvent(
-                    ActionHelper.ACTIONFAILURE_OBJECT_TYPE,
+                    ActionServiceInfo.ACTIONFAILURE_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(),
                     errorNumber,
                     related,
@@ -532,7 +533,7 @@ public final class ActionManager extends MCManager {
 
             try {
                 this.getEventService().publishEvent(new URI(""), objId,
-                        ActionHelper.ACTIONFAILURE_OBJECT_TYPE, related, source, errorNumbers);
+                        ActionServiceInfo.ACTIONFAILURE_OBJECT_TYPE, related, source, errorNumbers);
             } catch (IOException ex) {
                 Logger.getLogger(ActionManager.class.getName()).log(Level.SEVERE, null, ex);
             }

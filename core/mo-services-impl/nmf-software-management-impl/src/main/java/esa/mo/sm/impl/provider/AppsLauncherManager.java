@@ -65,6 +65,7 @@ import org.ccsds.moims.mo.mal.structures.StringList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
 import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherHelper;
+import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherServiceInfo;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.provider.StopAppInteraction;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.structures.AppDetails;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.structures.AppDetailsList;
@@ -218,7 +219,7 @@ public class AppsLauncherManager extends DefinitionsManager
 
     return super.getArchiveService().store(
         true,
-        AppsLauncherHelper.APP_OBJECT_TYPE,
+        AppsLauncherServiceInfo.APP_OBJECT_TYPE,
         ConfigurationProviderSingleton.getDomain(),
         archDetails,
         defs,
@@ -250,7 +251,7 @@ public class AppsLauncherManager extends DefinitionsManager
 
     ArchiveDetails archiveDetails = HelperArchive.getArchiveDetailsFromArchive(super.
         getArchiveService(),
-        AppsLauncherHelper.APP_OBJECT_TYPE, domain, objId);
+        AppsLauncherServiceInfo.APP_OBJECT_TYPE, domain, objId);
     if (archiveDetails == null) {
       throw new MALException("No object present in archive.");
     }
@@ -259,7 +260,7 @@ public class AppsLauncherManager extends DefinitionsManager
     archiveDetailsList.add(archiveDetails);
 
     super.getArchiveService().update(
-        AppsLauncherHelper.APP_OBJECT_TYPE,
+        AppsLauncherServiceInfo.APP_OBJECT_TYPE,
         domain,
         archiveDetailsList,
         defs,
@@ -579,7 +580,7 @@ public class AppsLauncherManager extends DefinitionsManager
     // Select all object numbers from the Apps Launcher service Events
     Subscription eventSub = HelperCOM.generateSubscriptionCOMEvent(
         "ClosingAppEvents",
-        AppsLauncherHelper.APP_OBJECT_TYPE);
+        AppsLauncherServiceInfo.APP_OBJECT_TYPE);
     try { // Subscribe to events
       EventConsumerServiceImpl eventServiceConsumer = new EventConsumerServiceImpl(appConnection);
       Logger.getLogger(AppsLauncherProviderServiceImpl.class.getName()).log(Level.FINE,
@@ -593,7 +594,7 @@ public class AppsLauncherManager extends DefinitionsManager
     }
 
     // Stop the app...
-    ObjectType objType = AppsLauncherHelper.STOPAPP_OBJECT_TYPE;
+    ObjectType objType = AppsLauncherServiceInfo.STOPAPP_OBJECT_TYPE;
     Logger.getLogger(AppsLauncherProviderServiceImpl.class.getName()).log(Level.INFO,
         "Sending event to app: {0} (Name: ''{1}'')", new Object[]{appInstId, appDirectoryServiceName});
     this.setRunning(appInstId, false, interaction.getInteraction());

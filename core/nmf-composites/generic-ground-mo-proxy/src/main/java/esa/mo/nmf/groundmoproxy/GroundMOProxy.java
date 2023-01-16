@@ -27,7 +27,6 @@ import esa.mo.helpertools.connections.ConnectionConsumer;
 import esa.mo.helpertools.connections.ConnectionProvider;
 import esa.mo.helpertools.connections.SingleConnectionDetails;
 import esa.mo.helpertools.helpers.HelperMisc;
-import esa.mo.helpertools.helpers.HelperTime;
 import esa.mo.helpertools.misc.Const;
 import esa.mo.nmf.NMFConsumer;
 import esa.mo.sm.impl.consumer.HeartbeatConsumerServiceImpl;
@@ -46,7 +45,7 @@ import org.ccsds.moims.mo.com.archive.ArchiveHelper;
 import org.ccsds.moims.mo.com.archive.consumer.ArchiveAdapter;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveQuery;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveQueryList;
-import org.ccsds.moims.mo.common.directory.DirectoryHelper;
+import org.ccsds.moims.mo.common.directory.DirectoryServiceInfo;
 import org.ccsds.moims.mo.common.directory.structures.ProviderSummary;
 import org.ccsds.moims.mo.common.directory.structures.ProviderSummaryList;
 import org.ccsds.moims.mo.common.directory.structures.ServiceFilter;
@@ -58,16 +57,14 @@ import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
-import org.ccsds.moims.mo.mal.structures.Time;
 import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.UShort;
 import org.ccsds.moims.mo.mal.structures.UShortList;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.mal.transport.MALTransmitErrorException;
-import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherHelper;
+import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherServiceInfo;
 import org.ccsds.moims.mo.softwaremanagement.heartbeat.HeartbeatHelper;
-import org.ccsds.moims.mo.softwaremanagement.heartbeat.consumer.HeartbeatAdapter;
 
 /**
  * The Ground MO Proxy class.
@@ -121,9 +118,9 @@ public abstract class GroundMOProxy
   private SingleConnectionDetails cdFromService(COMService service)
   {
     final ServiceKey serviceKey = new ServiceKey(
-        service.getArea().getNumber(),
-        service.getNumber(),
-        service.getArea().getVersion()
+        service.getAreaNumber(),
+        service.getServiceNumber(),
+        service.getServiceVersion()
     );
 
     try {
@@ -271,11 +268,11 @@ public abstract class GroundMOProxy
           };
 
           // Use the count operation from the Archive for Common.Directory.ServiceProvider
-          archiveService.getArchiveStub().count(DirectoryHelper.SERVICEPROVIDER_OBJECT_TYPE,
+          archiveService.getArchiveStub().count(DirectoryServiceInfo.SERVICEPROVIDER_OBJECT_TYPE,
               archiveQueryList, null, adapter);
 
           // use the count operation from the Archive for SoftwareManagement.AppsLauncher.StopApp
-          archiveService.getArchiveStub().count(AppsLauncherHelper.STOPAPP_OBJECT_TYPE,
+          archiveService.getArchiveStub().count(AppsLauncherServiceInfo.STOPAPP_OBJECT_TYPE,
               archiveQueryList, null, adapter);
 
           lastTime = currentOBT;

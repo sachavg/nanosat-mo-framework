@@ -38,6 +38,7 @@ import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.com.archive.ArchiveHelper;
+import org.ccsds.moims.mo.com.archive.ArchiveServiceInfo;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveDetails;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveDetailsList;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveQuery;
@@ -311,7 +312,7 @@ public class ArchiveManager {
             objIds.add(objId);
         }
 
-        final Runnable publishEvents = this.generatePublishEventsThread(ArchiveHelper.OBJECTSTORED_OBJECT_TYPE,
+        final Runnable publishEvents = this.generatePublishEventsThread(ArchiveServiceInfo.OBJECTSTORED_OBJECT_TYPE,
                 objType, domain, objIds, interaction);
 
         this.dbProcessor.insert(perObjsEntities, publishEvents);
@@ -351,7 +352,7 @@ public class ArchiveManager {
             objIds.add(lArchiveDetails.get(i).getInstId());
         }
 
-        Runnable publishEvents = this.generatePublishEventsThread(ArchiveHelper.OBJECTUPDATED_OBJECT_TYPE,
+        Runnable publishEvents = this.generatePublishEventsThread(ArchiveServiceInfo.OBJECTUPDATED_OBJECT_TYPE,
                 objType, domain, objIds, interaction);
 
         this.dbProcessor.update(newObjs, publishEvents);
@@ -362,7 +363,7 @@ public class ArchiveManager {
         final Integer objTypeId = this.fastObjectType.getObjectTypeId(objType);
         final int domainId = this.fastDomain.getDomainId(domain);
 
-        Runnable publishEvents = this.generatePublishEventsThread(ArchiveHelper.OBJECTDELETED_OBJECT_TYPE,
+        Runnable publishEvents = this.generatePublishEventsThread(ArchiveServiceInfo.OBJECTDELETED_OBJECT_TYPE,
                 objType, domain, objIds, interaction);
         this.dbProcessor.remove(objTypeId, domainId, objIds, publishEvents);
         this.fastObjId.delete(objTypeId, domainId);

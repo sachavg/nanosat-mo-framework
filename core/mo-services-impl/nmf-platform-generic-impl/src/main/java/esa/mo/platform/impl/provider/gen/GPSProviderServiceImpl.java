@@ -48,7 +48,6 @@ import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALHelper;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.MALStandardError;
-import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.provider.MALInteraction;
 import org.ccsds.moims.mo.mal.provider.MALProvider;
 import org.ccsds.moims.mo.mal.provider.MALPublishInteractionListener;
@@ -71,6 +70,7 @@ import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.platform.PlatformHelper;
 import org.ccsds.moims.mo.platform.gps.GPSHelper;
+import org.ccsds.moims.mo.platform.gps.GPSServiceInfo;
 import org.ccsds.moims.mo.platform.gps.body.GetLastKnownPositionAndVelocityResponse;
 import org.ccsds.moims.mo.platform.gps.body.GetLastKnownPositionResponse;
 import org.ccsds.moims.mo.platform.gps.provider.GPSInheritanceSkeleton;
@@ -164,7 +164,7 @@ public class GPSProviderServiceImpl extends GPSInheritanceSkeleton
 
     manager = new GPSManager(comServices);
     this.adapter = adapter;
-    gpsServiceProvider = connection.startService(GPSHelper.GPS_SERVICE_NAME.toString(),
+    gpsServiceProvider = connection.startService(GPSServiceInfo.GPS_SERVICE_NAME.toString(),
         GPSHelper.GPS_SERVICE, this);
 
     if (Boolean.parseBoolean(System.getProperty(HelperMisc.PROP_GPS_POLLING_ACTIVE))) {
@@ -603,7 +603,7 @@ public class GPSProviderServiceImpl extends GPSInheritanceSkeleton
     ConfigurationObjectSet confSet = configurationObjectDetails.getConfigObjects().get(0);
 
     // Confirm the objType
-    if (!confSet.getObjType().equals(GPSHelper.NEARBYPOSITION_OBJECT_TYPE)) {
+    if (!confSet.getObjType().equals(GPSServiceInfo.NEARBYPOSITION_OBJECT_TYPE)) {
       return false;
     }
 
@@ -622,7 +622,7 @@ public class GPSProviderServiceImpl extends GPSInheritanceSkeleton
     // ok, we're good to go...
     // Load the Parameter Definitions from this configuration...
     PositionList pDefs = (PositionList) HelperArchive.getObjectBodyListFromArchive(
-        manager.getArchiveService(), GPSHelper.NEARBYPOSITION_OBJECT_TYPE,
+        manager.getArchiveService(), GPSServiceInfo.NEARBYPOSITION_OBJECT_TYPE,
         ConfigurationProviderSingleton.getDomain(), confSet.getObjInstIds());
 
     manager.reconfigureDefinitions(confSet.getObjInstIds(), pDefs); // Reconfigures the Manager
@@ -642,7 +642,7 @@ public class GPSProviderServiceImpl extends GPSInheritanceSkeleton
     LongList currentObjIds = new LongList();
     currentObjIds.addAll(defObjs.keySet());
     objsSet.setObjInstIds(currentObjIds);
-    objsSet.setObjType(GPSHelper.NEARBYPOSITION_OBJECT_TYPE);
+    objsSet.setObjType(GPSServiceInfo.NEARBYPOSITION_OBJECT_TYPE);
 
     ConfigurationObjectSetList list = new ConfigurationObjectSetList();
     list.add(objsSet);

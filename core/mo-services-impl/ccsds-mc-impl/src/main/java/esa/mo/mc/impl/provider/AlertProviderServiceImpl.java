@@ -70,6 +70,7 @@ import org.ccsds.moims.mo.mc.structures.ObjectInstancePairList;
 import org.ccsds.moims.mo.mc.structures.Severity;
 import esa.mo.reconfigurable.service.ReconfigurableService;
 import esa.mo.reconfigurable.service.ConfigurationChangeListener;
+import org.ccsds.moims.mo.mc.alert.AlertServiceInfo;
 
 /**
  * Alert service Provider.
@@ -118,7 +119,7 @@ public class AlertProviderServiceImpl extends AlertInheritanceSkeleton implement
             connection.closeAll();
         }
 
-        alertServiceProvider = connection.startService(AlertHelper.ALERT_SERVICE_NAME.toString(), AlertHelper.ALERT_SERVICE, false, this);
+        alertServiceProvider = connection.startService(AlertServiceInfo.ALERT_SERVICE_NAME.toString(), AlertHelper.ALERT_SERVICE, false, this);
 
         running = true;
         manager = new AlertManager(comServices);
@@ -211,13 +212,13 @@ public class AlertProviderServiceImpl extends AlertInheritanceSkeleton implement
                         ignoreList.add(groupId);
 
                         // workaround for empty groups of the wrong type
-                        if (idObjectTypes.isEmpty() && !group.getObjectType().equals(AlertHelper.ALERTIDENTITY_OBJECT_TYPE)) {
+                        if (idObjectTypes.isEmpty() && !group.getObjectType().equals(AlertServiceInfo.ALERTIDENTITY_OBJECT_TYPE)) {
                             invIndexList.add(new UInteger(index));
                         }
 
                         //checks if the given identityId is found in the internal Alert-list, if not its not a alert and invalid
                         for (GroupServiceImpl.IdObjectType idObjectType : idObjectTypes) {
-                            if (idObjectType.getObjectType().equals(AlertHelper.ALERTIDENTITY_OBJECT_TYPE)) {
+                            if (idObjectType.getObjectType().equals(AlertServiceInfo.ALERTIDENTITY_OBJECT_TYPE)) {
                                 final Long identityId = idObjectType.getId(); // requirement: 3.4.8.2.b
                                 //checks if the alertId referenced in the group is known
                                 if (!manager.existsIdentity(identityId)) {// requirement: 3.4.8.2.g
@@ -513,7 +514,7 @@ public class AlertProviderServiceImpl extends AlertInheritanceSkeleton implement
         // COM and Event usage 
         // requirement: 3.4.3.d
         // requirement: 3.4.7.b, 3.4.4.d, 3.4.4.f
-        Long alertEventObjId = manager.getEventService().generateAndStoreEvent(AlertHelper.ALERTEVENT_OBJECT_TYPE,
+        Long alertEventObjId = manager.getEventService().generateAndStoreEvent(AlertServiceInfo.ALERTEVENT_OBJECT_TYPE,
                 ConfigurationProviderSingleton.getDomain(), alertEvent, defId, source, interaction);
 
         // requirement: 3.4.5.a and 3.4.5.b and 3.4.5.c
@@ -522,7 +523,7 @@ public class AlertProviderServiceImpl extends AlertInheritanceSkeleton implement
         final URI uri = EventProviderServiceImpl.convertMALInteractionToURI(interaction);
 
         try {
-            manager.getEventService().publishEvent(uri, alertEventObjId, AlertHelper.ALERTEVENT_OBJECT_TYPE, defId, source, alertEvents);
+            manager.getEventService().publishEvent(uri, alertEventObjId, AlertServiceInfo.ALERTEVENT_OBJECT_TYPE, defId, source, alertEvents);
         } catch (IOException ex) {
             Logger.getLogger(AlertProviderServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -614,13 +615,13 @@ public class AlertProviderServiceImpl extends AlertInheritanceSkeleton implement
         ConfigurationObjectSet confSet1 = configurationObjectDetails.getConfigObjects().get(1);
 
         // Confirm the objTypes
-        if (!confSet0.getObjType().equals(AlertHelper.ALERTDEFINITION_OBJECT_TYPE) &&
-                !confSet1.getObjType().equals(AlertHelper.ALERTDEFINITION_OBJECT_TYPE)) {
+        if (!confSet0.getObjType().equals(AlertServiceInfo.ALERTDEFINITION_OBJECT_TYPE) &&
+                !confSet1.getObjType().equals(AlertServiceInfo.ALERTDEFINITION_OBJECT_TYPE)) {
             return false;
         }
 
-        if (!confSet0.getObjType().equals(AlertHelper.ALERTIDENTITY_OBJECT_TYPE) &&
-                !confSet1.getObjType().equals(AlertHelper.ALERTIDENTITY_OBJECT_TYPE)) {
+        if (!confSet0.getObjType().equals(AlertServiceInfo.ALERTIDENTITY_OBJECT_TYPE) &&
+                !confSet1.getObjType().equals(AlertServiceInfo.ALERTIDENTITY_OBJECT_TYPE)) {
             return false;
         }
 
@@ -640,19 +641,19 @@ public class AlertProviderServiceImpl extends AlertInheritanceSkeleton implement
 
         // ok, we're good to go...
         // Load the Parameter Definitions from this configuration...
-        ConfigurationObjectSet confSetDefs = (confSet0.getObjType().equals(AlertHelper.ALERTDEFINITION_OBJECT_TYPE)) ? confSet0 : confSet1;
+        ConfigurationObjectSet confSetDefs = (confSet0.getObjType().equals(AlertServiceInfo.ALERTDEFINITION_OBJECT_TYPE)) ? confSet0 : confSet1;
         
         AlertDefinitionDetailsList pDefs = (AlertDefinitionDetailsList) HelperArchive.getObjectBodyListFromArchive(
                 manager.getArchiveService(),
-                AlertHelper.ALERTDEFINITION_OBJECT_TYPE,
+                AlertServiceInfo.ALERTDEFINITION_OBJECT_TYPE,
                 ConfigurationProviderSingleton.getDomain(),
                 confSetDefs.getObjInstIds());
 
-        ConfigurationObjectSet confSetIdents = (confSet0.getObjType().equals(AlertHelper.ALERTIDENTITY_OBJECT_TYPE)) ? confSet0 : confSet1;
+        ConfigurationObjectSet confSetIdents = (confSet0.getObjType().equals(AlertServiceInfo.ALERTIDENTITY_OBJECT_TYPE)) ? confSet0 : confSet1;
         
         IdentifierList idents = (IdentifierList) HelperArchive.getObjectBodyListFromArchive(
                 manager.getArchiveService(),
-                AlertHelper.ALERTIDENTITY_OBJECT_TYPE,
+                AlertServiceInfo.ALERTIDENTITY_OBJECT_TYPE,
                 ConfigurationProviderSingleton.getDomain(),
                 confSetIdents.getObjInstIds());
         
@@ -666,8 +667,8 @@ public class AlertProviderServiceImpl extends AlertInheritanceSkeleton implement
     public ConfigurationObjectDetails getCurrentConfiguration() {
         // Create a Configuration Object with all the objs of the provider
         ConfigurationObjectSetList list = manager.getCurrentConfiguration();
-        list.get(0).setObjType(AlertHelper.ALERTIDENTITY_OBJECT_TYPE);
-        list.get(1).setObjType(AlertHelper.ALERTDEFINITION_OBJECT_TYPE);
+        list.get(0).setObjType(AlertServiceInfo.ALERTIDENTITY_OBJECT_TYPE);
+        list.get(1).setObjType(AlertServiceInfo.ALERTDEFINITION_OBJECT_TYPE);
         
         // Needs the Common API here!
         ConfigurationObjectDetails set = new ConfigurationObjectDetails();

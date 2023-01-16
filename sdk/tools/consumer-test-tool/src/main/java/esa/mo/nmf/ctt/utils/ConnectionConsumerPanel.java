@@ -44,16 +44,16 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
-import org.ccsds.moims.mo.com.archive.ArchiveHelper;
-import org.ccsds.moims.mo.com.event.EventHelper;
+import org.ccsds.moims.mo.com.archive.ArchiveServiceInfo;
+import org.ccsds.moims.mo.com.event.EventServiceInfo;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALInteractionException;
-import org.ccsds.moims.mo.mc.action.ActionHelper;
-import org.ccsds.moims.mo.mc.aggregation.AggregationHelper;
-import org.ccsds.moims.mo.mc.alert.AlertHelper;
-import org.ccsds.moims.mo.mc.check.CheckHelper;
-import org.ccsds.moims.mo.mc.parameter.ParameterHelper;
-import org.ccsds.moims.mo.mc.statistic.StatisticHelper;
+import org.ccsds.moims.mo.mc.action.ActionServiceInfo;
+import org.ccsds.moims.mo.mc.aggregation.AggregationServiceInfo;
+import org.ccsds.moims.mo.mc.alert.AlertServiceInfo;
+import org.ccsds.moims.mo.mc.check.CheckServiceInfo;
+import org.ccsds.moims.mo.mc.parameter.ParameterServiceInfo;
+import org.ccsds.moims.mo.mc.statistic.StatisticServiceInfo;
 
 /**
  *
@@ -537,7 +537,7 @@ public class ConnectionConsumerPanel extends javax.swing.JPanel {
         ArchiveConsumerServiceImpl archiveService = null;
         if (checkBoxArchive.isSelected()) {
             try {
-                details = connectionConsumer.getServicesDetails().get(ArchiveHelper.ARCHIVE_SERVICE_NAME);
+                details = connectionConsumer.getServicesDetails().get(ArchiveServiceInfo.ARCHIVE_SERVICE_NAME);
                 archiveService = new ArchiveConsumerServiceImpl(details);
 
                 ArchiveConsumerManagerPanel panel2 = new ArchiveConsumerManagerPanel(archiveService);
@@ -554,7 +554,7 @@ public class ConnectionConsumerPanel extends javax.swing.JPanel {
         EventConsumerServiceImpl eventService = null;
         if (checkBoxEvent.isSelected()) {
             try {
-                details = connectionConsumer.getServicesDetails().get(EventHelper.EVENT_SERVICE_NAME);
+                details = connectionConsumer.getServicesDetails().get(EventServiceInfo.EVENT_SERVICE_NAME);
                 eventService = new EventConsumerServiceImpl(details);
                 this.tabs.insertTab("Event service", null, new EventConsumerPanel(eventService, archiveService), "Event Tab", tabs.getTabCount());
             } catch (MALInteractionException ex) {
@@ -577,7 +577,7 @@ public class ConnectionConsumerPanel extends javax.swing.JPanel {
         // M&C services
         if (checkBoxAction.isSelected()) {
             try {
-                details = connectionConsumer.getServicesDetails().get(ActionHelper.ACTION_SERVICE_NAME);
+                details = connectionConsumer.getServicesDetails().get(ActionServiceInfo.ACTION_SERVICE_NAME);
                 ActionConsumerServiceImpl actionService = new ActionConsumerServiceImpl(details, comServices);
 
                 this.tabs.insertTab("Action service", null, new ActionConsumerPanel(actionService), "Action Tab", tabs.getTabCount());
@@ -595,7 +595,7 @@ public class ConnectionConsumerPanel extends javax.swing.JPanel {
 
         if (checkBoxParameter.isSelected()) {
             try {
-                details = connectionConsumer.getServicesDetails().get(ParameterHelper.PARAMETER_SERVICE_NAME);
+                details = connectionConsumer.getServicesDetails().get(ParameterServiceInfo.PARAMETER_SERVICE_NAME);
                 parameterService = new ParameterConsumerServiceImpl(details, comServices);
 
                 this.tabs.insertTab("Parameter service", null, new ParameterConsumerPanel(parameterService), "Parameter Tab", tabs.getTabCount());
@@ -614,7 +614,7 @@ public class ConnectionConsumerPanel extends javax.swing.JPanel {
 
         if (checkBoxAggregation.isSelected()) {
             try {
-                details = connectionConsumer.getServicesDetails().get(AggregationHelper.AGGREGATION_SERVICE_NAME);
+                details = connectionConsumer.getServicesDetails().get(AggregationServiceInfo.AGGREGATION_SERVICE_NAME);
                 AggregationConsumerServiceImpl aggregationService = new AggregationConsumerServiceImpl(details, comServices);
 
                 this.tabs.insertTab("Aggregation service", null, new AggregationConsumerPanel(aggregationService), "Aggregation Tab", tabs.getTabCount());
@@ -632,7 +632,7 @@ public class ConnectionConsumerPanel extends javax.swing.JPanel {
 
         if (checkBoxAlert.isSelected()) {
             try {
-                details = connectionConsumer.getServicesDetails().get(AlertHelper.ALERT_SERVICE_NAME);
+                details = connectionConsumer.getServicesDetails().get(AlertServiceInfo.ALERT_SERVICE_NAME);
                 AlertConsumerServiceImpl alertService = new AlertConsumerServiceImpl(details, comServices);
 
                 this.tabs.insertTab("Alert service", null, new AlertConsumerPanel(alertService), "Alert Tab", tabs.getTabCount());
@@ -664,7 +664,7 @@ public class ConnectionConsumerPanel extends javax.swing.JPanel {
          */
         if (checkBoxStatistic.isSelected()) {
             try {
-                details = connectionConsumer.getServicesDetails().get(StatisticHelper.STATISTIC_SERVICE_NAME);
+                details = connectionConsumer.getServicesDetails().get(StatisticServiceInfo.STATISTIC_SERVICE_NAME);
                 StatisticConsumerServiceImpl statisticService = new StatisticConsumerServiceImpl(details, comServices);
 
                 this.tabs.insertTab("Statistic service", null, new StatisticConsumerPanel(statisticService, parameterService), "Statistic Tab", tabs.getTabCount());
@@ -875,56 +875,54 @@ public class ConnectionConsumerPanel extends javax.swing.JPanel {
         SingleConnectionDetails details;
 
         // COM services
-        details = connectionConsumer.getServicesDetails().get(EventHelper.EVENT_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(EventServiceInfo.EVENT_SERVICE_NAME);
         if (details != null) {
-            this.connectionConsumer.getServicesDetails().get(EventHelper.EVENT_SERVICE_NAME).setProviderURI(uriServiceEvent.getText());
-            this.connectionConsumer.getServicesDetails().get(EventHelper.EVENT_SERVICE_NAME).setBrokerURI(uriBrokerEvent.getText());
+            this.connectionConsumer.getServicesDetails().get(EventServiceInfo.EVENT_SERVICE_NAME).setProviderURI(uriServiceEvent.getText());
+            this.connectionConsumer.getServicesDetails().get(EventServiceInfo.EVENT_SERVICE_NAME).setBrokerURI(uriBrokerEvent.getText());
         }
 
-        details = connectionConsumer.getServicesDetails().get(ArchiveHelper.ARCHIVE_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(ArchiveServiceInfo.ARCHIVE_SERVICE_NAME);
         if (details != null) {
-            this.connectionConsumer.getServicesDetails().get(ArchiveHelper.ARCHIVE_SERVICE_NAME).setProviderURI(uriServiceArchive.getText());
-            this.connectionConsumer.getServicesDetails().get(ArchiveHelper.ARCHIVE_SERVICE_NAME).setBrokerURI(uriBrokerArchive.getText());
+            this.connectionConsumer.getServicesDetails().get(ArchiveServiceInfo.ARCHIVE_SERVICE_NAME).setProviderURI(uriServiceArchive.getText());
+            this.connectionConsumer.getServicesDetails().get(ArchiveServiceInfo.ARCHIVE_SERVICE_NAME).setBrokerURI(uriBrokerArchive.getText());
         }
         
         // M&C services
-        details = connectionConsumer.getServicesDetails().get(ActionHelper.ACTION_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(ActionServiceInfo.ACTION_SERVICE_NAME);
         if (details != null) {
-            this.connectionConsumer.getServicesDetails().get(ActionHelper.ACTION_SERVICE_NAME).setProviderURI(uriServiceAction.getText());
-            this.connectionConsumer.getServicesDetails().get(ActionHelper.ACTION_SERVICE_NAME).setBrokerURI(uriBrokerAction.getText());
+            this.connectionConsumer.getServicesDetails().get(ActionServiceInfo.ACTION_SERVICE_NAME).setProviderURI(uriServiceAction.getText());
+            this.connectionConsumer.getServicesDetails().get(ActionServiceInfo.ACTION_SERVICE_NAME).setBrokerURI(uriBrokerAction.getText());
         }
 
-        details = connectionConsumer.getServicesDetails().get(ParameterHelper.PARAMETER_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(ParameterServiceInfo.PARAMETER_SERVICE_NAME);
         if (details != null) {
-            this.connectionConsumer.getServicesDetails().get(ParameterHelper.PARAMETER_SERVICE_NAME).setProviderURI(uriServiceParameter.getText());
-            this.connectionConsumer.getServicesDetails().get(ParameterHelper.PARAMETER_SERVICE_NAME).setBrokerURI(uriBrokerParameter.getText());
+            this.connectionConsumer.getServicesDetails().get(ParameterServiceInfo.PARAMETER_SERVICE_NAME).setProviderURI(uriServiceParameter.getText());
+            this.connectionConsumer.getServicesDetails().get(ParameterServiceInfo.PARAMETER_SERVICE_NAME).setBrokerURI(uriBrokerParameter.getText());
         }
 
-        details = connectionConsumer.getServicesDetails().get(AlertHelper.ALERT_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(AlertServiceInfo.ALERT_SERVICE_NAME);
         if (details != null) {
-            this.connectionConsumer.getServicesDetails().get(AlertHelper.ALERT_SERVICE_NAME).setProviderURI(uriServiceAlert.getText());
-            this.connectionConsumer.getServicesDetails().get(AlertHelper.ALERT_SERVICE_NAME).setBrokerURI(uriBrokerAlert.getText());
+            this.connectionConsumer.getServicesDetails().get(AlertServiceInfo.ALERT_SERVICE_NAME).setProviderURI(uriServiceAlert.getText());
+            this.connectionConsumer.getServicesDetails().get(AlertServiceInfo.ALERT_SERVICE_NAME).setBrokerURI(uriBrokerAlert.getText());
         }
 
-        details = connectionConsumer.getServicesDetails().get(CheckHelper.CHECK_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(CheckServiceInfo.CHECK_SERVICE_NAME);
         if (details != null) {
-            this.connectionConsumer.getServicesDetails().get(CheckHelper.CHECK_SERVICE_NAME).setProviderURI(uriServiceCheck.getText());
-            this.connectionConsumer.getServicesDetails().get(CheckHelper.CHECK_SERVICE_NAME).setBrokerURI(uriBrokerCheck.getText());
+            this.connectionConsumer.getServicesDetails().get(CheckServiceInfo.CHECK_SERVICE_NAME).setProviderURI(uriServiceCheck.getText());
+            this.connectionConsumer.getServicesDetails().get(CheckServiceInfo.CHECK_SERVICE_NAME).setBrokerURI(uriBrokerCheck.getText());
         }
 
-        details = connectionConsumer.getServicesDetails().get(StatisticHelper.STATISTIC_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(StatisticServiceInfo.STATISTIC_SERVICE_NAME);
         if (details != null) {
-            this.connectionConsumer.getServicesDetails().get(StatisticHelper.STATISTIC_SERVICE_NAME).setProviderURI(uriServiceStatistic.getText());
-            this.connectionConsumer.getServicesDetails().get(StatisticHelper.STATISTIC_SERVICE_NAME).setBrokerURI(uriBrokerStatistic.getText());
+            this.connectionConsumer.getServicesDetails().get(StatisticServiceInfo.STATISTIC_SERVICE_NAME).setProviderURI(uriServiceStatistic.getText());
+            this.connectionConsumer.getServicesDetails().get(StatisticServiceInfo.STATISTIC_SERVICE_NAME).setBrokerURI(uriBrokerStatistic.getText());
         }
 
-        details = connectionConsumer.getServicesDetails().get(AggregationHelper.AGGREGATION_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(AggregationServiceInfo.AGGREGATION_SERVICE_NAME);
         if (details != null) {
-            this.connectionConsumer.getServicesDetails().get(AggregationHelper.AGGREGATION_SERVICE_NAME).setProviderURI(uriServiceAggregation.getText());
-            this.connectionConsumer.getServicesDetails().get(AggregationHelper.AGGREGATION_SERVICE_NAME).setBrokerURI(uriBrokerAggregation.getText());
+            this.connectionConsumer.getServicesDetails().get(AggregationServiceInfo.AGGREGATION_SERVICE_NAME).setProviderURI(uriServiceAggregation.getText());
+            this.connectionConsumer.getServicesDetails().get(AggregationServiceInfo.AGGREGATION_SERVICE_NAME).setBrokerURI(uriBrokerAggregation.getText());
         }
-        
-
     }
 
     private void refreshTextBoxAdresses() {
@@ -932,50 +930,50 @@ public class ConnectionConsumerPanel extends javax.swing.JPanel {
         SingleConnectionDetails details;
 
         // COM services
-        details = connectionConsumer.getServicesDetails().get(EventHelper.EVENT_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(EventServiceInfo.EVENT_SERVICE_NAME);
         if (details != null) {
             this.uriServiceEvent.setText(details.getProviderURI().toString());
             this.uriBrokerEvent.setText(details.getBrokerURI().toString());
         }
 
-        details = connectionConsumer.getServicesDetails().get(ArchiveHelper.ARCHIVE_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(ArchiveServiceInfo.ARCHIVE_SERVICE_NAME);
         if (details != null) {
             this.uriServiceArchive.setText(details.getProviderURI().toString());
             this.uriBrokerArchive.setText(details.getBrokerURI().toString());
         }
 
         // M&C services
-        details = connectionConsumer.getServicesDetails().get(ActionHelper.ACTION_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(ActionServiceInfo.ACTION_SERVICE_NAME);
         if (details != null) {
             this.uriServiceAction.setText(details.getProviderURI().toString());
             this.uriBrokerAction.setText(details.getBrokerURI().toString());
         }
 
-        details = connectionConsumer.getServicesDetails().get(ParameterHelper.PARAMETER_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(ParameterServiceInfo.PARAMETER_SERVICE_NAME);
         if (details != null) {
             this.uriServiceParameter.setText(details.getProviderURI().toString());
             this.uriBrokerParameter.setText(details.getBrokerURI().toString());
         }
 
-        details = connectionConsumer.getServicesDetails().get(AlertHelper.ALERT_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(AlertServiceInfo.ALERT_SERVICE_NAME);
         if (details != null) {
             this.uriServiceAlert.setText(details.getProviderURI().toString());
             this.uriBrokerAlert.setText(details.getBrokerURI().toString());
         }
 
-        details = connectionConsumer.getServicesDetails().get(CheckHelper.CHECK_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(CheckServiceInfo.CHECK_SERVICE_NAME);
         if (details != null) {
             this.uriServiceCheck.setText(details.getProviderURI().toString());
             this.uriBrokerCheck.setText(details.getBrokerURI().toString());
         }
 
-        details = connectionConsumer.getServicesDetails().get(StatisticHelper.STATISTIC_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(StatisticServiceInfo.STATISTIC_SERVICE_NAME);
         if (details != null) {
             this.uriServiceStatistic.setText(details.getProviderURI().toString());
             this.uriBrokerStatistic.setText(details.getBrokerURI().toString());
         }
 
-        details = connectionConsumer.getServicesDetails().get(AggregationHelper.AGGREGATION_SERVICE_NAME);
+        details = connectionConsumer.getServicesDetails().get(AggregationServiceInfo.AGGREGATION_SERVICE_NAME);
         if (details != null) {
             this.uriServiceAggregation.setText(details.getProviderURI().toString());
             this.uriBrokerAggregation.setText(details.getBrokerURI().toString());

@@ -34,7 +34,7 @@ import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.helpertools.connections.ConnectionConsumer;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
-import org.ccsds.moims.mo.mc.check.CheckHelper;
+import org.ccsds.moims.mo.mc.check.CheckServiceInfo;
 
 /**
  *
@@ -113,7 +113,7 @@ public class CheckLinkMonitorManager {
         if (checkLinksToNotify != null) {
             for (Long checkLinkToNotify : checkLinksToNotify) {
                 checkManager.executeCheck(checkLinkToNotify, null, false, false,
-                        new ObjectId(CheckHelper.CHECKLINK_OBJECT_TYPE, new ObjectKey(domain, sourceCheckLinkId)));
+                        new ObjectId(CheckServiceInfo.CHECKLINK_OBJECT_TYPE, new ObjectKey(domain, sourceCheckLinkId)));
             }
         }
     }

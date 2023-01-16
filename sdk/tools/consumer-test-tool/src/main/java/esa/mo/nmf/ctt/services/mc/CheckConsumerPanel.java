@@ -44,7 +44,7 @@ import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.StringList;
-import org.ccsds.moims.mo.mc.check.CheckHelper;
+import org.ccsds.moims.mo.mc.check.CheckServiceInfo;
 import org.ccsds.moims.mo.mc.check.structures.CheckDefinitionDetails;
 import org.ccsds.moims.mo.mc.check.structures.CheckDefinitionDetailsList;
 import org.ccsds.moims.mo.mc.check.structures.CheckLinkDetails;
@@ -56,7 +56,7 @@ import org.ccsds.moims.mo.mc.check.structures.ConstantCheckDefinition;
 import org.ccsds.moims.mo.mc.check.structures.DeltaCheckDefinition;
 import org.ccsds.moims.mo.mc.check.structures.LimitCheckDefinition;
 import org.ccsds.moims.mo.mc.check.structures.ReferenceCheckDefinition;
-import org.ccsds.moims.mo.mc.parameter.ParameterHelper;
+import org.ccsds.moims.mo.mc.parameter.ParameterServiceInfo;
 import org.ccsds.moims.mo.mc.structures.ObjectInstancePairList;
 
 /**
@@ -84,7 +84,7 @@ public class CheckConsumerPanel extends javax.swing.JPanel {
         jScrollPane3.setViewportView(checkLinksTable);
 
         this.serviceMCCheck = serviceMCCheck;
-        objTypeCheckDefinition = CheckHelper.CHECKIDENTITY_OBJECT_TYPE;
+        objTypeCheckDefinition = CheckServiceInfo.CHECKIDENTITY_OBJECT_TYPE;
         
         this.listDefinitionAllButtonActionPerformed(null);
     
@@ -611,7 +611,7 @@ public class CheckConsumerPanel extends javax.swing.JPanel {
             }
             
             details.setRelated(checkDefsTable.getSelectedCOMObject().getObjectId());
-            details.setSource(new ObjectId(ParameterHelper.PARAMETERDEFINITION_OBJECT_TYPE, 
+            details.setSource(new ObjectId(ParameterServiceInfo.PARAMETERDEFINITION_OBJECT_TYPE, 
                     new ObjectKey(serviceMCCheck.getConnectionDetails().getDomain(), new Long (1))));
 
             MOWindow linksWindow = new MOWindow(details, true);
@@ -627,7 +627,7 @@ public class CheckConsumerPanel extends javax.swing.JPanel {
             Thread.sleep(500);
             // Get the stored Action Definition from the Archive
             ArchivePersistenceObject comObject = HelperArchive.getArchiveCOMObject(this.serviceMCCheck.getCOMServices().getArchiveService().getArchiveStub(),
-                    CheckHelper.CHECKLINK_OBJECT_TYPE, serviceMCCheck.getConnectionDetails().getDomain(), objIds.get(0).getObjDefInstanceId());
+                    CheckServiceInfo.CHECKLINK_OBJECT_TYPE, serviceMCCheck.getConnectionDetails().getDomain(), objIds.get(0).getObjDefInstanceId());
 
             // Add the Check Link to the table
             checkLinksTable.addEntry(new Identifier("A check!!"), comObject);

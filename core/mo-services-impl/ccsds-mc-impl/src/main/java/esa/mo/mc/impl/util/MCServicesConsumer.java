@@ -34,12 +34,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALInteractionException;
-import org.ccsds.moims.mo.mc.action.ActionHelper;
-import org.ccsds.moims.mo.mc.aggregation.AggregationHelper;
-import org.ccsds.moims.mo.mc.alert.AlertHelper;
-import org.ccsds.moims.mo.mc.check.CheckHelper;
-import org.ccsds.moims.mo.mc.parameter.ParameterHelper;
-import org.ccsds.moims.mo.mc.statistic.StatisticHelper;
+import org.ccsds.moims.mo.mc.action.ActionServiceInfo;
+import org.ccsds.moims.mo.mc.aggregation.AggregationServiceInfo;
+import org.ccsds.moims.mo.mc.alert.AlertServiceInfo;
+import org.ccsds.moims.mo.mc.check.CheckServiceInfo;
+import org.ccsds.moims.mo.mc.parameter.ParameterServiceInfo;
+import org.ccsds.moims.mo.mc.statistic.StatisticServiceInfo;
 
 /**
  *
@@ -65,37 +65,37 @@ public class MCServicesConsumer {
 
         try {
             // Initialize the Action service
-            details = connectionConsumer.getServicesDetails().get(ActionHelper.ACTION_SERVICE_NAME);
+            details = connectionConsumer.getServicesDetails().get(ActionServiceInfo.ACTION_SERVICE_NAME);
             if (details != null) {
                 actionService = new ActionConsumerServiceImpl(details, comServices);
             }
 
             // Initialize the Parameter service
-            details = connectionConsumer.getServicesDetails().get(ParameterHelper.PARAMETER_SERVICE_NAME);
+            details = connectionConsumer.getServicesDetails().get(ParameterServiceInfo.PARAMETER_SERVICE_NAME);
             if (details != null) {
                 parameterService = new ParameterConsumerServiceImpl(details, comServices);
             }
 
             // Initialize the Alert service
-            details = connectionConsumer.getServicesDetails().get(AlertHelper.ALERT_SERVICE_NAME);
+            details = connectionConsumer.getServicesDetails().get(AlertServiceInfo.ALERT_SERVICE_NAME);
             if (details != null) {
                 alertService = new AlertConsumerServiceImpl(details, comServices);
             }
 
             // Initialize the Check service
-            details = connectionConsumer.getServicesDetails().get(CheckHelper.CHECK_SERVICE_NAME);
+            details = connectionConsumer.getServicesDetails().get(CheckServiceInfo.CHECK_SERVICE_NAME);
             if (details != null) {
                 checkService = new CheckConsumerServiceImpl(details, comServices);
             }
 
             // Initialize the Statistic service
-            details = connectionConsumer.getServicesDetails().get(StatisticHelper.STATISTIC_SERVICE_NAME);
+            details = connectionConsumer.getServicesDetails().get(StatisticServiceInfo.STATISTIC_SERVICE_NAME);
             if (details != null) {
                 statisticService = new StatisticConsumerServiceImpl(details, comServices);
             }
 
             // Initialize the Aggregation service
-            details = connectionConsumer.getServicesDetails().get(AggregationHelper.AGGREGATION_SERVICE_NAME);
+            details = connectionConsumer.getServicesDetails().get(AggregationServiceInfo.AGGREGATION_SERVICE_NAME);
             if (details != null) {
                 aggregationService = new AggregationConsumerServiceImpl(details, comServices);
             }

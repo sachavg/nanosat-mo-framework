@@ -44,6 +44,7 @@ import org.ccsds.moims.mo.mal.structures.UIntegerList;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.mc.MCHelper;
 import org.ccsds.moims.mo.mc.action.ActionHelper;
+import org.ccsds.moims.mo.mc.action.ActionServiceInfo;
 import org.ccsds.moims.mo.mc.action.consumer.ActionAdapter;
 import org.ccsds.moims.mo.mc.action.provider.ActionInheritanceSkeleton;
 import org.ccsds.moims.mo.mc.action.structures.ActionCreationRequestList;
@@ -105,7 +106,7 @@ public class ActionProxyServiceImpl extends ActionInheritanceSkeleton {
         }
 
         Random random = new Random();
-        String name = ActionHelper.ACTION_SERVICE_NAME.toString() + "_" + random.nextInt();
+        String name = ActionServiceInfo.ACTION_SERVICE_NAME.toString() + "_" + random.nextInt();
         actionServiceProvider = connection.startService(name, ActionHelper.ACTION_SERVICE, false, this);
 
         running = true;
