@@ -56,6 +56,7 @@ import org.ccsds.moims.mo.com.archive.structures.CompositeFilterSetList;
 import org.ccsds.moims.mo.com.archive.structures.ExpressionOperator;
 import org.ccsds.moims.mo.com.archive.structures.PaginationFilter;
 import org.ccsds.moims.mo.com.archive.structures.PaginationFilterList;
+import org.ccsds.moims.mo.com.archive.structures.QueryFilterList;
 import org.ccsds.moims.mo.com.structures.ObjectType;
 import org.ccsds.moims.mo.mal.MALElementsRegistry;
 import org.ccsds.moims.mo.mal.MALException;
@@ -710,7 +711,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
         }
 
         // Composite Filter
-        CompositeFilterSetList compositeFilters = new CompositeFilterSetList();
+        QueryFilterList compositeFilters = new QueryFilterList();
         CompositeFilterSet compositeFilterSet = new CompositeFilterSet();
         CompositeFilterList compositeFilterList = new CompositeFilterList();
         compositeFilterList.add(ArchiveConsumerManagerPanel.generateCompositeFilter());
@@ -718,7 +719,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
         compositeFilters.add(compositeFilterSet);
         MOWindow genFilter = new MOWindow(compositeFilters, true);
         try {
-            compositeFilters = (CompositeFilterSetList) genFilter.getObject();
+            compositeFilters = (QueryFilterList) genFilter.getObject();
         } catch (InterruptedIOException ex) {
             return;
         }
@@ -840,7 +841,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
         }
 
         // Composite Filter
-        CompositeFilterSetList compositeFilters = new CompositeFilterSetList();
+        QueryFilterList compositeFilters = new QueryFilterList();
         CompositeFilterSet compositeFilterSet = new CompositeFilterSet();
         CompositeFilterList compositeFilterList = new CompositeFilterList();
         compositeFilterList.add(ArchiveConsumerManagerPanel.generateCompositeFilter());
@@ -848,7 +849,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
         compositeFilters.add(compositeFilterSet);
         MOWindow genFilter = new MOWindow(compositeFilters, true);
         try {
-            compositeFilters = (CompositeFilterSetList) genFilter.getObject();
+            compositeFilters = (QueryFilterList) genFilter.getObject();
         } catch (InterruptedIOException ex) {
             return;
         }
@@ -980,7 +981,7 @@ public class ArchiveConsumerManagerPanel extends javax.swing.JPanel {
             return;
         }
 
-        PaginationFilterList list = new PaginationFilterList();
+        QueryFilterList list = new QueryFilterList();
         list.add(filter);
 
         try {

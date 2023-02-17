@@ -201,7 +201,7 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
       AttitudeModeList attitudeModeList;
       if (activeAttitudeMode == null) {
         // Pick a dummy concrete type type just to fill it with a null value
-        attitudeModeList = new AttitudeModeBDotList();
+        attitudeModeList = new AttitudeModeList();
       } else {
         attitudeModeList = (AttitudeModeList) MALElementsRegistry.elementToElementList(
             activeAttitudeMode);
