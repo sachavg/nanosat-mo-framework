@@ -25,6 +25,7 @@ import java.io.OutputStream;
 import java.math.BigInteger;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.structures.Blob;
+import org.ccsds.moims.mo.mal.structures.Element;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.ULong;
 import org.ccsds.moims.mo.mal.structures.URI;
@@ -168,6 +169,27 @@ public class BinaryEncoder extends GENEncoder
       throw new MALException(ENCODING_EXCEPTION_STR, ex);
     }
   }
+
+    @Override
+    public void encodeAbstractElement(final Element value) throws MALException {
+        encodeLong(value.getShortForm());
+        value.encode(this);
+    }
+
+    @Override
+    public void encodeNullableAbstractElement(final Element value) throws MALException {
+        try {
+            if (value != null) {
+                outputStream.addNotNull();
+                encodeLong(value.getShortForm());
+                value.encode(this);
+            } else {
+                outputStream.addIsNull();
+            }
+        } catch (IOException ex) {
+            throw new MALException(ENCODING_EXCEPTION_STR, ex);
+        }
+    }
 
   /**
    * Internal class for accessing the binary stream. Overridden by sub-classes to alter the low level encoding.

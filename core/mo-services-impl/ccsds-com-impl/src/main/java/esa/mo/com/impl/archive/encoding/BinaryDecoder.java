@@ -27,6 +27,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.ccsds.moims.mo.mal.MALContextFactory;
 
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALListDecoder;
@@ -161,6 +162,32 @@ public class BinaryDecoder extends GENDecoder
     BinaryBufferHolder dSourceBuffer = (BinaryBufferHolder)sourceBuffer;
     return Arrays.copyOfRange(dSourceBuffer.buf.buf, dSourceBuffer.buf.offset, dSourceBuffer.buf.contentLength);
   }
+
+    @Override
+    public Element decodeAbstractElement() throws MALException {
+        Long sfp = decodeLong();
+        try {
+            Element type = MALContextFactory.getElementsRegistry().createElement(sfp);
+            return type.decode(this);
+        } catch (Exception ex) {
+            throw new MALException("The Element could not be created!", ex);
+        }
+    }
+
+    @Override
+    public Element decodeNullableAbstractElement() throws MALException {
+        if (sourceBuffer.isNotNull()) {
+            Long sfp = decodeLong();
+            try {
+                Element type = MALContextFactory.getElementsRegistry().createElement(sfp);
+                return type.decode(this);
+            } catch (Exception ex) {
+                throw new MALException("The Element could not be created!", ex);
+            }
+        }
+
+        return null;
+    }
 
   /**
    * Internal class that is used to hold the byte buffer. Derived classes should extend this (and replace it in the
