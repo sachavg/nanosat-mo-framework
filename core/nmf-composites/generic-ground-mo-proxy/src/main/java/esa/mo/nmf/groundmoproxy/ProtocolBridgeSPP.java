@@ -203,7 +203,7 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
                 sourceHdr.getServiceArea(),
                 sourceHdr.getService(),
                 sourceHdr.getOperation(),
-                sourceHdr.getAreaVersion(),
+                sourceHdr.getServiceVersion(),
                 sourceHdr.getIsErrorMessage(),
                 srcMessage.getQoSProperties(),
                 objList);
@@ -250,7 +250,7 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
                 sourceHdr.getServiceArea(),
                 sourceHdr.getService(),
                 sourceHdr.getOperation(),
-                sourceHdr.getAreaVersion(),
+                sourceHdr.getServiceVersion(),
                 sourceHdr.getIsErrorMessage(),
                 srcMessage.getQoSProperties(),
                 objList);
