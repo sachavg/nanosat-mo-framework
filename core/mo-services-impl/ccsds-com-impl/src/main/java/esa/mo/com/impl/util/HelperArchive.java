@@ -130,8 +130,8 @@ public class HelperArchive {
         return generateArchiveDetailsList(
             related,
             source,
-            interaction.getMessageHeader().getNetworkZone(),
-            interaction.getMessageHeader().getURIFrom());
+            null,
+            interaction.getMessageHeader().getFrom());
     }
 
     /**

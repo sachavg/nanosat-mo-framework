@@ -607,7 +607,7 @@ public class AppsLauncherManager extends DefinitionsManager
         ConfigurationProviderSingleton.getDomain(), null, appInstId, eventSource, interaction.
         getInteraction());
 
-    final URI uri = interaction.getInteraction().getMessageHeader().getURIFrom();
+    final URI uri = interaction.getInteraction().getMessageHeader().getFrom();
 
     try {
       IdentifierList eventBodies = new IdentifierList(1);

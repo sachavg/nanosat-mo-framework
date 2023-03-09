@@ -143,9 +143,9 @@ public class ConfigurationEventAdapter extends EventAdapter implements Serializa
                 ArchiveDetails archiveDetails = new ArchiveDetails();
                 archiveDetails.setInstId(new Long(0));
                 archiveDetails.setDetails(new ObjectDetails(entityKey3, null));  // Event objId
-                archiveDetails.setNetwork(msgHeader.getNetworkZone());
+                //archiveDetails.setNetwork(msgHeader.getNetworkZone());
                 archiveDetails.setTimestamp(HelperTime.getTimestamp());
-                archiveDetails.setProvider(msgHeader.getURIFrom());
+                archiveDetails.setProvider(msgHeader.getFrom());
 
                 ArchiveDetailsList archiveDetailsList = new ArchiveDetailsList();
                 archiveDetailsList.add(archiveDetails);

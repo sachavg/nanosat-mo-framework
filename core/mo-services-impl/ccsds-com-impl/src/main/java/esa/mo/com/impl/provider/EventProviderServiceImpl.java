@@ -232,7 +232,7 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
 
         if (interaction != null) {
             if (interaction.getMessageHeader() != null) {
-                sourceURI = interaction.getMessageHeader().getURITo();
+                sourceURI = interaction.getMessageHeader().getTo();
             }
         }
 
@@ -434,8 +434,8 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
         URI uri = null;
 
         if (interaction != null) {
-            network = interaction.getMessageHeader().getNetworkZone();
-            uri = interaction.getMessageHeader().getURIFrom();
+            //network = interaction.getMessageHeader().getNetworkZone();
+            uri = interaction.getMessageHeader().getFrom();
         }
 
         if (this.archiveService == null) {
@@ -507,7 +507,7 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
             final ObjectType objType, final ElementList events, final MALInteraction interaction) {
         if (interaction != null) {
             return this.storeEventOnArchive(objectDetailsList, domain, objType,
-                    events, interaction.getMessageHeader().getURIFrom(), interaction.getMessageHeader().getNetworkZone());
+                    events, interaction.getMessageHeader().getFrom(), null);
         } else {
             return this.storeEventOnArchive(objectDetailsList, domain, objType,
                     events, null, null);
@@ -581,7 +581,7 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
     public static URI convertMALInteractionToURI(final MALInteraction interaction) {
         if (interaction != null) {
             if (interaction.getMessageHeader() != null) {
-                return interaction.getMessageHeader().getURITo();
+                return interaction.getMessageHeader().getTo();
             }
         }
 

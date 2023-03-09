@@ -67,7 +67,7 @@ public class CheckLinkMonitorAdapter extends EventAdapter {
             ObjectDetailsList _ObjectDetailsList2, ElementList elementList, Map qosProperties) {
         Logger.getLogger(CheckLinkMonitorAdapter.class.getName()).log(Level.INFO, "monitorEvents-update received");
         for (ObjectDetails objectDetails : _ObjectDetailsList2) {
-            manager.updatedCheckLinkEvaluation(objectDetails.getRelated(), msgHeader.getDomain());
+            manager.updatedCheckLinkEvaluation(objectDetails.getRelated(), null);
         }
         
         super.monitorEventNotifyReceived(msgHeader, _Identifier0, _UpdateHeaderList1, _ObjectDetailsList2, elementList, qosProperties);

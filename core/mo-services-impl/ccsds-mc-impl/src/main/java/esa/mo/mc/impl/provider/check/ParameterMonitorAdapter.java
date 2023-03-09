@@ -81,7 +81,7 @@ public class ParameterMonitorAdapter extends ParameterAdapter {
         final ParameterValue newParamValue = parameterValueList.get(0);
         final Long key4 = (Long) HelperAttributes.attribute2JavaType(keyValues.get(3));
         final ObjectId paramValObjId = new ObjectId(ParameterServiceInfo.PARAMETERVALUEINSTANCE_OBJECT_TYPE, 
-                new ObjectKey(msgHeader.getDomain(), key4));
+                new ObjectKey(null, key4));
 
         //set as the current parameterValue
         paramMonitorManager.setParameterValue(paramIdentityId, newParamValue, paramValObjId);

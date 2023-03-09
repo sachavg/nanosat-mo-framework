@@ -396,7 +396,7 @@ public final class ActionManager extends MCManager {
                 try {
                     final ObjectKey key = new ObjectKey(ConfigurationProviderSingleton.getDomain(), actionInstId);
 
-                    URI uriTo = interaction.getMessageHeader().getURITo();
+                    URI uriTo = interaction.getMessageHeader().getTo();
                     URI uriNextDestination = null;
                     String[] nodes = uriTo.toString().split("@");
 
@@ -407,7 +407,7 @@ public final class ActionManager extends MCManager {
                     // Reception
                     ObjectId sourceRec = new ObjectId(ActionServiceInfo.ACTIONINSTANCE_OBJECT_TYPE, key);
                     getActivityTrackingService().publishReceptionEvent(new URI(nodes[0]),
-                            interaction.getMessageHeader().getNetworkZone(), true, null, uriNextDestination, sourceRec);
+                            null, true, null, uriNextDestination, sourceRec);
 
                     UInteger errorNumber;
 
@@ -422,7 +422,7 @@ public final class ActionManager extends MCManager {
                     // Publish forward success
                     ObjectId sourceFor = new ObjectId(ActionServiceInfo.ACTIONINSTANCE_OBJECT_TYPE, key);
                     getActivityTrackingService().publishForwardEvent(new URI(nodes[0]),
-                            interaction.getMessageHeader().getNetworkZone(), (errorNumber == null),
+                            null, (errorNumber == null),
                             null, uriNextDestination, sourceFor);
                 } catch (MALInteractionException ex) {
                     Logger.getLogger(ActionManager.class.getName()).log(Level.SEVERE, null, ex);
