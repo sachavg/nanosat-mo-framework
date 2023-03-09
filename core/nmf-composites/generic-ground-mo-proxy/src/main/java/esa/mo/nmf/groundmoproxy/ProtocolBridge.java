@@ -101,7 +101,7 @@ public class ProtocolBridge {
         @Override
         public void onMessage(MALEndpoint callingEndpoint, MALMessage srcMessage) {
             try {
-                System.out.println("Received message from: " + srcMessage.getHeader().getURIFrom().getValue());
+                System.out.println("Received message from: " + srcMessage.getHeader().getFrom().getValue());
 
                 // copy source message into destination message format
                 MALMessage dMsg = cloneForwardMessage(destination, srcMessage);
@@ -135,24 +135,18 @@ public class ProtocolBridge {
         MALMessageHeader sourceHdr = srcMessage.getHeader();
         MALMessageBody body = srcMessage.getBody();
 
-        System.out.println("cloneForwardMessage from : " + sourceHdr.getURIFrom() + "                to  :    " + sourceHdr.getURITo());
-        String endpointUriPart = sourceHdr.getURITo().getValue();
+        System.out.println("cloneForwardMessage from : " + sourceHdr.getFrom() + "                to  :    " + sourceHdr.getTo());
+        String endpointUriPart = sourceHdr.getTo().getValue();
         final int iSecond = endpointUriPart.indexOf("@");
         endpointUriPart = endpointUriPart.substring(iSecond + 1, endpointUriPart.length());
         URI to = new URI(endpointUriPart);
-        URI from = new URI(destination.getURI().getValue() + "@" + sourceHdr.getURIFrom().getValue());
+        URI from = new URI(destination.getURI().getValue() + "@" + sourceHdr.getFrom().getValue());
         System.out.println("cloneForwardMessage      : " + from + "                to  :    " + to);
 
         MALMessage destMessage = destination.createMessage(
                 sourceHdr.getAuthenticationId(),
                 to,
                 sourceHdr.getTimestamp(),
-                sourceHdr.getQoSlevel(),
-                sourceHdr.getPriority(),
-                sourceHdr.getDomain(),
-                sourceHdr.getNetworkZone(),
-                sourceHdr.getSession(),
-                sourceHdr.getSessionName(),
                 sourceHdr.getInteractionType(),
                 sourceHdr.getInteractionStage(),
                 sourceHdr.getTransactionId(),
@@ -161,10 +155,11 @@ public class ProtocolBridge {
                 sourceHdr.getOperation(),
                 sourceHdr.getServiceVersion(),
                 sourceHdr.getIsErrorMessage(),
+                sourceHdr.getSupplements(),
                 srcMessage.getQoSProperties(),
                 body.getEncodedBody());
 
-        destMessage.getHeader().setURIFrom(from);
+        destMessage.getHeader().setFrom(from);
 
         return destMessage;
     }

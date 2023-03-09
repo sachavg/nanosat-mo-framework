@@ -129,7 +129,7 @@ public class ParameterProxyServiceImpl extends ParameterInheritanceSkeleton {
         // between the consumer part of the proxy to the provider on Space
         
         //  Check the interaction object to know to whom the message should be forwarded to...
-        URI uriTo = interaction.getMessageHeader().getURITo();
+        URI uriTo = interaction.getMessageHeader().getTo();
 
         // Remove the first part of the uriTo
         URI uriOfSpaceProvider = this.removePrefix(uriTo);

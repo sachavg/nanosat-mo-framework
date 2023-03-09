@@ -100,13 +100,13 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
         @Override
         public void onMessage(MALEndpoint callingEndpoint, MALMessage srcMessage) {
             try {
-                String uriFrom = srcMessage.getHeader().getURIFrom().getValue();
+                String uriFrom = srcMessage.getHeader().getFrom().getValue();
                 LOGGER.log(Level.FINER, "Received message from: {0}", uriFrom);
 
                 MALMessage dMsg;
 
                 if (this.isSPP(uriFrom)) {
-                    String uriTrans = virtualSPPURI.getURI(srcMessage.getHeader().getURITo().getValue());
+                    String uriTrans = virtualSPPURI.getURI(srcMessage.getHeader().getTo().getValue());
 
                     // copy source message into destination message format
                     dMsg = cloneForwardMessageFromSPP(epOther, srcMessage, new URI(uriTrans));
@@ -176,9 +176,9 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
             objList[i] = body.getBodyElement(i, null);
         }
 
-        LOGGER.log(Level.FINER, "cloneForwardMessage from: {0} to: {1}", new Object[]{sourceHdr.getURIFrom(),
-          sourceHdr.getURITo()});
-        String endpointUriPart = sourceHdr.getURITo().getValue();
+        LOGGER.log(Level.FINER, "cloneForwardMessage from: {0} to: {1}", new Object[]{sourceHdr.getFrom(),
+          sourceHdr.getTo()});
+        String endpointUriPart = sourceHdr.getTo().getValue();
         final int iSecond = endpointUriPart.indexOf("@");
         endpointUriPart = endpointUriPart.substring(iSecond + 1, endpointUriPart.length());
         URI to = new URI(endpointUriPart);
@@ -191,12 +191,6 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
                 sourceHdr.getAuthenticationId(),
                 to,
                 sourceHdr.getTimestamp(),
-                sourceHdr.getQoSlevel(),
-                sourceHdr.getPriority(),
-                sourceHdr.getDomain(),
-                sourceHdr.getNetworkZone(),
-                sourceHdr.getSession(),
-                sourceHdr.getSessionName(),
                 sourceHdr.getInteractionType(),
                 sourceHdr.getInteractionStage(),
                 sourceHdr.getTransactionId(),
@@ -205,10 +199,11 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
                 sourceHdr.getOperation(),
                 sourceHdr.getServiceVersion(),
                 sourceHdr.getIsErrorMessage(),
+                sourceHdr.getSupplements(),
                 srcMessage.getQoSProperties(),
                 objList);
 
-        destMessage.getHeader().setURIFrom(from);
+        destMessage.getHeader().setFrom(from);
 
         return destMessage;
     }
@@ -227,10 +222,10 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
             objList[i] = body.getBodyElement(i, null);
         }
 
-        LOGGER.log(Level.FINER, "cloneForwardMessage from : {0} to: {1}", new Object[]{sourceHdr.getURIFrom(),
-          sourceHdr.getURITo()});
+        LOGGER.log(Level.FINER, "cloneForwardMessage from : {0} to: {1}", new Object[]{sourceHdr.getFrom(),
+          sourceHdr.getTo()});
         URI to = reverse;
-        URI from = new URI(destination.getURI().getValue() + "@" + sourceHdr.getURIFrom().getValue());
+        URI from = new URI(destination.getURI().getValue() + "@" + sourceHdr.getFrom().getValue());
 
         LOGGER.log(Level.FINER, "cloneForwardMessage from: {0} to: {1}", new Object[]{from, to});
 
@@ -238,12 +233,6 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
                 sourceHdr.getAuthenticationId(),
                 to,
                 sourceHdr.getTimestamp(),
-                sourceHdr.getQoSlevel(),
-                sourceHdr.getPriority(),
-                sourceHdr.getDomain(),
-                sourceHdr.getNetworkZone(),
-                sourceHdr.getSession(),
-                sourceHdr.getSessionName(),
                 sourceHdr.getInteractionType(),
                 sourceHdr.getInteractionStage(),
                 sourceHdr.getTransactionId(),
@@ -252,10 +241,11 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
                 sourceHdr.getOperation(),
                 sourceHdr.getServiceVersion(),
                 sourceHdr.getIsErrorMessage(),
+                sourceHdr.getSupplements(),
                 srcMessage.getQoSProperties(),
                 objList);
 
-        destMessage.getHeader().setURIFrom(from);
+        destMessage.getHeader().setFrom(from);
 
         return destMessage;
     }
