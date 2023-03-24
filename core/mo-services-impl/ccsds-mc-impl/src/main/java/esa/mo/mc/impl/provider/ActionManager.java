@@ -396,7 +396,7 @@ public final class ActionManager extends MCManager {
                 try {
                     final ObjectKey key = new ObjectKey(ConfigurationProviderSingleton.getDomain(), actionInstId);
 
-                    URI uriTo = interaction.getMessageHeader().getTo();
+                    URI uriTo = interaction.getMessageHeader().getToURI();
                     URI uriNextDestination = null;
                     String[] nodes = uriTo.toString().split("@");
 

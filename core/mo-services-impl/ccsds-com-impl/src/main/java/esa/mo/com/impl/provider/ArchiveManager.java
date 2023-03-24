@@ -518,7 +518,7 @@ public class ArchiveManager {
 
         if (interaction != null) {
             if (interaction.getMessageHeader() != null) {
-                sourceURI = interaction.getMessageHeader().getTo();
+                sourceURI = interaction.getMessageHeader().getToURI();
             }
         }
 

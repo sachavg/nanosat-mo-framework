@@ -106,7 +106,7 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
                 MALMessage dMsg;
 
                 if (this.isSPP(uriFrom)) {
-                    String uriTrans = virtualSPPURI.getURI(srcMessage.getHeader().getTo().getValue());
+                    String uriTrans = virtualSPPURI.getURI(srcMessage.getHeader().getToURI().getValue());
 
                     // copy source message into destination message format
                     dMsg = cloneForwardMessageFromSPP(epOther, srcMessage, new URI(uriTrans));
@@ -177,8 +177,8 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
         }
 
         LOGGER.log(Level.FINER, "cloneForwardMessage from: {0} to: {1}", new Object[]{sourceHdr.getFrom(),
-          sourceHdr.getTo()});
-        String endpointUriPart = sourceHdr.getTo().getValue();
+          sourceHdr.getToURI()});
+        String endpointUriPart = sourceHdr.getToURI().getValue();
         final int iSecond = endpointUriPart.indexOf("@");
         endpointUriPart = endpointUriPart.substring(iSecond + 1, endpointUriPart.length());
         URI to = new URI(endpointUriPart);
@@ -203,7 +203,7 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
                 srcMessage.getQoSProperties(),
                 objList);
 
-        destMessage.getHeader().setFrom(from);
+        destMessage.getHeader().setFromURI(from);
 
         return destMessage;
     }
@@ -223,7 +223,7 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
         }
 
         LOGGER.log(Level.FINER, "cloneForwardMessage from : {0} to: {1}", new Object[]{sourceHdr.getFrom(),
-          sourceHdr.getTo()});
+          sourceHdr.getToURI()});
         URI to = reverse;
         URI from = new URI(destination.getURI().getValue() + "@" + sourceHdr.getFrom().getValue());
 
@@ -245,7 +245,7 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
                 srcMessage.getQoSProperties(),
                 objList);
 
-        destMessage.getHeader().setFrom(from);
+        destMessage.getHeader().setFromURI(from);
 
         return destMessage;
     }

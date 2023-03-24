@@ -209,7 +209,7 @@ public class ActivityTrackingProviderServiceImpl {
         if (interaction != null) {
             objId = eventService.generateAndStoreEvent(ActivityTrackingServiceInfo.EXECUTION_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(), ael, related, source, interaction);
-            sourceURI = (interaction.getMessageHeader() != null) ? interaction.getMessageHeader().getTo() : new URI("");
+            sourceURI = (interaction.getMessageHeader() != null) ? interaction.getMessageHeader().getToURI() : new URI("");
         } else {
             objId = eventService.generateAndStoreEvent(ActivityTrackingServiceInfo.EXECUTION_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(), ael, related, source, uri, network);
@@ -252,7 +252,7 @@ public class ActivityTrackingProviderServiceImpl {
 
         if (interaction != null) {
             objId = eventService.generateAndStoreEvent(objType, ConfigurationProviderSingleton.getDomain(), atl, null, source, interaction);
-            sourceURI = (interaction.getMessageHeader() != null) ? interaction.getMessageHeader().getTo() : new URI("");
+            sourceURI = (interaction.getMessageHeader() != null) ? interaction.getMessageHeader().getToURI() : new URI("");
         } else {
             objId = eventService.generateAndStoreEvent(objType, ConfigurationProviderSingleton.getDomain(), atl, null, source, uri, network);
         }
@@ -288,7 +288,7 @@ public class ActivityTrackingProviderServiceImpl {
         if (interaction != null) {
             objId = eventService.generateAndStoreEvent(ActivityTrackingServiceInfo.ACCEPTANCE_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(), aal, related, source, interaction);
-            sourceURI = (interaction.getMessageHeader() != null) ? interaction.getMessageHeader().getTo() : new URI("");
+            sourceURI = (interaction.getMessageHeader() != null) ? interaction.getMessageHeader().getToURI() : new URI("");
         } else {
             objId = eventService.generateAndStoreEvent(ActivityTrackingServiceInfo.ACCEPTANCE_OBJECT_TYPE,
                     ConfigurationProviderSingleton.getDomain(), aal, related, source, uri, network);
@@ -325,7 +325,7 @@ public class ActivityTrackingProviderServiceImpl {
         final Long objId = interaction.getMessageHeader().getTransactionId();
         archiveDetails.get(0).setInstId(objId); // requirement: 3.5.2.4
         //archiveDetails.get(0).setNetwork(interaction.getMessageHeader().getNetworkZone());  // RID raised to create this requirement!
-        archiveDetails.get(0).setProvider(interaction.getMessageHeader().getFrom());     // RID raised to create this requirement!
+        archiveDetails.get(0).setProvider(interaction.getMessageHeader().getFromURI());     // RID raised to create this requirement!
 
         executor.execute(new Runnable() {
             @Override

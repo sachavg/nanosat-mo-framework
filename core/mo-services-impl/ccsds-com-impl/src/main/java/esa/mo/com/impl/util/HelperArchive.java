@@ -131,7 +131,7 @@ public class HelperArchive {
             related,
             source,
             null,
-            interaction.getMessageHeader().getFrom());
+            interaction.getMessageHeader().getFromURI());
     }
 
     /**
