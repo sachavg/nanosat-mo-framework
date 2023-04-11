@@ -26,6 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALStandardError;
+import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.transport.MALEndpoint;
 import org.ccsds.moims.mo.mal.transport.MALMessage;
@@ -182,10 +183,10 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
         final int iSecond = endpointUriPart.indexOf("@");
         endpointUriPart = endpointUriPart.substring(iSecond + 1, endpointUriPart.length());
         URI to = new URI(endpointUriPart);
-        URI from = new URI(virtualURI);
+        Identifier from = new Identifier(virtualURI);
 
-        LOGGER.log(Level.FINER, "cloneForwardMessage from: {0} to: {1}", new Object[]{from,
-          to});
+        LOGGER.log(Level.FINER, "cloneForwardMessage from: {0} to: {1}",
+                new Object[]{from, to});
 
         MALMessage destMessage = destination.createMessage(
                 sourceHdr.getAuthenticationId(),
@@ -203,8 +204,7 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
                 srcMessage.getQoSProperties(),
                 objList);
 
-        destMessage.getHeader().setFromURI(from);
-
+        destMessage.getHeader().setFrom(from);
         return destMessage;
     }
 
@@ -225,7 +225,7 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
         LOGGER.log(Level.FINER, "cloneForwardMessage from : {0} to: {1}", new Object[]{sourceHdr.getFrom(),
           sourceHdr.getToURI()});
         URI to = reverse;
-        URI from = new URI(destination.getURI().getValue() + "@" + sourceHdr.getFrom().getValue());
+        Identifier from = new Identifier(destination.getURI().getValue() + "@" + sourceHdr.getFrom().getValue());
 
         LOGGER.log(Level.FINER, "cloneForwardMessage from: {0} to: {1}", new Object[]{from, to});
 
@@ -245,8 +245,7 @@ public class ProtocolBridgeSPP extends ProtocolBridge {
                 srcMessage.getQoSProperties(),
                 objList);
 
-        destMessage.getHeader().setFromURI(from);
-
+        destMessage.getHeader().setFrom(from);
         return destMessage;
     }
 

@@ -25,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALStandardError;
+import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.transport.MALEndpoint;
 import org.ccsds.moims.mo.mal.transport.MALMessage;
@@ -140,7 +141,7 @@ public class ProtocolBridge {
         final int iSecond = endpointUriPart.indexOf("@");
         endpointUriPart = endpointUriPart.substring(iSecond + 1, endpointUriPart.length());
         URI to = new URI(endpointUriPart);
-        URI from = new URI(destination.getURI().getValue() + "@" + sourceHdr.getFrom().getValue());
+        Identifier from = new Identifier(destination.getURI().getValue() + "@" + sourceHdr.getFrom().getValue());
         System.out.println("cloneForwardMessage      : " + from + "                to  :    " + to);
 
         MALMessage destMessage = destination.createMessage(
@@ -159,7 +160,7 @@ public class ProtocolBridge {
                 srcMessage.getQoSProperties(),
                 body.getEncodedBody());
 
-        destMessage.getHeader().setFromURI(from);
+        destMessage.getHeader().setFrom(from);
 
         return destMessage;
     }

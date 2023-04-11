@@ -65,7 +65,7 @@ public class ParameterMonitorAdapter extends ParameterAdapter {
     @Override
     public void monitorValueRegisterErrorReceived(MALMessageHeader msgHeader, MALStandardError error, Map qosProperties) {
         Logger.getLogger(CheckProviderServiceImpl.class.getName()).log(Level.SEVERE, 
-                "registration for monitorvalue failed with error {0}", new Object[]{error.getErrorName()});
+                "registration for monitorvalue failed with error", error);
         super.monitorValueRegisterErrorReceived(msgHeader, error, qosProperties);
     }
 
@@ -94,7 +94,7 @@ public class ParameterMonitorAdapter extends ParameterAdapter {
     public void monitorValueNotifyErrorReceived(MALMessageHeader msgHeader, MALStandardError error, Map qosProperties
     ) {
         Logger.getLogger(CheckProviderServiceImpl.class.getName()).log(Level.SEVERE, 
-                "monitorvalue notification failed with error {0}", new Object[]{error.getErrorName()});
+                "monitorvalue notification failed with error", error);
         super.monitorValueNotifyErrorReceived(msgHeader, error, qosProperties);
     }
 
