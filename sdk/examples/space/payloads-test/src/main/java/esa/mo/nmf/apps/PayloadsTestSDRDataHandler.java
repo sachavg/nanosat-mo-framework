@@ -23,7 +23,6 @@ package esa.mo.nmf.apps;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.platform.softwaredefinedradio.consumer.SoftwareDefinedRadioAdapter;
-import org.ccsds.moims.mo.platform.softwaredefinedradio.structures.IQComponents;
 
 class PayloadsTestSDRDataHandler extends SoftwareDefinedRadioAdapter
 {
@@ -34,18 +33,17 @@ class PayloadsTestSDRDataHandler extends SoftwareDefinedRadioAdapter
   @Override
   public void streamRadioNotifyReceived(org.ccsds.moims.mo.mal.transport.MALMessageHeader msgHeader,
       org.ccsds.moims.mo.mal.structures.Identifier _Identifier0,
-      org.ccsds.moims.mo.mal.structures.UpdateHeaderList _UpdateHeaderList1,
-      org.ccsds.moims.mo.platform.softwaredefinedradio.structures.IQComponentsList _IQComponentsList2,
+      org.ccsds.moims.mo.mal.structures.UpdateHeader updateHeader,
+      org.ccsds.moims.mo.platform.softwaredefinedradio.structures.IQComponents iqComp,
       java.util.Map qosProperties)
   {
-    if (_IQComponentsList2.isEmpty()) {
+    if (iqComp == null) {
       LOGGER.log(Level.SEVERE, "empty IQComponentsList");
       return;
     }
-    for (IQComponents iqComp : _IQComponentsList2) {
-      LOGGER.log(Level.INFO, "Received I {0} samples and Q {1} samples.",
+    
+    LOGGER.log(Level.INFO, "Received I {0} samples and Q {1} samples.",
           new Object[]{iqComp.getInPhase().size(), iqComp.getQuadrature().size()});
-    }
   }
 
   @Override

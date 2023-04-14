@@ -52,7 +52,7 @@ import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mal.structures.UShort;
 import org.ccsds.moims.mo.mal.structures.Union;
-import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
+import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.mc.action.structures.ActionDefinitionDetails;
 import org.ccsds.moims.mo.mc.action.structures.ActionDefinitionDetailsList;
@@ -76,14 +76,12 @@ import org.ccsds.moims.mo.mc.structures.ConditionalConversionList;
 import org.ccsds.moims.mo.mc.structures.ParameterExpression;
 import org.ccsds.moims.mo.platform.autonomousadcs.body.GetStatusResponse;
 import org.ccsds.moims.mo.platform.autonomousadcs.consumer.AutonomousADCSAdapter;
-import org.ccsds.moims.mo.platform.autonomousadcs.structures.ActuatorsTelemetry;
 import org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeMode;
 import org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeModeBDot;
 import org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeModeNadirPointing;
 import org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeModeSingleSpinning;
 import org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeModeSunPointing;
 import org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeModeTargetTracking;
-import org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeTelemetry;
 import org.ccsds.moims.mo.platform.autonomousadcs.structures.Quaternion;
 import org.ccsds.moims.mo.platform.structures.VectorF3D;
 import org.ccsds.moims.mo.platform.gps.body.GetLastKnownPositionResponse;
@@ -688,14 +686,13 @@ public class MCAllInOneAdapter extends MonitorAndControlNMFAdapter
     @Override
     public void monitorAttitudeNotifyReceived(
         final MALMessageHeader msgHeader,
-        final Identifier lIdentifier, final UpdateHeaderList lUpdateHeaderList,
-        org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeTelemetryList attitudeTelemetryList,
-        org.ccsds.moims.mo.platform.autonomousadcs.structures.ActuatorsTelemetryList actuatorsTelemetryList,
-        org.ccsds.moims.mo.mal.structures.DurationList controlDurationList,
-        org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeModeList attitudeModeList,
+        final Identifier lIdentifier, final UpdateHeader updateHeader,
+        org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeTelemetry attitudeTm,
+        org.ccsds.moims.mo.platform.autonomousadcs.structures.ActuatorsTelemetry actuatorsTm,
+        org.ccsds.moims.mo.mal.structures.Duration remainingDuration,
+        org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeMode activeAttitudeMode,
         final Map qosp)
     {
-      for (AttitudeTelemetry attitudeTm : attitudeTelemetryList) {
         try {
           VectorF3D sunVector = attitudeTm.getSunVector();
           VectorF3D magneticField = attitudeTm.getMagneticField();
@@ -721,8 +718,7 @@ public class MCAllInOneAdapter extends MonitorAndControlNMFAdapter
         } catch (NMFException ex) {
           LOGGER.log(Level.SEVERE, "Error when propagating Sensors TM", ex);
         }
-      }
-      for (ActuatorsTelemetry actuatorsTm : actuatorsTelemetryList) {
+
         try {
           VectorF3D mtqDipoleMoment = actuatorsTm.getMtqDipoleMoment();
           //VectorF3D angularVelocity = attitudeTm.getAngularVelocity();
@@ -733,16 +729,14 @@ public class MCAllInOneAdapter extends MonitorAndControlNMFAdapter
         } catch (NMFException ex) {
           LOGGER.log(Level.SEVERE, "Error when propagating Actuators TM", ex);
         }
-      }
-      for (Object activeAttitudeMode : attitudeModeList) {
+
         try {
           nmf.pushParameterValue(PARAMETER_ADCS_MODE, attitudeModeToParamValue(
               (AttitudeMode) activeAttitudeMode));
         } catch (NMFException ex) {
           LOGGER.log(Level.SEVERE, "Error when propagating active ADCS mode", ex);
         }
-      }
-      for (Duration remainingDuration : controlDurationList) {
+
         try {
           if (remainingDuration != null) {
             nmf.pushParameterValue(PARAMETER_ADCS_DURATION, remainingDuration);
@@ -752,7 +746,6 @@ public class MCAllInOneAdapter extends MonitorAndControlNMFAdapter
         } catch (NMFException ex) {
           LOGGER.log(Level.SEVERE, "Error when propagating active ADCS mode duration", ex);
         }
-      }
     }
   }
 }

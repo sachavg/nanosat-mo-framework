@@ -301,7 +301,7 @@ public class ProviderTabPanel extends javax.swing.JPanel {
         @Override
         public synchronized void beatNotifyReceived(org.ccsds.moims.mo.mal.transport.MALMessageHeader msgHeader,
                 org.ccsds.moims.mo.mal.structures.Identifier _Identifier0,
-                org.ccsds.moims.mo.mal.structures.UpdateHeaderList _UpdateHeaderList1,
+                org.ccsds.moims.mo.mal.structures.UpdateHeader updateHeader,
                 java.util.Map qosProperties) {
             lastBeatAt = HelperTime.getTimestampMillis();
             final Time onboardTime = msgHeader.getTimestamp();

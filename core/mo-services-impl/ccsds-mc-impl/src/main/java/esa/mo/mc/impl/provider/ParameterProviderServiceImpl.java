@@ -968,7 +968,7 @@ public class ParameterProviderServiceImpl extends ParameterInheritanceSkeleton i
 
             final ObjectInstancePairList outIds = new ObjectInstancePairList(parameters.size());
             final ParameterValueList parameterValueList = new ParameterValueList(parameters.size());
-            final List<ParameterInstance> parameterInstances = new ArrayList<ParameterInstance>(parameters.size());
+            final List<ParameterInstance> parameterInstances = new ArrayList<>(parameters.size());
 
             for (int i = 0; i < parameters.size(); i++) {
                 ObjectInstancePair objId = manager.getIdentityDefinition(parameters.get(i).getName());  // Does the submitted name exists in the manager? 
@@ -1073,13 +1073,14 @@ public class ParameterProviderServiceImpl extends ParameterInheritanceSkeleton i
 
                 //requirement: 3.3.7.2.e : timestamp must be the same as for the creation of the ParameterValue
                 URI source = connection.getConnectionDetails().getProviderURI();
-                hdrlst.add(new UpdateHeader(new Identifier(source.getValue()),
-                        connection.getConnectionDetails().getDomain(), keys));
-                objectIdlst.add(parameterInstances.get(i).getSource()); // requirement: 3.3.7.2.g (3.3.5.2.f not necessary) 
-                pVallst.add(parameterInstances.get(i).getParameterValue()); // requirement: 3.3.7.2.h 
+                UpdateHeader updateHeader = new UpdateHeader(new Identifier(source.getValue()),
+                        connection.getConnectionDetails().getDomain(), keys);
+                
+                // requirement: 3.3.7.2.g (3.3.5.2.f not necessary) 
+                // requirement: 3.3.7.2.h 
+                publisher.publish(updateHeader, parameterInstances.get(i).getSource(),
+                        parameterInstances.get(i).getParameterValue());
             }
-
-            publisher.publish(hdrlst, objectIdlst, pVallst);
         } catch (IllegalArgumentException ex) {
             Logger.getLogger(ParameterProviderServiceImpl.class.getName()).log(Level.WARNING,
                     "Pushed Parameter: Exception during publishing process on the provider {0}", ex);

@@ -32,11 +32,9 @@ import org.ccsds.moims.mo.com.archive.structures.ArchiveDetails;
 import org.ccsds.moims.mo.com.archive.structures.ArchiveDetailsList;
 import org.ccsds.moims.mo.com.event.consumer.EventAdapter;
 import org.ccsds.moims.mo.com.structures.ObjectDetails;
-import org.ccsds.moims.mo.com.structures.ObjectDetailsList;
 import org.ccsds.moims.mo.com.structures.ObjectId;
 import org.ccsds.moims.mo.com.structures.ObjectKey;
 import org.ccsds.moims.mo.com.structures.ObjectType;
-import org.ccsds.moims.mo.common.configuration.ConfigurationHelper;
 import org.ccsds.moims.mo.common.configuration.ConfigurationServiceInfo;
 import org.ccsds.moims.mo.common.configuration.structures.ConfigurationObjectDetails;
 import org.ccsds.moims.mo.common.configuration.structures.ConfigurationObjectDetailsList;
@@ -44,12 +42,12 @@ import org.ccsds.moims.mo.mal.MALException;
 import org.ccsds.moims.mo.mal.MALInteractionException;
 import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.BooleanList;
-import org.ccsds.moims.mo.mal.structures.ElementList;
+import org.ccsds.moims.mo.mal.structures.Element;
 import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.URI;
-import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
+import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 
 /**
@@ -75,102 +73,91 @@ public class ConfigurationEventAdapter extends EventAdapter implements Serializa
 
     @Override
     public void monitorEventNotifyReceived(MALMessageHeader msgHeader, Identifier _Identifier0,
-            UpdateHeaderList updateHeaderList, ObjectDetailsList objectDetailsList,
-            ElementList objects, Map qosProperties) {
+            UpdateHeader updateHeader, ObjectDetails objectDetails,
+            Element object, Map qosProperties) {
         // Notification received from the Configuration serviceImpl...
-        for (int i = 0; i < objectDetailsList.size(); i++) {
-            AttributeList subkeys = updateHeaderList.get(i).getKeyValues();
-            Identifier eventObjNumber = (Identifier) subkeys.get(0);
+        AttributeList subkeys = updateHeader.getKeyValues();
+        Identifier eventObjNumber = (Identifier) subkeys.get(0);
 
-            // Check if it is a "Configuration switch Request" or a "Current Configuration Store"
-            if (!eventObjNumber.toString().equals(ConfigurationServiceInfo.CONFIGURATIONSWITCH_OBJECT_NUMBER.toString())
-                    && !eventObjNumber.toString().equals(ConfigurationServiceInfo.CONFIGURATIONSTORE_OBJECT_NUMBER.toString())) {
+        // Check if it is a "Configuration switch Request" or a "Current Configuration Store"
+        if (!eventObjNumber.toString().equals(ConfigurationServiceInfo.CONFIGURATIONSWITCH_OBJECT_NUMBER.toString())
+                && !eventObjNumber.toString().equals(ConfigurationServiceInfo.CONFIGURATIONSTORE_OBJECT_NUMBER.toString())) {
+            return;
+        }
+
+        // If so... check if it is a "Configuration switch Request"
+        if (eventObjNumber.toString().equals(ConfigurationServiceInfo.CONFIGURATIONSWITCH_OBJECT_NUMBER.toString())) {
+            if (object == null) {
                 return;
             }
 
-            // If so... check if it is a "Configuration switch Request"
-            if (eventObjNumber.toString().equals(ConfigurationServiceInfo.CONFIGURATIONSWITCH_OBJECT_NUMBER.toString())) {
-                if (objects == null) {
-                    return;
-                }
+            // Get the objId of the Configuration
+            ObjectId obj = (ObjectId) object;
 
-                if (objects.isEmpty()) {
-                    return; // No objects... 
-                }
+            // Check if it is a Configuration event for this particular service (based on the service type, domain ?)
+            if (obj.getType().getArea().equals(serviceImpl.getCOMService().getAreaNumber())
+                    && obj.getType().getNumber().equals(serviceImpl.getCOMService().getServiceNumber())
+                    && obj.getKey().getDomain().equals(providerDomain)) {
 
-                // Get the objId of the Configuration
-                ObjectId obj = (ObjectId) objects.get(0);
+                // Retrieve it from the Archive
+                ConfigurationObjectDetails configurationObj = (ConfigurationObjectDetails) HelperArchive.getObjectBodyFromArchive(
+                        comServices.getArchiveService(), obj.getType(),
+                        obj.getKey().getDomain(), obj.getKey().getInstId());
 
-                if (obj == null) {
-                    return;
-                }
+                // Reload the retrieved configuration
+                Boolean confChanged = serviceImpl.reloadConfiguration(configurationObj);
 
-                // Check if it is a Configuration event for this particular service (based on the service type, domain ?)
-                if (obj.getType().getArea().equals(serviceImpl.getCOMService().getAreaNumber())
-                        && obj.getType().getNumber().equals(serviceImpl.getCOMService().getServiceNumber())
-                        && obj.getKey().getDomain().equals(providerDomain)) {
-
-                    // Retrieve it from the Archive
-                    ConfigurationObjectDetails configurationObj = (ConfigurationObjectDetails) 
-                            HelperArchive.getObjectBodyFromArchive(
-                            comServices.getArchiveService(), obj.getType(),
-                            obj.getKey().getDomain(), obj.getKey().getInstId());
-
-                    // Reload the retrieved configuration
-                    Boolean confChanged = serviceImpl.reloadConfiguration(configurationObj);
-
-                    if (confChanged) {
-                        // Todo: Publish success
-                    } else {
-                        // Todo: Publish failure
-                    }
+                if (confChanged) {
+                    // Todo: Publish success
+                } else {
+                    // Todo: Publish failure
                 }
             }
+        }
 
-            // Long entityKey3 = (Long) HelperAttributes.attribute2JavaType(subkeys.get(2).getValue());
-            Long entityKey3 = (Long) subkeys.get(2);
-            
-            // -----------------------------------------------------------
-            // Check if it is a "Current Configuration Store"
-            if (eventObjNumber.toString().equals(ConfigurationServiceInfo.CONFIGURATIONSTORE_OBJECT_NUMBER.toString())) {
-                ConfigurationObjectDetails set = serviceImpl.getCurrentConfiguration();
-                ConfigurationObjectDetailsList bodies = new ConfigurationObjectDetailsList();
-                bodies.add(set);
+        // Long entityKey3 = (Long) HelperAttributes.attribute2JavaType(subkeys.get(2).getValue());
+        Long entityKey3 = (Long) subkeys.get(2);
 
-                // For the ConfigurationObjects:
-                ObjectType objType = ConfigurationServiceInfo.CONFIGURATIONOBJECTS_OBJECT_TYPE;
+        // -----------------------------------------------------------
+        // Check if it is a "Current Configuration Store"
+        if (eventObjNumber.toString().equals(ConfigurationServiceInfo.CONFIGURATIONSTORE_OBJECT_NUMBER.toString())) {
+            ConfigurationObjectDetails set = serviceImpl.getCurrentConfiguration();
+            ConfigurationObjectDetailsList bodies = new ConfigurationObjectDetailsList();
+            bodies.add(set);
 
-                ArchiveDetails archiveDetails = new ArchiveDetails();
-                archiveDetails.setInstId(new Long(0));
-                archiveDetails.setDetails(new ObjectDetails(entityKey3, null));  // Event objId
-                //archiveDetails.setNetwork(msgHeader.getNetworkZone());
-                archiveDetails.setTimestamp(HelperTime.getTimestamp());
-                archiveDetails.setProvider(msgHeader.getFromURI());
+            // For the ConfigurationObjects:
+            ObjectType objType = ConfigurationServiceInfo.CONFIGURATIONOBJECTS_OBJECT_TYPE;
 
-                ArchiveDetailsList archiveDetailsList = new ArchiveDetailsList();
-                archiveDetailsList.add(archiveDetails);
+            ArchiveDetails archiveDetails = new ArchiveDetails();
+            archiveDetails.setInstId(new Long(0));
+            archiveDetails.setDetails(new ObjectDetails(entityKey3, null));  // Event objId
+            //archiveDetails.setNetwork(msgHeader.getNetworkZone());
+            archiveDetails.setTimestamp(HelperTime.getTimestamp());
+            archiveDetails.setProvider(msgHeader.getFromURI());
 
-                try {
-                    // Store the Configuration Object in the COM Archive
-                    LongList objIds = comServices.getArchiveService().store(
-                            true,
-                            objType,
-                            providerDomain,
-                            archiveDetailsList,
-                            bodies,
-                            null);
+            ArchiveDetailsList archiveDetailsList = new ArchiveDetailsList();
+            archiveDetailsList.add(archiveDetails);
 
-                    Long objId = objIds.get(0);
+            try {
+                // Store the Configuration Object in the COM Archive
+                LongList objIds = comServices.getArchiveService().store(
+                        true,
+                        objType,
+                        providerDomain,
+                        archiveDetailsList,
+                        bodies,
+                        null);
 
-                    // Publish event: Success with the objId of the Configuration stored
-                    this.publishConfigurationStoredSuccess(objId, entityKey3);
-                } catch (MALException ex) {
-                    // Publish event: Failure with the objId of the Configuration stored
-                    this.publishConfigurationStoredFailure(entityKey3);  // Event objId
-                } catch (MALInteractionException ex) {
-                    // Publish event: Failure with the objId of the Configuration stored
-                    this.publishConfigurationStoredFailure(entityKey3);  // Event objId
-                }
+                Long objId = objIds.get(0);
+
+                // Publish event: Success with the objId of the Configuration stored
+                this.publishConfigurationStoredSuccess(objId, entityKey3);
+            } catch (MALException ex) {
+                // Publish event: Failure with the objId of the Configuration stored
+                this.publishConfigurationStoredFailure(entityKey3);  // Event objId
+            } catch (MALInteractionException ex) {
+                // Publish event: Failure with the objId of the Configuration stored
+                this.publishConfigurationStoredFailure(entityKey3);  // Event objId
             }
         }
     }

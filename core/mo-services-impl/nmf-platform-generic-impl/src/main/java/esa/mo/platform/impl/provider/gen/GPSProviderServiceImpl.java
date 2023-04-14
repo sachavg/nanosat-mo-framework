@@ -225,14 +225,13 @@ public class GPSProviderServiceImpl extends GPSInheritanceSkeleton
 
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
       URI source = connection.getConnectionDetails().getProviderURI();
-      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), 
-              connection.getConnectionDetails().getDomain(), keys));
+      UpdateHeader updateHeader = new UpdateHeader(new Identifier(source.getValue()), 
+              connection.getConnectionDetails().getDomain(), keys);
 
       BooleanList bools = new BooleanList();
       bools.add(isInside);
 
-      publisher.publish(hdrlst, bools);
-
+      publisher.publish(updateHeader, isInside);
     } catch (IllegalArgumentException | MALException | MALInteractionException ex) {
       Logger.getLogger(GPSProviderServiceImpl.class.getName()).log(Level.WARNING,
           "Exception during publishing process on the provider {0}", ex);

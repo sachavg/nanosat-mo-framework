@@ -41,6 +41,7 @@ import java.util.logging.Logger;
 import org.ccsds.moims.mo.com.COMHelper;
 import org.ccsds.moims.mo.com.COMService;
 import org.ccsds.moims.mo.com.event.consumer.EventAdapter;
+import org.ccsds.moims.mo.com.structures.ObjectDetails;
 import org.ccsds.moims.mo.com.structures.ObjectDetailsList;
 import org.ccsds.moims.mo.com.structures.ObjectId;
 import org.ccsds.moims.mo.com.structures.ObjectIdList;
@@ -67,6 +68,7 @@ import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
 import org.ccsds.moims.mo.mal.structures.UShort;
+import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 
@@ -386,15 +388,15 @@ public class ConfigurationProviderServiceImpl extends ConfigurationInheritanceSk
 
         @Override
         public synchronized void monitorEventNotifyReceived(MALMessageHeader msgHeader, Identifier _Identifier0,
-                UpdateHeaderList updateHeaderList, ObjectDetailsList objectDetailsList,
-                ElementList objects, Map qosProperties) {
-            if (objectDetailsList.size() != 1) {
+                UpdateHeader updateHeader, ObjectDetails objectDetails,
+                Element object, Map qosProperties) {
+            if (objectDetails == null) {
                 return;
             }
 
             // Does the objId received matches the one the we originally sent to the service?
-            if (originalObjId.equals(objectDetailsList.get(0).getRelated())) {
-                objectId = objectDetailsList.get(0).getSource();
+            if (originalObjId.equals(objectDetails.getRelated())) {
+                objectId = objectDetails.getSource();
                 this.notify();
                 available = true;
             }

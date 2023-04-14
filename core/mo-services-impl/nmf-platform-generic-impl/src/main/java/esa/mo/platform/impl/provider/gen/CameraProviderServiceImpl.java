@@ -203,12 +203,12 @@ public class CameraProviderServiceImpl extends CameraInheritanceSkeleton
 
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
       URI source = connection.getConnectionDetails().getProviderURI();
-      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), 
-              connection.getConnectionDetails().getDomain(), keys));
+      UpdateHeader updateHeader = new UpdateHeader(new Identifier(source.getValue()), 
+              connection.getConnectionDetails().getDomain(), keys);
 
-      PictureList picList = new PictureList();
-      picList.add(picture);
-      publisher.publish(hdrlst, picList);
+      //PictureList picList = new PictureList();
+      //picList.add(picture);
+      publisher.publish(updateHeader, picture);
     } catch (IllegalArgumentException | MALException | MALInteractionException ex) {
       LOGGER.log(Level.WARNING,
           "Exception during publishing process on the provider {0}", ex);

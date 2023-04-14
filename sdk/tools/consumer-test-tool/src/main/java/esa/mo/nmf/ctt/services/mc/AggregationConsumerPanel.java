@@ -683,14 +683,13 @@ public class AggregationConsumerPanel extends javax.swing.JPanel {
         @Override
         public void monitorValueNotifyReceived(org.ccsds.moims.mo.mal.transport.MALMessageHeader msgHeader,
                 org.ccsds.moims.mo.mal.structures.Identifier identifier,
-                org.ccsds.moims.mo.mal.structures.UpdateHeaderList lUpdateHeaderList,
-                org.ccsds.moims.mo.com.structures.ObjectIdList _ObjectIdList2,
-                org.ccsds.moims.mo.mc.aggregation.structures.AggregationValueList lAggregationValueList,
+                org.ccsds.moims.mo.mal.structures.UpdateHeader updateHeader,
+                org.ccsds.moims.mo.com.structures.ObjectId objectId,
+                org.ccsds.moims.mo.mc.aggregation.structures.AggregationValue aggregationValue,
                 java.util.Map qosProperties) {
 
             final long iDiff = System.currentTimeMillis() - msgHeader.getTimestamp().getValue();
 
-            final UpdateHeader updateHeader = lUpdateHeaderList.get(0);
             final AttributeList keyValues = updateHeader.getKeyValues();
             final String Aggname = HelperAttributes.attribute2string(keyValues.get(0));
             final int objId = (int) HelperAttributes.attribute2JavaType(keyValues.get(1));
@@ -700,9 +699,8 @@ public class AggregationConsumerPanel extends javax.swing.JPanel {
             */
 
             try {
-                if (msgBoxOn.isSelected() && !lUpdateHeaderList.isEmpty() && lAggregationValueList.size() != 0) {
+                if (msgBoxOn.isSelected()) {
                     String str = "";
-                    final AggregationValue aggregationValue = lAggregationValueList.get(0);
                     str += "AggregationValue generationMode: " + aggregationValue.getGenerationMode().toString()
                             + " (filtered: " + aggregationValue.getFiltered().toString() + ")" + "\n";
 

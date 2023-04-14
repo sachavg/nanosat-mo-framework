@@ -39,7 +39,6 @@ import org.ccsds.moims.mo.mal.structures.Identifier;
 import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
-import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.AppsLauncherServiceInfo;
 import org.ccsds.moims.mo.softwaremanagement.appslauncher.consumer.AppsLauncherAdapter;
@@ -344,20 +343,15 @@ public class AppsLauncherConsumerPanel extends javax.swing.JPanel
     public void monitorExecutionNotifyReceived(
         org.ccsds.moims.mo.mal.transport.MALMessageHeader msgHeader,
         org.ccsds.moims.mo.mal.structures.Identifier _Identifier0,
-        org.ccsds.moims.mo.mal.structures.UpdateHeaderList updateHeaderList,
-        org.ccsds.moims.mo.mal.structures.StringList outputStream, java.util.Map qosProperties)
+        org.ccsds.moims.mo.mal.structures.UpdateHeader updateHeader,
+        String out, java.util.Map qosProperties)
     {
-
-      for (int i = 0; i < updateHeaderList.size(); i++) {
-        final String out = outputStream.get(i);
-        final UpdateHeader updateHeader = updateHeaderList.get(i);
         final AttributeList keyValues = updateHeader.getKeyValues();
         final long id = (long) HelperAttributes.attribute2JavaType(keyValues.get(1));
         StringBuffer stringBuf = outputBuffers.get(id);
         stringBuf.append(out);
         appVerboseTextArea.append(out);
         appVerboseTextArea.setCaretPosition(appVerboseTextArea.getDocument().getLength());
-      }
     }
   }
 

@@ -206,7 +206,7 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
             appObjId, new Identifier(appName)
           });
 
-      final StringList outputList = new StringList();
+      String outputList = new String();
 
       /*
       // Should not be store in the Archive... it's too much stuff
@@ -221,15 +221,15 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
       
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
       URI sourceURI = connection.getConnectionDetails().getProviderURI();
-      hdrlst.add(new UpdateHeader(new Identifier(sourceURI.getValue()), 
-              connection.getConnectionDetails().getDomain(), keyValues));
+      UpdateHeader updateHeader = new UpdateHeader(new Identifier(sourceURI.getValue()), 
+              connection.getConnectionDetails().getDomain(), keyValues);
       EventProviderServiceImpl eventService = this.comServices.getEventService();
 
       int length = outputText.length();
       for (int i = 0; i < length; i += MAX_SEGMENT_SIZE) {
         int end = Math.min(length, i + MAX_SEGMENT_SIZE);
         String segment = outputText.substring(i, end);
-        outputList.add(segment);
+        outputList = outputList + segment;
         boolean storeInArchive = Boolean.valueOf(System.getProperty(Const.APPSLAUNCHER_STD_STORE_PROPERTY,
             Const.APPSLAUNCHER_STD_STORE_DEFAULT));
         
@@ -250,7 +250,7 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
             String errorString
                 = "Your logging is too verbose and reached the limit.\nPlease reduce verbosity.";
             Element eventBody = new Union(errorString);
-            outputList.add(errorString);
+            outputList = outputList + errorString;
             ObjectId source = new ObjectId(AppsLauncherServiceInfo.APP_OBJECT_TYPE, 
                     new ObjectKey(domain, appObjId));
             eventService.generateAndStoreEvent(
@@ -260,7 +260,7 @@ public class AppsLauncherProviderServiceImpl extends AppsLauncherInheritanceSkel
         }
       }
 
-      publisher.publish(hdrlst, outputList);
+      publisher.publish(updateHeader, outputList);
     } catch (IllegalArgumentException | MALException | MALInteractionException ex) {
       LOGGER.log(Level.WARNING,
           "Exception during publishing process on the provider {0}", ex);

@@ -58,6 +58,7 @@ import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
 import org.ccsds.moims.mo.mal.structures.Time;
 import org.ccsds.moims.mo.mal.structures.UShort;
+import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
 import org.ccsds.moims.mo.mal.transport.MALMessage;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
@@ -81,6 +82,7 @@ import org.ccsds.moims.mo.mc.parameter.structures.ParameterCreationRequestList;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterDefinitionDetails;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterRawValue;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterRawValueList;
+import org.ccsds.moims.mo.mc.parameter.structures.ParameterValue;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterValueList;
 import org.ccsds.moims.mo.mc.structures.ArgumentDefinitionDetails;
 import org.ccsds.moims.mo.mc.structures.ArgumentDefinitionDetailsList;
@@ -210,16 +212,14 @@ public class GroundMOAdapterImpl extends NMFConsumer implements SimpleCommanding
 
       @Override
       public void monitorValueNotifyReceived(final MALMessageHeader msgHeader,
-          final Identifier lIdentifier, final UpdateHeaderList lUpdateHeaderList,
-          final ObjectIdList lObjectIdList, final ParameterValueList lParameterValueList,
+          final Identifier lIdentifier, final UpdateHeader updateHeader,
+          final ObjectId source, final ParameterValue lParameterValue,
           final Map qosp)
       {
 
-        if (lParameterValueList.size() == lUpdateHeaderList.size()) {
-          for (int i = 0; i < lUpdateHeaderList.size(); i++) {
-            AttributeList keyValues = lUpdateHeaderList.get(i).getKeyValues();
+            AttributeList keyValues = updateHeader.getKeyValues();
             String parameterName = HelperAttributes.attribute2string(keyValues.get(0));
-            Attribute parameterValue = lParameterValueList.get(i).getRawValue();
+            Attribute parameterValue = lParameterValue.getRawValue();
             Serializable object;
 
             // Is it a Blob?
@@ -245,18 +245,15 @@ public class GroundMOAdapterImpl extends NMFConsumer implements SimpleCommanding
 
             // Complete interface
             if (listener instanceof CompleteDataReceivedListener) {
-              ObjectId source = lObjectIdList.get(i);
               // Time timestamp = lUpdateHeaderList.get(i).getTimestamp();
               Time timestamp = null;
 
               ParameterInstance parameterInstance = new ParameterInstance(new Identifier(
                   parameterName),
-                  lParameterValueList.get(i), source, timestamp);
+                  lParameterValue, source, timestamp);
 
               ((CompleteDataReceivedListener) listener).onDataReceived(parameterInstance);
             }
-          }
-        }
       }
     }
 
@@ -266,18 +263,12 @@ public class GroundMOAdapterImpl extends NMFConsumer implements SimpleCommanding
 
       @Override
       public void monitorValueNotifyReceived(final MALMessageHeader msgHeader,
-          final Identifier lIdentifier, final UpdateHeaderList lUpdateHeaderList,
-          final ObjectIdList lObjectIdList, final AggregationValueList lAggregationValueList,
+          final Identifier lIdentifier, final UpdateHeader updateHeader,
+          final ObjectId source, final AggregationValue aggregationValue,
           final Map qosp)
       {
-
-        if (lAggregationValueList.size() == lUpdateHeaderList.size()) {
-          for (int i = 0; i < lUpdateHeaderList.size(); i++) {
-
             if (listener instanceof SimpleAggregationReceivedListener) {
-              List<ParameterInstance> parameterInstances = new LinkedList<ParameterInstance>();
-
-              AggregationValue aggregationValue = lAggregationValueList.get(i);
+              List<ParameterInstance> parameterInstances = new LinkedList<>();
 
               for (AggregationSetValue aggregationSetValue : aggregationValue.getParameterSetValues()) {
                 for (AggregationParameterValue aggregationParamValue : aggregationSetValue.getValues()) {
@@ -293,21 +284,17 @@ public class GroundMOAdapterImpl extends NMFConsumer implements SimpleCommanding
             }
 
             if (listener instanceof CompleteAggregationReceivedListener) {
-              ObjectId source = lObjectIdList.get(i);
               //Time timestamp = lUpdateHeaderList.get(i).getTimestamp();
               Time timestamp = null;
-              AttributeList subkeys = lUpdateHeaderList.get(i).getKeyValues();
+              AttributeList subkeys = updateHeader.getKeyValues();
               // String aggregationName = lUpdateHeaderList.get(i).getKey().getFirstSubKey().toString();
               String aggregationName = HelperAttributes.attribute2string(subkeys.get(0));
-              AggregationValue aggregationValue = lAggregationValueList.get(i);
 
               AggregationInstance aggregationInstance = new AggregationInstance(
                   new Identifier(aggregationName), aggregationValue, source, timestamp);
 
               ((CompleteAggregationReceivedListener) listener).onDataReceived(aggregationInstance);
             }
-          }
-        }
       }
     }
 

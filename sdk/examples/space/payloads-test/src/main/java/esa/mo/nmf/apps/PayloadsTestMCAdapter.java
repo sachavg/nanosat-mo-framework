@@ -49,7 +49,7 @@ import org.ccsds.moims.mo.mal.structures.PairList;
 import org.ccsds.moims.mo.mal.structures.UInteger;
 import org.ccsds.moims.mo.mal.structures.UOctet;
 import org.ccsds.moims.mo.mal.structures.Union;
-import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
+import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.mc.conversion.structures.DiscreteConversionDetails;
 import org.ccsds.moims.mo.mc.conversion.structures.DiscreteConversionDetailsList;
@@ -659,15 +659,14 @@ public class PayloadsTestMCAdapter extends MonitorAndControlNMFAdapter
     @Override
     public void monitorAttitudeNotifyReceived(
         final MALMessageHeader msgHeader,
-        final Identifier lIdentifier, final UpdateHeaderList lUpdateHeaderList,
-        org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeTelemetryList attitudeTelemetryList,
-        org.ccsds.moims.mo.platform.autonomousadcs.structures.ActuatorsTelemetryList actuatorsTelemetryList,
-        org.ccsds.moims.mo.mal.structures.DurationList controlDurationList,
-        org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeModeList attitudeModeList,
+        final Identifier lIdentifier, final UpdateHeader updateHeader,
+        org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeTelemetry attitudeTm,
+        org.ccsds.moims.mo.platform.autonomousadcs.structures.ActuatorsTelemetry actuatorsTm,
+        org.ccsds.moims.mo.mal.structures.Duration remainingDuration,
+        org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeMode activeAttitudeMode,
         final Map qosp)
     {
       LOGGER.log(Level.FINE, "Received monitorAttitude notify");
-      for (AttitudeTelemetry attitudeTm : attitudeTelemetryList) {
         try {
           VectorF3D sunVector = attitudeTm.getSunVector();
           VectorF3D magneticField = attitudeTm.getMagneticField();
@@ -693,8 +692,7 @@ public class PayloadsTestMCAdapter extends MonitorAndControlNMFAdapter
         } catch (NMFException ex) {
           LOGGER.log(Level.SEVERE, "Error when propagating Sensors TM", ex);
         }
-      }
-      for (ActuatorsTelemetry actuatorsTm : actuatorsTelemetryList) {
+
         try {
           VectorF3D mtqDipoleMoment = actuatorsTm.getMtqDipoleMoment();
           nmf.pushParameterValue(PARAMETER_MTQ_X, mtqDipoleMoment.getX());
@@ -703,16 +701,14 @@ public class PayloadsTestMCAdapter extends MonitorAndControlNMFAdapter
         } catch (NMFException ex) {
           LOGGER.log(Level.SEVERE, "Error when propagating Actuators TM", ex);
         }
-      }
-      for (Object activeAttitudeMode : attitudeModeList) {
+
         try {
           nmf.pushParameterValue(PARAMETER_ADCS_MODE, attitudeModeToParamValue(
               (AttitudeMode) activeAttitudeMode));
         } catch (NMFException ex) {
           LOGGER.log(Level.SEVERE, "Error when propagating active ADCS mode", ex);
         }
-      }
-      for (Duration remainingDuration : controlDurationList) {
+        
         try {
           if (remainingDuration != null) {
             nmf.pushParameterValue(PARAMETER_ADCS_DURATION, remainingDuration);
@@ -722,7 +718,6 @@ public class PayloadsTestMCAdapter extends MonitorAndControlNMFAdapter
         } catch (NMFException ex) {
           LOGGER.log(Level.SEVERE, "Error when propagating active ADCS mode duration", ex);
         }
-      }
     }
   }
 }

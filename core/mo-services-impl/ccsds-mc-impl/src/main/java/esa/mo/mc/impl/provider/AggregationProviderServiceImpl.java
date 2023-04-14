@@ -246,17 +246,14 @@ public class AggregationProviderServiceImpl extends AggregationInheritanceSkelet
             keys.add(new Union(definitionId));
             keys.add(new Union(aValObjId));
             
-            final UpdateHeaderList hdrlst = new UpdateHeaderList(1);
-            final ObjectIdList objectIdlst = new ObjectIdList(1);
             final AggregationValueList aValLst = new AggregationValueList(1);
 
             URI providerURI = connection.getConnectionDetails().getProviderURI();
-            hdrlst.add(new UpdateHeader(new Identifier(providerURI.getValue()), 
-                    connection.getConnectionDetails().getDomain(), keys));
-            objectIdlst.add(source); // requirement: 3.7.7.2.f,g 
-            aValLst.add(aVal); //requirement 3.7.7.2.h
-
-            publisher.publish(hdrlst, objectIdlst, aValLst);
+            UpdateHeader updateHeader = new UpdateHeader(new Identifier(providerURI.getValue()), 
+                    connection.getConnectionDetails().getDomain(), keys);
+            
+            //requirement 3.7.7.2.h
+            publisher.publish(updateHeader, source, aVal);
         } catch (IllegalArgumentException ex) {
             Logger.getLogger(AggregationProviderServiceImpl.class.getName()).log(Level.WARNING, 
                     "Exception during publishing process on the provider {0}", ex);

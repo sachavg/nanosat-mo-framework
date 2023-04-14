@@ -152,14 +152,15 @@ public class SoftwareDefinedRadioProviderServiceImpl extends SoftwareDefinedRadi
     try {
       final Long objId;
       final IQComponentsList iqComponentsList = new IQComponentsList(1);
-
+      IQComponents iqComponents;
+      
       synchronized (lock) {
         if (!isRegistered) {
           IdentifierList keys = new IdentifierList();
           publisher.register(keys, new PublishInteractionListener());
           isRegistered = true;
         }
-        final IQComponents iqComponents = adapter.getIQComponents();
+        iqComponents = adapter.getIQComponents();
         if (iqComponents == null) {
           return;
         }
@@ -173,11 +174,10 @@ public class SoftwareDefinedRadioProviderServiceImpl extends SoftwareDefinedRadi
       final UpdateHeaderList hdrlst = new UpdateHeaderList();
       AttributeList keys = new AttributeList(); 
       URI source = connection.getConnectionDetails().getProviderURI();
-      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), 
-              connection.getConnectionDetails().getDomain(), keys));
+      UpdateHeader updateHeader = new UpdateHeader(new Identifier(source.getValue()), 
+              connection.getConnectionDetails().getDomain(), keys);
 
-      publisher.publish(hdrlst, iqComponentsList);
-
+      publisher.publish(updateHeader, iqComponents);
     } catch (IllegalArgumentException ex) {
       Logger.getLogger(SoftwareDefinedRadioProviderServiceImpl.class.getName()).log(Level.WARNING,
           "Exception during publishing process on the provider {0}", ex);

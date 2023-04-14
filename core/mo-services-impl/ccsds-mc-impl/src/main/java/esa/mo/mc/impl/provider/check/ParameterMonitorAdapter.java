@@ -25,17 +25,15 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ccsds.moims.mo.com.structures.ObjectId;
-import org.ccsds.moims.mo.com.structures.ObjectIdList;
 import org.ccsds.moims.mo.com.structures.ObjectKey;
 import org.ccsds.moims.mo.mal.MALStandardError;
 import org.ccsds.moims.mo.mal.structures.AttributeList;
 import org.ccsds.moims.mo.mal.structures.Identifier;
-import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
+import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 import org.ccsds.moims.mo.mc.parameter.ParameterServiceInfo;
 import org.ccsds.moims.mo.mc.parameter.consumer.ParameterAdapter;
 import org.ccsds.moims.mo.mc.parameter.structures.ParameterValue;
-import org.ccsds.moims.mo.mc.parameter.structures.ParameterValueList;
 
 /**
  *
@@ -70,15 +68,15 @@ public class ParameterMonitorAdapter extends ParameterAdapter {
     }
 
     @Override
-    public void monitorValueNotifyReceived(MALMessageHeader msgHeader, Identifier _Identifier0, UpdateHeaderList _UpdateHeaderList1,
-            ObjectIdList paramValueObjectIds, ParameterValueList parameterValueList, Map qosProperties) {
-        AttributeList keyValues = _UpdateHeaderList1.get(0).getKeyValues();
+    public void monitorValueNotifyReceived(MALMessageHeader msgHeader, Identifier _Identifier0, 
+            UpdateHeader updateHeader, ObjectId paramValueObjectId, ParameterValue parameterValue, Map qosProperties) {
+        AttributeList keyValues = updateHeader.getKeyValues();
 
         //final Long paramIdentityId = _UpdateHeaderList1.get(0).getKey().getSecondSubKey();
         final Long paramIdentityId = (Long) HelperAttributes.attribute2JavaType(keyValues.get(1));
         Logger.getLogger(CheckProviderServiceImpl.class.getName()).log(Level.INFO, 
                 "monitorvalue-update for parameter with identity id: {0} received", new Object[]{paramIdentityId});
-        final ParameterValue newParamValue = parameterValueList.get(0);
+        final ParameterValue newParamValue = parameterValue;
         final Long key4 = (Long) HelperAttributes.attribute2JavaType(keyValues.get(3));
         final ObjectId paramValObjId = new ObjectId(ParameterServiceInfo.PARAMETERVALUEINSTANCE_OBJECT_TYPE, 
                 new ObjectKey(null, key4));
@@ -86,8 +84,8 @@ public class ParameterMonitorAdapter extends ParameterAdapter {
         //set as the current parameterValue
         paramMonitorManager.setParameterValue(paramIdentityId, newParamValue, paramValObjId);
 
-        super.monitorValueNotifyReceived(msgHeader, _Identifier0, _UpdateHeaderList1, 
-                paramValueObjectIds, parameterValueList, qosProperties);
+        super.monitorValueNotifyReceived(msgHeader, _Identifier0, updateHeader, 
+                paramValueObjectId, parameterValue, qosProperties);
     }
 
     @Override

@@ -156,12 +156,11 @@ public class HeartbeatProviderServiceImpl extends HeartbeatInheritanceSkeleton
         }
       }
 
-      final UpdateHeaderList hdrlst = new UpdateHeaderList(1);
       URI source = connection.getConnectionDetails().getProviderURI();
-      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), 
-              connection.getConnectionDetails().getDomain(), new AttributeList()));
+      UpdateHeader updateHeader = new UpdateHeader(new Identifier(source.getValue()), 
+              connection.getConnectionDetails().getDomain(), new AttributeList());
 
-      publisher.publish(hdrlst);
+      publisher.publish(updateHeader);
     } catch (IllegalArgumentException | MALException | MALInteractionException ex) {
       LOGGER.log(Level.WARNING, "Exception during publishing process on the provider", ex);
     }

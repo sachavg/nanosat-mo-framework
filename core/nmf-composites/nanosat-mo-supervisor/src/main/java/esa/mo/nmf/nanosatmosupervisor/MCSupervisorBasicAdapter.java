@@ -30,10 +30,9 @@ import esa.mo.sm.impl.util.OSValidator;
 import esa.mo.sm.impl.util.ShellCommander;
 import org.ccsds.moims.mo.mal.structures.Duration;
 import org.ccsds.moims.mo.mal.structures.Identifier;
-import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
+import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.platform.autonomousadcs.consumer.AutonomousADCSAdapter;
 import org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeModeSunPointing;
-import org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeTelemetry;
 import org.ccsds.moims.mo.platform.autonomousadcs.structures.Quaternion;
 
 /**
@@ -97,21 +96,19 @@ public class MCSupervisorBasicAdapter extends MonitorAndControlNMFAdapter {
     @Override
     public void monitorAttitudeNotifyReceived(
         final MALMessageHeader msgHeader,
-        final Identifier lIdentifier, final UpdateHeaderList lUpdateHeaderList,
-        org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeTelemetryList attitudeTelemetryList,
-        org.ccsds.moims.mo.platform.autonomousadcs.structures.ActuatorsTelemetryList actuatorsTelemetryList,
-        org.ccsds.moims.mo.mal.structures.DurationList controlDurationList,
-        org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeModeList attitudeModeList,
+        final Identifier lIdentifier, final UpdateHeader lUpdateHeader,
+        org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeTelemetry attitudeTm,
+        org.ccsds.moims.mo.platform.autonomousadcs.structures.ActuatorsTelemetry actuatorsTelemetry,
+        org.ccsds.moims.mo.mal.structures.Duration controlDuration,
+        org.ccsds.moims.mo.platform.autonomousadcs.structures.AttitudeMode attitudeMode,
         final Map qosp)
     {
       LOGGER.log(Level.FINE, "Received monitorAttitude notify");
-      for (AttitudeTelemetry attitudeTm : attitudeTelemetryList) {
-          Quaternion attitude = attitudeTm.getAttitude();
-          attitudeQuatA = attitude.getA();
-          attitudeQuatB = attitude.getB();
-          attitudeQuatC = attitude.getC();
-          attitudeQuatD = attitude.getD();
-      }
+      Quaternion attitude = attitudeTm.getAttitude();
+      attitudeQuatA = attitude.getA();
+      attitudeQuatB = attitude.getB();
+      attitudeQuatC = attitude.getC();
+      attitudeQuatD = attitude.getD();
     }
   }
   

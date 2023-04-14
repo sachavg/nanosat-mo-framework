@@ -34,6 +34,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.ccsds.moims.mo.com.structures.InstanceBooleanPair;
 import org.ccsds.moims.mo.com.structures.InstanceBooleanPairList;
+import org.ccsds.moims.mo.com.structures.ObjectId;
 import org.ccsds.moims.mo.com.structures.ObjectIdList;
 import org.ccsds.moims.mo.com.structures.ObjectKey;
 import org.ccsds.moims.mo.mal.MALException;
@@ -454,13 +455,11 @@ public class StatisticConsumerPanel extends javax.swing.JPanel {
     public class StatisticConsumerAdapter extends StatisticAdapter {
         @Override
     public void monitorStatisticsNotifyReceived(MALMessageHeader msgHeader, 
-            Identifier _Identifier0, UpdateHeaderList lUpdateHeaderList, 
-            LongList _LongList2, ObjectIdList _ObjectIdList3, 
-            StatisticValueList _StatisticValueList3, Map qosProperties) {
+            Identifier _Identifier0, UpdateHeader updateHeader, 
+            Long _Long, ObjectId _ObjectId, StatisticValue statisticValue, Map qosProperties) {
 
             final long iDiff = System.currentTimeMillis() - msgHeader.getTimestamp().getValue();
 
-            final UpdateHeader updateHeader = lUpdateHeaderList.get(0);
             final AttributeList keyValues = updateHeader.getKeyValues();
             final String statFunctionName = HelperAttributes.attribute2string(keyValues.get(0));
             final int statLinkObjId = (int) HelperAttributes.attribute2JavaType(keyValues.get(1));
@@ -472,11 +471,10 @@ public class StatisticConsumerPanel extends javax.swing.JPanel {
             */
 
             try {
-                if (msgBoxOn2.isSelected() && lUpdateHeaderList.size() != 0 && _StatisticValueList3.size() != 0) {
+                if (msgBoxOn2.isSelected()) {
                     String str = "";
                     str += "Statistic Function name: " + statFunctionName + " | " + "Statistic Link id: " 
                             + statLinkObjId + " | " + "Parameter obj Id: " + paramObjId + " | " + "\n";
-                    final StatisticValue statisticValue = _StatisticValueList3.get(0);
                     str += "startTime: " + HelperTime.time2readableString(statisticValue.getStartTime()) + "\n";
                     str += "endTime: " + HelperTime.time2readableString(statisticValue.getEndTime()) + "\n";
                     str += "valueTime: " + HelperTime.time2readableString(statisticValue.getValueTime()) + "\n";

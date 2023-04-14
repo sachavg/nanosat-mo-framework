@@ -58,11 +58,9 @@ import org.ccsds.moims.mo.mal.structures.LongList;
 import org.ccsds.moims.mo.mal.structures.QoSLevel;
 import org.ccsds.moims.mo.mal.structures.SessionType;
 import org.ccsds.moims.mo.mal.structures.UInteger;
-import org.ccsds.moims.mo.mal.structures.UIntegerList;
 import org.ccsds.moims.mo.mal.structures.URI;
 import org.ccsds.moims.mo.mal.structures.Union;
 import org.ccsds.moims.mo.mal.structures.UpdateHeader;
-import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
 import org.ccsds.moims.mo.mal.transport.MALErrorBody;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 
@@ -249,11 +247,11 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
      * @param objType Object type
      * @param related Related link
      * @param source Source link
-     * @param eventBodies Bodies of the event
+     * @param eventBody Body of the event
      * @throws java.io.IOException if it cannot publish the Event
      */
     public void publishEvent(final URI sourceURI, final Long objId, final ObjectType objType,
-            final Long related, final ObjectId source, ElementList eventBodies) throws IOException {
+            final Long related, final ObjectId source, Element eventBody) throws IOException {
         // 3.3.2.1 , 3.3.2.2 , 3.3.2.3 , 3.3.2.4 , 3.3.2.5
         if (!running) {
             throw new IOException("The Event service is not running.");
@@ -301,26 +299,15 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
             keyValues.add(new Union(objId));
             keyValues.add(new Union(subKey));
 
-            final UpdateHeaderList hdrlst = new UpdateHeaderList();
-            final ObjectDetailsList objectDetailsList = new ObjectDetailsList();
+            UpdateHeader updateHeader = new UpdateHeader(new Identifier(sourceURI.getValue()),
+                    connection.getConnectionDetails().getDomain(), keyValues);
+            ObjectDetails objectDetails = new ObjectDetails(related, source); // requirement: 3.3.4.2.5
 
-            hdrlst.add(new UpdateHeader(new Identifier(sourceURI.getValue()),
-                    connection.getConnectionDetails().getDomain(), keyValues));
-            objectDetailsList.add(new ObjectDetails(related, source)); // requirement: 3.3.4.2.5
-
-            if (eventBodies != null) {
-                if (eventBodies.isEmpty()) {
-                    Logger.getLogger(EventProviderServiceImpl.class.getName()).log(Level.WARNING, "The event bodies list is empty!");
-                }
-            } else {
-                eventBodies = new UIntegerList(hdrlst.size());
-
-                for (UpdateHeader hdrlst1 : hdrlst) {
-                    eventBodies.add(new UInteger());
-                }
+            if (eventBody == null) {
+                eventBody = new UInteger();
             }
 
-            publisher.publish(hdrlst, objectDetailsList, eventBodies); // requirement: 3.7.2.15
+            publisher.publish(updateHeader, objectDetails, eventBody); // requirement: 3.7.2.15
         } catch (IllegalArgumentException ex) {
             Logger.getLogger(EventProviderServiceImpl.class.getName()).log(Level.WARNING,
                     "Exception during publishing process on the provider (0)", ex);
@@ -341,11 +328,11 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
      * @param objType Object type
      * @param relateds Related links
      * @param sources Source links
-     * @param eventBodies Bodies of the event
+     * @param eventBody Body of the event
      * @throws java.io.IOException if it cannot publish the Event
      */
     public void publishEvents(final URI sourceURI, final LongList objIds, final ObjectType objType,
-            final LongList relateds, final ObjectIdList sources, ElementList eventBodies) throws IOException {
+            final LongList relateds, final ObjectIdList sources, Element eventBody) throws IOException {
         // 3.3.2.1 , 3.3.2.2 , 3.3.2.3 , 3.3.2.4 , 3.3.2.5
         if (!running) {
             throw new IOException("The Event service is not running.");
@@ -369,9 +356,6 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
                     "Publishing Event for the Event objIds: {0}; with Event Object Numbers: {1}",
                     new Object[]{objIds, objType.getNumber()});
              */
-            final UpdateHeaderList hdrlst = new UpdateHeaderList(objIds.size());
-            final ObjectDetailsList objectDetailsList = new ObjectDetailsList(objIds.size());
-
             for (int i = 0; i < objIds.size(); i++) {
                 // 0xFFFF FFFF FF00 0000
                 final Long secondEntityKey = 0xFFFFFFFFFF000000L & HelperCOM.generateSubKey(objType);
@@ -386,25 +370,16 @@ public class EventProviderServiceImpl extends EventInheritanceSkeleton {
 
                 final Long related = (relateds == null) ? null : relateds.get(i);
 
-                hdrlst.add(new UpdateHeader(new Identifier(sourceURI.getValue()),
-                        connection.getConnectionDetails().getDomain(), keys));
-                objectDetailsList.add(new ObjectDetails(related, sources.get(i))); // requirement: 3.3.4.2.5
-            }
+                UpdateHeader updateHeader = new UpdateHeader(new Identifier(sourceURI.getValue()),
+                        connection.getConnectionDetails().getDomain(), keys);
+                ObjectDetails objectDetails = new ObjectDetails(related, sources.get(i)); // requirement: 3.3.4.2.5
 
-            if (eventBodies != null) {
-                if (eventBodies.isEmpty()) {
-                    Logger.getLogger(EventProviderServiceImpl.class.getName()).log(Level.WARNING,
-                            "The event bodies list is empty!");
+                if (eventBody == null) {
+                    eventBody = new UInteger();
                 }
-            } else {
-                eventBodies = new UIntegerList(hdrlst.size());
 
-                for (UpdateHeader hdrlst1 : hdrlst) {
-                    eventBodies.add(new UInteger());
-                }
+                publisher.publish(updateHeader, objectDetails, eventBody); // requirement: 3.7.2.15
             }
-
-            publisher.publish(hdrlst, objectDetailsList, eventBodies); // requirement: 3.7.2.15
         } catch (IllegalArgumentException ex) {
             Logger.getLogger(EventProviderServiceImpl.class.getName()).log(Level.WARNING,
                     "Exception during publishing process on the provider (0)", ex);

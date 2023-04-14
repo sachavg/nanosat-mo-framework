@@ -34,6 +34,7 @@ import org.ccsds.moims.mo.com.COMHelper;
 import org.ccsds.moims.mo.com.event.EventHelper;
 import org.ccsds.moims.mo.com.event.consumer.EventAdapter;
 import org.ccsds.moims.mo.com.event.consumer.EventStub;
+import org.ccsds.moims.mo.com.structures.ObjectDetails;
 import org.ccsds.moims.mo.com.structures.ObjectDetailsList;
 import org.ccsds.moims.mo.com.structures.ObjectType;
 import org.ccsds.moims.mo.mal.MALContextFactory;
@@ -49,6 +50,7 @@ import org.ccsds.moims.mo.mal.structures.IdentifierList;
 import org.ccsds.moims.mo.mal.structures.Subscription;
 import org.ccsds.moims.mo.mal.structures.SubscriptionList;
 import org.ccsds.moims.mo.mal.structures.UShort;
+import org.ccsds.moims.mo.mal.structures.UpdateHeader;
 import org.ccsds.moims.mo.mal.structures.UpdateHeaderList;
 import org.ccsds.moims.mo.mal.transport.MALMessageHeader;
 
@@ -132,12 +134,10 @@ public class EventConsumerServiceImpl extends ConsumerServiceImpl {
 
             @Override
             public void monitorEventNotifyReceived(final MALMessageHeader msgHeader,
-                    final Identifier lIdentifier, final UpdateHeaderList lUpdateHeaderList,
-                    final ObjectDetailsList objectDetailsList, final ElementList elementList,
+                    final Identifier lIdentifier, final UpdateHeader lUpdateHeader,
+                    final ObjectDetails objectDetails, final Element element,
                     Map qosProperties) {
 
-                if (objectDetailsList.size() == lUpdateHeaderList.size()) { // Something is wrong
-                    for (int i = 0; i < lUpdateHeaderList.size(); i++) {
                         /*
                         Identifier entityKey1 = lUpdateHeaderList.get(i).getKey().getFirstSubKey();
                         Long entityKey2 = lUpdateHeaderList.get(i).getKey().getSecondSubKey();
@@ -145,7 +145,7 @@ public class EventConsumerServiceImpl extends ConsumerServiceImpl {
                         Long entityKey4 = lUpdateHeaderList.get(i).getKey().getFourthSubKey(); // ObjType of the source
                         */
 
-                        AttributeList subkeys = lUpdateHeaderList.get(i).getKeyValues();
+                        AttributeList subkeys = lUpdateHeader.getKeyValues();
                         Identifier entityKey1 = (Identifier) subkeys.get(0);
                         Long entityKey2 = (Long) subkeys.get(1);
                         Long entityKey3 = (Long) subkeys.get(2);
@@ -160,7 +160,7 @@ public class EventConsumerServiceImpl extends ConsumerServiceImpl {
                         ObjectType objType = HelperCOM.objectTypeId2objectType(entityKey2);
                         objType.setNumber(new UShort(Integer.parseInt(entityKey1.toString())));
 
-                        Object nativeBody = ((elementList == null) ? null : elementList.get(i));
+                        Object nativeBody = element;
                         Element body = (Element) HelperAttributes.javaType2Attribute(nativeBody);
 
                         // ----
@@ -170,8 +170,8 @@ public class EventConsumerServiceImpl extends ConsumerServiceImpl {
                         newEvent.setObjType(objType);
                         newEvent.setObjId(entityKey3);
 
-                        newEvent.setSource(objectDetailsList.get(i).getSource());
-                        newEvent.setRelated(objectDetailsList.get(i).getRelated());
+                        newEvent.setSource(objectDetails.getSource());
+                        newEvent.setRelated(objectDetails.getRelated());
                         newEvent.setBody(body);
 
                         newEvent.setTimestamp(msgHeader.getTimestamp());
@@ -182,8 +182,6 @@ public class EventConsumerServiceImpl extends ConsumerServiceImpl {
                         // Push the data to the listener
                         eventReceivedListener.onDataReceived(newEvent);
                     }
-                }
-            }
         }
 
         try {  // Register with the subscription key provided

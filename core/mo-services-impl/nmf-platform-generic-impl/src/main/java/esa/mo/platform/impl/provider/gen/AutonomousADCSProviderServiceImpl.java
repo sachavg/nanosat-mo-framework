@@ -187,17 +187,20 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
 
     try {
       final AttitudeTelemetry attitudeTelemetry = adapter.getAttitudeTelemetry();
+      /*
       final AttitudeTelemetryList attitudeTelemetryList =
           (AttitudeTelemetryList) MALElementsRegistry.elementToElementList(attitudeTelemetry);
       attitudeTelemetryList.add(attitudeTelemetry);
-
+      */
       final ActuatorsTelemetry actuatorsTelemetry = adapter.getActuatorsTelemetry();
+      /*
       final ActuatorsTelemetryList actuatorsTelemetryList =
           (ActuatorsTelemetryList) MALElementsRegistry.elementToElementList(actuatorsTelemetry);
       actuatorsTelemetryList.add(actuatorsTelemetry);
-
+      */
       final AttitudeMode activeAttitudeMode = adapter.getActiveAttitudeMode();
 
+      /*
       AttitudeModeList attitudeModeList;
       if (activeAttitudeMode == null) {
         // Pick a dummy concrete type type just to fill it with a null value
@@ -207,19 +210,19 @@ public class AutonomousADCSProviderServiceImpl extends AutonomousADCSInheritance
             activeAttitudeMode);
       }
       attitudeModeList.add(activeAttitudeMode);
-
-      final DurationList durationList = new DurationList();
-      durationList.add(getAttitudeControlRemainingDuration());
+      */
+      //final DurationList durationList = new DurationList();
+      Duration duration = getAttitudeControlRemainingDuration();
 
       AttributeList keys = new AttributeList(); 
       keys.add(new NamedValueList());
-      final UpdateHeaderList hdrlst = new UpdateHeaderList();
+      //final UpdateHeaderList hdrlst = new UpdateHeaderList();
       URI source = connection.getConnectionDetails().getProviderURI();
-      hdrlst.add(new UpdateHeader(new Identifier(source.getValue()), 
-              connection.getConnectionDetails().getDomain(), keys));
+      UpdateHeader updateHeader = new UpdateHeader(new Identifier(source.getValue()), 
+              connection.getConnectionDetails().getDomain(), keys);
 
-      publisher.publish(hdrlst, attitudeTelemetryList, actuatorsTelemetryList, durationList,
-          attitudeModeList);
+      publisher.publish(updateHeader, attitudeTelemetry, 
+              actuatorsTelemetry, duration, activeAttitudeMode);
     } catch (IOException | IllegalArgumentException | MALException | MALInteractionException ex) {
       LOGGER.log(Level.SEVERE, "Error when trying to publish data!", ex);
     }

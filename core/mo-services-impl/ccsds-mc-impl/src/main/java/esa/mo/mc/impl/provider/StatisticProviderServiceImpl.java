@@ -249,22 +249,13 @@ public class StatisticProviderServiceImpl extends StatisticInheritanceSkeleton {
             
             final Time timestamp = HelperTime.getTimestampMillis(); //  requirement: 3.6.9.2.e
 
-            final UpdateHeaderList hdrlst = new UpdateHeaderList();
-            LongList relatedId = new LongList();
-            final ObjectIdList sourceId = new ObjectIdList();
-
             URI uri = connection.getConnectionDetails().getProviderURI();
-            hdrlst.add(new UpdateHeader(new Identifier(uri.getValue()),
-                    connection.getConnectionDetails().getDomain(), keys));
-            sourceId.add(source); // requirement: 3.6.9.2.f and 3.6.9.2.g
+            UpdateHeader updateHeader = new UpdateHeader(new Identifier(uri.getValue()),
+                    connection.getConnectionDetails().getDomain(), keys);
 
-            StatisticValueList statisticValues = new StatisticValueList();
-            statisticValues.add(sVal); // requirement: 3.6.9.2.h
-
-            relatedId.add(objIdLinkDef);
-
-            publisher.publish(hdrlst, relatedId, sourceId, statisticValues);
-
+            // requirement: 3.6.9.2.h
+            // requirement: 3.6.9.2.f and 3.6.9.2.g
+            publisher.publish(updateHeader, objIdLinkDef, source, sVal);
         } catch (IllegalArgumentException ex) {
             Logger.getLogger(AggregationProviderServiceImpl.class.getName()).log(Level.WARNING,
                     "Exception during publishing process on the provider {0}", ex);
