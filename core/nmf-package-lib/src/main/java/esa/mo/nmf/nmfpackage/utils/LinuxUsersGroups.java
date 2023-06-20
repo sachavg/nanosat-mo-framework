@@ -204,7 +204,7 @@ public class LinuxUsersGroups {
      * @throws IOException if the permissions could not be changed.
      */
     public static void chmod(boolean sudo, boolean recursive, String mode, String path) throws IOException {
-        String strRecursive = recursive ? "--recursive" : "";
+        String strRecursive = recursive ? "-R" : "";
         //String[] cmd = {sudo ? "sudo" : "", "chmod", strRecursive, mode, path};
         String[] cmd = sudo
                 ? new String[]{"sudo", "chmod", strRecursive, mode, path}
@@ -216,7 +216,7 @@ public class LinuxUsersGroups {
     }
 
     public static void chgrp(boolean recursive, String newGroup, String path) throws IOException {
-        String[] cmd = {"sudo", "chgrp", recursive ? "--recursive" : "", newGroup, path};
+        String[] cmd = {"sudo", "chgrp", recursive ? "-R" : "", newGroup, path};
         String out = runCommand(cmd);
         checkIfPermissionDenied(cmd, out);
         LinuxUsersGroups.printCommandAndOutput(cmd, out);
