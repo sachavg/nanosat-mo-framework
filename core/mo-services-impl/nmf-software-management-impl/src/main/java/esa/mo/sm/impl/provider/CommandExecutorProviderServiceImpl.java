@@ -169,6 +169,7 @@ public class CommandExecutorProviderServiceImpl extends CommandExecutorInheritan
         }
 
         String[] shellCommand = assembleCommand(command.getCommand());
+        //sandboxing somewhere for this
         final ProcessBuilder pb = new ProcessBuilder(shellCommand);
         Map<String, String> env = pb.environment();
         // Reuse the environment

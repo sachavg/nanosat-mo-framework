@@ -425,7 +425,7 @@ public class AppsLauncherManager extends DefinitionsManager {
     }
 
     protected String[] assembleCommand(final String workDir, final String appName,
-            final String runAs, final String prefix, final String[] env) {
+            final String prefix, final String[] env) {
         ArrayList<String> ret = new ArrayList<>();
         String trimmedAppName = appName.replaceAll("space-app-", "");
         
@@ -461,13 +461,13 @@ public class AppsLauncherManager extends DefinitionsManager {
     }
 
     protected String[] assembleAppStopCommand(final String workDir,
-            final String appName, final String runAs, final String[] env) {
-        return assembleCommand(workDir, appName, runAs, "stop_", env);
+            final String appName, final String[] env) {
+        return assembleCommand(workDir, appName, "stop_", env);
     }
 
     protected String[] assembleAppStartCommand(final String workDir,
-            final String appName, final String runAs, final String[] env) {
-        return assembleCommand(workDir, appName, runAs, "start_", env);
+            final String appName, final String[] env) {
+        return assembleCommand(workDir, appName, "start_", env);
     }
 
     protected HashMap<String, String> assembleAppLauncherEnvironment(final String directoryServiceURI) {
@@ -515,7 +515,6 @@ public class AppsLauncherManager extends DefinitionsManager {
         String[] appLauncherCommand = assembleAppStartCommand(
                 appFolder.getAbsolutePath(),
                 appName,
-                app.getRunAs(),
                 EnvironmentUtils.toStrings(env));
 
         final ProcessBuilder pb = new ProcessBuilder(appLauncherCommand);
@@ -569,7 +568,7 @@ public class AppsLauncherManager extends DefinitionsManager {
         File appFolder = new File(appsFolderPath + File.separator + app.getName().getValue());
         Map<String, String> env = assembleAppLauncherEnvironment("");
         String[] appLauncherCommand = assembleAppStopCommand(appFolder.getAbsolutePath(),
-                app.getName().getValue(), app.getRunAs(), EnvironmentUtils.toStrings(env));
+                app.getName().getValue(), EnvironmentUtils.toStrings(env));
 
         ProcessBuilder pb = new ProcessBuilder(appLauncherCommand);
         pb.environment().clear();
@@ -698,7 +697,7 @@ public class AppsLauncherManager extends DefinitionsManager {
                     Map<String, String> env = assembleAppLauncherEnvironment("");
                     File appFolder = new File(appsFolderPath + File.separator + curr.getName().getValue());
                     String[] appLauncherCommand = assembleAppStopCommand(appFolder.getAbsolutePath(),
-                            curr.getName().getValue(), curr.getRunAs(), EnvironmentUtils.toStrings(env));
+                            curr.getName().getValue(), EnvironmentUtils.toStrings(env));
                     ProcessBuilder pb = new ProcessBuilder(appLauncherCommand);
                     pb.environment().clear();
                     pb.directory(appFolder);
@@ -820,7 +819,6 @@ public class AppsLauncherManager extends DefinitionsManager {
             app.setVersion(version);
             app.setCopyright(copyright);
             app.setDescription(description);
-            app.setRunAs(user);
 
             app.setRunAtStartup(false); // This is not supported in this implementation
             app.setRunning(false); // Default values
