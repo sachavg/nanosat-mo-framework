@@ -98,7 +98,7 @@ public class NMFPackageManager {
         NMFPackage nmfPackage = new NMFPackage(packageLocation);
         Metadata metadata = nmfPackage.getMetadata();
 
-        if (metadata.getMetadataVersion() < 2) {
+        if (metadata.getMetadataVersion() < 3) {
             throw new IOException("The package version is deprecated! "
                     + "Version: " + metadata.getMetadataVersion());
         }
