@@ -81,7 +81,7 @@ public class AppsLauncherManager extends DefinitionsManager {
 
     private final OSValidator osValidator = new OSValidator();
 
-    private boolean sudoAvailable = false;
+    private boolean bwrapAvailable = false;
 
     private static final String FOLDER_LOCATION_PROPERTY
             = "esa.mo.sm.impl.provider.appslauncher.FolderLocation";
@@ -136,17 +136,17 @@ public class AppsLauncherManager extends DefinitionsManager {
 
         if (osValidator.isUnix()) {
             try {
-                String[] params = new String[]{"sh", "-c", "sudo --help"};
+                String[] params = new String[]{"sh", "-c", "bwrap --help"};
                 Process p = Runtime.getRuntime().exec(params, null, null);
                 try {
                     boolean terminated = p.waitFor(1, TimeUnit.SECONDS);
                     if (terminated) {
-                        sudoAvailable = (p.exitValue() != 127);
+                        bwrapAvailable = (p.exitValue() != 127);
                     }
                 } catch (InterruptedException ex) {
                     Logger.getLogger(AppsLauncherManager.class.getName()).log(
                             Level.SEVERE, "The process did no finish yet...", ex);
-                    sudoAvailable = false;
+                    bwrapAvailable = false;
                 }
             } catch (IOException ex) {
                 Logger.getLogger(AppsLauncherManager.class.getName()).log(
@@ -437,18 +437,13 @@ public class AppsLauncherManager extends DefinitionsManager {
             ret.add(str.toString());
         } else {
             // add sandboxing logic here
-            if (runAs != null) {
-                if (sudoAvailable) {
-                    ret.add("sudo");
-                }
-                ret.add("su");
-                ret.add("-");
-                ret.add(runAs);
-                ret.add("-c");
-            } else {
-                ret.add("/bin/sh");
-                ret.add("-c");
-            }
+            // some templating would be nicer here
+             
+            // ret.add("/bin/sh");
+            // ret.add("-c");
+            ret.add("bwrap --unshare-all --share-net --bind / / --die-with-parent");
+
+
             StringBuilder envString = new StringBuilder();
             for (String envVar : env) {
                 envString.append(envVar).append(" ");
