@@ -441,7 +441,7 @@ public class AppsLauncherManager extends DefinitionsManager {
              
             // ret.add("/bin/sh");
             // ret.add("-c");
-            ret.add("bwrap --unshare-all --share-net --bind / / --die-with-parent");
+            ret.add("/usr/bin/bwrap --unshare-all --share-net --bind / / --die-with-parent");
 
 
             StringBuilder envString = new StringBuilder();
