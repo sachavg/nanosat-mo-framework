@@ -57,7 +57,7 @@ public class MetadataApp extends Metadata {
         properties.put(Metadata.PACKAGE_NAME, packageName);
         properties.put(Metadata.PACKAGE_VERSION, version);
         properties.put(MetadataApp.APP_MAINCLASS, mainclass);
-        properties.put(MetadataApp.APP_MAIN_JAR, mainJar == null ? "./*" : mainJar);
+        properties.put(MetadataApp.APP_MAIN_JAR, mainJar);
         properties.put(MetadataApp.APP_MAX_HEAP, maxHeap == null ? "128m" : maxHeap);
         properties.put(MetadataApp.APP_MIN_HEAP, minHeap == null ? "32m" : minHeap);
 
