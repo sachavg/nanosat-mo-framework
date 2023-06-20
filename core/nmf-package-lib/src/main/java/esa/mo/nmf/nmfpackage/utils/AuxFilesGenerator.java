@@ -92,6 +92,9 @@ public class AuxFilesGenerator {
 
         // The command "exec" spawns the execution in a different process
         // str.append("exec -a MyUniqueProcessName ");
+        // This will be ran in a sandbox
+        // only access to java stuff, app homedir and log
+        // next step networking
         str.append("$JAVA_CMD $JAVA_OPTS \\\n");
         str.append("  -classpath \"$JARS_ALL\" \\\n");
         str.append("  \"$MAIN_CLASS\" \\\n");
@@ -128,15 +131,13 @@ public class AuxFilesGenerator {
         return str.toString();
     }
 
-    public static String generateProviderProperties(String runAs, String transportPath) throws IOException {
+    public static String generateProviderProperties(String transportPath) throws IOException {
         StringBuilder str = new StringBuilder();
         str.append(getBanner());
         str.append("# MO App configurations\n");
         str.append(HelperMisc.PROP_ORGANIZATION_NAME).append("=").append("esa\n");
         str.append(HelperMisc.APP_CATEGORY).append("=").append("NMF_App\n");
-        if (runAs != null) {
-            str.append(HelperMisc.APP_USER).append("=").append(runAs).append("\n");
-        }
+
         str.append("\n");
 
         str.append("# Enables the new Home directory mode: \n");

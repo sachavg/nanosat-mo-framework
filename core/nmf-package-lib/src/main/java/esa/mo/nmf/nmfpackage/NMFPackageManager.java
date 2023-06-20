@@ -20,7 +20,6 @@
  */
 package esa.mo.nmf.nmfpackage;
 
-import esa.mo.nmf.nmfpackage.utils.LinuxUsersGroups;
 import esa.mo.nmf.nmfpackage.utils.HelperNMFPackage;
 import esa.mo.helpertools.helpers.HelperMisc;
 import esa.mo.helpertools.misc.Const;
@@ -117,62 +116,11 @@ public class NMFPackageManager {
         String packageName = metadata.getPackageName();
 
         if (metadata.isApp()) {
-            String username = generateUsername(packageName);
-            String password = null;
-
             File appDir = new File(Deployment.getAppsDir(), packageName);
             AuxFilesGenerator.generateStartScript(metadata.castToApp(), appDir, nmfDir);
-            createAuxiliaryFiles(appDir, username);
+            createAuxiliaryFiles(appDir);
             File logDir = Deployment.getLogsDirForApp(packageName);
             logDir.mkdirs();
-
-            if (OS.isUnix()) {
-                try {
-                    // Create the User for this App
-                    boolean withGroup = true;
-                    LinuxUsersGroups.adduser(username, password, withGroup);
-
-                    if (GROUP_FLAG) {
-                        try {
-                            LinuxUsersGroups.addUserToGroup(username, GROUP_NMF_APPS);
-                        } catch (IOException ex) {
-                            Logger.getLogger(NMFPackageManager.class.getName()).log(
-                                    Level.INFO, "The User " + username
-                                    + " could not be added to the Group: "
-                                    + GROUP_NMF_APPS, ex);
-                        }
-                    }
-
-                    // Set the right Group and Permissions to the Home Directory
-                    // The owner remains with the app, the group is nmf-admin
-                    try {
-                        String appHomeDir = LinuxUsersGroups.findHomeDir(username);
-                        LinuxUsersGroups.chgrp(true, USER_NMF_ADMIN, appHomeDir);
-                        LinuxUsersGroups.chmod(true, true, "770", appHomeDir);
-                    } catch (IOException ex) {
-                        Logger.getLogger(NMFPackageManager.class.getName()).log(
-                                Level.INFO, "The permissions of the User Home "
-                                + "directory could not be set for username: "
-                                + username, ex);
-                    }
-
-                    // There is a group with the same name as the username:
-                    String toGroup = username;
-                    // Change Group owner of the appDir...
-                    // Usually something like: /nanosat-mo-framework/apps/my-app
-                    changeGroupAndSetPermissions(appDir, toGroup, "750");
-
-                    try {
-                        changeGroupAndSetPermissions(logDir, toGroup, "770");
-                    } catch (IOException ex) {
-                        // The previous log files were created with a user that 
-                        // might no longer exist, so just ignore the exception!
-                    }
-                } catch (IOException ex) {
-                    Logger.getLogger(NMFPackageManager.class.getName()).log(Level.INFO,
-                            "The User could not be created: " + username, ex);
-                }
-            }
         }
 
         // Store a copy of the newReceipt to know that it has been installed!
@@ -219,19 +167,6 @@ public class NMFPackageManager {
             // This directory should be passed in the method signature:
             File installationDir = new File(Deployment.getAppsDir(), packageName);
             removeAuxiliaryFiles(installationDir, packageName);
-
-            if (OS.isUnix()) {
-                if (!keepUserData) {
-                    String username = generateUsername(packageName);
-                    try {
-                        LinuxUsersGroups.deluser(username, true);
-                    } catch (IOException ex) {
-                        Logger.getLogger(NMFPackageManager.class.getName()).log(
-                                Level.WARNING, "The User could not be deleted: "
-                                + username, ex);
-                    }
-                }
-            }
         }
 
         File receiptsFolder = Deployment.getInstallationsTrackerDir();
@@ -323,24 +258,13 @@ public class NMFPackageManager {
 
         if (isApp) {
             File appDir = new File(Deployment.getAppsDir(), packageName);
-            String username = generateUsername(packageName);
 
             MetadataApp appMetadata = newPackMetadata.castToApp();
             AuxFilesGenerator.generateStartScript(appMetadata, appDir, nmfDir);
-            createAuxiliaryFiles(appDir, username);
+            createAuxiliaryFiles(appDir);
             File logDir = Deployment.getLogsDirForApp(packageName);
             logDir.mkdirs();
 
-            if (OS.isUnix()) { // Change Group owner of the appDir
-                changeGroupAndSetPermissions(appDir, username, "750");
-
-                try {
-                    changeGroupAndSetPermissions(logDir, username, "770");
-                } catch (IOException ex) {
-                    // The previous log files were created with a user that 
-                    // might no longer exist, so just ignore the exception!
-                }
-            }
         }
 
         // Store a copy of the newReceipt to know that it has been installed!
@@ -475,7 +399,7 @@ public class NMFPackageManager {
         }
     }
 
-    private static void createAuxiliaryFiles(File appDir, String username) throws IOException {
+    private static void createAuxiliaryFiles(File appDir) throws IOException {
         File globalTransport = Deployment.getTransportFile();
         String transport;
 
@@ -493,7 +417,7 @@ public class NMFPackageManager {
 
         // Generate provider.properties
         File providerFile = new File(appDir, HelperMisc.PROVIDER_PROPERTIES_FILE);
-        String providerContent = AuxFilesGenerator.generateProviderProperties(username, transport);
+        String providerContent = AuxFilesGenerator.generateProviderProperties(transport);
         AuxFilesGenerator.writeFile(providerFile, providerContent);
 
     }
@@ -548,19 +472,6 @@ public class NMFPackageManager {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    private static String generateUsername(String appName) {
-        return USER_NMF_APP_PREFIX + appName;
-    }
-
-    private static void changeGroupAndSetPermissions(File file,
-            String toGroup, String permissions) throws IOException {
-        if (toGroup != null) {
-            LinuxUsersGroups.chgrp(true, toGroup, file.getAbsolutePath());
-        }
-
-        // chmod the installation directory with recursive
-        LinuxUsersGroups.chmod(false, true, permissions, file.getAbsolutePath());
-    }
 
     private void stopAppIfRunning(String name) {
         if (appsLauncher == null) {

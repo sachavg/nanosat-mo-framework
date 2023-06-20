@@ -436,6 +436,7 @@ public class AppsLauncherManager extends DefinitionsManager {
             str.append(prefix).append(trimmedAppName).append(".bat");
             ret.add(str.toString());
         } else {
+            // add sandboxing logic here
             if (runAs != null) {
                 if (sudoAvailable) {
                     ret.add("sudo");
