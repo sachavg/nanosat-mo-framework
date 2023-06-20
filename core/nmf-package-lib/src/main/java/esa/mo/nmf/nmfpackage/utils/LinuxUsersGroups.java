@@ -40,7 +40,7 @@ public class LinuxUsersGroups {
 
     private static final String MSG_NOT_FOUND = "The command was not found.\n";
 
-    private static final String DEFAULT_SHELL = "/bin/bash";
+    private static final String DEFAULT_SHELL = "/bin/sh";
 
     /**
      * Adds a new Linux user account and sets its respective password. The
