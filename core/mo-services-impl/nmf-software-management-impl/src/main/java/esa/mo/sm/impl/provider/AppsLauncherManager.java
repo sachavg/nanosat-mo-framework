@@ -444,7 +444,9 @@ public class AppsLauncherManager extends DefinitionsManager {
             ret.add("/usr/bin/bwrap");
             ret.add("--unshare-all"); 
             ret.add("--share-net"); 
-            ret.add("--bind / /"); 
+            ret.add("--bind"); 
+            ret.add("/"); 
+            ret.add("/"); 
             ret.add("--die-with-parent");
 
 
