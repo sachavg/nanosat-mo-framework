@@ -444,9 +444,11 @@ public class AppsLauncherManager extends DefinitionsManager {
             ret.add("/usr/bin/bwrap");
             ret.add("--unshare-all"); 
             ret.add("--share-net"); 
-            ret.add("--bind"); 
-            ret.add("/"); 
-            ret.add("/"); 
+            ret.add("--ro-bind / /");
+            ret.add("--bind /home/nmf-admin/.nmf-apps/" + trimmedAppName + "/ /home/nmf-admin/.nmf-apps/" + trimmedAppName + "/");
+            ret.add("--bind /nanosat-mo-framework/logs/app_" + trimmedAppName + "/ /nanosat-mo-framework/logs/app_c" + trimmedAppName + "/");
+            ret.add("--bind " + workDir + "/toGround/ " + workDir + "/toGround/");
+            ret.add("--tmpfs /tmp");
             ret.add("--die-with-parent");
             ret.add("--chdir");
             ret.add(workDir);
