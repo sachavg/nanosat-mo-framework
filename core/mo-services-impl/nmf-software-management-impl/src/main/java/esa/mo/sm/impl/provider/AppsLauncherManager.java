@@ -453,9 +453,9 @@ public class AppsLauncherManager extends DefinitionsManager {
             ret.add("--bind"); 
             ret.add("/nanosat-mo-framework/logs/app_" + trimmedAppName + "/");
             ret.add("/nanosat-mo-framework/logs/app_" + trimmedAppName + "/");
-            ret.add("--bind");
-            ret.add(workDir + "/toGround/");
-            ret.add(workDir + "/toGround/");
+//            ret.add("--bind");
+//            ret.add(workDir + "/toGround/");
+//            ret.add(workDir + "/toGround/");
             ret.add("--tmpfs");
             ret.add("/tmp");
             ret.add("--die-with-parent");
