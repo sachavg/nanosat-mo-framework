@@ -439,29 +439,35 @@ public class AppsLauncherManager extends DefinitionsManager {
             // add sandboxing logic here
             // some templating would be nicer here
              
-            // ret.add("/bin/sh");
-            // ret.add("-c");
             ret.add("/usr/bin/bwrap");
-            ret.add("--unshare-all"); 
-            ret.add("--share-net"); 
+            // no shared namespaces
+            ret.add("--unshare-all");
+            // except for network
+            ret.add("--share-net");
+            // share full filesystem (for now) reeadonly (src,dst)
             ret.add("--ro-bind");
             ret.add("/");
             ret.add("/");
+            // share some points rw as needed for the app
             ret.add("--bind"); 
             ret.add("/home/nmf-admin/.nmf-apps/" + trimmedAppName + "/");
             ret.add("/home/nmf-admin/.nmf-apps/" + trimmedAppName + "/");
             ret.add("--bind"); 
             ret.add("/nanosat-mo-framework/logs/app_" + trimmedAppName + "/");
             ret.add("/nanosat-mo-framework/logs/app_" + trimmedAppName + "/");
-//            ret.add("--bind");
-//            ret.add(workDir + "/toGround/");
-//            ret.add(workDir + "/toGround/");
+            // For the picture app to function
+            // this is moved to another dir on the host
+            ret.add("--bind");
+            ret.add("/home/nmf-admin/.nmf-apps/" + trimmedAppName + "/toGround/");
+            ret.add(workDir + "/toGround/");
+            // change to workdir
             ret.add("--tmpfs");
             ret.add("/tmp");
             ret.add("--die-with-parent");
             ret.add("--chdir");
             ret.add(workDir);
-
+            
+            // Copy all environment variables to sandbox
             for (Map.Entry<String, String> entry: env.entrySet()) {
                 ret.add("--setenv");
                 ret.add(entry.getKey());
